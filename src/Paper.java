@@ -4,5 +4,5 @@
  *
  */
 public class Paper {
-	Test test test. error.
+	Test test test. error. error. error.
 }
