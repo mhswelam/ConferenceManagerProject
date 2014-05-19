@@ -4,5 +4,5 @@
  * 
  */
 public class Review {
-	This is a test.
+
 }
