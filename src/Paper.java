@@ -7,31 +7,31 @@
  */
 public class Paper {
 	/** Unique identification number of the paper. */
-	final int myId;
+	int myId;
 	/** Title of the paper. */
-	final String myTitle;
+	String myTitle;
 	/** Author of the paper. */
-	final Author myAuthor;
+	Author myAuthor;
 	/** Review status of the paper. */
-	final boolean myReviewed;
+	boolean myReviewed;
 	/** Reviewer assigned to review the paper. */
-	final Reviewer myAssignedReviewer0;
+	Reviewer myAssignedReviewer0;
 	/** Reviewer assigned to review the paper. */
-	final Reviewer myAssignedReviewer1;
+	Reviewer myAssignedReviewer1;
 	/** Reviewer assigned to review the paper. */
-	final Reviewer myAssignedReviewer2;
+	Reviewer myAssignedReviewer2;
 	/** Subprogram Chair in charge of the paper. */
-	final SubProgramChair mySubProgramChair;
+	SubProgramChair mySubProgramChair;
 	/** Review of the paper. */
-	final Review myReview0;
+	Review myReview0;
 	/** Review of the paper. */
-	final Review myReview1;
+	Review myReview1;
 	/** Review of the paper. */
-	final Review myReview2;
+	Review myReview2;
 	/** Recommendation of SubProgram Chair. */
-	final Recommendation myRecommendation;
+	Recommendation myRecommendation;
 	/** Acceptance Status of the paper. */
-	final PaperStatus myAcceptanceStatus;
+	PaperStatus myAcceptanceStatus;
 	
 	
 	/**

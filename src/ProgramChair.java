@@ -6,12 +6,14 @@
  *
  */
 public class ProgramChair {
+	/** Unique user identification number of the Program Chair. */
+	int myUserId;
 	
 	/**
 	 * Creates a designated Program Chair
 	 */
-	public ProgramChair() {
-		
+	public ProgramChair(final int theUserId) {
+		myUserId = theUserId;
 	}
 	
 	/**
@@ -42,10 +44,12 @@ public class ProgramChair {
 	/**
 	 * Accepts/Rejects paper for the conference.
 	 * 
-	 * @param the_paper_id paper to be accepted/rejected.
+	 * @param the_paper_id identification number of the 
+	 * paper to be accepted/rejected.
 	 * @param the_status paper status yes/no.
+	 * 
 	 */
-	public void makeDesicion(final Paper thePaperId, 
+	public void makeDesicion(final int thePaperId, 
 							 final PaperStatus theStatus) {
 		
 	}
