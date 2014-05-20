@@ -8,6 +8,8 @@
 public class Paper {
 	/** Unique identification number of the paper. */
 	int myId;
+	/** How many people are reviewing this paper*/
+	public int reviewed;
 	/** Title of the paper. */
 	String myTitle;
 	/** Author of the paper. */
@@ -15,11 +17,11 @@ public class Paper {
 	/** Review status of the paper. */
 	boolean myReviewed;
 	/** Reviewer assigned to review the paper. */
-	Reviewer myAssignedReviewer0;
+	int myAssignedReviewer0;
 	/** Reviewer assigned to review the paper. */
-	Reviewer myAssignedReviewer1;
+	int myAssignedReviewer1;
 	/** Reviewer assigned to review the paper. */
-	Reviewer myAssignedReviewer2;
+	int myAssignedReviewer2;
 	/** Subprogram Chair in charge of the paper. */
 	SubProgramChair mySubProgramChair;
 	/** Review of the paper. */
@@ -47,14 +49,15 @@ public class Paper {
 	 */
 	public Paper(final int theId, final Author theAuthor, final String theTitle) {
 		myId = theId;
+		reviewed = 0;
 		myTitle = theTitle;
 		myAuthor = theAuthor;
 		myAcceptanceStatus = PaperStatus.Undecided;
 		
 		mySubProgramChair = null;
-		myAssignedReviewer0 = null; 
-		myAssignedReviewer1 = null;
-		myAssignedReviewer2 = null;
+		myAssignedReviewer0 = 0; 
+		myAssignedReviewer1 = 0;
+		myAssignedReviewer2 = 0;
 		myReviewed = false;
 		myReview0 = null;
 		myReview1 = null;
