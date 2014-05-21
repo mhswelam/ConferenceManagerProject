@@ -2,8 +2,16 @@ package cleanCode;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
+/**
+ * Test Review class.
+ * @author Polina Kud
+ *
+ */
 public class ReviewTest {
 
 	/**
@@ -12,9 +20,34 @@ public class ReviewTest {
 	@Test
 	public void testGeMyReviewID() {
 		Review testReviewOne = new Review(00555, 00001, 1, 2, 3, 4);
-		Review testReviewTwo = new Review(00545, 00001, 1, 2, 3, 4);
 		int output = testReviewOne.getMyReviewerId();
 		int expected = 00001;
+		assertEquals(output, expected);
+	}
+	
+	/**
+	 * Tests the paper id.
+	 */
+	@Test
+	public void testGetPaperId() {
+		Review testReviewTwo = new Review(00545, 00001, 1, 2, 3, 4);
+		int output = testReviewTwo.getMyPaperId();
+		int expected = 00545;
+		assertEquals(output, expected);
+	}
+	
+	/**
+	 * Tests get my comments method.
+	 */
+	@Test
+	public void testGetMyComments() {
+		Review testReviewThree = new Review(00545, 00001, 1, 2, 3, 4);
+		List<Integer> output = testReviewThree.getMyComments();
+		List<Integer> expected = new ArrayList<Integer>();
+		expected.add(1);
+		expected.add(2);
+		expected.add(3);
+		expected.add(4);
 		assertEquals(output, expected);
 	}
 }
