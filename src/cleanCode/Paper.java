@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class Paper {
 	/** Maximum number of reviews and reviewers for the paper. */
-	private final static int NUM_REVIEW = 3;
+	private final static int NUM_REVIEW = 4;
 	
 	/** Unique identification number of the paper. */
 	int myId;
@@ -24,23 +24,11 @@ public class Paper {
 	Author myAuthor;
 	/** Review status of the paper. */
 	boolean myReviewed;
-	/** Reviewer assigned to review the paper. */
-	int myAssignedReviewer0;
-	/** Reviewer assigned to review the paper. */
-	int myAssignedReviewer1;
-	/** Reviewer assigned to review the paper. */
-	int myAssignedReviewer2;
 	/** Subprogram Chair in charge of the paper. */
 	SubProgramChair mySubProgramChair;
-	/** Review of the paper. */
-	Review myReview0;
-	/** Review of the paper. */
-	Review myReview1;
-	/** Review of the paper. */
-	Review myReview2;
-	/** List of 3 reviews for the paper. */
+	/** List of reviews for the paper. */
 	List<Review> myReviews;
-	/** List of 3 reviewers assigned to the paper. */
+	/** List of reviewers assigned to the paper. */
 	List<Reviewer> myReviewers;
 	/** Recommendation of SubProgram Chair. */
 	Recommendation myRecommendation;
@@ -69,45 +57,37 @@ public class Paper {
 		mySubProgramChair = null;
 		myReviewers = new ArrayList<Reviewer>();
 		myReviews = new ArrayList<Review>();
-		
-//		myAssignedReviewer0 = 0; 
-//		myAssignedReviewer1 = 0;
-//		myAssignedReviewer2 = 0;
+
 		myReviewed = false;
-//		myReview0 = null;
-//		myReview1 = null;
-//		myReview2 = null;
 		myRecommendation = null;
 	}
 	
 	/**
 	* Assigns a reviewer to review the paper. 
-	* Total of 3 reviewers.
 	* 
 	* @param theReviewer reviewer of the paper.
 	*/
 	public void assignReviewer(final Reviewer theReviewer) {
-	if (myReviewers.size() < NUM_REVIEW) {
-		myReviewers.add(theReviewer);
-	}
+		if (myReviewers.size() < NUM_REVIEW) {
+			myReviewers.add(theReviewer);
+		}
 	}
 
 	/**
 	* Adds review to the paper.
-	* Total of 3 reviews.
 	* 
 	* @param theReview review of the paper.
 	*/
 	public void review(final Review theReview) {
-	if (myReviews.size() < NUM_REVIEW) {	
-		myReviews.add(theReview);
-	}
-	isReviewed();
+		if (myReviews.size() < NUM_REVIEW) {	
+			myReviews.add(theReview);
+		}
+		isReviewed();
 	}
 
 	/**
 	* Changes the reviewed status of the paper
-	* if the maximum number of reviews has been s
+	* if the maximum number of reviews has been 
 	* submitted.
 	*/
 
