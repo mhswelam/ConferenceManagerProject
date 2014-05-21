@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class Paper {
 	/** Maximum number of reviews and reviewers for the paper. */
-	private final static int NUM_REVIEW = 4;
+	private final static int NUM_REVIEW = 3;
 	
 	/** Unique identification number of the paper. */
 	int myId;
