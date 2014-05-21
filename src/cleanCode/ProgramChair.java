@@ -1,5 +1,9 @@
 package cleanCode;
 
+import cleanCode.Paper;
+import cleanCode.PaperStatus;
+import cleanCode.SubProgramChair;
+
 /**
  * @author Clean Code
  * This class to create a Program Chair
@@ -33,7 +37,7 @@ public class ProgramChair {
 	 * 
 	 */
 	public void viewList() {
-		
+		System.out.println("View List");
 	}
 	
 	/**
