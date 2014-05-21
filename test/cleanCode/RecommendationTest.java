@@ -6,8 +6,6 @@ import org.junit.Test;
 
 public class RecommendationTest {
 	
-	
-
 	/**
 	 * This method to test getmypaperId.
 	 */
