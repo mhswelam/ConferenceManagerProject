@@ -6,12 +6,15 @@ import java.util.ArrayList;
  * This class to create a Review.
  * 
  */
+
 public class Review {
 	
+	
+
 	/**
 	 * This to hold the paper id.
 	 */
-	public int myPaperId;
+	private int myPaperId;
 	/**
 	 * This to hold the Reviewer id.
 	 */
@@ -54,6 +57,23 @@ public class Review {
 	 */
 	public int getMyReviewerId() {
 		return myReviewerId;
+	}
+	
+	
+	/**
+	 * This to return the paper id 
+	 * @return paper id type int.
+	 */
+	public int getMyPaperId() {
+		return myPaperId;
+	}
+
+	/**
+	 * This to return arrayList of integer that respond to the review questions.  
+	 * @return ArrayList with number respond to the review questions.
+	 */
+	public ArrayList<Integer> getMyComments() {
+		return myComments;
 	}
 
 }
