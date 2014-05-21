@@ -13,11 +13,16 @@ import java.util.Map;
  *
  */
 public class ProgramChair extends User {
-	/** Map of SubProgram Chairs and their Assigned papers. */
-	Map<SubProgramChair, List<Paper>> myAssignedPapers;
-	
 	/** Program Chairs role ID. */
 	final int myRoleId = 1;
+	/** Map of SubProgram Chairs and their Assigned papers. */
+	Map<SubProgramChair, List<Paper>> myAssignedPapers;
+	/** List designated SubProgram Chairs. */
+	List<SubProgramChair> mySubProgramChairs;
+	/** List of reviewers .*/
+	List<Reviewer> myReviewers;
+	/** Papers submitted to the confirence. */
+	List<Paper> myPapers;
 	
 	/**
 	 * Creates a designated Program Chair
@@ -31,6 +36,9 @@ public class ProgramChair extends User {
 						final String theLastName, final String theEmail) {
 		super(theUserId, theFirstName, theLastName, theEmail);
 		myAssignedPapers = new HashMap<SubProgramChair, List<Paper>>();
+		mySubProgramChairs = new ArrayList<SubProgramChair>();
+		myReviewers = new ArrayList<Reviewer>();
+		myPapers = new ArrayList<Paper>();
 	}
 	
 	/**
@@ -48,17 +56,17 @@ public class ProgramChair extends User {
 	}
 	
 	/**
-	 * 
+	 * @return list of designated SubProgram Chairs.
 	 */
-	public void viewList() {
-		System.out.println("View List");
+	public List<SubProgramChair> viewLisSubChairst() {
+		return mySubProgramChairs;
 	}
 	
 	/**
-	 * List of reviewers.
+	 * @return List of reviewers.
 	 */
-	public void viewReviewerList() {
-		
+	public List<Reviewer> viewReviewerList() {
+		return myReviewers;
 	}
 	
 	/**
@@ -69,8 +77,8 @@ public class ProgramChair extends User {
 	 * @param the_status paper status yes/no.
 	 * 
 	 */
-	public void makeDesicion(final int thePaperId, 
+	public void makeDesicion(final Paper thePaper, 
 							 final PaperStatus theStatus) {
-		
+		thePaper.changeStatus(theStatus);
 	}
 }

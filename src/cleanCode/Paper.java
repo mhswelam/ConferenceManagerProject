@@ -24,11 +24,23 @@ public class Paper {
 	Author myAuthor;
 	/** Review status of the paper. */
 	boolean myReviewed;
+	/** Reviewer assigned to review the paper. */
+	int myAssignedReviewer0;
+	/** Reviewer assigned to review the paper. */
+	int myAssignedReviewer1;
+	/** Reviewer assigned to review the paper. */
+	int myAssignedReviewer2;
 	/** Subprogram Chair in charge of the paper. */
 	SubProgramChair mySubProgramChair;
-	/** List of reviews for the paper. */
+	/** Review of the paper. */
+	Review myReview0;
+	/** Review of the paper. */
+	Review myReview1;
+	/** Review of the paper. */
+	Review myReview2;
+	/** List of 3 reviews for the paper. */
 	List<Review> myReviews;
-	/** List of reviewers assigned to the paper. */
+	/** List of 3 reviewers assigned to the paper. */
 	List<Reviewer> myReviewers;
 	/** Recommendation of SubProgram Chair. */
 	Recommendation myRecommendation;
@@ -57,9 +69,16 @@ public class Paper {
 		mySubProgramChair = null;
 		myReviewers = new ArrayList<Reviewer>();
 		myReviews = new ArrayList<Review>();
-
+		
 		myReviewed = false;
 		myRecommendation = null;
+		
+		myAssignedReviewer0 = 0; 
+		myAssignedReviewer1 = 0;
+		myAssignedReviewer2 = 0;
+		myReview0 = null;
+		myReview1 = null;
+		myReview2 = null;
 	}
 	
 	/**
