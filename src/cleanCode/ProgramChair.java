@@ -1,8 +1,9 @@
 package cleanCode;
 
-import cleanCode.Paper;
-import cleanCode.PaperStatus;
-import cleanCode.SubProgramChair;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Clean Code
@@ -12,6 +13,9 @@ import cleanCode.SubProgramChair;
  *
  */
 public class ProgramChair extends User {
+	/** Map of SubProgram Chairs and their Assigned papers. */
+	Map<SubProgramChair, List<Paper>> myAssignedPapers;
+	
 	/** Program Chairs role ID. */
 	final int myRoleId = 1;
 	
@@ -26,6 +30,7 @@ public class ProgramChair extends User {
 	public ProgramChair(final int theUserId, final String theFirstName, 
 						final String theLastName, final String theEmail) {
 		super(theUserId, theFirstName, theLastName, theEmail);
+		myAssignedPapers = new HashMap<SubProgramChair, List<Paper>>();
 	}
 	
 	/**
@@ -35,8 +40,11 @@ public class ProgramChair extends User {
 	 * @param the_paper_id paper to be designated.
 	 */
 	public void selectSubProgramChair(final SubProgramChair theSubChair, 
-									  final Paper thePaperId) {
-		
+									  final Paper thePaper) {
+		if (!myAssignedPapers.containsKey(theSubChair)) {
+			myAssignedPapers.put(theSubChair, new ArrayList<Paper>());
+		} 
+		myAssignedPapers.get(theSubChair).add(thePaper);
 	}
 	
 	/**
