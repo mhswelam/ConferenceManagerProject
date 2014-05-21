@@ -14,6 +14,8 @@ import cleanCode.SubProgramChair;
 public class ProgramChair {
 	/** Unique user identification number of the Program Chair. */
 	int myUserId;
+	/** Program Chairs role ID. */
+	final int myRoleId = 1;
 	
 	/**
 	 * Creates a designated Program Chair
