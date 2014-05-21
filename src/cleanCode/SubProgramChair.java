@@ -1,3 +1,4 @@
+package cleanCode;
 import java.util.Map;
 /**
  * @author Clean Code

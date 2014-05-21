@@ -1,4 +1,4 @@
-import com.cleanCode.Author;
+package cleanCode;
 
 /**
  * @author Clean Code

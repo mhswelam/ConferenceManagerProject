@@ -1,4 +1,4 @@
-package com.cleanCode;
+package cleanCode;
 /**
  * @author Clean Code
  * This class to create an Author.

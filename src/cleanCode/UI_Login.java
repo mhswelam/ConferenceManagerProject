@@ -1,3 +1,4 @@
+package cleanCode;
 /**
  * @author Clean Code
  * This class to create a user interface for the login

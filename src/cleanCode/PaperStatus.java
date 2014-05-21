@@ -1,3 +1,4 @@
+package cleanCode;
 /**
  * @author Clean Code/ Mohamed
  * This class to hold all the status for a paper.
