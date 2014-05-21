@@ -11,17 +11,21 @@ import cleanCode.SubProgramChair;
  * @author Polina Kud
  *
  */
-public class ProgramChair {
-	/** Unique user identification number of the Program Chair. */
-	int myUserId;
+public class ProgramChair extends User {
 	/** Program Chairs role ID. */
 	final int myRoleId = 1;
 	
 	/**
 	 * Creates a designated Program Chair
+	 * 
+	 * @param theUserId unique identification number of the Program Chair.
+	 * @param theFirstName first name of the Program Chair.
+	 * @param theLastName last name of the Program Chair.
+	 * @param theEmail email of the Program Chair.
 	 */
-	public ProgramChair(final int theUserId) {
-		myUserId = theUserId;
+	public ProgramChair(final int theUserId, final String theFirstName, 
+						final String theLastName, final String theEmail) {
+		super(theUserId, theFirstName, theLastName, theEmail);
 	}
 	
 	/**
