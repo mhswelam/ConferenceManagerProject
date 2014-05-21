@@ -1,3 +1,5 @@
+import com.cleanCode.Author;
+
 /**
  * @author Clean Code
  * This class to create a Paper
