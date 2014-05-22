@@ -94,7 +94,6 @@ public class Paper {
 	* if the maximum number of reviews has been 
 	* submitted.
 	*/
-
 	private void reviewed() {
 		if (myReviews.size() == NUM_REVIEW) {
 			myReviewed = true;
@@ -136,6 +135,20 @@ public class Paper {
 	 */
 	public boolean isReviewed() {
 		return myReviewed;
+	}
+	
+	/**
+	 * @return List of Reviewers for this paper. 
+	 */
+	public List<Integer> getReviewers() {
+		return myReviewers;
+	}
+	
+	/**
+	 * @return List of completed reviews.
+	 */
+	public List<Integer> getReviews() {
+		return myReviews;
 	}
 	
 	/**

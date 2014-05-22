@@ -96,10 +96,7 @@ public class ProgramChair extends User {
 	 */
 	public void makeDesicion(final Paper thePaper, 
 							 final PaperStatus theStatus) {
-		for (Integer paperId: myPapers) {
-			if (paperId == thePaper.getId()) {
-				thePaper.changeStatus(theStatus);
-			}
-		}
+
+		thePaper.changeStatus(theStatus);
 	}
 }
