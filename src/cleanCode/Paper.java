@@ -15,37 +15,25 @@ public class Paper {
 	private final static int NUM_REVIEW = 3;
 	
 	/** Unique identification number of the paper. */
-	int myId;
+	private int myId;
 	/** How many people are reviewing this paper*/
-	public int reviewed;
+	private int reviewed;
 	/** Title of the paper. */
-	String myTitle;
+	private String myTitle;
 	/** Author of the paper. */
-	Author myAuthor;
+	private int myAuthor;
 	/** Review status of the paper. */
-	boolean myReviewed;
-	/** Reviewer assigned to review the paper. */
-	int myAssignedReviewer0;
-	/** Reviewer assigned to review the paper. */
-	int myAssignedReviewer1;
-	/** Reviewer assigned to review the paper. */
-	int myAssignedReviewer2;
+	private boolean myReviewed;
 	/** Subprogram Chair in charge of the paper. */
-	SubProgramChair mySubProgramChair;
-	/** Review of the paper. */
-	Review myReview0;
-	/** Review of the paper. */
-	Review myReview1;
-	/** Review of the paper. */
-	Review myReview2;
+	private int mySubProgramChair;
 	/** List of 3 reviews for the paper. */
-	List<Review> myReviews;
+	private List<Integer> myReviews;
 	/** List of 3 reviewers assigned to the paper. */
-	List<Reviewer> myReviewers;
+	private List<Integer> myReviewers;
 	/** Recommendation of SubProgram Chair. */
-	Recommendation myRecommendation;
+	private Recommendation myRecommendation;
 	/** Acceptance Status of the paper. */
-	PaperStatus myAcceptanceStatus;
+	private PaperStatus myAcceptanceStatus;
 	
 	
 	/**
@@ -59,26 +47,19 @@ public class Paper {
 	 * @param theAuthor author of the paper.
 	 * @param theTitle title of the paper.
 	 */
-	public Paper(final int theId, final Author theAuthor, final String theTitle) {
+	public Paper(final int theId, final int theAuthor, final String theTitle) {
 		myId = theId;
 		reviewed = 0;
 		myTitle = theTitle;
 		myAuthor = theAuthor;
 		myAcceptanceStatus = PaperStatus.Undecided;
 		
-		mySubProgramChair = null;
-		myReviewers = new ArrayList<Reviewer>();
-		myReviews = new ArrayList<Review>();
+		mySubProgramChair = 0;
+		myReviewers = new ArrayList<Integer>();
+		myReviews = new ArrayList<Integer>();
 		
 		myReviewed = false;
 		myRecommendation = null;
-		
-		myAssignedReviewer0 = 0; 
-		myAssignedReviewer1 = 0;
-		myAssignedReviewer2 = 0;
-		myReview0 = null;
-		myReview1 = null;
-		myReview2 = null;
 	}
 	
 	/**
@@ -86,9 +67,9 @@ public class Paper {
 	* 
 	* @param theReviewer reviewer of the paper.
 	*/
-	public void assignReviewer(final Reviewer theReviewer) {
+	public void addReviewer(final int theReviewerId) {
 		if (myReviewers.size() < NUM_REVIEW) {
-			myReviewers.add(theReviewer);
+			myReviewers.add(theReviewerId);
 		}
 	}
 
@@ -97,13 +78,22 @@ public class Paper {
 	* 
 	* @param theReview review of the paper.
 	*/
-	public void review(final Review theReview) {
+	public void review(final int theReviewId) {
 		if (myReviews.size() < NUM_REVIEW) {	
-			myReviews.add(theReview);
+			myReviews.add(theReviewId);
 		}
 		isReviewed();
 	}
 
+	/**
+	 * SubProgram Chair adds recommendation to the paper for Program Chair.
+	 * 
+	 * @param theRecommendation recommendation form from SubProgram Chair.
+	 */
+	public void addRecommendation(final Recommendation theRecommendation) {
+		myRecommendation = theRecommendation;
+	}
+	
 	/**
 	* Changes the reviewed status of the paper
 	* if the maximum number of reviews has been 
@@ -121,14 +111,14 @@ public class Paper {
 	* 
 	* @param theSubChair SubProgram Chair selected for the paper.
 	*/
-	public void assignSubProgramChair(final SubProgramChair theSubChair) {
-		mySubProgramChair = theSubChair;
+	public void assignSubProgramChair(final int theSubChairId) {
+		mySubProgramChair = theSubChairId;
 	}
 
 	/**
 	* @return SubProgram Chair designated for the paper.
 	*/
-	public SubProgramChair getSubProgramChair() {
+	public int getSubProgramChair() {
 		return mySubProgramChair;
 	}
 

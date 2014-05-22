@@ -16,13 +16,13 @@ public class ProgramChair extends User {
 	/** Program Chairs role ID. */
 	final int myRoleId = 1;
 	/** Map of SubProgram Chairs and their Assigned papers. */
-	Map<SubProgramChair, List<Paper>> myAssignedPapers;
+	Map<Integer, List<Integer>> myAssignedPapers;
 	/** List designated SubProgram Chairs. */
-	List<SubProgramChair> mySubProgramChairs;
+	List<Integer> mySubProgramChairs;
 	/** List of reviewers .*/
-	List<Reviewer> myReviewers;
+	List<Integer> myReviewers;
 	/** Papers submitted to the confirence. */
-	List<Paper> myPapers;
+	List<Integer> myPapers;
 	
 	/**
 	 * Creates a designated Program Chair
@@ -34,11 +34,12 @@ public class ProgramChair extends User {
 	 */
 	public ProgramChair(final int theUserId, final String theFirstName, 
 						final String theLastName, final String theEmail) {
+		
 		super(theUserId, theFirstName, theLastName, theEmail);
-		myAssignedPapers = new HashMap<SubProgramChair, List<Paper>>();
-		mySubProgramChairs = new ArrayList<SubProgramChair>();
-		myReviewers = new ArrayList<Reviewer>();
-		myPapers = new ArrayList<Paper>();
+		myAssignedPapers = new HashMap<Integer, List<Integer>>();
+		mySubProgramChairs = new ArrayList<Integer>();
+		myReviewers = new ArrayList<Integer>();
+		myPapers = new ArrayList<Integer>();
 	}
 	
 	/**
@@ -47,25 +48,26 @@ public class ProgramChair extends User {
 	 * @param the_sub_chair SubProgram Chair to oversee the manuscript.
 	 * @param the_paper_id paper to be designated.
 	 */
-	public void selectSubProgramChair(final SubProgramChair theSubChair, 
+	public void selectSubProgramChair(final int theSubChair, 
 									  final Paper thePaper) {
 		if (!myAssignedPapers.containsKey(theSubChair)) {
-			myAssignedPapers.put(theSubChair, new ArrayList<Paper>());
+			myAssignedPapers.put(theSubChair, new ArrayList<Integer>());
 		} 
-		myAssignedPapers.get(theSubChair).add(thePaper);
+		myAssignedPapers.get(theSubChair).add(thePaper.getId());
+		thePaper.assignSubProgramChair(theSubChair);
 	}
 	
 	/**
 	 * @return list of designated SubProgram Chairs.
 	 */
-	public List<SubProgramChair> viewLisSubChairst() {
+	public List<Integer> viewLisSubChairst() {
 		return mySubProgramChairs;
 	}
 	
 	/**
 	 * @return List of reviewers.
 	 */
-	public List<Reviewer> viewReviewerList() {
+	public List<Integer> viewReviewerList() {
 		return myReviewers;
 	}
 	
@@ -79,6 +81,10 @@ public class ProgramChair extends User {
 	 */
 	public void makeDesicion(final Paper thePaper, 
 							 final PaperStatus theStatus) {
-		thePaper.changeStatus(theStatus);
+		for (Integer paperId: myPapers) {
+			if (paperId == thePaper.getId()) {
+				thePaper.changeStatus(theStatus);
+			}
+		}
 	}
 }

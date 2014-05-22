@@ -13,6 +13,9 @@ import org.junit.Test;
  *
  */
 public class ReviewTest {
+	public static void main(String[] args) {
+		
+	}
 
 	/**
 	 * Tests the id validity of a review.
