@@ -3,10 +3,29 @@ package cleanCode;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import java.awt.Color;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import javax.swing.JTextField;
+import java.awt.Component;
+import java.awt.Point;
+import javax.swing.border.EtchedBorder;
+import java.awt.Rectangle;
+import java.awt.ComponentOrientation;
+import javax.swing.JTextPane;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import javax.swing.BoxLayout;
+import java.awt.CardLayout;
+import java.awt.FlowLayout;
 
 public class UI_Window {
 
 	private JFrame frame;
+	private JPanel panel;
+	private JLabel lblLogIn;
 
 	/**
 	 * Launch the application.
@@ -36,7 +55,22 @@ public class UI_Window {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.getContentPane().setBackground(Color.WHITE);
+		frame.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		panel = new JPanel();
+		panel.setBorder(null);
+		panel.setBackground(Color.WHITE);
+		frame.getContentPane().add(panel);
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		lblLogIn = new JLabel("Log In");
+		lblLogIn.setName("LogIn");
+		lblLogIn.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		lblLogIn.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+		panel.add(lblLogIn);
+		//700 width 500 height
+		frame.setBounds(100, 100, 700, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
