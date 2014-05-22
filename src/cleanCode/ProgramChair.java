@@ -14,15 +14,16 @@ import java.util.Map;
  */
 public class ProgramChair extends User {
 	/** Program Chairs role ID. */
-	final int myRoleId = 1;
+	private final static int MY_ROLE_ID = 1;
+	
 	/** Map of SubProgram Chairs and their Assigned papers. */
-	Map<Integer, List<Integer>> myAssignedPapers;
+	private Map<Integer, List<Integer>> myAssignedPapers;
 	/** List designated SubProgram Chairs. */
-	List<Integer> mySubProgramChairs;
+	private List<Integer> mySubProgramChairs;
 	/** List of reviewers .*/
-	List<Integer> myReviewers;
+	private List<Integer> myReviewers;
 	/** Papers submitted to the confirence. */
-	List<Integer> myPapers;
+	private List<Integer> myPapers;
 	
 	/**
 	 * Creates a designated Program Chair

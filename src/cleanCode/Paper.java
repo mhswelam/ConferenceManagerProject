@@ -17,7 +17,7 @@ public class Paper {
 	/** Unique identification number of the paper. */
 	private int myId;
 	/** How many people are reviewing this paper*/
-	private int reviewed;
+	private int reviewers;
 	/** Title of the paper. */
 	private String myTitle;
 	/** Author of the paper. */
@@ -26,14 +26,17 @@ public class Paper {
 	private boolean myReviewed;
 	/** Subprogram Chair in charge of the paper. */
 	private int mySubProgramChair;
-	/** List of 3 reviews for the paper. */
-	private List<Integer> myReviews;
-	/** List of 3 reviewers assigned to the paper. */
-	private List<Integer> myReviewers;
+	
 	/** Recommendation of SubProgram Chair. */
 	private Recommendation myRecommendation;
 	/** Acceptance Status of the paper. */
 	private PaperStatus myAcceptanceStatus;
+	
+	/** List of 3 reviews for the paper. */
+	private List<Integer> myReviews;
+	/** List of 3 reviewers assigned to the paper. */
+	private List<Integer> myReviewers;
+
 	
 	
 	/**
@@ -49,7 +52,7 @@ public class Paper {
 	 */
 	public Paper(final int theId, final int theAuthor, final String theTitle) {
 		myId = theId;
-		reviewed = 0;
+		reviewers = 0;
 		myTitle = theTitle;
 		myAuthor = theAuthor;
 		myAcceptanceStatus = PaperStatus.Undecided;
@@ -65,11 +68,12 @@ public class Paper {
 	/**
 	* Assigns a reviewer to review the paper. 
 	* 
-	* @param theReviewer reviewer of the paper.
+	* @param theReviewer Reviewer of the paper.
 	*/
 	public void addReviewer(final int theReviewerId) {
 		if (myReviewers.size() < NUM_REVIEW) {
 			myReviewers.add(theReviewerId);
+			reviewers++;
 		}
 	}
 
@@ -78,11 +82,23 @@ public class Paper {
 	* 
 	* @param theReview review of the paper.
 	*/
-	public void review(final int theReviewId) {
+	public void addReview(final int theReviewId) {
 		if (myReviews.size() < NUM_REVIEW) {	
 			myReviews.add(theReviewId);
 		}
-		isReviewed();
+		reviewed();
+	}
+	
+	/**
+	* Changes the reviewed status of the paper
+	* if the maximum number of reviews has been 
+	* submitted.
+	*/
+
+	private void reviewed() {
+		if (myReviews.size() == NUM_REVIEW) {
+			myReviewed = true;
+		}
 	}
 
 	/**
@@ -93,30 +109,38 @@ public class Paper {
 	public void addRecommendation(final Recommendation theRecommendation) {
 		myRecommendation = theRecommendation;
 	}
-	
-	/**
-	* Changes the reviewed status of the paper
-	* if the maximum number of reviews has been 
-	* submitted.
-	*/
-
-	private void isReviewed() {
-		if (myReviews.size() == NUM_REVIEW) {
-			myReviewed = true;
-		}
-	}
 
 	/**
 	* Assigned SubProgram chair to the paper.
 	* 
-	* @param theSubChair SubProgram Chair selected for the paper.
+	* @param theSubChair Identification number of 
+	* SubProgram Chair selected for the paper.
 	*/
 	public void assignSubProgramChair(final int theSubChairId) {
 		mySubProgramChair = theSubChairId;
 	}
+	
+	/**
+	* Change paper status to Accepted/Rejected. 
+	* Initially the status is Undecided.
+	* 
+	* @param theStatus Accepted / Rejected status of the paper.
+	*/
+	public void changeStatus(final PaperStatus theStatus) {
+		myAcceptanceStatus = theStatus;
+	}
 
 	/**
-	* @return SubProgram Chair designated for the paper.
+	 * @return true is all Reviewers have submitted their reviews. 
+	 * False otherwise.
+	 */
+	public boolean isReviewed() {
+		return myReviewed;
+	}
+	
+	/**
+	* @return Identification number of SubProgram 
+	* Chair designated for the paper.
 	*/
 	public int getSubProgramChair() {
 		return mySubProgramChair;
@@ -130,7 +154,47 @@ public class Paper {
 	public int getId() {
 		return myId;
 	}
+	
+	/**
+	 * @return Title of the manuscript.
+	 */
+	public String getTitle() {
+		return myTitle;
+	}
+	
+	/**
+	 * @return Recommendation from SubProgram Chair.
+	 */
+	public Recommendation getRecommendation() {
+		return myRecommendation;
+	}
 
+	/** 
+	* Status of the paper.
+	* Initially Undecided. 
+	* ProgramChair specifies if the paper is 
+	* accepted / denied to the conference.
+	* 
+	* @return Accepted, Denied, Undecided.
+	*/
+	public PaperStatus getStatus() {
+		return myAcceptanceStatus;
+	}
+	
+	/**
+	 * @return number of reviewers.
+	 */
+	public int getNumReviewers() {
+		return reviewers;
+	}
+
+	/**
+	 * @return Identification number of the Author of this paper.
+	 */
+	public int getAuthor() {
+		return myAuthor;
+	}
+	
 	/**
 	* Downloads the paper.
 	*/
@@ -143,27 +207,5 @@ public class Paper {
 	*/
 	public void upload() {
 
-	}
-
-	/**
-	* Change paper status to Accepted/Rejected. 
-	* Initially the status is Undecided.
-	* 
-	* @param theStatus Accepted / Rejected status of the paper.
-	*/
-	public void changeStatus(final PaperStatus theStatus) {
-		myAcceptanceStatus = theStatus;
-	}
-
-	/** 
-	* Status of the paper.
-	* Initially Undecided. 
-	* ProgramChair specifies if the paper is 
-	* accepted / denied to the conference.
-	* 
-	* @return Accepted, Denied, Undecided.
-	*/
-	public PaperStatus status() {
-		return myAcceptanceStatus;
 	}
 }
