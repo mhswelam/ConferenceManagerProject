@@ -59,17 +59,31 @@ public class ProgramChair extends User {
 	}
 	
 	/**
-	 * @return list of designated SubProgram Chairs.
+	 * @return List of SubProgram Chairs and their corresponding papers.
 	 */
-	public List<Integer> viewLisSubChairst() {
+	public Map<Integer, List<Integer>> getAssignedPapers() {
+		return myAssignedPapers;
+	}
+	
+	/**
+	 * @return List of designated SubProgram Chairs.
+	 */
+	public List<Integer> getSubChairs() {
 		return mySubProgramChairs;
 	}
 	
 	/**
 	 * @return List of reviewers.
 	 */
-	public List<Integer> viewReviewerList() {
+	public List<Integer> getReviewers() {
 		return myReviewers;
+	}
+	
+	/**
+	 * @return List of papers.
+	 */
+	public List<Integer> getPapers() {
+		return myPapers;
 	}
 	
 	/**
