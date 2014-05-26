@@ -70,7 +70,7 @@ public class Data {
 
 	 public static void main(String[] args) throws IOException {
 		 Data test = new Data();
-	     test.setInputFile("src/lib/NonAuthors.xls");
+	     test.setInputFile("src/lib/Authors.xls");
 	     HashMap<Integer, String[]> myMap = test.read();
 	     Iterator it = myMap.entrySet().iterator();
 	     while (it.hasNext()) {
