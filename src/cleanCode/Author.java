@@ -15,7 +15,7 @@ public class Author extends User
 	final int MAX_PAPERS = 4;
 	
 	/** The unique role ID for an author. */
-	final int ROLE_ID = null;
+	final int ROLE_ID = 0;
 	
 	/** The amount of papers that have been assigned to and author. */
 	int papersAssigned = 0;

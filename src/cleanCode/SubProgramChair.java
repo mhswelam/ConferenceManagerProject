@@ -36,18 +36,18 @@ public class SubProgramChair extends User{
 	 */
 	private void assignPapers(int idPaper, int idReviewer) {
 		Paper myPaper = myAssignedPapers.get(idPaper);
-		myPaper.reviewed++;
-		if (myPaper.reviewed == 1) {
-			myPaper.myAssignedReviewer0 = idReviewer;
-		} else if (myPaper.reviewed == 2) {
-			myPaper.myAssignedReviewer1 = idReviewer;
-		} else if (myPaper.reviewed == 3) {
-			myPaper.myAssignedReviewer2 = idReviewer;
-			//Once their is 3 reviewers for a paper it cannot be reviewed by any more.
-		} else {
-			System.out.println("This paper cannot be reviewed"
-					+ " by anymore reviewers");
-		}
+//		myPaper.reviewed++;
+//		if (myPaper.reviewed == 1) {
+//			myPaper.myAssignedReviewer0 = idReviewer;
+//		} else if (myPaper.reviewed == 2) {
+//			myPaper.myAssignedReviewer1 = idReviewer;
+//		} else if (myPaper.reviewed == 3) {
+//			myPaper.myAssignedReviewer2 = idReviewer;
+//			//Once their is 3 reviewers for a paper it cannot be reviewed by any more.
+//		} else {
+//			System.out.println("This paper cannot be reviewed"
+//					+ " by anymore reviewers");
+//		}
 	}
 	
 	/**
