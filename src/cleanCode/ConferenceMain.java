@@ -28,14 +28,15 @@ public class ConferenceMain {
             @Override
             public void run() {
             	try {
-					UI_Page window = new UI_Page();
+					UI_Page window = new UI_Page(new Conference());
 					window.start();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
             }
         });
-
+        Conference mycon = new Conference();
+ 
 	}
 
 }

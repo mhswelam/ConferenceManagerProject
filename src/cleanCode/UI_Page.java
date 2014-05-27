@@ -14,16 +14,22 @@ import javax.swing.JPanel;
 public class UI_Page {
 	/** Main window frame. */
 	public JFrame myFrame;
+	
+	/**
+	 * To hold the conference class
+	 */
+	public Conference myConference;
 	//Observes all other UI classes.
 	//Controls changes to all other UI classes.
 
 	/**
 	 * Constructs graphical user interface.
 	 */
-	public UI_Page() {
+	public UI_Page(Conference aConference) {
 		myFrame = new JFrame();
 		myFrame.getContentPane().setBackground(Color.WHITE);
 		myFrame.setBackground(Color.WHITE);
+		myConference = aConference;
 	}
 
 	/**

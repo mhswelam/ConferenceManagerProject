@@ -36,8 +36,8 @@ public class Author extends User
 	private void submitPaper(int idPaper)
 	{
 		String title = JOptionPane.showInputDialog("Please enter a title for the paper.");
-		Paper newPaper = new Paper(idPaper, this, title);
-		submittedPapers.add(newPaper);
+		//Paper newPaper = new Paper(idPaper, this, title);
+		//submittedPapers.add(newPaper);
 	}
 	
 	/**
@@ -45,7 +45,7 @@ public class Author extends User
 	 * 
 	 * @param idPaper The paper ID
 	 */
-	private Review seeReviews(int idPaper)
+	/*private Review seeReviews(int idPaper)
 	{
 		Paper paper = submittedPapers.get(idPaper);
 		
@@ -67,18 +67,18 @@ public class Author extends User
 				return paper.myReview2;
 			}
 		}
-	}
+	}*/
 	
 	/**
 	 * Edit a particular paper.
 	 * 
 	 * @param idPaper The paper ID
 	 */
-	private Paper editPaper(int idPaper)
+	/*private Paper editPaper(int idPaper)
 	{
 		unsubmitPaper(idPaper);
 		submitPaper(idPaper);
-	}
+	}*/
 	
 	/**
 	 * Unsubmit a particular paper.
@@ -89,10 +89,10 @@ public class Author extends User
 	{
 		for (int i = 0; i < submittedPapers.size(); i++)
 		{
-			if(submittedPapers.get(i).myId == idPaper)
+			/*if(submittedPapers.get(i).myId == idPaper)
 			{
 				submittedPapers.remove(i);
-			}
+			}*/
 		}
 	}
 }

@@ -14,9 +14,16 @@ public class Reviewer extends User {
     
     final int myRoleId = 4;
     
-    public Reviewer(int aUserId, String aFristName, String aLastName,
+    /**
+     * This is a constructor to create reviewer.
+     * @param aUserId the reviewer id.
+     * @param aFirstName the reviewer first name
+     * @param aLastName the reviewer last name
+     * @param anEmail the reviewer email
+     */
+    public Reviewer(int aUserId, String aFirstName, String aLastName,
 			String anEmail){
-    	super(aUserId, aFristName, aLastName,
+    	super(aUserId, aFirstName, aLastName,
     			anEmail);
     	
     }
