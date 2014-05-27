@@ -130,5 +130,18 @@ public class Conference {
         
         toRead.close();
 	}
-	
+
+	/**
+	 * This method to return the user from the the list of reviewer.
+	 * @param userID the user id 
+	 * @return the user type User.
+	 */
+	public User getUser(int userID) {
+		User result = null;
+		if (listOfReviewer.containsKey(userID)) {
+			result = listOfReviewer.get(userID);
+		}
+		return result;
+	}
 }
+
