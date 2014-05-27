@@ -16,11 +16,8 @@ public class UI_Page {
 	/** Main window frame. */
 	private JFrame myFrame;
 	private UI_Login logInPanel;
-	
-	
-	/**
-	 * To hold the conference class
-	 */
+
+	/** To hold the conference class. */
 	public Conference myConference;
 	//Observes all other UI classes.
 	//Controls changes to all other UI classes.
@@ -28,12 +25,12 @@ public class UI_Page {
 	/**
 	 * Constructs graphical user interface.
 	 */
-	public UI_Page(Conference aConference) {
+	public UI_Page(Conference theConference) {
 		myFrame = new JFrame();
 		logInPanel = new UI_Login();
 		myFrame.getContentPane().setBackground(Color.WHITE);
 		myFrame.setBackground(Color.WHITE);
-		myConference = aConference;
+		myConference = theConference;
 	}
 
 	/**
