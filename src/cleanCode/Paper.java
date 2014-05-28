@@ -208,13 +208,16 @@ public class Paper {
 		return myAuthor;
 	}
 	
+	//Author submits the paper into the database.
+	
 	/**
 	* Downloads the paper.
 	*/
 	public void download() {
 		
 	}
-
+	
+	//Constructor will upload the paper
 	/**
 	* Uploads the paper.
 	*/
