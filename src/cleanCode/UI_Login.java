@@ -106,7 +106,6 @@ public class UI_Login extends JPanel {
 			}
 		});
 
-		
 //		loginFrame.add(logInText);
 		loginFrame.add(userNameLabel);
 		loginFrame.add(userNameField);
