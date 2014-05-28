@@ -3,8 +3,12 @@ package cleanCode;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 /**
  * @author Clean Code
@@ -17,25 +21,22 @@ public class UI_Login extends JPanel {
 	 * Instantiates Log In panel when Conference starts running.
 	 */
 	public UI_Login() {
-		super(new BorderLayout());
-		setPreferredSize(new Dimension(300, 400));
-		setBackground(new Color(205, 205, 205));
+		super(new FlowLayout(FlowLayout.CENTER, 300, 100));
+//		setPreferredSize(new Dimension(600, 600));
+		//White background color
+		setBackground(new Color(255, 255, 255));
 	}
 	
 	public void logIn() {
-//		JPanel mainWindow = new JPanel(new BorderLayout());
-//		mainWindow.setBackground(new Color(205, 205, 205));
-//		mainWindow.setPreferredSize(new Dimension(300, 400));
+		JPanel loginFrame = new JPanel();
+		loginFrame.setPreferredSize(new Dimension(350, 450));
+		Border panelBorder = BorderFactory.createLineBorder(new Color(235, 235, 235), 2);
+		loginFrame.setBorder(panelBorder);
+		loginFrame.setBackground(new Color(250, 250, 250));
 		
-//		add(mainWindow, BorderLayout.CENTER);
-
+		JLabel text = new JLabel("Log In:");
+		loginFrame.add(text, BorderLayout.NORTH);
 		
-//		Object[] choices = {"Author", "Reviewer", "SubProgram Chair", "Program Chair"};
-//		JLabel logIn = new JLabel("Log in", JLabel.CENTER);
-//		logIn.setVerticalTextPosition(JLabel.CENTER);
-//		logIn.setHorizontalTextPosition(JLabel.CENTER);
-//		add(logIn, BorderLayout.CENTER);
-		
-//		JOptionPane.showOptionDialog(this ,"Log In", "Log In", JOptionPane.YES_OPTION, JOptionPane.PLAIN_MESSAGE, null, choices, choices[0]);
+		add(loginFrame);
 	}
 }
