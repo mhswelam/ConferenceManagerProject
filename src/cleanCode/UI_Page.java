@@ -39,6 +39,7 @@ public class UI_Page {
 	 */
 	public void start() {
 		myFrame.setVisible(true);
+		myFrame.setResizable(false);
 		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//Size of the frame 1200 width 900 height
 		myFrame.setPreferredSize(new Dimension(1200, 900));
@@ -68,13 +69,13 @@ public class UI_Page {
 		JPanel northPanel = new JPanel(new BorderLayout());
 		northPanel.setPreferredSize(new Dimension(200, 100));
 		//Blue color is north panel
-		northPanel.setBackground(new Color(33, 104, 255));
+		//northPanel.setBackground(new Color(33, 104, 255));
 		
 		//Task Info Panel?
 		JPanel southPanel = new JPanel(new BorderLayout());
 		southPanel.setPreferredSize(new Dimension(200, 100));
 		//Yellow color is south panel
-		southPanel.setBackground(new Color(237, 255, 33));
+		//southPanel.setBackground(new Color(237, 255, 33));
 		
 		contentPane.add(northPanel, BorderLayout.NORTH);
 		contentPane.add(loginPanel, BorderLayout.CENTER);
