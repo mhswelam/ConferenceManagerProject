@@ -1,7 +1,6 @@
 package cleanCode;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -81,15 +80,19 @@ public class UI_Page {
 		contentPane.add(northPanel, BorderLayout.NORTH);
 		contentPane.add(logInPanel, BorderLayout.CENTER);
 		contentPane.add(southPanel, BorderLayout.SOUTH);
-		logInPanel.logIn();
+		
+		
 		
 		myFrame.add(contentPane);
+		
+		logInPanel.logIn();
+		
 	}
 	
 	/**
 	 * Starts the program for a particular user.
 	 */
 	public void initializeProgram() {
-		
+		String roleUserId = logInPanel.getUser();
 	}
 }

@@ -24,7 +24,7 @@ public class User {
 	}
 	
 	public void login(int aUserId) {
-		
+
 	}
 	
 	public void logout() {
