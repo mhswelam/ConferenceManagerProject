@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 public class UI_Page {
 	/** Main window frame. */
 	private JFrame myFrame;
+	
 	private UI_Login logInPanel;
 
 	/** To hold the conference class. */
@@ -61,7 +62,7 @@ public class UI_Page {
 		
 		UI_ControlPanel controlPanel = new UI_ControlPanel();
 		UI_PaperInfo paperInfo = new UI_PaperInfo();
-		UI_Login loginPanel = new UI_Login();
+//		UI_Login loginPanel = new UI_Login();
 		UI_TaskInfo taskInfo  = new UI_TaskInfo();
 		UI_UserInfo userInfo = new UI_UserInfo();
 		
@@ -78,35 +79,17 @@ public class UI_Page {
 		//southPanel.setBackground(new Color(237, 255, 33));
 		
 		contentPane.add(northPanel, BorderLayout.NORTH);
-		contentPane.add(loginPanel, BorderLayout.CENTER);
+		contentPane.add(logInPanel, BorderLayout.CENTER);
 		contentPane.add(southPanel, BorderLayout.SOUTH);
-		loginPanel.logIn();
+		logInPanel.logIn();
 		
 		myFrame.add(contentPane);
-//		JPanel centerPanel = new JPanel();
-//		centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.LINE_AXIS));
-//		centerPanel.setPreferredSize(new Dimension(1000, 700));
-//		centerPanel.setBackground(new Color(255, 255, 255));
-//		centerPanel.add(logInPanel);
-//		
-//		JPanel eastPanel = new JPanel(new BorderLayout());
-//		eastPanel.setPreferredSize(new Dimension(100, 100));
-//		eastPanel.setBackground(new Color(105, 105, 105));
-//		
-//		JPanel westPanel = new JPanel(new BorderLayout());
-//		westPanel.setPreferredSize(new Dimension(100, 100));
-//		westPanel.setBackground(new Color(105, 105, 105));
-//		
-//		JPanel southPanel = new JPanel(new BorderLayout());
-//		southPanel.setPreferredSize(new Dimension(200, 100));
-//		southPanel.setBackground(new Color(105, 105, 105));
-//		
-//		
-//		
-//		myFrame.add(northPanel, BorderLayout.NORTH);
-//		myFrame.add(eastPanel, BorderLayout.EAST);
-//		myFrame.add(westPanel, BorderLayout.WEST);
-//		myFrame.add(southPanel, BorderLayout.SOUTH);
-//		myFrame.add(centerPanel, BorderLayout.CENTER);		
+	}
+	
+	/**
+	 * Starts the program for a particular user.
+	 */
+	public void initializeProgram() {
+		
 	}
 }
