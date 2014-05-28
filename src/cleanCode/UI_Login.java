@@ -51,7 +51,7 @@ public class UI_Login extends JPanel {
 //		logInText.setHorizontalTextPosition(JLabel.CENTER);
 		
 		
-		JLabel userNameLabel = new JLabel("Enter User Name");
+		JLabel userNameLabel = new JLabel("Enter User Id");
 		JTextField userNameField = new JTextField(20);
 		userNameLabel.setLabelFor(userNameField);
 		userNameField.addActionListener(new ActionListener() {
@@ -89,7 +89,6 @@ public class UI_Login extends JPanel {
 		        }
 //		        System.out.println("I selected a role");
 			}
-			
 		});
 		
 		comboBoxText.setLabelFor(roles);
