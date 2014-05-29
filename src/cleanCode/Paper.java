@@ -17,7 +17,7 @@ public class Paper {
 	/** Unique identification number of the paper. */
 	private int myId;
 	/** How many people are reviewing this paper*/
-	private int reviewers;
+	private int numReviewers;
 	/** Title of the paper. */
 	private String myTitle;
 	/** Author of the paper. */
@@ -28,9 +28,9 @@ public class Paper {
 	private int mySubProgramChair;
 	
 	/** Recommendation of SubProgram Chair. */
-	private Recommendation myRecommendation;
+	private int myRecommendation;
 	/** Acceptance Status of the paper. */
-	private PaperStatus myAcceptanceStatus;
+	private String myStatus;
 	
 	/** List of 3 reviews for the paper. */
 	private List<Integer> myReviews;
@@ -51,18 +51,46 @@ public class Paper {
 	 * @param theTitle title of the paper.
 	 */
 	public Paper(final int theId, final int theAuthor, final String theTitle) {
+		this(theId, theAuthor, theTitle, 0, 0, 0, 0, 0, 0, 0, 0, 0, "Undecided");
+	}
+	
+	
+	public Paper(final int theId, final int theAuthorId, final String theTitle, 
+				final int theNumOfReviewer,final int theSubProgId, final int theRecommendId, 
+				final int theReviewOneId, final int theReviewTwoId, final int theReviewThreeId, 
+				final int theReviewerOneId, final int theReviewerTwoId, 
+				final int theReviewerThreeId, final String theStatus)  {
+		
+		this(theId, theAuthorId, theTitle, theNumOfReviewer, theSubProgId, 
+				theRecommendId, theReviewOneId, theReviewTwoId, theReviewThreeId, 
+				theReviewerOneId, theReviewerTwoId, theReviewerThreeId, theStatus, false);
+	}
+	
+	public Paper(final int theId, final int theAuthorId, final String theTitle, 
+			final int theNumOfReviewer,final int theSubProgId, final int theRecommendId, 
+			final int theReviewOneId, final int theReviewTwoId, final int theReviewThreeId, 
+			final int theReviewerOneId, final int theReviewerTwoId, 
+			final int theReviewerThreeId, final String theStatus, final boolean theReviewed)  {
+		
 		myId = theId;
-		reviewers = 0;
+		myAuthor = theAuthorId;
 		myTitle = theTitle;
-		myAuthor = theAuthor;
-		myAcceptanceStatus = PaperStatus.Undecided;
+		numReviewers = theNumOfReviewer;
+		mySubProgramChair = theSubProgId;
+		myRecommendation = theRecommendId;
 		
-		mySubProgramChair = 0;
-		myReviewers = new ArrayList<Integer>();
 		myReviews = new ArrayList<Integer>();
+		myReviews.add(theReviewOneId);
+		myReviews.add(theReviewTwoId);
+		myReviews.add(theReviewThreeId);
 		
-		myReviewed = false;
-		myRecommendation = null;
+		myReviewers = new ArrayList<Integer>();
+		myReviewers.add(theReviewerOneId);
+		myReviewers.add(theReviewerTwoId);
+		myReviewers.add(theReviewerThreeId);
+		
+		myStatus = theStatus;
+		myReviewed = theReviewed;
 	}
 	
 	/**
@@ -73,7 +101,7 @@ public class Paper {
 	public void addReviewer(final int theReviewerId) {
 		if (myReviewers.size() < NUM_REVIEW) {
 			myReviewers.add(theReviewerId);
-			reviewers++;
+			numReviewers++;
 		}
 	}
 
@@ -105,8 +133,8 @@ public class Paper {
 	 * 
 	 * @param theRecommendation recommendation form from SubProgram Chair.
 	 */
-	public void addRecommendation(final Recommendation theRecommendation) {
-		myRecommendation = theRecommendation;
+	public void addRecommendation(final int theRecommendationId) {
+		myRecommendation = theRecommendationId;
 	}
 
 	/**
@@ -125,8 +153,8 @@ public class Paper {
 	* 
 	* @param theStatus Accepted / Rejected status of the paper.
 	*/
-	public void changeStatus(final PaperStatus theStatus) {
-		myAcceptanceStatus = theStatus;
+	public void changeStatus(final String theStatus) {
+		myStatus = theStatus;
 	}
 
 	/**
@@ -178,7 +206,7 @@ public class Paper {
 	/**
 	 * @return Recommendation from SubProgram Chair.
 	 */
-	public Recommendation getRecommendation() {
+	public int getRecommendation() {
 		return myRecommendation;
 	}
 
@@ -190,15 +218,15 @@ public class Paper {
 	* 
 	* @return Accepted, Denied, Undecided.
 	*/
-	public PaperStatus getStatus() {
-		return myAcceptanceStatus;
+	public String getStatus() {
+		return myStatus;
 	}
 	
 	/**
 	 * @return number of reviewers.
 	 */
 	public int getNumReviewers() {
-		return reviewers;
+		return numReviewers;
 	}
 
 	/**
