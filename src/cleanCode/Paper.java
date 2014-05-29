@@ -33,9 +33,9 @@ public class Paper {
 	private String myStatus;
 	
 	/** List of 3 reviews for the paper. */
-	private List<Integer> myReviews;
+	private int[] myReviews;
 	/** List of 3 reviewers assigned to the paper. */
-	private List<Integer> myReviewers;
+	private int[] myReviewers;
 
 	
 	
@@ -79,15 +79,15 @@ public class Paper {
 		mySubProgramChair = theSubProgId;
 		myRecommendation = theRecommendId;
 		
-		myReviews = new ArrayList<Integer>();
-		myReviews.add(theReviewOneId);
-		myReviews.add(theReviewTwoId);
-		myReviews.add(theReviewThreeId);
+		myReviews = new int[NUM_REVIEW];
+		myReviews[0] = theReviewOneId;
+		myReviews[1] = theReviewTwoId;
+		myReviews[2] = theReviewThreeId;
 		
-		myReviewers = new ArrayList<Integer>();
-		myReviewers.add(theReviewerOneId);
-		myReviewers.add(theReviewerTwoId);
-		myReviewers.add(theReviewerThreeId);
+		myReviewers = new int[NUM_REVIEW];
+		myReviewers[0] = theReviewerOneId;
+		myReviewers[1] = theReviewerTwoId;
+		myReviewers[2] = theReviewerThreeId;
 		
 		myStatus = theStatus;
 		myReviewed = theReviewed;
@@ -99,9 +99,14 @@ public class Paper {
 	* @param theReviewer Reviewer of the paper.
 	*/
 	public void addReviewer(final int theReviewerId) {
-		if (myReviewers.size() < NUM_REVIEW) {
-			myReviewers.add(theReviewerId);
-			numReviewers++;
+		if (numReviewers < NUM_REVIEW) {
+			for (int i = 0; i < NUM_REVIEW; i++) {
+				if (myReviewers[i] == 0) {
+					myReviewers[i] = theReviewerId;
+					numReviewers++;
+					break;
+				}
+			}
 		}
 	}
 
@@ -111,23 +116,19 @@ public class Paper {
 	* @param theReview review of the paper.
 	*/
 	public void addReview(final int theReviewId) {
-		if (myReviews.size() < NUM_REVIEW) {	
-			myReviews.add(theReviewId);
+		if (!myReviewed) {
+			for (int i = 0; i < NUM_REVIEW; i++) {
+				if (myReviews[i] == 0) {
+					myReviews[i] = theReviewId;
+					if (i == 2) {
+						myReviewed = true;
+					}
+					break;
+				}
+			}
 		}
-		reviewed();
 	}
 	
-	/**
-	* Changes the reviewed status of the paper
-	* if the maximum number of reviews has been 
-	* submitted.
-	*/
-	private void reviewed() {
-		if (myReviews.size() == NUM_REVIEW) {
-			myReviewed = true;
-		}
-	}
-
 	/**
 	 * SubProgram Chair adds recommendation to the paper for Program Chair.
 	 * 
@@ -168,14 +169,14 @@ public class Paper {
 	/**
 	 * @return List of Reviewers for this paper. 
 	 */
-	public List<Integer> getReviewers() {
+	public int[] getReviewers() {
 		return myReviewers;
 	}
 	
 	/**
 	 * @return List of completed reviews.
 	 */
-	public List<Integer> getReviews() {
+	public int[] getReviews() {
 		return myReviews;
 	}
 	
