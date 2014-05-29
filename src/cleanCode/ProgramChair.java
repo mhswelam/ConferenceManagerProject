@@ -95,8 +95,7 @@ public class ProgramChair extends User {
 	 * 
 	 */
 	public void makeDesicion(final Paper thePaper, 
-							 final PaperStatus theStatus) {
-
+							 final String theStatus) {
 		thePaper.changeStatus(theStatus);
 	}
 }

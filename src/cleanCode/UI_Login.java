@@ -10,6 +10,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
@@ -20,6 +21,7 @@ import javax.swing.border.Border;
  *
  */
 public class UI_Login extends JPanel implements ActionListener {
+	/** Role choices when logging in. */
 	private final String[] options = {"Author", "Reviewer", "SubProgram Chair", "Program Chair"};
 	/** User Id entered into the text field. Initially set to -1. */
 	private int myUserId;
@@ -31,30 +33,31 @@ public class UI_Login extends JPanel implements ActionListener {
 	private JTextField myUserNameField;
 	/** Button used to log in the user. */
 	private JButton myLogInButton;
-	UI_Page myMainPage;
+	/** Conference. */
+	private Conference myConference;
 	
 	/**
 	 * Instantiates Log In panel when Conference starts running.
 	 * 
-	 * @param theMainPage 
+	 * @param theConference conference.
 	 */
-	public UI_Login(final UI_Page theMainPage) {
+	public UI_Login(final Conference theConference) {
 		super(new FlowLayout(FlowLayout.CENTER, 300, 100));
 		setBackground(new Color(255, 255, 255));
 		
-		myUserId = -1;
-		myRoleId = -1;
+		myUserId = 0;
+		myRoleId = 0;
 		myRoleBox = new JComboBox<String>(options);
 		myUserNameField = new JTextField(15);
 		myLogInButton = new JButton("Log In");
 		myLogInButton.addActionListener(this);
-		myMainPage = theMainPage;
+		myConference = theConference;
 	}
 	
 	/**
 	 * Sets up the panels for log in screen.
 	 */
-	public void setUpPanel() {
+	public void logIn() {
 		JPanel loginFrame = new JPanel(new FlowLayout(FlowLayout.CENTER, 100, 10));
 		loginFrame.setPreferredSize(new Dimension(350, 270));
 		Border panelBorder = BorderFactory.createLineBorder(new Color(235, 235, 235), 2);
@@ -75,21 +78,46 @@ public class UI_Login extends JPanel implements ActionListener {
 		loginFrame.add(comboBoxText);
 		loginFrame.add(myRoleBox);
 		loginFrame.add(myLogInButton);
-		
 		add(loginFrame);
 	}
 	
-	public void logIn() {
-		
+	/**
+	 * Resets the log in screen if user decided to log out.
+	 */
+	public void logOut() {
+		myUserNameField.setText("");
+		myRoleBox.setSelectedIndex(0);
+		myUserId = 0;
+		myRoleId = 0;
 	}
+
 	
 	/**
-	 * 
+	 * Once the log in button is pressed. The user id and 
+	 * role id is checked against user list in class and 
+	 * proper permission is granted.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent theEvent) {
 		myUserId = Integer.parseInt(myUserNameField.getText());
 		myRoleId = myRoleBox.getSelectedIndex();
-		System.out.println("User Id : " + myUserId + " Rode num : " + myRoleId);
+		
+		//Here ooes the code to check user & and their role
+		setVisible(false);
+//		System.out.println("User Id : " + myUserId + " Rode num : " + myRoleId);
+	}
+	
+	/**
+	 * @return unique identification number of the user that logged in.
+	 */
+	public int getUderId() {
+		return myUserId;
+	}
+	
+	/**
+	 * @return role identification number of the user that logged in.
+	 */
+	public int getRoleId() {
+		return myRoleId;
 	}
 }

@@ -93,7 +93,7 @@ public class Author extends User {
 	 * 
 	 * @return returns list of reviews for the specified paper.
 	 */
-	public List<Integer> seeReviews(final Paper thePaper) {
+	public int[] seeReviews(final Paper thePaper) {
 		for (int i = 0; i < mySubmittedPapers.size(); i++) {
 			int id = mySubmittedPapers.get(i);
 			if (thePaper.getId() == id) {
