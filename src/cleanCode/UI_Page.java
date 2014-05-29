@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -14,6 +15,7 @@ import javax.swing.JPanel;
 public class UI_Page {
 	/** Main window frame. */
 	private JFrame myFrame;
+	JPanel contentPane;
 	
 	private UI_Login logInPanel;
 
@@ -30,7 +32,7 @@ public class UI_Page {
 	public UI_Page(Conference theConference) {
 		myFrame = new JFrame("Conference");
 		
-		logInPanel = new UI_Login();
+		logInPanel = new UI_Login(this);
 		myConference = theConference;
 	}
 
@@ -56,7 +58,7 @@ public class UI_Page {
 	 * Sets up all interface panels.
 	 */
 	private void setUpPanels() {
-		JPanel contentPane = new JPanel(new BorderLayout());
+		contentPane = new JPanel(new BorderLayout());
 		
 		
 		UI_ControlPanel controlPanel = new UI_ControlPanel();
@@ -93,6 +95,13 @@ public class UI_Page {
 	 * Starts the program for a particular user.
 	 */
 	public void initializeProgram() {
-		String roleUserId = logInPanel.getUser();
+//		contentPane.remove(logInPanel);
+		if (myConference.listOfReviewer.containsKey(logInPanel.myUserId)) {
+			myFrame.remove(contentPane);
+			myFrame.repaint();
+		} else {
+			JOptionPane.showMessageDialog(myFrame, "Enter Correct Information");
+		}
+//		String roleUserId = logInPanel.getUser();
 	}
 }

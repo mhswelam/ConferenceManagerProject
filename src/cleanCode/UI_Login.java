@@ -23,11 +23,12 @@ public class UI_Login extends JPanel {
 	int myUserId;
 	int myRole;
 	boolean submitted;
+	UI_Page myMainPage;
 	
 	/**
 	 * Instantiates Log In panel when Conference starts running.
 	 */
-	public UI_Login() {
+	public UI_Login(UI_Page mainPage) {
 		super(new FlowLayout(FlowLayout.CENTER, 300, 100));
 //		setPreferredSize(new Dimension(600, 600));
 		//White background color
@@ -37,6 +38,7 @@ public class UI_Login extends JPanel {
 		myUserId = -1;
 		myRole = -1;
 		submitted = false;
+		myMainPage = mainPage;
 	}
 	
 	public void logIn() {
@@ -101,8 +103,9 @@ public class UI_Login extends JPanel {
 				JButton l = (JButton) theEvent.getSource();
 				//Checks if this is a valid user
 				submitted = true;
-				getUser();
+//				getUser();
 //				System.out.println("I tried to log in.");
+				myMainPage.initializeProgram();
 			}
 		});
 
