@@ -40,7 +40,9 @@ public class UI_UserInfo extends JPanel {
 		myConferenceName = theConferenceName;
 	}
 	
-	
+	/**
+	 * Sets up the panel that contains user information.
+	 */
 	public void setUp() {
 		setPreferredSize(new Dimension(900, 100));
 		setBackground(new Color(255, 255, 255));

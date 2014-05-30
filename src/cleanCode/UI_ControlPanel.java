@@ -21,10 +21,17 @@ public class UI_ControlPanel extends JPanel {
 	 * Tasks at index 1 belongs to Reviewer,
 	 * Tasks at index 2 belong to Subprogram Chair,
 	 * Tasks at index 3 belong to Program Chair. */
-	private final static String[][] TASKS = {{"View Papers", "Submit Paper"}, 
-		{"Review Papers"}, {"View Papers", "Assign Papers", "View Reviewers"}, 
-		{ "View Papers", "Assign Papers", "View Subprogram Chairs", "View Reviewers", "View Authors"}};
+	private final static String[][] TASKS = {
+		{"View Submitted Papers", "Submit Paper", "Edit Paper", "Unsubmit Paper"}, 				//Author
+		{"View Papers", "Review Papers"}, 										   				//Reviewer
+		{"View Papers", "Assign Papers", "Recommend Paper", "View Reviewers"},		//Subprogram Chair
+		{ "View Papers", "Assign Papers", "Make Acceptance Decision",		//Program Chair
+			"View Subprogram Chairs", "View Reviewers", "View Authors"}};
 	
+	/** Tabbed pane. */
+	private JTabbedPane myTabbedPane;
+	/** List of the tabbed panels .*/
+	private List<JComponent> myTextPanels;
 	/** Conference .*/
 	private Conference myConference;
 	
@@ -37,6 +44,8 @@ public class UI_ControlPanel extends JPanel {
 		super(new GridLayout(1, 1));
 		setBackground(new Color(255, 255, 255));
 		myConference = theConference;
+		myTabbedPane = new JTabbedPane();
+		myTextPanels = new ArrayList<JComponent>();
 	}
 	
 	/**
@@ -46,16 +55,14 @@ public class UI_ControlPanel extends JPanel {
 	 * @param theRoleId role of the user.
 	 */
 	public void setUp(final int theUserId, final int theRoleId) {
-		JTabbedPane tabbedPane = new JTabbedPane();
 		int size = TASKS[theRoleId].length;
-		List<JComponent> textPanels = new ArrayList<JComponent>();
 		for (int i = 0; i < size; i++) {
 			JComponent tab = makeTextPanel(TASKS[theRoleId][i]);
-	        tabbedPane.addTab(TASKS[theRoleId][i], tab);
-	        textPanels.add(tab);
+	        myTabbedPane.addTab(TASKS[theRoleId][i], tab);
+	        myTextPanels.add(tab);
 		}
 
-        add(tabbedPane);
+        add(myTabbedPane);
 	}
 
    private JComponent makeTextPanel(String text) {
@@ -63,7 +70,16 @@ public class UI_ControlPanel extends JPanel {
         JLabel filler = new JLabel(text);
         filler.setHorizontalAlignment(JLabel.CENTER);
         panel.setLayout(new GridLayout(1, 1));
+        panel.setBackground(new Color(255, 255, 255));
         panel.add(filler);
         return panel;
     }
+   
+   /**
+    * Removes all tabbed panels when the user logs out.
+    */
+   public void logOut() {
+	   myTabbedPane.removeAll();
+	   myTextPanels.clear();
+   }
 }

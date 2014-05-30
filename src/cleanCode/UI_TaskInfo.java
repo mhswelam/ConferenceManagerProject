@@ -5,5 +5,8 @@ package cleanCode;
  *
  */
 public class UI_TaskInfo {
+	public UI_TaskInfo() {
+		
+	}
 
 }
