@@ -35,7 +35,7 @@ public class ConferenceMain {
 				}
             }
         });
-        Conference mycon = new Conference();
+        //Conference mycon = new Conference();
  
 	}
 
