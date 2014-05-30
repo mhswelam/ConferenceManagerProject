@@ -58,7 +58,8 @@ public class SubProgramChair extends User{
 	 * @return the recommendation.
 	 */
 	private Recommendation recommendation(int idPaper, int theGrade, String theRational) {
-		Recommendation rec = new Recommendation(idPaper, super.myUserId, theGrade, theRational);
+		int recommID = Conference.lastRecommendationID++;
+		Recommendation rec = new Recommendation(recommID,idPaper, super.myUserId, theGrade, theRational);
 		return rec;
 	}
 	

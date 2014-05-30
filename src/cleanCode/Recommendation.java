@@ -7,6 +7,9 @@ package cleanCode;
 public class Recommendation {
 	
 	/** This to hold the paper id. */
+	private int myrecommendationId;
+	
+	/** This to hold the paper id. */
 	private int myPaperId;
 	
 	/** This to hold the SubProgramChairs id. */
@@ -20,19 +23,28 @@ public class Recommendation {
 	
 	/**
 	 * The constructor for the Recommendation class.
+	 * @param therecommendationId the id for the recommendation.
 	 * @param thePaperId the ID of the paper.
 	 * @param theSubProgramChairId the Sub Program Chairs ID.
 	 * @param theGrade the grade that this paper will recieve from the Sub Program Chair.
 	 * @param theRecRational the resoning behind the recomendation.
 	 */
-	public Recommendation(int thePaperId, int theSubProgramChairId, int theGrade,
+	public Recommendation(int therecommendationId, int thePaperId, int theSubProgramChairId, int theGrade,
 				String theRecRational) {
+		myrecommendationId = therecommendationId;
 		myPaperId = thePaperId;
 		mySubprogramChairId = theSubProgramChairId;
 		myGrade = theGrade;
 		myRecRational = theRecRational;
 	}
-	
+	/**
+	 * Getter method for the recommendationId.
+	 * @return the recommendation ID.
+	 */
+	public int getMyrecommendationId() {
+		return myrecommendationId;
+	}
+
 	/**
 	 * Getter method for the paperId.
 	 * @return the papers ID.

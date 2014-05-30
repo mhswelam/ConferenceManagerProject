@@ -10,6 +10,11 @@ import java.util.ArrayList;
 public class Review {
 	
 	
+	/**
+	 * This to hold the review id.
+	 */
+	private int myReviewId;
+	
 
 	/**
 	 * This to hold the paper id.
@@ -27,11 +32,12 @@ public class Review {
 	 * the inputs will be validated at UI or by creating input drop list
 	 * 
 	 */
-	private ArrayList<Integer> myComments;
+	private int [] myComments;
 	
 	/**
 	 * This is a  to create a review.
-	 *  
+	 * 
+	 * @param myReviewId the review id.
 	 * @param aPaperId the paper id.
 	 * @param aReviewerId the reviewer id.
 	 * @param aFristComment a number from 1 to 5 respond for first Q.
@@ -39,16 +45,17 @@ public class Review {
 	 * @param aThirdComment a number from 1 to 5 respond for third Q.
 	 * @param aForthComment a number from 1 to 5 respond for forth Q.
 	 */
-	public Review(int aPaperId, int aReviewerId, int aFristComment,
+	public Review(int aReviewId, int aPaperId, int aReviewerId, int aFristComment,
 			int aSecondComment,int aThirdComment, int aForthComment) {
+		myReviewId = aReviewId;
 		myPaperId = aPaperId;
 		myReviewerId = aReviewerId;
-	    myComments = new ArrayList<Integer>();
+	    myComments = new int [4];
 	    
-		myComments.add(0, aFristComment);
-		myComments.add(1, aSecondComment);
-		myComments.add(2, aThirdComment);
-		myComments.add(3, aForthComment);
+		myComments[0] = aFristComment;
+		myComments[1] = aSecondComment;
+		myComments[2] = aThirdComment;
+		myComments[3] = aForthComment;
 	}
 	
 	/**
@@ -69,11 +76,19 @@ public class Review {
 	}
 
 	/**
-	 * This to return arrayList of integer that respond to the review questions.  
-	 * @return ArrayList with number respond to the review questions.
+	 * This to return array of integer that respond to the review questions.  
+	 * @return Array with number respond to the review questions.
 	 */
-	public ArrayList<Integer> getMyComments() {
+	public int [] getMyComments() {
 		return myComments;
+	}
+	
+	/**
+	 * This to return the review id   
+	 * @return Array with number respond to the review questions.
+	 */
+	public int getMyReviewId() {
+		return myReviewId;
 	}
 
 }

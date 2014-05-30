@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -55,10 +56,25 @@ public class Conference {
 	 */
 	public static Map<Integer, Paper> listOfPaper;
 	/**
+	 * This to hold the conference list of reviews.
+	 */
+	public static Map<Integer, Review> listOfReviews;
+	/**
+	 * This to hold the conference list of recommendation.
+	 */
+	public static Map<Integer, Recommendation> listOfRecommendation;
+	/**
 	 * This to hold the last paper id.
 	 */
 	public static int lastPaperID = 0;
-	
+	/**
+	 * This to hold the last review id.
+	 */
+	public static int lastReviewID = 0;
+	/**
+	 * This to hold the last recommendation id.
+	 */
+	public static int lastRecommendationID = 0;
 
 	/**
 	 * This is a constructor to create conference
@@ -68,10 +84,10 @@ public class Conference {
 		createReviewerMap();
 		createAuthorMap();
 		createPaperMap();
-		System.out.println(listOfPaper.containsKey(145));
-		//lastPaperID++;
-		//addPaper(new Paper(lastPaperID,55,"Test",0,0,0,0,0,0,0,0,0,PaperStatus.Undecided.toString()));
-		//removePaper(140);
+		createReviewMap();
+		createRecommendationMap();
+		//lastRecommendationID++;
+		//addRecommendation(new Recommendation(lastRecommendationID, 99, 23, 1, "It is working"));
 	}
 	
 	/**
@@ -103,7 +119,7 @@ public class Conference {
 				try {
 					myPaperDueDate = formatter.parse(lines[2]);
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
+					
 					e.printStackTrace();
 				}
 			myProgramChair = Integer.parseInt(lines[3]);
@@ -208,9 +224,127 @@ public class Conference {
 	}
 	
 	/**
+	 * This method to create the review map.
+	 */
+	private void createReviewMap() {
+		listOfReviews = new TreeMap<Integer, Review>();
+		final String errorMessage = "File not found";
+        Scanner toRead = null;
+        String [] line = new String[7];
+        try {
+            final File readFile = new File("reviews.csv");
+            toRead = new Scanner(readFile);
+        } catch (final IOException e) {
+            System.out.println(errorMessage);
+            System.exit(0);
+        }
+        while (toRead.hasNextLine()) {
+            
+            line = toRead.nextLine().split(",");
+            if (!("reviewId".equals(line[0]))) {
+            	listOfReviews.put(Integer.parseInt(line[0]), new Review(Integer.parseInt(line[0]), Integer.parseInt(line[1]), Integer.parseInt(line[2]), 
+            			Integer.parseInt(line[3]), Integer.parseInt(line[4]), Integer.parseInt(line[5]), Integer.parseInt(line[6])));
+            	lastReviewID = Integer.parseInt(line[0]);
+            }      
+        }
+        
+        toRead.close();
+        
+	}
+	/**
+	 * This method to create the recommendation map.
+	 */
+	private void createRecommendationMap() {
+		listOfRecommendation = new TreeMap<Integer, Recommendation>();
+		final String errorMessage = "File not found";
+        Scanner toRead = null;
+        String [] line = new String[5];
+        try {
+            final File readFile = new File("recommendation.csv");
+            toRead = new Scanner(readFile);
+        } catch (final IOException e) {
+            System.out.println(errorMessage);
+            System.exit(0);
+        }
+        while (toRead.hasNextLine()) {
+            
+            line = toRead.nextLine().split(",");
+            if (!("recommendationId".equals(line[0]))) {
+            	listOfRecommendation.put(Integer.parseInt(line[0]), new Recommendation(Integer.parseInt(line[0]), Integer.parseInt(line[1]), Integer.parseInt(line[2]), 
+            			Integer.parseInt(line[3]), line[4]));
+            	lastRecommendationID = Integer.parseInt(line[0]);
+            }      
+        }
+        
+        toRead.close();
+	}
+	/**
+	 * This method to add a review to the map and to the file.
+	 * @param aReview
+	 */
+	public void addReview(Review aReview) {
+		listOfReviews.put(aReview.getMyReviewId(), aReview);
+		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("reviews.csv", false)))) {
+			out.println("reviewId,paperId,reviewerId,fristComment,secondComment,thirdComment,forthComment");
+			for (Entry<Integer, Review> entry: listOfReviews.entrySet()) {
+				out.println(entry.getKey() + "," + entry.getValue().getMyPaperId() + "," + entry.getValue().getMyReviewerId() + "," + 
+						entry.getValue().getMyComments()[0]+ "," + entry.getValue().getMyComments()[1]+ "," + entry.getValue().getMyComments()[2] + "," +
+						entry.getValue().getMyComments()[3]);
+			}
+			out.close();
+		}catch (IOException e) {
+			System.out.println(e);
+            System.exit(0);
+		}
+	}
+
+	/**
+	 * This method to add a recommendation to the map and to the file.
+	 * @param aRecomm a recommendation
+	 */
+	public void addRecommendation(Recommendation aRecomm) {
+		listOfRecommendation.put(aRecomm.getMyrecommendationId(), aRecomm);
+		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("recommendation.csv", false)))) {
+			out.println("recommendationId,paperId,subProgramId,grade,rational");
+			for (Entry<Integer, Recommendation> entry: listOfRecommendation.entrySet()) {
+				out.println(entry.getKey() + "," + entry.getValue().getMyPaperID() + "," + entry.getValue().getMySubProgramID() + "," + 
+						entry.getValue().getGrade()+ "," + entry.getValue().getRational());
+			}
+			out.close();
+		}catch (IOException e) {
+			System.out.println(e);
+            System.exit(0);
+		}
+	}
+	/**
+	 * This method to return review if exists if not it will return null.
+	 * @param aReviewID review id
+	 * @return the review or null
+	 */
+	public Review getReview(int aReviewID) {
+		if (listOfReviews.containsKey(aReviewID)) {
+			return listOfReviews.get(aReviewID);
+		} else {
+			return null;
+		}
+	}
+	
+	/**
+	 * This method to return recommendation if exists if not it will return null.
+	 * @param aRecommendationID recommendation id
+	 * @return the recommendation or null
+	 */
+	public Recommendation getRecommendation(int aRecommendationID) {
+		if (listOfRecommendation.containsKey(aRecommendationID)) {
+			return listOfRecommendation.get(aRecommendationID);
+		} else {
+			return null;
+		}
+	}
+	/**
 	 * This method to add a paper to the map and to the file.
 	 * @param aPaper
-	 */
+	 */ 	
 	public void addPaper(Paper aPaper) {
 		
 		listOfPaper.put(aPaper.getId(), aPaper);
@@ -255,6 +389,45 @@ public class Conference {
 		}
 		
 	}
+
+	/**
+	 * This method to return a array list of paper for each user reflecting their role
+	 * 
+	 * @param aRoleID the role id 1 or 2 or 3 or 4
+	 * @param userId the user id
+	 * @return a array list of paper if user has any otherwise will return empty array list.
+	 */
+	public ArrayList<Paper> getPaperList(int aRoleID, int userId) {
+		ArrayList<Paper> result = new ArrayList<Paper>();
+		if (aRoleID == 1) {
+			for (Entry<Integer, Paper> entry: listOfPaper.entrySet()) {
+				result.add(entry.getValue());
+			}
+		} else if (aRoleID == 2) {
+			for (Entry<Integer, Paper> entry: listOfPaper.entrySet()) {
+				if (entry.getValue().getSubProgramChair() == userId) {
+					result.add(entry.getValue());
+				}
+			}
+			// check reviewers
+		} else if (aRoleID == 4){
+			for (Entry<Integer, Paper> entry: listOfPaper.entrySet()) {
+				if (entry.getValue().getReviewers()[0] == userId || 
+						entry.getValue().getReviewers()[1] == userId || entry.getValue().getReviewers()[2] == userId) {
+					result.add(entry.getValue());
+				}
+			}
+		} else if (aRoleID == 3) {
+			for (Entry<Integer, Paper> entry: listOfPaper.entrySet()) {
+				if (entry.getValue().getAuthor() == userId) {
+					result.add(entry.getValue());
+				}
+			}
+		}
+		return result;
+	}
+
+	
 	/**
 	 * This method to return a reviewer from the the list of reviewer.
 	 * @param userID the user id 
