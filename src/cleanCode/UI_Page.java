@@ -3,7 +3,6 @@ package cleanCode;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -11,7 +10,6 @@ import java.awt.event.ComponentEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -29,7 +27,10 @@ public class UI_Page {
 	private JPanel contentPane;
 	/** To hold the conference class. */
 	private Conference myConference;
-	UI_Login myLogInPanel;
+	/** Log in screen. */
+	private UI_Login myLogInPanel;
+	/** Control panel where users can do all the tasks. */
+	private UI_ControlPanel myControlPanel;
 
 	/**
 	 * Constructs graphical user interface.
@@ -37,10 +38,11 @@ public class UI_Page {
 	 * @param theConference conference.
 	 */
 	public UI_Page(final Conference theConference) {
-		myFrame = new JFrame("Conference");
 		myConference = theConference;
+		myFrame = new JFrame("Conference");
 		contentPane = new JPanel(new BorderLayout());
 		myLogInPanel = new UI_Login(myConference);
+		myControlPanel = new UI_ControlPanel(myConference);
 	}
 
 	/**
@@ -74,7 +76,7 @@ public class UI_Page {
 				contentPane.remove(panel);
 				int userId = panel.getUderId();
 				int roleId = panel.getRoleId();
-				System.out.println("User Id : " + userId + " Rode num : " + roleId);
+//				System.out.println("User Id : " + userId + " Rode num : " + roleId);
 				initializeProgram(userId, roleId);
 			}
 		});
@@ -89,25 +91,13 @@ public class UI_Page {
 	 * Starts the program for a particular user.
 	 */
 	public void initializeProgram(final int theUserId, final int theRoleId) {
-		//"Welcome User" layout
-		setUpWelcomePanel(theRoleId);
-		
-		UI_ControlPanel controlPanel = new UI_ControlPanel();
-		UI_PaperInfo paperInfo = new UI_PaperInfo();
-		UI_TaskInfo taskInfo  = new UI_TaskInfo();
-		UI_UserInfo userInfo = new UI_UserInfo();
-	}
-	
-	private void setUpWelcomePanel(final int theRoleId) {
-		String welcomeText = "Welcome " + options[theRoleId];
-		JLabel welcomeLabel = new JLabel(welcomeText);
-		
-		JPanel northPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 300, 10));
-		welcomeLabel.setLabelFor(northPanel);
-		northPanel.setPreferredSize(new Dimension(900, 70));
-		northPanel.setBackground(new Color(250, 250, 250));
+		UI_UserInfo userInfo = new UI_UserInfo("Name", options[theRoleId], 
+											   "" + theUserId, myConference.myName);
+		userInfo.setUp();
 		
 		JButton logOut = new JButton("Log Out");
+//		logOut.setMaximumSize(new Dimension(50, 10));
+		
 		logOut.addActionListener(new ActionListener() {
 			/**
 			 * Logs out the user.
@@ -125,10 +115,15 @@ public class UI_Page {
 			}
 			
 		});
+		userInfo.add(logOut, BorderLayout.EAST);
 		
-		northPanel.add(welcomeLabel);
-		northPanel.add(logOut);
 		
-		contentPane.add(northPanel, BorderLayout.NORTH);
+		myControlPanel.setUp(theUserId, theRoleId);
+		contentPane.add(userInfo, BorderLayout.NORTH);
+		contentPane.add(myControlPanel, BorderLayout.CENTER);
+		
+		
+		UI_PaperInfo paperInfo = new UI_PaperInfo();
+		UI_TaskInfo taskInfo  = new UI_TaskInfo();
 	}
 }
