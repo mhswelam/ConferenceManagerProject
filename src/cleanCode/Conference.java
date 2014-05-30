@@ -12,7 +12,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 
 /**
@@ -55,7 +57,7 @@ public class Conference {
 	/**
 	 * This to hold the last paper id.
 	 */
-	public static int lastPaperID;
+	public static int lastPaperID = 0;
 	
 
 	/**
@@ -65,6 +67,11 @@ public class Conference {
 		readConferenceInfo();
 		createReviewerMap();
 		createAuthorMap();
+		createPaperMap();
+		System.out.println(listOfPaper.containsKey(145));
+		//lastPaperID++;
+		//addPaper(new Paper(lastPaperID,55,"Test",0,0,0,0,0,0,0,0,0,PaperStatus.Undecided.toString()));
+		//removePaper(140);
 	}
 	
 	/**
@@ -172,7 +179,7 @@ public class Conference {
 	 * This method to create the paper map.
 	 */
 	private void createPaperMap() {
-		listOfPaper = new HashMap<Integer, Paper>();
+		listOfPaper = new TreeMap<Integer, Paper>();
 		final String errorMessage = "File not found";
         Scanner toRead = null;
         String [] line = new String[13];
@@ -189,10 +196,10 @@ public class Conference {
             line = toRead.nextLine().split(",");
             if (!("paperID".equals(line[0]))) {
             	
-            	/*listOfPaper.put(Integer.parseInt(line[0]), 
+            	listOfPaper.put(Integer.parseInt(line[0]), 
             				new Paper(Integer.parseInt(line[0]), Integer.parseInt(line[1]), line[2],Integer.parseInt(line[3]),Integer.parseInt(line[4]),
             						Integer.parseInt(line[5]),Integer.parseInt(line[6]),Integer.parseInt(line[7]),Integer.parseInt(line[8]),Integer.parseInt(line[9]),
-            						Integer.parseInt(line[10]),Integer.parseInt(line[11]),line[12]));*/
+            						Integer.parseInt(line[10]),Integer.parseInt(line[11]),line[12]));
             	lastPaperID = Integer.parseInt(line[0]);
             }      
         }
@@ -201,16 +208,50 @@ public class Conference {
 	}
 	
 	/**
-	 * Still working on it
+	 * This method to add a paper to the map and to the file.
 	 * @param aPaper
 	 */
 	public void addPaper(Paper aPaper) {
-		lastPaperID++;
-		listOfPaper.put(lastPaperID, aPaper);
-		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("paper.csv", true)))) {
-		    out.println(aPaper.getId() + "," + aPaper.getAuthor() + "," + aPaper.getTitle());
+		
+		listOfPaper.put(aPaper.getId(), aPaper);
+		
+		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("paper.csv", false)))) {
+			out.println("paperID,AuthorID,TheTitle,numOfReviewer,subProgID,recommID,reviewID,reviewID,reviewID,reviewerID,reviewerID,reviewerID,paperStatus");
+			for (Entry<Integer, Paper> entry: listOfPaper.entrySet()) {
+				out.println(entry.getKey() + "," + entry.getValue().getAuthor() + "," + entry.getValue().getTitle() + "," + entry.getValue().getReviewers().length 
+						+ "," + entry.getValue().getSubProgramChair() + "," + entry.getValue().getRecommendation() + "," + entry.getValue().getReviewers()[0] 
+								+ "," + entry.getValue().getReviewers()[1] + "," + entry.getValue().getReviewers()[2]+ "," + entry.getValue().getReviews()[0]
+										+ "," + entry.getValue().getReviews()[1] + "," + entry.getValue().getReviews()[2] + "," + entry.getValue().getStatus());
+			}
+		    
+		    out.close();
 		}catch (IOException e) {
-		    //exception handling left as an exercise for the reader
+			System.out.println(e);
+            System.exit(0);
+		}
+	}
+	
+	/**
+	 * This method to remove a paper from the map and from the file.
+	 * @param aPaper paper to be removed.
+	 */
+	public void removePaper(int aPaperId) {
+		if (listOfPaper.containsKey(aPaperId)) {
+			listOfPaper.remove(aPaperId);
+			try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("paper.csv", false)))) {
+				out.println("paperID,AuthorID,TheTitle,numOfReviewer,subProgID,recommID,reviewID,reviewID,reviewID,reviewerID,reviewerID,reviewerID,paperStatus");
+				for (Entry<Integer, Paper> entry: listOfPaper.entrySet()) {
+					out.println(entry.getKey() + "," + entry.getValue().getAuthor() + "," + entry.getValue().getTitle() + "," + entry.getValue().getReviewers().length 
+							+ "," + entry.getValue().getSubProgramChair() + "," + entry.getValue().getRecommendation() + "," + entry.getValue().getReviewers()[0] 
+									+ "," + entry.getValue().getReviewers()[1] + "," + entry.getValue().getReviewers()[2]+ "," + entry.getValue().getReviews()[0]
+											+ "," + entry.getValue().getReviews()[1] + "," + entry.getValue().getReviews()[2] + "," + entry.getValue().getStatus());
+				}
+			    
+			    out.close();
+			}catch (IOException e) {
+				System.out.println(e);
+	            System.exit(0);
+			}
 		}
 		
 	}
