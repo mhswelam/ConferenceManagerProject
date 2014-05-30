@@ -32,6 +32,7 @@ public class ProgramChair extends User {
 	 * @param theFirstName first name of the Program Chair.
 	 * @param theLastName last name of the Program Chair.
 	 * @param theEmail email of the Program Chair.
+	 * @param theConference conference.
 	 */
 	public ProgramChair(final int theUserId, final String theFirstName, 
 						final String theLastName, final String theEmail) {
@@ -51,11 +52,21 @@ public class ProgramChair extends User {
 	 */
 	public void selectSubProgramChair(final int theSubChair, 
 									  final Paper thePaper) {
+		//check to make sure that subprogram chair is not the author of that paper
 		if (!myAssignedPapers.containsKey(theSubChair)) {
 			myAssignedPapers.put(theSubChair, new ArrayList<Integer>());
 		} 
 		myAssignedPapers.get(theSubChair).add(thePaper.getId());
 		thePaper.assignSubProgramChair(theSubChair);
+	}
+	
+	/**
+	 * Assigns a Reviewer to be a Subprogram Chair for the conference.
+	 * 
+	 * @param theReviewer reviewer in the conference.
+	 */
+	public void createSubProgramChair(final int theReviewer) {
+		//still working
 	}
 	
 	/**

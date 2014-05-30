@@ -103,6 +103,7 @@ public class UI_Login extends JPanel implements ActionListener {
 		myRoleId = myRoleBox.getSelectedIndex();
 		
 		//Here ooes the code to check user & and their role
+		//If the person logging in is User, then they become author by submitting the paper;
 		setVisible(false);
 //		System.out.println("User Id : " + myUserId + " Rode num : " + myRoleId);
 	}

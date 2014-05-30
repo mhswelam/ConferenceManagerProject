@@ -49,11 +49,11 @@ public class UI_Page {
 	 * Initialize the contents of the frame.
 	 */
 	public void start() {
-		contentPane.setBackground(new Color(255, 255, 255));
 		myFrame.setResizable(false);
 		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//Size of the frame 900 width 700 height
 		myFrame.setPreferredSize(new Dimension(900, 700));
+		contentPane.setBackground(new Color(255, 255, 255));
 		
 		setUpPanels();
 		
@@ -95,6 +95,21 @@ public class UI_Page {
 											   "" + theUserId, myConference.myName);
 		userInfo.setUp();
 		
+		//add "Log Out" button to the panel
+		userInfo.add( createLogOutButton(), BorderLayout.EAST);
+		
+		
+		myControlPanel.setUp(theUserId, theRoleId);
+		
+		contentPane.add(userInfo, BorderLayout.NORTH);
+		contentPane.add(myControlPanel, BorderLayout.CENTER);
+		
+		
+		UI_PaperInfo paperInfo = new UI_PaperInfo();
+		UI_TaskInfo taskInfo  = new UI_TaskInfo();
+	}
+	
+	private JButton createLogOutButton() {
 		JButton logOut = new JButton("Log Out");
 //		logOut.setMaximumSize(new Dimension(50, 10));
 		
@@ -109,21 +124,13 @@ public class UI_Page {
 					if (ok ==  JOptionPane.YES_OPTION) {
 						contentPane.removeAll();
 						myLogInPanel.logOut();
+						myControlPanel.logOut();
 						contentPane.add(myLogInPanel, BorderLayout.CENTER);
 						myLogInPanel.setVisible(true);
 					}
 			}
 			
 		});
-		userInfo.add(logOut, BorderLayout.EAST);
-		
-		
-		myControlPanel.setUp(theUserId, theRoleId);
-		contentPane.add(userInfo, BorderLayout.NORTH);
-		contentPane.add(myControlPanel, BorderLayout.CENTER);
-		
-		
-		UI_PaperInfo paperInfo = new UI_PaperInfo();
-		UI_TaskInfo taskInfo  = new UI_TaskInfo();
+		return logOut;
 	}
 }
