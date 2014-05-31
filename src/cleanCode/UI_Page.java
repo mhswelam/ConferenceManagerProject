@@ -96,7 +96,7 @@ public class UI_Page {
 		userInfo.setUp();
 		
 		//add "Log Out" button to the panel
-		userInfo.add( createLogOutButton(), BorderLayout.EAST);
+		userInfo.add(createLogOutButton(), BorderLayout.EAST);
 		
 		
 		myControlPanel.setUp(theUserId, theRoleId);

@@ -1,14 +1,20 @@
 package cleanCode;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
+import javax.swing.ListSelectionModel;
 
 /**
  * @author Clean Code
@@ -22,10 +28,10 @@ public class UI_ControlPanel extends JPanel {
 	 * Tasks at index 2 belong to Subprogram Chair,
 	 * Tasks at index 3 belong to Program Chair. */
 	private final static String[][] TASKS = {
-		{"View Submitted Papers", "Submit Paper", "Edit Paper", "Unsubmit Paper"}, 				//Author
-		{"View Papers", "Review Papers"}, 										   				//Reviewer
+		{"View Papers", "Submit Paper", "Edit Paper", "Unsubmit Paper"}, 	//Author
+		{"View Papers", "Review Papers"}, 										   	//Reviewer
 		{"View Papers", "Assign Papers", "Recommend Paper", "View Reviewers"},		//Subprogram Chair
-		{ "View Papers", "Assign Papers", "Make Acceptance Decision",		//Program Chair
+		{ "View Papers", "Assign Papers", "Make Acceptance Decision",				//Program Chair
 			"View Subprogram Chairs", "View Reviewers", "View Authors"}};
 	
 	/** Tabbed pane. */
@@ -57,14 +63,20 @@ public class UI_ControlPanel extends JPanel {
 	public void setUp(final int theUserId, final int theRoleId) {
 		int size = TASKS[theRoleId].length;
 		for (int i = 0; i < size; i++) {
-			JComponent tab = makeTextPanel(TASKS[theRoleId][i]);
+			JComponent tab = null;
+			
+			if (TASKS[theRoleId][i].equals(TASKS[theRoleId][0])) {
+				tab = makeViewPaperPanel(theUserId, theRoleId);
+			} else {
+				tab = makeTextPanel(TASKS[theRoleId][i]);
+			}
 	        myTabbedPane.addTab(TASKS[theRoleId][i], tab);
 	        myTextPanels.add(tab);
 		}
 
         add(myTabbedPane);
 	}
-
+	
    private JComponent makeTextPanel(String text) {
         JPanel panel = new JPanel(false);
         JLabel filler = new JLabel(text);
@@ -76,10 +88,63 @@ public class UI_ControlPanel extends JPanel {
     }
    
    /**
+    * @param text
+    * @return panel that shows list papers to user
+    */
+   private JSplitPane makeViewPaperPanel(final int theUserId, final int theRoleId) {
+	   JComponent listPane = makePaperList(theUserId, theRoleId);
+	   JComponent textPanel = makeTextPanel("This will show the information of selected paper.");
+       JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, listPane, textPanel);
+       splitPane.setDividerLocation(300);
+       splitPane.setBackground(new Color(253, 253, 253));
+
+       return splitPane;
+   }
+   
+   private JList makePaperList(final int theUserId, final int theRoleId) {
+	 //just for Program Chair
+	   Collection<Paper> paperSet = myConference.listOfPaper.values();
+	   String[] paperNames = new String[paperSet.size()];
+	   int i = 0;
+	   for (Paper paper : paperSet) {
+		   paperNames[i] = paper.getTitle();
+		   i++;
+	   }
+	   JList<String> list = new JList<String>(paperNames);
+	   
+	   list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	   list.setLayoutOrientation(JList.VERTICAL);
+	   list.setSelectedIndex(0);
+	   
+	   //not sure if this is needed
+//	   JScrollPane paperPanel = new JScrollPane(list);
+//	   paperPanel.setPreferredSize(new Dimension(100, 150));
+//	   paperPanel.add(list);
+//	   return paperPanel;
+	   
+	   return list;
+   }
+
+   
+   /**
     * Removes all tabbed panels when the user logs out.
     */
    public void logOut() {
 	   myTabbedPane.removeAll();
 	   myTextPanels.clear();
    }
+   
+   //Panels for each user
+//	private JComponent createAuthorPanels() {
+//		return null;
+//	}
+//	private JComponent createReviewerPanels() {
+//		return null;
+//	}
+//	private JComponent createSubChairPanels() {
+//		return null;
+//	}
+//	private JComponent createProgramChairPanels() {
+//		return null;
+//	}
 }
