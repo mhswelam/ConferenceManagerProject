@@ -1,7 +1,5 @@
 package cleanCode;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Clean Code

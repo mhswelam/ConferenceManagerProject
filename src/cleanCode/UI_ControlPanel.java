@@ -66,16 +66,19 @@ public class UI_ControlPanel extends JPanel {
 			JComponent tab = null;
 			
 			if (TASKS[theRoleId][i].equals(TASKS[theRoleId][0])) {
-				tab = makeViewPaperPanel(theUserId, theRoleId);
+				UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId, myConference);
+				tab = table;
+//				tab = makeViewPaperPanel(theUserId, theRoleId);
 			} else {
 				tab = makeTextPanel(TASKS[theRoleId][i]);
 			}
 	        myTabbedPane.addTab(TASKS[theRoleId][i], tab);
 	        myTextPanels.add(tab);
+	        tab.setBackground(new Color(255, 255, 255));
 		}
-
         add(myTabbedPane);
 	}
+	
 	
    private JComponent makeTextPanel(String text) {
         JPanel panel = new JPanel(false);

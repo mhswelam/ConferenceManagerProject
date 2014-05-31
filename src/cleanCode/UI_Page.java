@@ -20,7 +20,9 @@ import javax.swing.JPanel;
  */
 public class UI_Page {
 	/** Role choices. */
-	private final String[] options = {"Author", "Reviewer", "SubProgram Chair", "Program Chair"};
+	private final static String[] OPTIONS = {"Author", "Reviewer", "SubProgram Chair", "Program Chair"};
+	/** Background color is white. */
+	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
 	/** Main window frame. */
 	private JFrame myFrame;
 	/** Panel that contains all other panels. */
@@ -53,7 +55,8 @@ public class UI_Page {
 		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//Size of the frame 900 width 700 height
 		myFrame.setPreferredSize(new Dimension(900, 700));
-		contentPane.setBackground(new Color(255, 255, 255));
+		contentPane.setBackground(BACKGROUND_COLOR);
+		myControlPanel.setBackground(BACKGROUND_COLOR);
 		
 		setUpPanels();
 		
@@ -91,7 +94,7 @@ public class UI_Page {
 	 * Starts the program for a particular user.
 	 */
 	public void initializeProgram(final int theUserId, final int theRoleId) {
-		UI_UserInfo userInfo = new UI_UserInfo("Name", options[theRoleId], 
+		UI_UserInfo userInfo = new UI_UserInfo("Name", OPTIONS[theRoleId], 
 											   "" + theUserId, myConference.myName);
 		userInfo.setUp();
 		
@@ -105,7 +108,7 @@ public class UI_Page {
 		contentPane.add(myControlPanel, BorderLayout.CENTER);
 		
 		
-		UI_PaperInfo paperInfo = new UI_PaperInfo();
+//		UI_PaperInfo paperInfo = new UI_PaperInfo();
 		UI_TaskInfo taskInfo  = new UI_TaskInfo();
 	}
 	
