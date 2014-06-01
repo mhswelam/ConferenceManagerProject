@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class ProgramChair extends User {
 	/** Program Chairs role ID. */
-	private final static int MY_ROLE_ID = 1;
+	private final static int MY_ROLE_ID = 3;
 	
 	/** Conference .*/
 //	private Conference myConference;

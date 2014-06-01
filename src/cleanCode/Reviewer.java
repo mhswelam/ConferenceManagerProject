@@ -12,7 +12,7 @@ public class Reviewer extends User {
 	
     final int PAPERASSIGNED = 4;
     
-    final int myRoleId = 4;
+    final int myRoleId = 1;
     
     /**
      * This is a constructor to create reviewer.
