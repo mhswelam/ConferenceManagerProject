@@ -16,7 +16,10 @@ import javax.swing.JTable;
  */
 public class UI_PaperTable extends JPanel {
 	/** Column headers of the table. */
-	private final static String[] COLUMN_NAMES = {"Author", "Title", "Review 1", "Review 2", "Review 3", "Subprogram Chair"};
+	private final static String[][] COLUMN_NAMES = {{"Title", "Acceptence Status"}, 		//Author 			0
+		{"Author", "Title", "Review"}, 														//Reviewer			1
+		{"Author", "Title", "Review 1", "Review 2", "Review 3"},							//Subprogram Chair	2
+		{"Author", "Title", "Review 1", "Review 2", "Review 3", "Subprogram Chair"}};		//Program Chair		3
 	/** Background color is white. */
 	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
 	/** Unique identification number of the user. */
@@ -44,7 +47,7 @@ public class UI_PaperTable extends JPanel {
 	}
 
 	public void setUp() {
-		JTable table = new JTable(getData(), COLUMN_NAMES);
+		JTable table = new JTable(getData(), COLUMN_NAMES[myRoleId]);
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBackground(BACKGROUND_COLOR);
 		table.setFillsViewportHeight(true);
