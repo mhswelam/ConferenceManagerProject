@@ -23,6 +23,9 @@ import javax.swing.border.Border;
 public class UI_Login extends JPanel implements ActionListener {
 	/** Role choices when logging in. */
 	private final String[] options = {"Author", "Reviewer", "SubProgram Chair", "Program Chair"};
+	/** Background color is white. */
+	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
+	
 	/** User Id entered into the text field. Initially set to -1. */
 	private int myUserId;
 	/** Role selected in the combo box. Initially set to -1. */
@@ -43,7 +46,7 @@ public class UI_Login extends JPanel implements ActionListener {
 	 */
 	public UI_Login(final Conference theConference) {
 		super(new FlowLayout(FlowLayout.CENTER, 300, 100));
-		setBackground(new Color(255, 255, 255));
+		setBackground(BACKGROUND_COLOR);
 		
 		myUserId = 0;
 		myRoleId = 0;
@@ -62,7 +65,7 @@ public class UI_Login extends JPanel implements ActionListener {
 		loginFrame.setPreferredSize(new Dimension(350, 270));
 		Border panelBorder = BorderFactory.createLineBorder(new Color(235, 235, 235), 2);
 		loginFrame.setBorder(panelBorder);
-		loginFrame.setBackground(new Color(250, 250, 250));
+		loginFrame.setBackground(BACKGROUND_COLOR);
 	
 		
 		JLabel userNameLabel = new JLabel("Enter User Id");

@@ -1,6 +1,7 @@
 package cleanCode;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import javax.swing.JPanel;
 
@@ -10,12 +11,19 @@ import javax.swing.JPanel;
  *
  */
 public class UI_SubmitPaper extends JPanel {
+	/** Background color is white. */
+	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
+	
+	/** Conference. */
+	private Conference myConference;
 	
 	/**
-	 * 
+	 * Creates a panel containing the submission sheet and a 
+	 * dialog allowing the Author to submit their manuscript.
 	 */
-	public UI_SubmitPaper() {
+	public UI_SubmitPaper(final Conference theConference) {
 		super(new BorderLayout());
+		myConference = theConference;
 	}
 
 }

@@ -20,8 +20,10 @@ public class UI_PaperTable extends JPanel {
 		{"Author", "Title", "Review"}, 														//Reviewer			1
 		{"Author", "Title", "Review 1", "Review 2", "Review 3"},							//Subprogram Chair	2
 		{"Author", "Title", "Review 1", "Review 2", "Review 3", "Subprogram Chair"}};		//Program Chair		3
+	
 	/** Background color is white. */
 	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
+	
 	/** Unique identification number of the user. */
 	private int myUserId;
 	/** Role of the user. */

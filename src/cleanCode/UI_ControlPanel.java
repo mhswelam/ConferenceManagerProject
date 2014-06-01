@@ -33,6 +33,8 @@ public class UI_ControlPanel extends JPanel {
 		{"View Papers", "Assign Papers", "Recommend Paper", "View Reviewers"},		//Subprogram Chair
 		{ "View Papers", "Assign Papers", "Make Acceptance Decision",				//Program Chair
 			"View Subprogram Chairs", "View Reviewers", "View Authors"}};
+	/** Background color is white. */
+	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
 	
 	/** Tabbed pane. */
 	private JTabbedPane myTabbedPane;
@@ -48,7 +50,7 @@ public class UI_ControlPanel extends JPanel {
 	 */
 	public UI_ControlPanel(final Conference theConference) {
 		super(new GridLayout(1, 1));
-		setBackground(new Color(255, 255, 255));
+		setBackground(BACKGROUND_COLOR);
 		myConference = theConference;
 		myTabbedPane = new JTabbedPane();
 		myTextPanels = new ArrayList<JComponent>();
@@ -74,7 +76,7 @@ public class UI_ControlPanel extends JPanel {
 			}
 	        myTabbedPane.addTab(TASKS[theRoleId][i], tab);
 	        myTextPanels.add(tab);
-	        tab.setBackground(new Color(255, 255, 255));
+	        tab.setBackground(BACKGROUND_COLOR);
 		}
         add(myTabbedPane);
 	}
@@ -85,7 +87,7 @@ public class UI_ControlPanel extends JPanel {
         JLabel filler = new JLabel(text);
         filler.setHorizontalAlignment(JLabel.CENTER);
         panel.setLayout(new GridLayout(1, 1));
-        panel.setBackground(new Color(255, 255, 255));
+        panel.setBackground(BACKGROUND_COLOR);
         panel.add(filler);
         return panel;
     }
@@ -99,7 +101,7 @@ public class UI_ControlPanel extends JPanel {
 	   JComponent textPanel = makeTextPanel("This will show the information of selected paper.");
        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, listPane, textPanel);
        splitPane.setDividerLocation(300);
-       splitPane.setBackground(new Color(253, 253, 253));
+       splitPane.setBackground(BACKGROUND_COLOR);
 
        return splitPane;
    }

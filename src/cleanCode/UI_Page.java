@@ -23,6 +23,7 @@ public class UI_Page {
 	private final static String[] OPTIONS = {"Author", "Reviewer", "SubProgram Chair", "Program Chair"};
 	/** Background color is white. */
 	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
+	
 	/** Main window frame. */
 	private JFrame myFrame;
 	/** Panel that contains all other panels. */
