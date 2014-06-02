@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 public class UI_PaperInfo extends JPanel {
 	/** Background color is white. */
 	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
+	
 	/** Conference. */
 	private Conference myConference;
 	

@@ -113,17 +113,19 @@ public class UI_Page {
 		UI_TaskInfo taskInfo  = new UI_TaskInfo();
 	}
 	
+	/**
+	 * @return button that logs out the user, clearing all the information.
+	 */ 
 	private JButton createLogOutButton() {
 		JButton logOut = new JButton("Log Out");
-//		logOut.setMaximumSize(new Dimension(50, 10));
-		
 		logOut.addActionListener(new ActionListener() {
 			/**
 			 * Logs out the user.
 			 */
 			@Override
 			public void actionPerformed(ActionEvent theEvent) {
-				int ok = JOptionPane.showConfirmDialog(contentPane, "Are you sure you want to log out?", 
+				int ok = JOptionPane.showConfirmDialog(contentPane, 
+						"Are you sure you want to log out?", 
 						   "Log out", JOptionPane.YES_NO_OPTION); 
 					if (ok ==  JOptionPane.YES_OPTION) {
 						contentPane.removeAll();
