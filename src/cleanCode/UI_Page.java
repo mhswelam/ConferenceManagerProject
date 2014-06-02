@@ -20,7 +20,7 @@ import javax.swing.JPanel;
  */
 public class UI_Page {
 	/** Role choices. */
-	private final static String[] OPTIONS = {"Author", "Reviewer", "SubProgram Chair", "Program Chair"};
+	private final String[] OPTIONS = {"","Program Chair","SubProgram Chair","Author", "Reviewer"};
 	/** Background color is white. */
 	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
 	
@@ -97,7 +97,22 @@ public class UI_Page {
 	 * Starts the program for a particular user.
 	 */
 	public void initializeProgram(final int theUserId, final int theRoleId) {
-		UI_UserInfo userInfo = new UI_UserInfo("Name", OPTIONS[theRoleId], 
+		System.out.print("I am right here" + theRoleId);
+		//Retrieves the First and Last name of the user
+		String firstName = "";
+		String lastName = "";
+		if (theRoleId == 1 || theRoleId == 2 || theRoleId == 4) {
+			if (myConference.isReviewer(theUserId)) {
+				firstName = myConference.getReviewer(theUserId).myFristName;
+				lastName = myConference.getReviewer(theUserId).myLastName;
+			}
+		} else {
+			firstName = myConference.getAuthor(theUserId).myFristName;
+			lastName = myConference.getAuthor(theUserId).myLastName;
+		}
+		System.out.print(OPTIONS[theRoleId]);
+		UI_UserInfo userInfo = new UI_UserInfo(firstName + " " + lastName, 
+											OPTIONS[theRoleId], 
 											   "" + theUserId, myConference.myName);
 		userInfo.setUp();
 		
