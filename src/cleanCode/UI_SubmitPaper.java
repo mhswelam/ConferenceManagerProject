@@ -180,6 +180,7 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 			int returnValue = fileChooser.showDialog(this, "Upload");
 			if (returnValue == JFileChooser.OPEN_DIALOG) {
 				File paper = fileChooser.getSelectedFile();
+				paper.renameTo(new File("C:\\Users\\Zack\\git\\ConferenceManager\\src\\lib" + paper.getName()));
 			}
 		} else if (theEvent.getSource() == mySubmitButton) {
 			

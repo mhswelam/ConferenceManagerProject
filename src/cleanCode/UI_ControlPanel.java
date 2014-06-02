@@ -11,7 +11,7 @@ import javax.swing.JTabbedPane;
 /**
  * @author Clean Code
  * This class to create a user interface for the Control Panel.
- *j
+ *
  */
 public class UI_ControlPanel extends JPanel { 
 	/** Tasks for each role. 
