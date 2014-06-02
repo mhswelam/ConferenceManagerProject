@@ -90,48 +90,17 @@ public class UI_UnsubmitPaper extends JPanel implements ActionListener, ListSele
 		paperInfoPanel.add(makeUnsubmitPanel(), BorderLayout.CENTER);
 		paperInfoPanel.add(makeUnsubmitButton(), BorderLayout.SOUTH);
 		
+		UI_PaperList paperList = new UI_PaperList(myUserId, myConference);
+		paperList.setUp();
+		
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, 
-											  makePaperList(), 
-											  paperInfoPanel);
+											  paperList, paperInfoPanel);
 		splitPane.setDividerLocation(300);
 	    splitPane.setBackground(BACKGROUND_COLOR);
 	    
 	    add(topLabel, BorderLayout.NORTH);
 	    add(splitPane, BorderLayout.CENTER);
 	}
-	
-	/**
-	 * Creates a list of papers.
-	 * 
-	 * @param theUserId unique identification number of the user.
-	 * @param theConference conference.
-	 * 
-	 * @return a list of papers.
-	 */
-   private JList makePaperList() {
-		 //just for Program Chair
-		   Collection<Paper> paperSet = myConference.listOfPaper.values();
-		   String[] paperNames = new String[paperSet.size()];
-		   int i = 0;
-		   for (Paper paper : paperSet) {
-			   paperNames[i] = paper.getTitle();
-			   i++;
-		   }
-		   JList<String> list = new JList<String>(paperNames);
-		   
-		   list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		   list.setLayoutOrientation(JList.VERTICAL);
-		   list.setSelectedIndex(0);
-		   
-		   //not sure if this is needed
-//			   JScrollPane paperPanel = new JScrollPane(list);
-//			   paperPanel.setPreferredSize(new Dimension(100, 150));
-//			   paperPanel.add(list);
-//			   return paperPanel;
-		   
-		   return list;
-	   }
-	
 	
 	/**
 	 * Creates a panel with information about the paper Author wants to unsubmit.

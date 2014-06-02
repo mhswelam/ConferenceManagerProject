@@ -20,10 +20,10 @@ public class UI_ControlPanel extends JPanel {
 	 * Tasks at index 2 belong to Subprogram Chair,
 	 * Tasks at index 3 belong to Program Chair. */
 	private final static String[][] TASKS = {
-		{"View Papers", "View Reviews", "Submit Paper", "Edit Paper", "Unsubmit Paper"}, 	//Author
-		{"View Papers", "Review Papers"}, 										   			//Reviewer
-		{"View Papers", "Assign Papers", "Recommend Paper", /** "View Reviewers" */},		//Subprogram Chair
-		{ "View Papers", "Assign Papers", "Make Acceptance Decision"					//Program Chair
+		{"View Papers", "View Reviews", "Submit Paper", "Edit Paper", "Unsubmit Paper"}, 		//Author
+		{"View Papers", "Review Papers"}, 										   				//Reviewer
+		{"View Papers", "Assign Reviewers", "Recommend Paper", /** "View Reviewers" */},		//Subprogram Chair
+		{ "View Papers", "Assign Subprogram Chair", "Make Acceptance Decision"					//Program Chair
 			/**, "View Subprogram Chairs", "View Reviewers", "View Authors"*/}};
 	
 	/** Background color is white. */
@@ -167,28 +167,17 @@ public class UI_ControlPanel extends JPanel {
 	 */
 	private void setUpPC(final int theUserId, final int theRoleId) {
 		//"View Papers"
-		//"Assign Papers"
-		//"Make Acceptance Decision",
-		//"View Subprogram Chairs"
-		//"View Reviewers"
-		//"View Authors"
+		UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId, myConference);
+		table.setUp();
+		myTabbedPane.addTab(TASKS[theRoleId][0], table);
 		
-		int size = TASKS[theRoleId].length;
-		for (int i = 0; i < size; i++) {
-			JComponent tab = null;
-			//View Paper for any user
-			if (TASKS[theRoleId][i].equals(TASKS[theRoleId][0])) {
-				UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId, myConference);
-				table.setUp();
-				tab = table;
-//				tab = makeViewPaperPanel(theUserId, theRoleId);
-			//Submit Paper for Author
-			} else {
-				tab = makeTextPanel(TASKS[theRoleId][i]);
-			}
-	        myTabbedPane.addTab(TASKS[theRoleId][i], tab);
-	        tab.setBackground(BACKGROUND_COLOR);
-		}
+		//"Assign Papers"
+		JComponent tab = makeTextPanel(TASKS[theRoleId][1]);
+		myTabbedPane.addTab(TASKS[theRoleId][1], tab);
+		
+		//"Make Acceptance Decision"
+		JComponent tab1 = makeTextPanel(TASKS[theRoleId][2]);
+		myTabbedPane.addTab(TASKS[theRoleId][2], tab1);
 	}
 	
 	

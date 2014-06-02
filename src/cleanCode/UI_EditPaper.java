@@ -94,47 +94,17 @@ public class UI_EditPaper extends JPanel implements ActionListener {
 		paperInfoPanel.add(makeSubmitForm(), BorderLayout.CENTER);
 		paperInfoPanel.add(makeSubmitDialog(), BorderLayout.SOUTH);
 		
+		UI_PaperList paperList = new UI_PaperList(myUserId, myConference);
+		paperList.setUp();
+		
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, 
-											  makePaperList(myUserId, 0), 
-											  paperInfoPanel);
+											  paperList, paperInfoPanel);
 		splitPane.setDividerLocation(300);
 	    splitPane.setBackground(BACKGROUND_COLOR);
 	    
 	    add(topLabel, BorderLayout.NORTH);
 	    add(splitPane, BorderLayout.CENTER);
 	}
-	
-	/**
-	 * Creates a list of papers.
-	 * 
-	 * @param theUserId unique identification number of the user.
-	 * @param theConference conference.
-	 * 
-	 * @return a list of papers.
-	 */
-   private JList makePaperList(final int theUserId, final int theRoleId) {
-		   Collection<Paper> paperSet = myConference.listOfPaper.values();
-		   String[] paperNames = new String[paperSet.size()];
-		   int i = 0;
-		   for (Paper paper : paperSet) {
-			   paperNames[i] = paper.getTitle();
-			   i++;
-		   }
-		   JList<String> list = new JList<String>(paperNames);
-		   
-		   list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		   list.setLayoutOrientation(JList.VERTICAL);
-		   list.setSelectedIndex(0);
-		   
-		   //not sure if this is needed
-//			   JScrollPane paperPanel = new JScrollPane(list);
-//			   paperPanel.setPreferredSize(new Dimension(100, 150));
-//			   paperPanel.add(list);
-//			   return paperPanel;
-		   
-		   return list;
-	   }
-	
 	
 	/**
 	 * Creates a form for submission.
