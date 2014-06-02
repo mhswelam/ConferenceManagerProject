@@ -82,29 +82,29 @@ public class UI_ControlPanel extends JPanel {
 		//View Papers
 		UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId, myConference);
 		table.setUp();
-		myTabbedPane.addTab(TASKS[theRoleId][1], table);
+		myTabbedPane.addTab(TASKS[theRoleId][0], table);
 		
 		//View Reviewes
 		UI_ViewReviews reviewPanel = new UI_ViewReviews(theUserId, myConference);
 		reviewPanel.setUp();
-		myTabbedPane.addTab(TASKS[theRoleId][2], reviewPanel);
+		myTabbedPane.addTab(TASKS[theRoleId][1], reviewPanel);
 //		JComponent tab = makeTextPanel(TASKS[0][1]);
 //		myTabbedPane.addTab(TASKS[theRoleId][1], tab);
 	
 		//"Submit Paper"
 		UI_SubmitPaper submitPaper = new UI_SubmitPaper(theUserId, myConference);
 		submitPaper.setUp();
-		myTabbedPane.addTab(TASKS[theRoleId][3], submitPaper);
+		myTabbedPane.addTab(TASKS[theRoleId][2], submitPaper);
 		
 		//"Edit Paper"
 		UI_EditPaper editPaper = new UI_EditPaper(theUserId, myConference);
 		editPaper.setUp();
-		myTabbedPane.addTab(TASKS[theRoleId][4], editPaper);
+		myTabbedPane.addTab(TASKS[theRoleId][3], editPaper);
 		
 		//"Unsubmit Paper"
 		UI_UnsubmitPaper unsubmit = new UI_UnsubmitPaper(theUserId, myConference);
 		unsubmit.setUp();
-		myTabbedPane.addTab(TASKS[theRoleId][5], unsubmit);
+		myTabbedPane.addTab(TASKS[theRoleId][4], unsubmit);
 		
 	}
 	
