@@ -3,7 +3,12 @@ package cleanCode;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -13,7 +18,7 @@ import javax.swing.JTextField;
  * This class to create a submit paper panel for the author.
  *
  */
-public class UI_SubmitPaper extends JPanel {
+public class UI_SubmitPaper extends JPanel implements ActionListener {
 	/** Background color is white. */
 	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
 	
@@ -38,6 +43,12 @@ public class UI_SubmitPaper extends JPanel {
 	/** Field where Author writes abstract of the paper.
 	 *  100 characters max. */
 	private JTextField myAbstractField;
+	/** Button that submits  the paper. */
+	private JButton mySubmitButton;
+	/** Button that opens up file chooser for submitting paper. */
+	private JButton myChooseFileButton;
+	/** Dialog that lets Author to chooser the paper they want to submit. */
+	private JFileChooser myPaperChooser;
 
 	
 	
@@ -59,6 +70,11 @@ public class UI_SubmitPaper extends JPanel {
 		myTitleField = new JTextField(10);
 		myKeywordsField = new JTextField(10);
 		myAbstractField = new JTextField(10);
+		mySubmitButton = new JButton("Submit");
+		mySubmitButton.addActionListener(this);
+		myChooseFileButton = new JButton("Choose File");
+		myChooseFileButton.addActionListener(this);
+		myPaperChooser = new JFileChooser();
 	}
 
 	/**
@@ -80,6 +96,7 @@ public class UI_SubmitPaper extends JPanel {
 		add(westfiller, BorderLayout.WEST);
 		add(eastfiller, BorderLayout.EAST);
 		makeSubmitForm();
+		makeSubmitDialog();
 	}
 	
 	/**
@@ -125,8 +142,47 @@ public class UI_SubmitPaper extends JPanel {
 	 * Creates a dialog that lets author upload the paper.
 	 */
 	public void makeSubmitDialog() {
-		JPanel dialogPanel = new JPanel();
+		JPanel dialogPanel = new JPanel(new BorderLayout());
+		dialogPanel.setPreferredSize(new Dimension(800, 100));
+		dialogPanel.setBackground(BACKGROUND_COLOR);
 		
-		add(dialogPanel, BorderLayout.CENTER);
+		//Filler panels for decent layout
+		JPanel westfiller = new JPanel();
+		westfiller.setPreferredSize(new Dimension(30, 100));
+		westfiller.setBackground(BACKGROUND_COLOR);
+		JPanel eastfiller = new JPanel();
+		eastfiller.setPreferredSize(new Dimension(30, 100));
+		eastfiller.setBackground(BACKGROUND_COLOR);
+		
+		JPanel centerPanel = new JPanel();
+		centerPanel.setBackground(BACKGROUND_COLOR);
+		
+		centerPanel.add(myChooseFileButton, BorderLayout.NORTH);
+		centerPanel.add(mySubmitButton, BorderLayout.SOUTH);
+		
+		dialogPanel.add(westfiller, BorderLayout.WEST);
+		dialogPanel.add(eastfiller, BorderLayout.EAST);
+		dialogPanel.add(centerPanel, BorderLayout.CENTER);
+//		dialogPanel.add(myChooseFileButton, BorderLayout.NORTH);
+//		dialogPanel.add(mySubmitButton, BorderLayout.SOUTH);
+		
+		add(dialogPanel, BorderLayout.SOUTH);
+	}
+
+	/**
+	 * Uploads a paper the user chose to submit.
+	 */
+	@Override
+	public void actionPerformed(ActionEvent theEvent) {
+		//Author is trying to choose a file to upload
+		if (theEvent.getSource() == myChooseFileButton) {
+			JFileChooser fileChooser = new JFileChooser();
+			int returnValue = fileChooser.showDialog(this, "Upload");
+			if (returnValue == JFileChooser.OPEN_DIALOG) {
+				File paper = fileChooser.getSelectedFile();
+			}
+		} else if (theEvent.getSource() == mySubmitButton) {
+			
+		}	
 	}
 }

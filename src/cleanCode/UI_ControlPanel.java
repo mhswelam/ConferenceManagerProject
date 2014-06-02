@@ -70,11 +70,12 @@ public class UI_ControlPanel extends JPanel {
 				table.setUp();
 				tab = table;
 //				tab = makeViewPaperPanel(theUserId, theRoleId);
-						//Submit Paper for Author
+			//Submit Paper for Author
 			} else if (TASKS[theRoleId][i].equals(TASKS[theRoleId][1])) {
 				UI_SubmitPaper submitPaper = new UI_SubmitPaper(theUserId, myConference);
 				submitPaper.setUp();
 				tab = submitPaper;
+			//Other fill in panels
 			} else 	{
 				tab = makeTextPanel(TASKS[theRoleId][i]);
 			}
