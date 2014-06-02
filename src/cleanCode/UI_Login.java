@@ -22,7 +22,7 @@ import javax.swing.border.Border;
  */
 public class UI_Login extends JPanel implements ActionListener {
 	/** Role choices when logging in. */
-	private final String[] options = {"Author", "Reviewer", "SubProgram Chair", "Program Chair"};
+	private final String[] options = {"","Program Chair","SubProgram Chair","Author", "Reviewer"};
 	/** Background color is white. */
 	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
 	
