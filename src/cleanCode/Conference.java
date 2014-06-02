@@ -183,7 +183,7 @@ public class Conference {
             line = toRead.nextLine().split(",");
             if (!("UserID".equals(line[0]))) {
             	if (line[4].equals("3")) {
-            		listOfReviewer.put(Integer.parseInt(line[0]), 
+            		listOfAuthors.put(Integer.parseInt(line[0]), 
             				new Author(Integer.parseInt(line[0]), line[1], line[2], line[3]));
             	} 
             }      
