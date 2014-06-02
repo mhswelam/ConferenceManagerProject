@@ -19,7 +19,7 @@ import javax.swing.border.Border;
  * @author Clean Code
  * This class to create a user interface for the login
  *
- */
+ */ 
 public class UI_Login extends JPanel implements ActionListener {
 	/** Role choices when logging in. */
 	private final String[] options = {"Author", "Reviewer", "SubProgram Chair", "Program Chair"};
