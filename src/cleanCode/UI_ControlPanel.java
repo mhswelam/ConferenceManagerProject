@@ -1,7 +1,6 @@
 package cleanCode;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,7 +10,6 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 import javax.swing.ListSelectionModel;
@@ -66,12 +64,18 @@ public class UI_ControlPanel extends JPanel {
 		int size = TASKS[theRoleId].length;
 		for (int i = 0; i < size; i++) {
 			JComponent tab = null;
-			
+			//View Paper for any user
 			if (TASKS[theRoleId][i].equals(TASKS[theRoleId][0])) {
 				UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId, myConference);
+				table.setUp();
 				tab = table;
 //				tab = makeViewPaperPanel(theUserId, theRoleId);
-			} else {
+						//Submit Paper for Author
+			} else if (TASKS[theRoleId][i].equals(TASKS[theRoleId][1])) {
+				UI_SubmitPaper submitPaper = new UI_SubmitPaper(theUserId, myConference);
+				submitPaper.setUp();
+				tab = submitPaper;
+			} else 	{
 				tab = makeTextPanel(TASKS[theRoleId][i]);
 			}
 	        myTabbedPane.addTab(TASKS[theRoleId][i], tab);

@@ -16,10 +16,10 @@ import javax.swing.JTable;
  */
 public class UI_PaperTable extends JPanel {
 	/** Column headers of the table. */
-	private final static String[][] COLUMN_NAMES = {{"Title", "Acceptence Status"}, 		//Author 			0
-		{"Author", "Title", "Review"}, 														//Reviewer			1
-		{"Author", "Title", "Review 1", "Review 2", "Review 3"},							//Subprogram Chair	2
-		{"Author", "Title", "Review 1", "Review 2", "Review 3", "Subprogram Chair"}};		//Program Chair		3
+	private final static String[][] COLUMN_NAMES = {{"Author", "Title", "Acceptence Status"},	//Author 			0
+		{"Author", "Title", "Review"}, 															//Reviewer			1
+		{"Author", "Title", "Review 1", "Review 2", "Review 3"},								//Subprogram Chair	2
+		{"Author", "Title", "Review 1", "Review 2", "Review 3", "Subprogram Chair"}};			//Program Chair		3
 	
 	/** Background color is white. */
 	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
@@ -45,15 +45,17 @@ public class UI_PaperTable extends JPanel {
 		myUserId = theUserId;
 		myRoleId = theRoleId;
 		myConference = theConference;
-		setUp();
 	}
 
+	/**
+	 * Creates the panel that contains paper information.
+	 */
 	public void setUp() {
 		JTable table = new JTable(getData(), COLUMN_NAMES[myRoleId]);
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBackground(BACKGROUND_COLOR);
 		table.setFillsViewportHeight(true);
-		table.setPreferredScrollableViewportSize(new Dimension(700, 500));
+		table.setPreferredScrollableViewportSize(new Dimension(750, 500));
 		table.setBackground(BACKGROUND_COLOR);
 		add(scrollPane);
 	}
