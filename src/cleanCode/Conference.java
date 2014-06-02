@@ -296,10 +296,18 @@ public class Conference {
 			System.out.println(e);
             System.exit(0);
 		}
+		Paper temp = listOfPaper.get(aReview.getMyPaperId());
+		listOfPaper.put(aReview.getMyPaperId(), 
+				new Paper(temp.getId(),temp.getAuthor(), temp.getTitle(), temp.getNumReviewers(),
+						temp.getSubProgramChair(), aReview.getMyReviewId(), temp.getReviews()[0],
+						temp.getReviews()[1], temp.getReviews()[2], temp.getReviewers()[0],temp.getReviewers()[1],
+						temp.getReviewers()[2], temp.getStatus()));
+		writePaperMapToFile();
 	}
 
 	/**
 	 * This method to add a recommendation to the map and to the file.
+	 * it will update the paper with the recommendation.
 	 * @param aRecomm a recommendation
 	 */
 	public void addRecommendation(Recommendation aRecomm) {
@@ -315,6 +323,14 @@ public class Conference {
 			System.out.println(e);
             System.exit(0);
 		}
+		Paper temp = listOfPaper.get(aRecomm.getMyPaperID());
+		listOfPaper.put(aRecomm.getMyPaperID(), 
+				new Paper(temp.getId(),temp.getAuthor(), temp.getTitle(), temp.getNumReviewers(),
+						temp.getSubProgramChair(), aRecomm.getMyrecommendationId(), temp.getReviews()[0],
+						temp.getReviews()[1], temp.getReviews()[2], temp.getReviewers()[0],temp.getReviewers()[1],
+						temp.getReviewers()[2], temp.getStatus()));
+		writePaperMapToFile();
+		
 	}
 	/**
 	 * This method to return review if exists if not it will return null.
@@ -349,6 +365,30 @@ public class Conference {
 		
 		listOfPaper.put(aPaper.getId(), aPaper);
 		
+		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("paper.csv", false)))) {
+			out.println("paperID,AuthorID,TheTitle,numOfReviewer,subProgID,recommID,reviewID,reviewID,reviewID,reviewerID,reviewerID,reviewerID,paperStatus");
+			for (Entry<Integer, Paper> entry: listOfPaper.entrySet()) {
+				out.println(entry.getKey() + "," + entry.getValue().getAuthor() + "," + entry.getValue().getTitle() + "," + entry.getValue().getReviewers().length 
+						+ "," + entry.getValue().getSubProgramChair() + "," + entry.getValue().getRecommendation() + "," + entry.getValue().getReviewers()[0] 
+								+ "," + entry.getValue().getReviewers()[1] + "," + entry.getValue().getReviewers()[2]+ "," + entry.getValue().getReviews()[0]
+										+ "," + entry.getValue().getReviews()[1] + "," + entry.getValue().getReviews()[2] + "," + entry.getValue().getStatus());
+			}
+		    
+		    out.close();
+		}catch (IOException e) {
+			System.out.println(e);
+            System.exit(0);
+		}
+		// if the author a reviewer or subprogram or program chair it will be added to author list
+		if(!isAuthor(aPaper.getAuthor())) {
+			addAuthor(aPaper.getAuthor());
+		}
+	}
+	
+	/**
+	 * This will write the paper map to file.
+	 */
+	public void writePaperMapToFile() {
 		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("paper.csv", false)))) {
 			out.println("paperID,AuthorID,TheTitle,numOfReviewer,subProgID,recommID,reviewID,reviewID,reviewID,reviewerID,reviewerID,reviewerID,paperStatus");
 			for (Entry<Integer, Paper> entry: listOfPaper.entrySet()) {
@@ -431,7 +471,7 @@ public class Conference {
 	/**
 	 * This method to return a reviewer from the the list of reviewer.
 	 * @param userID the user id 
-	 * @return the user type User.
+	 * @return the user type User it will return null if user not exist.
 	 */
 	public User getReviewer(int userID) {
 		User result = null;
@@ -444,7 +484,7 @@ public class Conference {
 	/**
 	 * This method to return an author from the the list of author.
 	 * @param userID the user id 
-	 * @return the user type User.
+	 * @return the user type User it will return null if user not exist.
 	 */
 	public User getAuthor(int userID) {
 		User result = null;
@@ -477,6 +517,27 @@ public class Conference {
 			return true;
 		} else {
 			return false;
+		}
+	}
+	
+	/**
+	 * This method will add author to author map and the file.
+	 * @param aUserId it will take a user id 
+	 */
+	public void addAuthor(int aUserId) {
+		User temp = getReviewer(aUserId);
+		listOfAuthors.put(aUserId, new Author(aUserId,temp.myFristName, temp.myLastName, temp.myEmail ));
+		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("authors.csv", false)))) {
+			out.println("UserID,FirstName,LastName,email,RoleID");
+			for (Entry<Integer, User> entry: listOfAuthors.entrySet()) {
+				out.println(entry.getKey() + "," + entry.getValue().myFristName + "," + entry.getValue().myLastName
+						+ "," + entry.getValue().myEmail);
+			}
+		    
+		    out.close();
+		}catch (IOException e) {
+			System.out.println(e);
+            System.exit(0);
 		}
 	}
 	

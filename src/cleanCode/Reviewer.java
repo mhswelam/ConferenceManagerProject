@@ -10,7 +10,7 @@ public class Reviewer extends User {
 	
 	private ArrayList<Integer> myAssignedPapers;
 	
-    final int PAPERASSIGNED = 4;
+    public int PAPERASSIGNED = 0;
     
     final int myRoleId = 1;
     
