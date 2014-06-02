@@ -69,25 +69,25 @@ public class UI_PaperTable extends JPanel {
 		ArrayList<Paper> paperList = myConference.getPaperList(myRoleId, myUserId);
 		String[][] data = new String[paperList.size()][COLUMN_NAMES.length];
 		
-		int i = 0;
-		for (Paper paper : paperList) {
-			System.out.println(paper.getAuthor());
-			int authorId = paper.getAuthor();
-			String authorFirstName = myConference.getAuthor(authorId).myFristName;
-			String authorLastName = myConference.getAuthor(authorId).myLastName;
-			String title = paper.getTitle();
-			String r1 = "N/A";
-			String r2 = "N/A";
-			String r3 = "N/A";
-			int scr = paper.getRecommendation();
-			data[i][0] = authorFirstName + " " + authorLastName;
-			data[i][1] = title;
-			data[i][2] = r1;
-			data[i][3] = r2;
-			data[i][4] = r3;
-			data[i][5] = "" + scr;
-			i++;
-		}
+//		int i = 0;
+//		for (Paper paper : paperList) {
+//			System.out.println(paper.getAuthor());
+//			int authorId = paper.getAuthor();
+//			String authorFirstName = myConference.getAuthor(authorId).myFristName;
+//			String authorLastName = myConference.getAuthor(authorId).myLastName;
+//			String title = paper.getTitle();
+//			String r1 = "N/A";
+//			String r2 = "N/A";
+//			String r3 = "N/A";
+//			int scr = paper.getRecommendation();
+//			data[i][0] = authorFirstName + " " + authorLastName;
+//			data[i][1] = title;
+//			data[i][2] = r1;
+//			data[i][3] = r2;
+//			data[i][4] = r3;
+//			data[i][5] = "" + scr;
+//			i++;
+//		}
 		return data;
 	}
 }
