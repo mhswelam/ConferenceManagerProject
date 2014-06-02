@@ -2,17 +2,11 @@ package cleanCode;
 
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
-import javax.swing.ListSelectionModel;
 
 /**
  * @author Clean Code
@@ -26,11 +20,11 @@ public class UI_ControlPanel extends JPanel {
 	 * Tasks at index 2 belong to Subprogram Chair,
 	 * Tasks at index 3 belong to Program Chair. */
 	private final static String[][] TASKS = {
-		{"View Papers", "Submit Paper", "Edit Paper", "Unsubmit Paper"}, 			//Author
-		{"View Papers", "Review Papers"}, 										   	//Reviewer
+		{"View Papers", "View Reviews", "Submit Paper", "Edit Paper", "Unsubmit Paper"}, 	//Author
+		{"View Papers", "Review Papers"}, 										   			//Reviewer
 		{"View Papers", "Assign Papers", "Recommend Paper", /** "View Reviewers" */},		//Subprogram Chair
-		{ "View Papers", "Assign Papers", "Make Acceptance Decision" /**,				//Program Chair
-			"View Subprogram Chairs", "View Reviewers", "View Authors"*/}};
+		{ "View Papers", "Assign Papers", "Make Acceptance Decision"					//Program Chair
+			/**, "View Subprogram Chairs", "View Reviewers", "View Authors"*/}};
 	
 	/** Background color is white. */
 	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
@@ -84,20 +78,27 @@ public class UI_ControlPanel extends JPanel {
 		table.setUp();
 		myTabbedPane.addTab(TASKS[theRoleId][0], table);
 		
+		//View Reviewes
+		UI_ViewReviews reviewPanel = new UI_ViewReviews(theUserId, myConference);
+		reviewPanel.setUp();
+		myTabbedPane.addTab(TASKS[theRoleId][1], reviewPanel);
+//		JComponent tab = makeTextPanel(TASKS[0][1]);
+//		myTabbedPane.addTab(TASKS[theRoleId][1], tab);
+	
 		//"Submit Paper"
 		UI_SubmitPaper submitPaper = new UI_SubmitPaper(theUserId, myConference);
 		submitPaper.setUp();
-		myTabbedPane.addTab(TASKS[theRoleId][1], submitPaper);
+		myTabbedPane.addTab(TASKS[theRoleId][2], submitPaper);
 		
 		//"Edit Paper"
 		UI_EditPaper editPaper = new UI_EditPaper(theUserId, myConference);
 		editPaper.setUp();
-		myTabbedPane.addTab(TASKS[theRoleId][2], editPaper);
+		myTabbedPane.addTab(TASKS[theRoleId][3], editPaper);
 		
 		//"Unsubmit Paper"
 		UI_UnsubmitPaper unsubmit = new UI_UnsubmitPaper(theUserId, myConference);
 		unsubmit.setUp();
-		myTabbedPane.addTab(TASKS[theRoleId][3], unsubmit);
+		myTabbedPane.addTab(TASKS[theRoleId][4], unsubmit);
 		
 	}
 	

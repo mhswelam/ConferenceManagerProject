@@ -50,8 +50,8 @@ public class UI_UnsubmitPaper extends JPanel implements ActionListener, ListSele
 
 	
 	/**
-	 * Creates a panel containing the submission sheet and a 
-	 * dialog allowing the Author to edit their manuscript.
+	 * Creates a panel containing paper information and a 
+	 * button allowing the Author to delete their manuscript.
 	 * 
 	 * @param theUserId unique identification number of the user.
 	 * @param theConference conference.
