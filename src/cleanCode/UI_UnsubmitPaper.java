@@ -5,9 +5,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.nio.file.Files;
 import java.util.Collection;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -153,7 +156,12 @@ public class UI_UnsubmitPaper extends JPanel implements ActionListener, ListSele
 	public void actionPerformed(ActionEvent theEvent) {
 		//Author is trying to choose a file to upload
 		if (theEvent.getSource() == myUnsubmitButton) {
-
+			JFileChooser fileChooser = new JFileChooser(new File("C:\\Users\\Zack\\git\\ConferenceManager\\src"));
+			int returnValue = fileChooser.showDialog(this, "remove");
+			if (returnValue == JFileChooser.OPEN_DIALOG) {
+				File paper = fileChooser.getSelectedFile();
+				paper.delete();
+			}
 		}
 	}
 
