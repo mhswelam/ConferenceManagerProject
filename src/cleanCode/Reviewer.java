@@ -1,5 +1,4 @@
 package cleanCode;
-import java.util.ArrayList;
 
 /**
  * @author Clean Code/ Mohamed
@@ -8,11 +7,12 @@ import java.util.ArrayList;
  */
 public class Reviewer extends User {
 	
-	private ArrayList<Integer> myAssignedPapers;
+	final int MAX_PAPER = 4;
 	
-    public int PAPERASSIGNED = 0;
+	
+	
+    public int paperAssinged = 0;
     
-    final int myRoleId = 1;
     
     /**
      * This is a constructor to create reviewer.
@@ -22,10 +22,13 @@ public class Reviewer extends User {
      * @param anEmail the reviewer email
      */
     public Reviewer(int aUserId, String aFirstName, String aLastName,
-			String anEmail){
+			String anEmail, int aPaperAssigned){
     	super(aUserId, aFirstName, aLastName,
-    			anEmail);
+    			anEmail,4);
     	
+    	paperAssinged = aPaperAssigned ;
     }
+    
+    
 
 }

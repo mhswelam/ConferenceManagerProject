@@ -8,13 +8,12 @@ import java.util.Map;
 public class SubProgramChair extends User{
 	
 	/** the amount of papers that can be assigned to the Sub Program Chair. */
-	public int papersAssigned = 4;
+	public int papersAssigned = 0;
 	
 	/** a list of the papers that the Sub Program Chair has access to. */
 	private Map<Integer, Paper> myAssignedPapers;
 	
-	/** The Sub Program Chairs role ID. */
-	final int myRoleId = 2;
+	
 	
 	/**
 	 * Constructor for the Sub Program Chair class.
@@ -25,8 +24,9 @@ public class SubProgramChair extends User{
 	 * notification purposes only.
 	 */
 	public SubProgramChair(int aUserId, String aFristName, String aLastName,
-			String anEmail){
-	    	super(aUserId, aFristName, aLastName, anEmail);
+			String anEmail, int aPaperAssigned){
+	    	super(aUserId, aFristName, aLastName, anEmail, 2);
+	    	papersAssigned = aPaperAssigned;
 	}
 	
 	/**

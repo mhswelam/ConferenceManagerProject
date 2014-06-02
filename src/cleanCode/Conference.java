@@ -133,7 +133,7 @@ public class Conference {
 		listOfReviewer = new HashMap<Integer, User>();
 		final String errorMessage = "File not found";
         Scanner toRead = null;
-        String [] line = new String[5];
+        String [] line = new String[6];
         try {
             final File readFile = new File("vipUsers.csv");
             toRead = new Scanner(readFile);
@@ -148,13 +148,13 @@ public class Conference {
             if (!("UserID".equals(line[0]))) {
             	if (line[4].equals("4")) {
             		listOfReviewer.put(Integer.parseInt(line[0]), 
-            				new Reviewer(Integer.parseInt(line[0]), line[1], line[2], line[3]));
+            				new Reviewer(Integer.parseInt(line[0]), line[1], line[2], line[3],Integer.parseInt(line[5])));
             	} else if (line[4].equals("1")) {
             		listOfReviewer.put(Integer.parseInt(line[0]), 
             				new ProgramChair(Integer.parseInt(line[0]), line[1], line[2], line[3]));
             	} else if (line[4].equals("2")) {
             		listOfReviewer.put(Integer.parseInt(line[0]), 
-            				new SubProgramChair(Integer.parseInt(line[0]), line[1], line[2], line[3]));
+            				new SubProgramChair(Integer.parseInt(line[0]), line[1], line[2], line[3], Integer.parseInt(line[5])));
             	}
             }      
         }
@@ -540,6 +540,34 @@ public class Conference {
             System.exit(0);
 		}
 	}
+	
+	/**
+	 * This method to get available reviewers
+	 */
+	public ArrayList<Reviewer> getAvaReviewer() {
+		ArrayList<Reviewer> result = new ArrayList<Reviewer>(); 
+		for (Entry<Integer, User> entry: listOfReviewer.entrySet()) {
+			if (entry.getValue().myRoleId == 4 && entry.getValue().paperAssinged < 4) {
+				result.add((Reviewer) entry.getValue());
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * This method to get available subProgram chair
+	 */
+	public ArrayList<SubProgramChair> getAvaSubProgram() {
+		ArrayList<SubProgramChair> result = new ArrayList<SubProgramChair>(); 
+		for (Entry<Integer, User> entry: listOfReviewer.entrySet()) {
+			if (entry.getValue().myRoleId == 2 && entry.getValue().paperAssinged < 4) {
+				result.add((SubProgramChair) entry.getValue());
+			}
+		}
+		return result;
+	}
+	
+	
 	
 }
 

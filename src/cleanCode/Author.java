@@ -36,7 +36,7 @@ public class Author extends User {
 	 */
 	public Author(final int aUserId, final String aFirstName, final String aLastName, 
 			final String anEmail) {
-		super(aUserId, aFirstName, aLastName, anEmail);
+		super(aUserId, aFirstName, aLastName, anEmail,3);
 		mySubmittedPapers = new ArrayList<Integer>();
 		myPapersAssigned = 0;
 //		myConference = theConference; 

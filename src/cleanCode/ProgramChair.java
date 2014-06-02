@@ -13,8 +13,7 @@ import java.util.Map;
  *
  */
 public class ProgramChair extends User {
-	/** Program Chairs role ID. */
-	private final static int MY_ROLE_ID = 3;
+
 	
 	/** Conference .*/
 //	private Conference myConference;
@@ -39,7 +38,7 @@ public class ProgramChair extends User {
 	public ProgramChair(final int theUserId, final String theFirstName, 
 						final String theLastName, final String theEmail) {
 		
-		super(theUserId, theFirstName, theLastName, theEmail);
+		super(theUserId, theFirstName, theLastName, theEmail, 3);
 //		myConference = theConference;
 		myAssignedPapers = new HashMap<Integer, List<Integer>>();
 		mySubProgramChairs = new ArrayList<Integer>();
