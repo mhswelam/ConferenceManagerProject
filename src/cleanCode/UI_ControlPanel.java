@@ -19,12 +19,18 @@ public class UI_ControlPanel extends JPanel {
 	 * Tasks at index 1 belongs to Reviewer,
 	 * Tasks at index 2 belong to Subprogram Chair,
 	 * Tasks at index 3 belong to Program Chair. */
-	private final static String[][] TASKS = {
-		{"View Papers", "View Reviews", "Submit Paper", "Edit Paper", "Unsubmit Paper"}, 		//Author
-		{"View Papers", "Review Papers"}, 										   				//Reviewer
-		{"View Papers", "Assign Reviewers", "Recommend Paper", /** "View Reviewers" */},		//Subprogram Chair
-		{ "View Papers", "Assign Subprogram Chair", "Make Acceptance Decision"					//Program Chair
-			/**, "View Subprogram Chairs", "View Reviewers", "View Authors"*/}};
+	private final static String[][] TASKS = { {},												//0 is empty
+		{ "View Papers", "Assign Subprogram Chair", "Make Acceptance Decision"}, 				//1 Program Chair
+		{"View Papers", "Assign Reviewers", "Recommend Paper"}, 								//2	Subprogram Chair
+		{"View Papers", "View Reviews", "Submit Paper", "Edit Paper", "Unsubmit Paper"},		//3 Author
+		{"View Papers", "Review Papers"}};														//4 Reviewer
+	
+//	private final static String[][] TASKS = { {},												//0 is empty
+//		{"View Papers", "View Reviews", "Submit Paper", "Edit Paper", "Unsubmit Paper"}, 		//Author
+//		{"View Papers", "Review Papers"}, 										   				//Reviewer
+//		{"View Papers", "Assign Reviewers", "Recommend Paper", /** "View Reviewers" */},		//Subprogram Chair
+//		{ "View Papers", "Assign Subprogram Chair", "Make Acceptance Decision"					//Program Chair
+//			/**, "View Subprogram Chairs", "View Reviewers", "View Authors"*/}};
 	
 	/** Background color is white. */
 	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
@@ -53,13 +59,13 @@ public class UI_ControlPanel extends JPanel {
 	 * @param theRoleId role of the user.
 	 */
 	public void setUp(final int theUserId, final int theRoleId) {
-		if (theRoleId == 0) {
+		if (theRoleId == 3) {
 			setUpAuthor(theUserId, theRoleId);
-		} else if (theRoleId == 1) {
+		} else if (theRoleId == 4) {
 			setUpReviewer(theUserId, theRoleId);
 		} else if (theRoleId == 2) {
 			setUpSPC(theUserId, theRoleId);
-		} else {
+		} else if (theRoleId == 1){
 			setUpPC(theUserId, theRoleId);
 		}
 		

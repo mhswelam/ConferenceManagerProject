@@ -70,6 +70,8 @@ public class UI_Page {
 	 * Sets up initial log in screen.
 	 */
 	private void setUpPanels() {
+		
+		
 		myLogInPanel.addComponentListener(new ComponentAdapter() {
 			/**
 			 * When the user loged in, sets up the rest of the program.
