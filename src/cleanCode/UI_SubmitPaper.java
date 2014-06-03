@@ -7,11 +7,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -28,17 +31,12 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 	private Conference myConference;
 	/** Unique identification number of the user. */
 	private int myUserId;
-	/** Field where Author puts their name. */
-//	private JTextField myNameField;
-	/** Field where Author puts their email. */
-	//private JTextField myEmailField;
-	/** Field where Author puts the name of the conference for submitted paper. */
-	//private JTextField myConferenceField;
 	
-	/** Missing: Which of the conference categories best characterizes this paper (used to match reviewers): */
+	/** Missing: Which of the conference categories best characterizes 
+	 * this paper (used to match reviewers): */
 	
 	/** Field where Author puts the title of their paper.
-	 *  100 characters max. */
+	  * 100 characters max. */
 	private JTextField myTitleField;
 	/** Field where Author puts the keywords that describe the paper. */
 	private JTextField myKeywordsField;
@@ -49,8 +47,6 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 	private JButton mySubmitButton;
 	/** Button that opens up file chooser for submitting paper. */
 	private JButton myChooseFileButton;
-
-	
 	
 	/**
 	 * Creates a panel containing the submission sheet and a 
@@ -64,9 +60,6 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 		setBackground(BACKGROUND_COLOR);
 		myUserId = theUserId;
 		myConference = theConference;
-	//	myNameField = new JTextField(10);
-	//	myEmailField = new JTextField(10);
-	//	myConferenceField = new JTextField(10);
 		myTitleField = new JTextField(20);
 		myKeywordsField = new JTextField(20);
 		myAbstractField = new JTextField(58);
@@ -105,13 +98,6 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 	 * Creates a form for submission.
 	 */
 	private void makeSubmitForm() {
-		//Creating labels
-		//JLabel nameLabel = new JLabel("Your Name: ");
-		//nameLabel.setLabelFor(myNameField);
-		//JLabel emailLabel = new JLabel("Your email: ");
-		//emailLabel.setLabelFor(myEmailField);
-		//JLabel conferenceLabel = new JLabel("Conference name: ");
-		//conferenceLabel.setLabelFor(myConferenceField);
 		JLabel titleLabel = new JLabel("Paper title (100 characters max): ");
 		titleLabel.setLabelFor(myTitleField);
 		JLabel keywordsLabel = new JLabel("Keywords (for searching): ");
@@ -124,12 +110,6 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 		submitForm.setPreferredSize(new Dimension(400, 300));
 		submitForm.setBackground(BACKGROUND_COLOR);
 		
-		//submitForm.add(nameLabel);
-	//	submitForm.add(myNameField);
-		//submitForm.add(emailLabel);
-	//	submitForm.add(myEmailField);
-		//submitForm.add(conferenceLabel);
-	//	submitForm.add(myConferenceField);
 		submitForm.add(titleLabel);
 		submitForm.add(myTitleField);
 		submitForm.add(keywordsLabel);
@@ -165,8 +145,6 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 		dialogPanel.add(westfiller, BorderLayout.WEST);
 		dialogPanel.add(eastfiller, BorderLayout.EAST);
 		dialogPanel.add(centerPanel, BorderLayout.CENTER);
-//		dialogPanel.add(myChooseFileButton, BorderLayout.NORTH);
-//		dialogPanel.add(mySubmitButton, BorderLayout.SOUTH);
 		
 		add(dialogPanel, BorderLayout.SOUTH);
 	}
@@ -182,14 +160,29 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 			int returnValue = fileChooser.showDialog(this, "Upload");
 			if (returnValue == JFileChooser.OPEN_DIALOG) {
 				File paper = fileChooser.getSelectedFile();
-				paper.renameTo(new File("C:\\Users\\Zack\\git\\ConferenceManager\\src\\lib" + paper.getName()));
+				paper.renameTo(new File("C:\\Users\\Zack\\git"
+						+ "\\ConferenceManager\\src\\lib" + paper.getName()));
 			}
 		} else if (theEvent.getSource() == mySubmitButton) {
+			Paper myPaper = null;
 			String title = myTitleField.getText();
 			String key = myKeywordsField.getText();
 			String abs = myAbstractField.getText();
-			Paper myPaper = new Paper(myConference.lastPaperID++, myUserId, title, 0, 0, 0, 0, 0, 0, 0, 0, 0, "No status");
-			myConference.addPaper(myPaper);
+			if (title.isEmpty() || key.isEmpty() || abs.isEmpty()) {
+				JOptionPane.showMessageDialog(this,"You must fill out all of "
+						+ "the text fields", 
+						"missing fields",JOptionPane.ERROR_MESSAGE);
+				myPaper = new Paper(myConference.lastPaperID++, myUserId, title, 
+						0, 0, 0, 0, 0, 0, 0, 0, 0, "No status");
+				myConference.addPaper(myPaper);
+			}
+//			Map<Integer, Paper> theMap = myConference.listOfPaper;
+//			Iterator it = theMap.entrySet().iterator();
+//		    while (it.hasNext()) {
+//		        Map.Entry pairs = (Map.Entry)it.next();
+//		        System.out.println(pairs.getKey() + " = " + pairs.getValue());
+//		        it.remove(); // avoids a ConcurrentModificationException
+//		    }
 		}	
 	}
 }

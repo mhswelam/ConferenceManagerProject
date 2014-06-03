@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
@@ -30,14 +31,9 @@ public class UI_EditPaper extends JPanel implements ActionListener {
 	private Conference myConference;
 	/** Unique identification number of the user. */
 	private int myUserId;
-	/** Field where Author puts their name. */
-	//private JTextField myNameField;
-	/** Field where Author puts their email. */
-//	private JTextField myEmailField;
-	/** Field where Author puts the name of the conference for submitted paper. */
-//	private JTextField myConferenceField;
 	
-	/** Missing: Which of the conference categories best characterizes this paper (used to match reviewers): */
+	/** Missing: Which of the conference categories best characterizes this 
+	 * paper (used to match reviewers): */
 	
 	/** Field where Author puts the title of their paper.
 	 *  100 characters max. */
@@ -64,9 +60,6 @@ public class UI_EditPaper extends JPanel implements ActionListener {
 		setBackground(BACKGROUND_COLOR);
 		myUserId = theUserId;
 		myConference = theConference;
-	//	myNameField = new JTextField("Name of the Author" ,10);
-	//	myEmailField = new JTextField("Email of the Author" ,10);
-	//	myConferenceField = new JTextField("Name of the conference" ,10);
 		myTitleField = new JTextField(30);
 		myKeywordsField = new JTextField(30);
 		myAbstractField = new JTextField(30);
@@ -111,12 +104,6 @@ public class UI_EditPaper extends JPanel implements ActionListener {
 	 */
 	private JPanel makeSubmitForm() {
 		//Creating labels
-	//	JLabel nameLabel = new JLabel("Your Name: ");
-	//	nameLabel.setLabelFor(myNameField);
-	//	JLabel emailLabel = new JLabel("Your email: ");
-	//	emailLabel.setLabelFor(myEmailField);
-	//	JLabel conferenceLabel = new JLabel("Conference name: ");
-	//	conferenceLabel.setLabelFor(myConferenceField);
 		JLabel titleLabel = new JLabel("Paper title (100 characters max): ");
 		titleLabel.setLabelFor(myTitleField);
 		JLabel keywordsLabel = new JLabel("Keywords (for searching): ");
@@ -129,12 +116,6 @@ public class UI_EditPaper extends JPanel implements ActionListener {
 		submitForm.setPreferredSize(new Dimension(400, 300));
 		submitForm.setBackground(BACKGROUND_COLOR);
 		
-	//	submitForm.add(nameLabel);
-	//	submitForm.add(myNameField);
-	//	submitForm.add(emailLabel);
-	//	submitForm.add(myEmailField);
-	//	submitForm.add(conferenceLabel);
-	//	submitForm.add(myConferenceField);
 		submitForm.add(titleLabel);
 		submitForm.add(myTitleField);
 		submitForm.add(keywordsLabel);
@@ -170,7 +151,8 @@ public class UI_EditPaper extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent theEvent) {
 		//Author is trying to choose a file to upload
 		if (theEvent.getSource() == myChooseFileButton) {
-			JFileChooser fileChooser = new JFileChooser(new File("C:\\Users\\Zack\\git\\ConferenceManager\\src"));
+			JFileChooser fileChooser = new JFileChooser(new File("C:\\Users"
+					+ "\\Zack\\git\\ConferenceManager\\src"));
 			int returnValue = fileChooser.showDialog(this, "Upload");
 			//This will delete old paper. Submit new paper.
 			//Change any edits that are needed.
@@ -178,7 +160,18 @@ public class UI_EditPaper extends JPanel implements ActionListener {
 				File paper = fileChooser.getSelectedFile();
 			}
 		} else if (theEvent.getSource() == mySubmitButton) {
-			
+			Paper myPaper = null;
+			String title = myTitleField.getText();
+			String key = myKeywordsField.getText();
+			String abs = myAbstractField.getText();
+			if (title.isEmpty() || key.isEmpty() || abs.isEmpty()) {
+				JOptionPane.showMessageDialog(this,"You must fill out all of "
+						+ "the text fields", 
+						"missing fields",JOptionPane.ERROR_MESSAGE);
+				myPaper = new Paper(myConference.lastPaperID++, myUserId, title, 
+						0, 0, 0, 0, 0, 0, 0, 0, 0, "No status");
+				myConference.addPaper(myPaper);
+			}
 		}	
 	}
 }

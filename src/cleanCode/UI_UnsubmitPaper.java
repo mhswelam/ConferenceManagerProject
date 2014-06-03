@@ -24,7 +24,8 @@ import javax.swing.event.ListSelectionListener;
  * This class to create a unsubmit paper panel for the Author.
  *
  */
-public class UI_UnsubmitPaper extends JPanel implements ActionListener, ListSelectionListener {
+public class UI_UnsubmitPaper extends JPanel implements ActionListener, 
+		ListSelectionListener {
 	/** Background color is white. */
 	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
 
@@ -59,7 +60,8 @@ public class UI_UnsubmitPaper extends JPanel implements ActionListener, ListSele
 	 * @param theUserId unique identification number of the user.
 	 * @param theConference conference.
 	 */
-	public UI_UnsubmitPaper(final int theUserId, final Conference theConference) {
+	public UI_UnsubmitPaper(final int theUserId, 
+				final Conference theConference) {
 		super(new BorderLayout());
 		setBackground(BACKGROUND_COLOR);
 		myUserId = theUserId;
@@ -69,7 +71,8 @@ public class UI_UnsubmitPaper extends JPanel implements ActionListener, ListSele
 		myUnsubmitButton.addActionListener(this);
 		myNameLabel = new JLabel();
 		myEmailLabel = new JLabel();
-		myConferenceLabel = new JLabel("Conference name: " + myConference.myName);
+		myConferenceLabel = new JLabel("Conference name: " 
+				+ myConference.myName);
 		myTitleLabel = new JLabel();
 		myKeywordsLabel = new JLabel();
 		myAbstractLabel = new JLabel();
@@ -106,7 +109,8 @@ public class UI_UnsubmitPaper extends JPanel implements ActionListener, ListSele
 	}
 	
 	/**
-	 * Creates a panel with information about the paper Author wants to unsubmit.
+	 * Creates a panel with information about the paper Author wants to 
+	 * unsubmit.
 	 */
 	private JPanel makeUnsubmitPanel() {
 		setTextForLabels();
@@ -131,9 +135,12 @@ public class UI_UnsubmitPaper extends JPanel implements ActionListener, ListSele
 	private void setTextForLabels() {
 		myNameLabel.setText("Your Name: " + "This will be authors name");
 		myEmailLabel.setText("Your email: " + "This wil be authors email");
-		myTitleLabel.setText("Paper title (100 characters max): " + "This will be paper title");
-		myKeywordsLabel.setText("Keywords (for searching): " + "These will be paper keywords");
-		myAbstractLabel.setText("Abstract: (100 words max): " + "This will be paper abstract");
+		myTitleLabel.setText("Paper title (100 characters max): " + 
+				"This will be paper title");
+		myKeywordsLabel.setText("Keywords (for searching): " 
+				+ "These will be paper keywords");
+		myAbstractLabel.setText("Abstract: (100 words max): " 
+				+ "This will be paper abstract");
 	}
 	
 	/**
@@ -156,7 +163,8 @@ public class UI_UnsubmitPaper extends JPanel implements ActionListener, ListSele
 	public void actionPerformed(ActionEvent theEvent) {
 		//Author is trying to choose a file to upload
 		if (theEvent.getSource() == myUnsubmitButton) {
-			JFileChooser fileChooser = new JFileChooser(new File("C:\\Users\\Zack\\git\\ConferenceManager\\src"));
+			JFileChooser fileChooser = new JFileChooser(new File("C:\\Users"
+					+ "\\Zack\\git\\ConferenceManager\\src"));
 			int returnValue = fileChooser.showDialog(this, "remove");
 			if (returnValue == JFileChooser.OPEN_DIALOG) {
 				File paper = fileChooser.getSelectedFile();
