@@ -20,7 +20,7 @@ public class UI_ControlPanel extends JPanel {
 	 * Tasks at index 2 belong to Subprogram Chair,
 	 * Tasks at index 3 belong to Program Chair. */
 	private final static String[][] TASKS = { {},												//0 is empty
-		{ "View Papers", "Assign Subprogram Chair", "Make Acceptance Decision"}, 				//1 Program Chair
+		{"View Papers", "Assign Subprogram Chair", "Make Acceptance Decision"}, 				//1 Program Chair
 		{"View Papers", "Assign Reviewers", "Recommend Paper"}, 								//2	Subprogram Chair
 		{"View Papers", "View Reviews", "Submit Paper", "Edit Paper", "Unsubmit Paper"},		//3 Author
 		{"View Papers", "Review Papers"}};														//4 Reviewer
