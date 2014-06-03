@@ -27,11 +27,11 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 	/** Unique identification number of the user. */
 	private int myUserId;
 	/** Field where Author puts their name. */
-	private JTextField myNameField;
+//	private JTextField myNameField;
 	/** Field where Author puts their email. */
-	private JTextField myEmailField;
+	//private JTextField myEmailField;
 	/** Field where Author puts the name of the conference for submitted paper. */
-	private JTextField myConferenceField;
+	//private JTextField myConferenceField;
 	
 	/** Missing: Which of the conference categories best characterizes this paper (used to match reviewers): */
 	
@@ -62,12 +62,12 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 		setBackground(BACKGROUND_COLOR);
 		myUserId = theUserId;
 		myConference = theConference;
-		myNameField = new JTextField(10);
-		myEmailField = new JTextField(10);
-		myConferenceField = new JTextField(10);
-		myTitleField = new JTextField(10);
-		myKeywordsField = new JTextField(10);
-		myAbstractField = new JTextField(10);
+	//	myNameField = new JTextField(10);
+	//	myEmailField = new JTextField(10);
+	//	myConferenceField = new JTextField(10);
+		myTitleField = new JTextField(20);
+		myKeywordsField = new JTextField(20);
+		myAbstractField = new JTextField(50);
 		mySubmitButton = new JButton("Submit");
 		mySubmitButton.addActionListener(this);
 		myChooseFileButton = new JButton("Choose File");
@@ -104,12 +104,12 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 	 */
 	private void makeSubmitForm() {
 		//Creating labels
-		JLabel nameLabel = new JLabel("Your Name: ");
-		nameLabel.setLabelFor(myNameField);
-		JLabel emailLabel = new JLabel("Your email: ");
-		emailLabel.setLabelFor(myEmailField);
-		JLabel conferenceLabel = new JLabel("Conference name: ");
-		conferenceLabel.setLabelFor(myConferenceField);
+		//JLabel nameLabel = new JLabel("Your Name: ");
+		//nameLabel.setLabelFor(myNameField);
+		//JLabel emailLabel = new JLabel("Your email: ");
+		//emailLabel.setLabelFor(myEmailField);
+		//JLabel conferenceLabel = new JLabel("Conference name: ");
+		//conferenceLabel.setLabelFor(myConferenceField);
 		JLabel titleLabel = new JLabel("Paper title (100 characters max): ");
 		titleLabel.setLabelFor(myTitleField);
 		JLabel keywordsLabel = new JLabel("Keywords (for searching): ");
@@ -122,12 +122,12 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 		submitForm.setPreferredSize(new Dimension(400, 300));
 		submitForm.setBackground(BACKGROUND_COLOR);
 		
-		submitForm.add(nameLabel);
-		submitForm.add(myNameField);
-		submitForm.add(emailLabel);
-		submitForm.add(myEmailField);
-		submitForm.add(conferenceLabel);
-		submitForm.add(myConferenceField);
+		//submitForm.add(nameLabel);
+	//	submitForm.add(myNameField);
+		//submitForm.add(emailLabel);
+	//	submitForm.add(myEmailField);
+		//submitForm.add(conferenceLabel);
+	//	submitForm.add(myConferenceField);
 		submitForm.add(titleLabel);
 		submitForm.add(myTitleField);
 		submitForm.add(keywordsLabel);

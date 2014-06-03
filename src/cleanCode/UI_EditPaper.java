@@ -170,13 +170,12 @@ public class UI_EditPaper extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent theEvent) {
 		//Author is trying to choose a file to upload
 		if (theEvent.getSource() == myChooseFileButton) {
-			JFileChooser fileChooser = new JFileChooser();
+			JFileChooser fileChooser = new JFileChooser(new File("C:\\Users\\Zack\\git\\ConferenceManager\\src"));
 			int returnValue = fileChooser.showDialog(this, "Upload");
 			//This will delete old paper. Submit new paper.
 			//Change any edits that are needed.
 			if (returnValue == JFileChooser.OPEN_DIALOG) {
 				File paper = fileChooser.getSelectedFile();
-				
 			}
 		} else if (theEvent.getSource() == mySubmitButton) {
 			
