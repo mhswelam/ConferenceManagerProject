@@ -35,10 +35,10 @@ public class Author extends User {
 	 * @param anEmail authors email address.
 	 */
 	public Author(final int aUserId, final String aFirstName, final String aLastName, 
-			final String anEmail) {
+			final String anEmail, int aPaperAssined) {
 		super(aUserId, aFirstName, aLastName, anEmail,3);
 		mySubmittedPapers = new ArrayList<Integer>();
-		myPapersAssigned = 0;
+		myPapersAssigned = aPaperAssined;
 //		myConference = theConference; 
 	}
 	
