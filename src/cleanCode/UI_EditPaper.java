@@ -6,17 +6,14 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.Collection;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
 
 /**
  * @author Clean Code
@@ -24,13 +21,17 @@ import javax.swing.ListSelectionModel;
  *
  */
 public class UI_EditPaper extends JPanel implements ActionListener {
+	
+	/**Adding default serial ID to get rid of error.*/
+	private static final long serialVersionUID = 1L;
 	/** Background color is white. */
 	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
-
 	/** Conference. */
 	private Conference myConference;
 	/** Unique identification number of the user. */
 	private int myUserId;
+	
+	
 	
 	/** Missing: Which of the conference categories best characterizes this 
 	 * paper (used to match reviewers): */
@@ -168,10 +169,14 @@ public class UI_EditPaper extends JPanel implements ActionListener {
 				JOptionPane.showMessageDialog(this,"You must fill out all of "
 						+ "the text fields", 
 						"missing fields",JOptionPane.ERROR_MESSAGE);
-				myPaper = new Paper(myConference.lastPaperID++, myUserId, title, 
-						0, 0, 0, 0, 0, 0, 0, 0, 0, "No status");
-				myConference.addPaper(myPaper);
 			}
+			myPaper = new Paper(myConference.lastPaperID++, myUserId, title, 
+					0, 0, 0, 0, 0, 0, 0, 0, 0, "No status");
+			if (myConference.myPaperToDelete != 0) {
+				System.out.println("it will be deleted");
+				myConference.removePaper(myConference.myPaperToDelete);
+			}
+			myConference.addPaper(myPaper);
 		}	
 	}
 }

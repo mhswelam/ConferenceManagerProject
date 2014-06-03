@@ -6,13 +6,11 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -24,9 +22,11 @@ import javax.swing.JTextField;
  *
  */
 public class UI_SubmitPaper extends JPanel implements ActionListener {
+	
+	/**Adding default serial ID to get rid of error.*/
+	private static final long serialVersionUID = 1L;
 	/** Background color is white. */
 	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
-	
 	/** Conference. */
 	private Conference myConference;
 	/** Unique identification number of the user. */

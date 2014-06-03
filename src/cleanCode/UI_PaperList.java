@@ -3,10 +3,14 @@ package cleanCode;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  * @author Clean Code
@@ -14,6 +18,10 @@ import javax.swing.ListSelectionModel;
  *
  */
 public class UI_PaperList extends JPanel {
+	
+	/**Adding default serial ID to get rid of error.*/
+	private static final long serialVersionUID = 1L;
+
 	/** Background color is white. */
 	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
 
@@ -59,11 +67,34 @@ public class UI_PaperList extends JPanel {
 			   paperNames[i] = paper.getTitle();
 			   i++;
 		   }
-		   JList<String> list = new JList<String>(paperNames);
+		   final JList<String> list = new JList<String>(paperNames);
 		   
 		   list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		   list.setLayoutOrientation(JList.VERTICAL);
-		   list.setSelectedIndex(0);
+		//   list.setSelectedIndex(0);
+		   
+		   list.addListSelectionListener(new ListSelectionListener() {
+
+	            @Override
+	            public void valueChanged(ListSelectionEvent arg0) {
+	                if (!arg0.getValueIsAdjusting()) {
+	                	Map<Integer, Paper> theMap = myConference.listOfPaper;
+	                	Iterator it = theMap.entrySet().iterator();
+	        		    while (it.hasNext()) {
+	        		        Map.Entry pairs = (Map.Entry)it.next();
+	        		        Paper tempPaper = (Paper) pairs.getValue();
+	        		        if (tempPaper.getTitle().equals(list.
+	        		        		getSelectedValue().toString())) {
+	        		        	myConference.myPaperToDelete = tempPaper.getId();
+	        		        	System.out.println(tempPaper.getId());
+	        		        	break;
+	        		        	//myConference.removePaper(tempPaper.getId());
+	        		        }
+	        		      //  it.remove(); 
+	        		    }
+	                }
+	            }
+	        });
 		   
 		   //not sure if this is needed
 //			   JScrollPane paperPanel = new JScrollPane(list);

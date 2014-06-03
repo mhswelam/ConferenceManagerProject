@@ -27,6 +27,7 @@ import java.util.TreeMap;
  */
 public class Conference {
 	
+	public int myPaperToDelete;
 	/**
 	 * This to hold the conference name.
 	 */

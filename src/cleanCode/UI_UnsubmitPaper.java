@@ -6,16 +6,12 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.nio.file.Files;
-import java.util.Collection;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
-import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -26,9 +22,11 @@ import javax.swing.event.ListSelectionListener;
  */
 public class UI_UnsubmitPaper extends JPanel implements ActionListener, 
 		ListSelectionListener {
+	
+	/**Adding default serial ID to get rid of error.*/
+	private static final long serialVersionUID = 1L;
 	/** Background color is white. */
 	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
-
 	/** Conference. */
 	private Conference myConference;
 	/** Unique identification number of the user. */
@@ -49,9 +47,6 @@ public class UI_UnsubmitPaper extends JPanel implements ActionListener,
 	private JLabel myKeywordsLabel;
 	/** Label that contains abstract of the paper. */
 	private JLabel myAbstractLabel;
-
-	
-
 	
 	/**
 	 * Creates a panel containing paper information and a 

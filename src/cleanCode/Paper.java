@@ -235,20 +235,24 @@ public class Paper {
 		return myAuthor;
 	}
 	
-	//Author submits the paper into the database.
-	
-	/**
-	* Downloads the paper.
-	*/
-	public void download() {
-		
+	public String toString() {
+		return myTitle;
 	}
 	
-	//Constructor will upload the paper
-	/**
-	* Uploads the paper.
-	*/
-	public void upload() {
-
-	}
+//	//Author submits the paper into the database.
+//	
+//	/**
+//	* Downloads the paper.
+//	*/
+//	public void download() {
+//		
+//	}
+//	
+//	//Constructor will upload the paper
+//	/**
+//	* Uploads the paper.
+//	*/
+//	public void upload() {
+//
+//	}
 }
