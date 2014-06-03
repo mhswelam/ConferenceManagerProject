@@ -104,7 +104,7 @@ public class UI_Login extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent theEvent) {
 		myUserId = Integer.parseInt(myUserNameField.getText());
 		myRoleId = myRoleBox.getSelectedIndex();
-		if (myRoleId == myConference.getReviewer(myUserId).myRoleId ) {
+		if (myRoleId == myConference.getAuthor(myUserId).myRoleId ) {
 				setVisible(false);
 			
 		} else if (myRoleId == 2 || myRoleId == 4) {

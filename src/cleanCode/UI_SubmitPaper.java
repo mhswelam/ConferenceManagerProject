@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -183,7 +185,11 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 				paper.renameTo(new File("C:\\Users\\Zack\\git\\ConferenceManager\\src\\lib" + paper.getName()));
 			}
 		} else if (theEvent.getSource() == mySubmitButton) {
-			
+			String title = myTitleField.getText();
+			String key = myKeywordsField.getText();
+			String abs = myAbstractField.getText();
+			Paper myPaper = new Paper(myConference.lastPaperID++, myUserId, title, 0, 0, 0, 0, 0, 0, 0, 0, 0, "No status");
+			myConference.addPaper(myPaper);
 		}	
 	}
 }
