@@ -67,7 +67,7 @@ public class Conference {
 	/**
 	 * This to hold the last paper id.
 	 */
-	public static int lastPaperID = 0;
+	public int lastPaperID = 0;
 	/**
 	 * This to hold the last review id.
 	 */
