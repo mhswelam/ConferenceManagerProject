@@ -97,7 +97,6 @@ public class UI_Page {
 	 * Starts the program for a particular user.
 	 */
 	public void initializeProgram(final int theUserId, final int theRoleId) {
-		System.out.print("I am right here" + theRoleId);
 		//Retrieves the First and Last name of the user
 		String firstName = "";
 		String lastName = "";
@@ -110,7 +109,8 @@ public class UI_Page {
 			firstName = myConference.getAuthor(theUserId).myFristName;
 			lastName = myConference.getAuthor(theUserId).myLastName;
 		}
-		System.out.print(OPTIONS[theRoleId]);
+		
+		//Creates the top User Information panel that contains the ID Name etc
 		UI_UserInfo userInfo = new UI_UserInfo(firstName + " " + lastName, 
 											OPTIONS[theRoleId], 
 											   "" + theUserId, myConference.myName);
