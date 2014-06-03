@@ -54,8 +54,8 @@ public class UI_Page {
 	public void start() {
 		myFrame.setResizable(false);
 		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//Size of the frame 900 width 700 height
-		myFrame.setPreferredSize(new Dimension(900, 700));
+		//Size of the frame 1000 width 900 height
+		myFrame.setPreferredSize(new Dimension(1000, 900));
 		contentPane.setBackground(BACKGROUND_COLOR);
 		myControlPanel.setBackground(BACKGROUND_COLOR);
 		
