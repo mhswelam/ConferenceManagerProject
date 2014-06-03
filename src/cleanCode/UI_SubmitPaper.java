@@ -67,7 +67,7 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 	//	myConferenceField = new JTextField(10);
 		myTitleField = new JTextField(20);
 		myKeywordsField = new JTextField(20);
-		myAbstractField = new JTextField(50);
+		myAbstractField = new JTextField(58);
 		mySubmitButton = new JButton("Submit");
 		mySubmitButton.addActionListener(this);
 		myChooseFileButton = new JButton("Choose File");
