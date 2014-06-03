@@ -104,7 +104,9 @@ public class UI_Login extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent theEvent) {
 		myUserId = Integer.parseInt(myUserNameField.getText());
 		myRoleId = myRoleBox.getSelectedIndex();
-		if (myRoleId == myConference.getAuthor(myUserId).myRoleId ) {
+		
+		if (myConference.isReviewer(myUserId) || myUserId == myConference.myProgramChair) {
+			if (myRoleId == 1 ) {
 				setVisible(false);
 			
 		} else if (myRoleId == 2 || myRoleId == 4) {
@@ -117,6 +119,8 @@ public class UI_Login extends JPanel implements ActionListener {
 				setVisible(false);
 			}
 		}
+		}
+		
 		//Here ooes the code to check user & and their role
 		//If the person logging in is User, then they become author by submitting the paper;
 		

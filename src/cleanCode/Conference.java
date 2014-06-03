@@ -152,6 +152,7 @@ public class Conference {
             	} else if (line[4].equals("1")) {
             		listOfReviewer.put(Integer.parseInt(line[0]), 
             				new ProgramChair(Integer.parseInt(line[0]), line[1], line[2], line[3]));
+            		myProgramChair = Integer.parseInt(line[0]);
             	} else if (line[4].equals("2")) {
             		listOfReviewer.put(Integer.parseInt(line[0]), 
             				new SubProgramChair(Integer.parseInt(line[0]), line[1], line[2], line[3], Integer.parseInt(line[5])));

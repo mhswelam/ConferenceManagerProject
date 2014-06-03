@@ -38,7 +38,7 @@ public class ProgramChair extends User {
 	public ProgramChair(final int theUserId, final String theFirstName, 
 						final String theLastName, final String theEmail) {
 		
-		super(theUserId, theFirstName, theLastName, theEmail, 3);
+		super(theUserId, theFirstName, theLastName, theEmail, 1);
 //		myConference = theConference;
 		myAssignedPapers = new HashMap<Integer, List<Integer>>();
 		mySubProgramChairs = new ArrayList<Integer>();
