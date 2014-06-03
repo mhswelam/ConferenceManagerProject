@@ -170,12 +170,13 @@ public class UI_EditPaper extends JPanel implements ActionListener {
 						+ "the text fields", 
 						"missing fields",JOptionPane.ERROR_MESSAGE);
 			}
-			myPaper = new Paper(myConference.lastPaperID++, myUserId, title, 
-					0, 0, 0, 0, 0, 0, 0, 0, 0, "No status");
+	
 			if (myConference.myPaperToDelete != 0) {
 				System.out.println("it will be deleted");
 				myConference.removePaper(myConference.myPaperToDelete);
 			}
+			myPaper = new Paper(myConference.myPaperToDelete, myUserId, title, 
+					0, 0, 0, 0, 0, 0, 0, 0, 0, "No status");
 			myConference.addPaper(myPaper);
 		}	
 	}

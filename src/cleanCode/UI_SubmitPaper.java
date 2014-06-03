@@ -173,7 +173,7 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 						+ "the text fields", 
 						"missing fields",JOptionPane.ERROR_MESSAGE);
 			} else {
-				myPaper = new Paper(myConference.lastPaperID++, myUserId, title, 
+				myPaper = new Paper(myConference.lastPaperID+1, myUserId, title, 
 						0, 0, 0, 0, 0, 0, 0, 0, 0, "No status");
 				myConference.addPaper(myPaper);
 			}
