@@ -153,7 +153,9 @@ public class UI_ControlPanel extends JPanel {
 //				tab = makeViewPaperPanel(theUserId, theRoleId);
 			//Submit Paper for Author
 			} else {
-				tab = makeTextPanel(TASKS[theRoleId][i]);
+				//tab = makeTextPanel(TASKS[theRoleId][i]);
+				Paper temp = myConference.getPaper(4);
+				tab = new UI_SubmitRecommendation(myConference, temp, theUserId);
 			}
 	        myTabbedPane.addTab(TASKS[theRoleId][i], tab);
 	        tab.setBackground(BACKGROUND_COLOR);
