@@ -86,6 +86,8 @@ public class Conference {
 		createPaperMap();
 		createReviewMap();
 		createRecommendationMap();
+		//System.out.println(lastPaperID);
+		//addPaper(new Paper(++lastPaperID,65,"Test",3,0,0,0,0,0,0,0,0,"No status"));
 		//lastRecommendationID++;
 		//addRecommendation(new Recommendation(lastRecommendationID, 99, 23, 1, "It is working"));
 	}
