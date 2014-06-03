@@ -1,4 +1,2 @@
 paperID,AuthorID,TheTitle,numOfReviewer,subProgID,recommID,reviewID,reviewID,reviewID,reviewerID,reviewerID,reviewerID,paperStatus
-0,65,replace,3,0,0,0,0,0,0,0,0,No status
-2,65,next,3,0,0,0,0,0,0,0,0,No status
-3,65,magic,3,0,231,0,0,0,0,0,0,No status
+4,65,night rain,3,0,0,0,0,0,0,0,0,No status
