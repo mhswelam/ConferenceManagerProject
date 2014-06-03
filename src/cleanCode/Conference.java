@@ -71,7 +71,7 @@ public class Conference {
 	/**
 	 * This to hold the last review id.
 	 */
-	public static int lastReviewID = 0;
+	public int lastReviewID = 0;
 	/**
 	 * This to hold the last recommendation id.
 	 */
@@ -234,7 +234,7 @@ public class Conference {
 		listOfReviews = new TreeMap<Integer, Review>();
 		final String errorMessage = "File not found";
         Scanner toRead = null;
-        String [] line = new String[7];
+        String [] line = new String[13];
         try {
             final File readFile = new File("reviews.csv");
             toRead = new Scanner(readFile);
@@ -247,7 +247,8 @@ public class Conference {
             line = toRead.nextLine().split(",");
             if (!("reviewId".equals(line[0]))) {
             	listOfReviews.put(Integer.parseInt(line[0]), new Review(Integer.parseInt(line[0]), Integer.parseInt(line[1]), Integer.parseInt(line[2]), 
-            			Integer.parseInt(line[3]), Integer.parseInt(line[4]), Integer.parseInt(line[5]), Integer.parseInt(line[6])));
+            			Integer.parseInt(line[3]), Integer.parseInt(line[4]), Integer.parseInt(line[5]), Integer.parseInt(line[6]),Integer.parseInt(line[7]),Integer.parseInt(line[8]),
+            					Integer.parseInt(line[9]),Integer.parseInt(line[10]),Integer.parseInt(line[11]),line[12]));
             	lastReviewID = Integer.parseInt(line[0]);
             }      
         }
@@ -289,11 +290,12 @@ public class Conference {
 	public void addReview(Review aReview) {
 		listOfReviews.put(aReview.getMyReviewId(), aReview);
 		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("reviews.csv", false)))) {
-			out.println("reviewId,paperId,reviewerId,fristComment,secondComment,thirdComment,forthComment");
+			out.println("reviewId,paperId,reviewerId,fristComment,secondComment,thirdComment,forthComment,FivthComment,SixthComment,SeventhComment,EighthComment,NinethComment,Summary");
 			for (Entry<Integer, Review> entry: listOfReviews.entrySet()) {
 				out.println(entry.getKey() + "," + entry.getValue().getMyPaperId() + "," + entry.getValue().getMyReviewerId() + "," + 
 						entry.getValue().getMyComments()[0]+ "," + entry.getValue().getMyComments()[1]+ "," + entry.getValue().getMyComments()[2] + "," +
-						entry.getValue().getMyComments()[3]);
+						entry.getValue().getMyComments()[3]+ "," + entry.getValue().getMyComments()[4]+ "," + entry.getValue().getMyComments()[5]+ "," + entry.getValue().getMyComments()[6]
+								+ "," + entry.getValue().getMyComments()[7]+ "," + entry.getValue().getMyComments()[8]+ "," + entry.getValue().getMySummary());
 			}
 			out.close();
 		}catch (IOException e) {
@@ -571,7 +573,14 @@ public class Conference {
 		return result;
 	}
 	
-	
-	
+	/**
+	 * This method to return paper 
+	 * @param aPaperId paper id 
+	 * @return the paper with that Id. 
+	 */
+	public Paper getPaper(int aPaperId) {
+		
+		Paper result = listOfPaper.get(aPaperId);
+		return result;
+	}
 }
-

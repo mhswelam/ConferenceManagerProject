@@ -12,24 +12,55 @@ import com.jgoodies.forms.factories.FormFactory;
 
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
+
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JTextField;
+import javax.swing.JButton;
 
-public class UI_SubmitReview extends JPanel {
+public class UI_SubmitReview extends JPanel implements ActionListener{
 	
 	private Conference myConferenc;
 	
 	private Paper myPaper;
-
+	
+	private int myUserId; 
+	private JTextField summary_textField;
+	private int aField;
+	private int bField;
+	private int cField;
+	private int dField;
+	private int eField;
+	private int fField;
+	private int gField;
+	private int hField;
+	private int kField;
+	
+	private JComboBox comboBox_A;
+	private JComboBox comboBox_B;
+	private JComboBox comboBox_C;
+	private JComboBox comboBox_D;
+	private JComboBox comboBox_E;
+	private JComboBox comboBox_F;
+	private JComboBox comboBox_G;
+	private JComboBox comboBox_H;
+	private JComboBox comboBox_K;
+	
+	private JButton submitReviewBtn;
 	/**
 	 * Create the panel.
 	 */
-	public UI_SubmitReview(Conference aConference, Paper aPaper) {
+	public UI_SubmitReview(Conference aConference, Paper aPaper, int userId) {
 		String [] reviewGrade = {"","[1] strong reject","[2] reject","[3] neutral", "[4] accept","[5] strong accept"};
 		myConferenc = aConference;
 		myPaper = aPaper;
+		myUserId = userId;
 		
 		setLayout(new BorderLayout(0, 0));
 		
@@ -53,81 +84,193 @@ public class UI_SubmitReview extends JPanel {
 		add(centerPanel, BorderLayout.CENTER);
 		
 		JLabel aLabel = new JLabel("Can The content be directly applied by classroom instructors or curriculum designers?    [5] Directly applicable.......[1] Not applicable");
-		JComboBox comboBox_A = new JComboBox(reviewGrade);
+		comboBox_A = new JComboBox(reviewGrade);
+		
 		
 		JLabel bLabel = new JLabel("Does the work appeal to a broad readship interested in engineering education or is it narrowly specialized?  [5] Broad......[1] Narrow");
 		
-		JComboBox comboBox_B = new JComboBox(reviewGrade);
+		comboBox_B = new JComboBox(reviewGrade);
 		
 		JLabel cLable = new JLabel("Does the work address a significant problem?   [5] Significant.....[1] Insignificant");
 		
-		JComboBox comboBox_C = new JComboBox(reviewGrade);
+		comboBox_C = new JComboBox(reviewGrade);
 		
 		JLabel dLabel = new JLabel("Does the author build upon relevant references and bodies of knowlwdge?   [5] Relevant references ....[1] Few if any relevant references");
 		
-		JComboBox comboBox_D = new JComboBox(new Object[]{});
+		comboBox_D = new JComboBox(reviewGrade);
 		
 		JLabel elabel = new JLabel("If a teaching intervention is reported, is it adequately evaluated in terhs of its impact on learning in actual use ?  [5] Excellent ....[1] Inadequate");
+		
+		comboBox_E = new JComboBox(reviewGrade);
+		
+		JLabel fLabel = new JLabel("Does the author use methods appropriate to the goals, both for instructional intervention and the evaluation of impact on learning? [5] Appropriate......[1] Inappropriate");
+		
+		comboBox_F = new JComboBox(reviewGrade);
+		
+		JLabel gLabel = new JLabel("Did the author provide sufficient detail to replicate and evaluate? [5] Sufficient......[1] Insufficient");
+		
+		comboBox_G = new JComboBox(reviewGrade);
+		
+		JLabel hLabel = new JLabel("Is the paper clearly and carfully written? [5] Excellent..........[1]Unacceptable");
+		
+		comboBox_H = new JComboBox(reviewGrade);
+		
+		JLabel kLabel = new JLabel("Does the paper adhere to accepted standards of style, usage, and composition?  [5] Excellent.....[1]Unacceptable");
+		
+		comboBox_K = new JComboBox(reviewGrade);
+		
+		JLabel summaryLabel = new JLabel("Summary Comments: ");
+		
+		summary_textField = new JTextField();
+		summary_textField.setColumns(10);
+		
+		submitReviewBtn = new JButton("Submit Review");
+		submitReviewBtn.addActionListener(this);
+		
+		
 		GroupLayout gl_centerPanel = new GroupLayout(centerPanel);
 		gl_centerPanel.setHorizontalGroup(
 			gl_centerPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_centerPanel.createSequentialGroup()
 					.addGroup(gl_centerPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_centerPanel.createSequentialGroup()
-							.addGap(140)
-							.addComponent(comboBox_A, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_centerPanel.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(aLabel, GroupLayout.PREFERRED_SIZE, 1057, Short.MAX_VALUE))
+							.addComponent(aLabel, GroupLayout.PREFERRED_SIZE, 1571, Short.MAX_VALUE))
+						.addGroup(gl_centerPanel.createSequentialGroup()
+							.addGap(127)
+							.addComponent(comboBox_A, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_centerPanel.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(bLabel, GroupLayout.PREFERRED_SIZE, 651, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_centerPanel.createSequentialGroup()
-							.addGap(141)
+							.addGap(128)
 							.addComponent(comboBox_B, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_centerPanel.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(cLable, GroupLayout.PREFERRED_SIZE, 651, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_centerPanel.createSequentialGroup()
-							.addGap(139)
+							.addGap(127)
 							.addComponent(comboBox_C, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_centerPanel.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(dLabel, GroupLayout.PREFERRED_SIZE, 679, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_centerPanel.createSequentialGroup()
-							.addGap(143)
+							.addGap(128)
 							.addComponent(comboBox_D, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_centerPanel.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(elabel, GroupLayout.PREFERRED_SIZE, 730, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(elabel, GroupLayout.PREFERRED_SIZE, 730, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_centerPanel.createSequentialGroup()
+							.addGap(131)
+							.addComponent(comboBox_E, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_centerPanel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(fLabel, GroupLayout.PREFERRED_SIZE, 828, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_centerPanel.createSequentialGroup()
+							.addGap(133)
+							.addComponent(comboBox_F, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_centerPanel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(gLabel, GroupLayout.PREFERRED_SIZE, 828, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_centerPanel.createSequentialGroup()
+							.addGap(132)
+							.addComponent(comboBox_G, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_centerPanel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(hLabel, GroupLayout.PREFERRED_SIZE, 647, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_centerPanel.createSequentialGroup()
+							.addGap(136)
+							.addComponent(comboBox_H, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_centerPanel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(kLabel, GroupLayout.PREFERRED_SIZE, 647, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_centerPanel.createSequentialGroup()
+							.addGap(137)
+							.addComponent(comboBox_K, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_centerPanel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(summaryLabel, GroupLayout.PREFERRED_SIZE, 214, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_centerPanel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(summary_textField, GroupLayout.PREFERRED_SIZE, 656, GroupLayout.PREFERRED_SIZE)
+							.addGap(58)
+							.addComponent(submitReviewBtn)))
 					.addContainerGap())
 		);
 		gl_centerPanel.setVerticalGroup(
 			gl_centerPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_centerPanel.createSequentialGroup()
 					.addComponent(aLabel)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGap(6)
 					.addComponent(comboBox_A, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(bLabel, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(bLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(comboBox_B, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(cLable, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+					.addComponent(cLable, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(comboBox_C, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(dLabel, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+					.addComponent(dLabel, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(comboBox_D, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(elabel, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(166, Short.MAX_VALUE))
+					.addComponent(elabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(comboBox_E, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(fLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(comboBox_F, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(gLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(comboBox_G, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(hLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(comboBox_H, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(kLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(comboBox_K, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(summaryLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_centerPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(summary_textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(submitReviewBtn))
+					.addContainerGap(19, Short.MAX_VALUE))
 		);
 		centerPanel.setLayout(gl_centerPanel);
 		
 		
 		
 
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		aField = comboBox_A.getSelectedIndex();
+		bField = comboBox_B.getSelectedIndex();
+		cField = comboBox_C.getSelectedIndex();
+		dField = comboBox_D.getSelectedIndex();
+		eField = comboBox_E.getSelectedIndex();
+		fField = comboBox_F.getSelectedIndex();
+		gField = comboBox_G.getSelectedIndex();
+		hField = comboBox_H.getSelectedIndex();
+		kField = comboBox_K.getSelectedIndex();
+		String summary = summary_textField.getText();
+		if (summary.length()>0 && aField > 0 && bField > 0 && cField > 0 && dField > 0 && eField > 0 && fField > 0 && gField > 0 && hField > 0 && kField > 0) {
+			int nextReview = ++myConferenc.lastReviewID;
+			myConferenc.addReview(new Review (nextReview, myPaper.getId(),myUserId,aField,bField,cField,dField,eField,fField,gField,hField,kField,summary));
+			JOptionPane.showMessageDialog(this,
+				    "Thank you, The paper review has been submited.");
+		} else {
+			JOptionPane.showMessageDialog(this,
+				    "Please make sure to fill all fields!");
+		}
+		
 	}
 }

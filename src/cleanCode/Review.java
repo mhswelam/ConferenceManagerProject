@@ -34,6 +34,8 @@ public class Review {
 	 */
 	private int [] myComments;
 	
+	private String mySummary;
+	
 	/**
 	 * This is a  to create a review.
 	 * 
@@ -46,16 +48,24 @@ public class Review {
 	 * @param aForthComment a number from 1 to 5 respond for forth Q.
 	 */
 	public Review(int aReviewId, int aPaperId, int aReviewerId, int aFristComment,
-			int aSecondComment,int aThirdComment, int aForthComment) {
+			int aSecondComment,int aThirdComment, int aForthComment, int aFivthComment, int aSixthComment, int aSeventhComment, int aEighthComment, int aNinethComment, String aSummary) {
 		myReviewId = aReviewId;
 		myPaperId = aPaperId;
 		myReviewerId = aReviewerId;
-	    myComments = new int [4];
+	    myComments = new int [9];
 	    
 		myComments[0] = aFristComment;
 		myComments[1] = aSecondComment;
 		myComments[2] = aThirdComment;
 		myComments[3] = aForthComment;
+		myComments[4] = aFivthComment;
+		myComments[5] = aSixthComment;
+		myComments[6] = aSeventhComment;
+		myComments[7] = aEighthComment;
+		myComments[8] = aNinethComment;
+		mySummary = aSummary;
+		
+		
 	}
 	
 	/**
@@ -91,4 +101,11 @@ public class Review {
 		return myReviewId;
 	}
 
+	/**
+	 * This to return the summary 
+	 * @return The summary.
+	 */
+	public String getMySummary() {
+		return mySummary;
+	}
 }
