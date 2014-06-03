@@ -75,7 +75,7 @@ public class Conference {
 	/**
 	 * This to hold the last recommendation id.
 	 */
-	public static int lastRecommendationID = 0;
+	public int lastRecommendationID = 0;
 
 	/**
 	 * This is a constructor to create conference

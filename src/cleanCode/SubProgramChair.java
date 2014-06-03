@@ -56,12 +56,12 @@ public class SubProgramChair extends User{
 	 * @param theGrade the Sub Program chairs grade of the paper.
 	 * @param theRational the Sub Program chairs rational behind the grade of the paper.
 	 * @return the recommendation.
-	 */
+	 *//*
 	private Recommendation recommendation(int idPaper, int theGrade, String theRational) {
 		int recommID = Conference.lastRecommendationID++;
 		Recommendation rec = new Recommendation(recommID,idPaper, super.myUserId, theGrade, theRational);
 		return rec;
-	}
+	}*/
 	
 	/**
 	 * The getter method for the amount of assigned papers to this Sub Program Chair.
