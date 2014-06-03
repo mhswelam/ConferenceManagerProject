@@ -122,7 +122,7 @@ public class UI_ControlPanel extends JPanel {
 //				tab = makeViewPaperPanel(theUserId, theRoleId);
 			//Submit Paper for Author
 			} else {
-				Paper temp = myConference.getPaper(3);
+				Paper temp = myConference.getPaper(4);
 				tab = new UI_SubmitReview(myConference, temp, theUserId);
 				//tab = makeTextPanel(TASKS[theRoleId][i]);
 			}
