@@ -169,7 +169,7 @@ public class Conference {
 		listOfAuthors = new HashMap<Integer, User>();
 		final String errorMessage = "File not found";
         Scanner toRead = null;
-        String [] line = new String[5];
+        String [] line = new String[6];
         try {
             final File readFile = new File("authors.csv");
             toRead = new Scanner(readFile);
@@ -184,7 +184,7 @@ public class Conference {
             if (!("UserID".equals(line[0]))) {
             	if (line[4].equals("3")) {
             		listOfAuthors.put(Integer.parseInt(line[0]), 
-            				new Author(Integer.parseInt(line[0]), line[1], line[2], line[3]));
+            				new Author(Integer.parseInt(line[0]), line[1], line[2], line[3],Integer.parseInt(line[5])));
             	} 
             }      
         }
@@ -526,7 +526,7 @@ public class Conference {
 	 */
 	public void addAuthor(int aUserId) {
 		User temp = getReviewer(aUserId);
-		listOfAuthors.put(aUserId, new Author(aUserId,temp.myFristName, temp.myLastName, temp.myEmail ));
+		listOfAuthors.put(aUserId, new Author(aUserId,temp.myFristName, temp.myLastName, temp.myEmail, temp.paperAssinged ));
 		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("authors.csv", false)))) {
 			out.println("UserID,FirstName,LastName,email,RoleID");
 			for (Entry<Integer, User> entry: listOfAuthors.entrySet()) {
