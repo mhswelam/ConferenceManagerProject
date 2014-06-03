@@ -25,13 +25,6 @@ public class UI_ControlPanel extends JPanel {
 		{"View Papers", "View Reviews", "Submit Paper", "Edit Paper", "Unsubmit Paper"},		//3 Author
 		{"View Papers", "Review Papers"}};														//4 Reviewer
 	
-//	private final static String[][] TASKS = { {},												//0 is empty
-//		{"View Papers", "View Reviews", "Submit Paper", "Edit Paper", "Unsubmit Paper"}, 		//Author
-//		{"View Papers", "Review Papers"}, 										   				//Reviewer
-//		{"View Papers", "Assign Reviewers", "Recommend Paper", /** "View Reviewers" */},		//Subprogram Chair
-//		{ "View Papers", "Assign Subprogram Chair", "Make Acceptance Decision"					//Program Chair
-//			/**, "View Subprogram Chairs", "View Reviewers", "View Authors"*/}};
-	
 	/** Background color is white. */
 	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
 	
