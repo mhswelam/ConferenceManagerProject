@@ -5,11 +5,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.event.ListSelectionEvent;
@@ -33,6 +33,7 @@ public class UI_UnsubmitPaper extends JPanel implements ActionListener,
 	private int myUserId;
 	/** Button that submits  the paper. */
 	private JButton myUnsubmitButton;
+	private JButton myViewButton;
 	/** Panel that contains paper information. */
 	private JPanel myInfoPanel;
 	/** Label that contains name of the author. */
@@ -47,6 +48,7 @@ public class UI_UnsubmitPaper extends JPanel implements ActionListener,
 	private JLabel myKeywordsLabel;
 	/** Label that contains abstract of the paper. */
 	private JLabel myAbstractLabel;
+	UI_PaperList paperList;
 	
 	/**
 	 * Creates a panel containing paper information and a 
@@ -64,6 +66,8 @@ public class UI_UnsubmitPaper extends JPanel implements ActionListener,
 		myUnsubmitButton = new JButton("Unsubmit");
 		myInfoPanel = new JPanel();
 		myUnsubmitButton.addActionListener(this);
+		myViewButton = new JButton("View File");
+		myViewButton.addActionListener(this);
 		myNameLabel = new JLabel();
 		myEmailLabel = new JLabel();
 		myConferenceLabel = new JLabel("Conference name: " 
@@ -91,7 +95,7 @@ public class UI_UnsubmitPaper extends JPanel implements ActionListener,
 		paperInfoPanel.add(makeUnsubmitPanel(), BorderLayout.CENTER);
 		paperInfoPanel.add(makeUnsubmitButton(), BorderLayout.SOUTH);
 		
-		UI_PaperList paperList = new UI_PaperList(myUserId, myConference);
+		paperList = new UI_PaperList(myUserId, myConference);
 		paperList.setUp();
 		
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, 
@@ -128,14 +132,26 @@ public class UI_UnsubmitPaper extends JPanel implements ActionListener,
 	 * This method changes text displayed on the labels.
 	 */
 	private void setTextForLabels() {
-		myNameLabel.setText("Your Name: " + "This will be authors name");
-		myEmailLabel.setText("Your email: " + "This wil be authors email");
-		myTitleLabel.setText("Paper title (100 characters max): " + 
-				"This will be paper title");
-		myKeywordsLabel.setText("Keywords (for searching): " 
-				+ "These will be paper keywords");
-		myAbstractLabel.setText("Abstract: (100 words max): " 
-				+ "This will be paper abstract");
+		System.out.println(myConference.myPaperToDelete);
+		if (myConference.myPaperToDelete == 0) {
+			myNameLabel.setText("Your Name: " + "This will be authors name");
+			myEmailLabel.setText("Your email: " + "This wil be authors email");
+			myTitleLabel.setText("Paper title (100 characters max): " + 
+					"This will be paper title");
+			myKeywordsLabel.setText("Keywords (for searching): " 
+					+ "These will be paper keywords");
+			myAbstractLabel.setText("Abstract: (100 words max): " 
+					+ "This will be paper abstract");
+		} else {
+			System.out.println("Inside the else");
+			System.out.println(User.myRoleId);
+			System.out.println(User.myUserId);
+			ArrayList<Paper> list = myConference.getPaperList(User.myRoleId ,User.myUserId);
+			System.out.println(list);
+			for(Paper temp : list) {
+				System.out.println(temp);
+			}
+		}
 	}
 	
 	/**
@@ -146,24 +162,36 @@ public class UI_UnsubmitPaper extends JPanel implements ActionListener,
 		unsubmitPanel.setPreferredSize(new Dimension(800, 100));
 		unsubmitPanel.setBackground(BACKGROUND_COLOR);
 		
-		unsubmitPanel.add(myUnsubmitButton, BorderLayout.SOUTH);
-		
+		unsubmitPanel.add(myUnsubmitButton, BorderLayout.WEST);
+		unsubmitPanel.add(myViewButton, BorderLayout.EAST);
 		return unsubmitPanel;
 	}
 
 	/**
-	 * Uploads a paper the user chose to submit.
+	 * Unsubmits a paper.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent theEvent) {
 		//Author is trying to choose a file to upload
 		if (theEvent.getSource() == myUnsubmitButton) {
-			JFileChooser fileChooser = new JFileChooser(new File("C:\\Users"
-					+ "\\Zack\\git\\ConferenceManager\\src"));
-			int returnValue = fileChooser.showDialog(this, "remove");
-			if (returnValue == JFileChooser.OPEN_DIALOG) {
-				File paper = fileChooser.getSelectedFile();
-				paper.delete();
+			if (myConference.myPaperToDelete == 0) {
+				JOptionPane.showMessageDialog(this,"You must select a paper to"
+						+ " delete", "missing fields",
+						JOptionPane.ERROR_MESSAGE);
+			} else {
+				myConference.removePaper(myConference.myPaperToDelete);
+				JOptionPane.showMessageDialog(this,"You have succsefully "
+						+ "deleted that paper", "missing fields",
+						JOptionPane.INFORMATION_MESSAGE);
+				paperList.revalidate();
+				paperList.repaint();
+			}
+		} else if (theEvent.getSource() == myViewButton) {
+			if (myConference.myPaperToDelete == 0) {
+				JOptionPane.showMessageDialog(this,"You must select a paper to"
+						+ " view", "missing fields",JOptionPane.ERROR_MESSAGE);
+			} else {
+				//System.out.println(myConference.myPaperToDelete);
 			}
 		}
 	}

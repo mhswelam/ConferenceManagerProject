@@ -71,8 +71,6 @@ public class UI_PaperList extends JPanel {
 		   
 		   list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		   list.setLayoutOrientation(JList.VERTICAL);
-		//   list.setSelectedIndex(0);
-		   
 		   list.addListSelectionListener(new ListSelectionListener() {
 
 	            @Override
@@ -85,23 +83,14 @@ public class UI_PaperList extends JPanel {
 	        		        Paper tempPaper = (Paper) pairs.getValue();
 	        		        if (tempPaper.getTitle().equals(list.
 	        		        		getSelectedValue().toString())) {
-	        		        	myConference.myPaperToDelete = tempPaper.getId();
-	        		        	System.out.println(tempPaper.getId());
+	        		        	myConference.myPaperToDelete = 
+	        		        			tempPaper.getId();
 	        		        	break;
-	        		        	//myConference.removePaper(tempPaper.getId());
 	        		        }
-	        		      //  it.remove(); 
 	        		    }
 	                }
 	            }
 	        });
-		   
-		   //not sure if this is needed
-//			   JScrollPane paperPanel = new JScrollPane(list);
-//			   paperPanel.setPreferredSize(new Dimension(100, 150));
-//			   paperPanel.add(list);
-//			   return paperPanel;
-		   
 		   return list;
 	   }
 
