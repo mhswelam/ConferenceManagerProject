@@ -16,10 +16,15 @@ import javax.swing.JTable;
  */
 public class UI_PaperTable extends JPanel {
 	/** Column headers of the table. */
-	private final static String[][] COLUMN_NAMES = {{"Author", "Title", "Acceptence Status"},	//Author 			0
-		{"Author", "Title", "Review"}, 															//Reviewer			1
-		{"Author", "Title", "Review 1", "Review 2", "Review 3"},								//Subprogram Chair	2
-		{"Author", "Title", "Review 1", "Review 2", "Review 3", "Subprogram Chair"}};			//Program Chair		3
+	private final static String[][] COLUMN_NAMES = {{},													//Empty 			0
+		{"Author", "Title", "Review 1", "Review 2", "Review 3", "Subprogram Chair", "Paper Status"},	//Program Chair 	1
+		{"Author", "Title", "Review 1", "Review 2", "Review 3"}, 										//SubProgram Chair	2
+		{"Author", "Title", "Acceptence Status"},														//Author			3
+		{"Author", "Title", "Review"}};																	//Reviewer			4
+//	private final static String[][] COLUMN_NAMES = {{"Author", "Title", "Acceptence Status"},			//Author 			0
+//		{"Author", "Title", "Review"}, 																	//Reviewer			1
+//		{"Author", "Title", "Review 1", "Review 2", "Review 3"},										//Subprogram Chair	2
+//		{"Author", "Title", "Review 1", "Review 2", "Review 3", "Subprogram Chair", "Paper Status"}};	//Program Chair		3
 	
 	/** Background color is white. */
 	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
@@ -51,6 +56,7 @@ public class UI_PaperTable extends JPanel {
 	 * Creates the panel that contains paper information.
 	 */
 	public void setUp() {
+
 		JTable table = new JTable(getData(), COLUMN_NAMES[myRoleId]);
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBackground(BACKGROUND_COLOR);
@@ -67,7 +73,7 @@ public class UI_PaperTable extends JPanel {
 	 */
 	private String[][] getData() {
 		ArrayList<Paper> paperList = myConference.getPaperList(myRoleId, myUserId);
-		String[][] data = new String[paperList.size()][COLUMN_NAMES.length];
+		String[][] data = new String[paperList.size()][COLUMN_NAMES[myRoleId].length];
 		
 //		int i = 0;
 //		for (Paper paper : paperList) {
