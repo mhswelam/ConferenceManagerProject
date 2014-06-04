@@ -156,7 +156,7 @@ public class UI_ControlPanel extends JPanel {
 		myTabbedPane.addTab(TASKS[theRoleId][1], assignTab);
 		assignTab.setBackground(BACKGROUND_COLOR);
 		//"Recommend Paper"
-        Paper temp = myConference.getPaper(5);
+        Paper temp = myConference.getPaper(6);
         JComponent recoomTab = new UI_SubmitRecommendation(myConference, temp, theUserId);
         myTabbedPane.addTab(TASKS[theRoleId][2], recoomTab);
         recoomTab.setBackground(BACKGROUND_COLOR);
