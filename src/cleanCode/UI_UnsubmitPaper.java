@@ -31,6 +31,7 @@ public class UI_UnsubmitPaper extends JPanel implements ActionListener,
 	private Conference myConference;
 	/** Unique identification number of the user. */
 	private int myUserId;
+	private int myRoleId;
 	/** Button that submits  the paper. */
 	private JButton myUnsubmitButton;
 	private JButton myViewButton;
@@ -57,7 +58,7 @@ public class UI_UnsubmitPaper extends JPanel implements ActionListener,
 	 * @param theUserId unique identification number of the user.
 	 * @param theConference conference.
 	 */
-	public UI_UnsubmitPaper(final int theUserId, 
+	public UI_UnsubmitPaper(final int theUserId, final int theRoleId,
 				final Conference theConference) {
 		super(new BorderLayout());
 		setBackground(BACKGROUND_COLOR);

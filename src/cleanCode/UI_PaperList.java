@@ -58,7 +58,7 @@ public class UI_PaperList extends JPanel {
 	 * 
 	 * @return a list of papers.
 	 */
-   private JList makePaperList() {
+   public JList makePaperList() {
 		 //just for Program Chair
 		   Collection<Paper> paperSet = myConference.listOfPaper.values();
 		   String[] paperNames = new String[paperSet.size()];

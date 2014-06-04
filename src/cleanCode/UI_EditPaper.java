@@ -30,8 +30,7 @@ public class UI_EditPaper extends JPanel implements ActionListener {
 	private Conference myConference;
 	/** Unique identification number of the user. */
 	private int myUserId;
-	
-	
+	private int myRoleId;
 	
 	/** Missing: Which of the conference categories best characterizes this 
 	 * paper (used to match reviewers): */
@@ -56,10 +55,12 @@ public class UI_EditPaper extends JPanel implements ActionListener {
 	 * @param theUserId unique identification number of the user.
 	 * @param theConference conference.
 	 */
-	public UI_EditPaper(final int theUserId, final Conference theConference) {
+	public UI_EditPaper(final int theUserId, final int theRoleId, 
+			final Conference theConference) {
 		super(new BorderLayout());
 		setBackground(BACKGROUND_COLOR);
 		myUserId = theUserId;
+		myRoleId = theRoleId;
 		myConference = theConference;
 		myTitleField = new JTextField(30);
 		myKeywordsField = new JTextField(30);
@@ -156,7 +157,6 @@ public class UI_EditPaper extends JPanel implements ActionListener {
 					+ "\\Zack\\git\\ConferenceManager\\src"));
 			int returnValue = fileChooser.showDialog(this, "Upload");
 			//This will delete old paper. Submit new paper.
-			//Change any edits that are needed.
 			if (returnValue == JFileChooser.OPEN_DIALOG) {
 				File paper = fileChooser.getSelectedFile();
 			}
@@ -170,14 +170,16 @@ public class UI_EditPaper extends JPanel implements ActionListener {
 						+ "the text fields", 
 						"missing fields",JOptionPane.ERROR_MESSAGE);
 			}
-	
+			
 			if (myConference.myPaperToDelete != 0) {
-				System.out.println("it will be deleted");
 				myConference.removePaper(myConference.myPaperToDelete);
 			}
 			myPaper = new Paper(myConference.myPaperToDelete, myUserId, title, 
 					0, 0, 0, 0, 0, 0, 0, 0, 0, "No status");
 			myConference.addPaper(myPaper);
+			UI_Page page = new UI_Page(myConference);
+			page.initializeProgram(myUserId, myRoleId);
+			
 		}	
 	}
 }
