@@ -18,11 +18,12 @@ import javax.swing.table.AbstractTableModel;
 public class UI_PaperTable extends JPanel {
 	boolean DEBUG = false;
 	/** Column headers of the table. */
-	private final static String[][] COLUMN_NAMES = {{},																//Empty 			0
-		{"Author", "Title", "Review 1", "Review 2", "Review 3", "Subprogram Chair", "Acceptence Status", "Select"},	//Program Chair 	1
-		{"Author", "Title", "Review 1", "Review 2", "Review 3", "Select"}, 											//SubProgram Chair	2
-		{"Author", "Title", "Acceptence Status", "Select"},															//Author			3
-		{"Author", "Title", "Review", "Select"}};																	//Reviewer			4
+	private final static String[][] COLUMN_NAMES = {{},							//Empty 			0
+		{"Author", "Title", "Review 1", "Review 2", "Review 3", 
+		"Subprogram Chair : Review", "Acceptence Status", "Select"},			//Program Chair 	1
+		{"Author", "Title", "Review 1", "Review 2", "Review 3", "Select"}, 		//SubProgram Chair	2
+		{"Author", "Title", "Acceptence Status", "Select"},						//Author			3
+		{"Author", "Title", "Review", "Select"}};								//Reviewer			4
 	
 	/** Background color is white. */
 	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
@@ -53,7 +54,8 @@ public class UI_PaperTable extends JPanel {
 		myRoleId = theRoleId;
 		myConference = theConference;
 		myPaperList = myConference.getPaperList(myRoleId, myUserId);
-		myTableData = new Object[myPaperList.size()][COLUMN_NAMES[myRoleId].length];
+		myTableData = 
+				new Object[myPaperList.size()][COLUMN_NAMES[myRoleId].length];
 	}
 
 	/**
@@ -65,7 +67,7 @@ public class UI_PaperTable extends JPanel {
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBackground(BACKGROUND_COLOR);
 		table.setFillsViewportHeight(true);
-		table.setPreferredScrollableViewportSize(new Dimension(750, 500));
+		table.setPreferredScrollableViewportSize(new Dimension(880, 500));
 		table.setBackground(BACKGROUND_COLOR);
 		add(scrollPane);
 	}
@@ -137,8 +139,22 @@ public class UI_PaperTable extends JPanel {
 				} else {
 					data = "" + myConference.getReview(reviewsId[i]).getReviewSummary();
 				}
+				//If the Subprogram Chair is viewing
+				//Reviewer will have their
+				//name next to their score
+				String name = "";
+				if (myRoleId == 2) {
+					int id = review.getMyReviewerId();
+					if (id == 0) {
+						name = "Not Assigned";
+					} else {
+						String firstName = myConference.getReviewer(id).myFristName;
+						String lastName = myConference.getReviewer(id).myLastName;
+						name = firstName + " " + lastName + " : ";
+					}
+				}
 				//Reviews start at index 2 of the table
-				myTableData[k][2 + i] = data;
+				myTableData[k][2 + i] = name + data;
 			}
 			k++;
 		}
@@ -168,7 +184,7 @@ public class UI_PaperTable extends JPanel {
 			i++;
 		}
 	}
-	
+	//Add name of Subprogram Chair to the Review
 	/**
 	 * Shows the Subprogram Chair score for the paper.
 	 */
@@ -182,7 +198,21 @@ public class UI_PaperTable extends JPanel {
 			} else {
 				score = "" + rec;
 			}
-			myTableData[i][5] = score;
+			//If the Program Chair is viewing
+			//Subprogram Chair will have their
+			//name next to their score
+			String name = "";
+			if (myRoleId == 1) {
+				int id = paper.getSubProgramChair();
+				if (id == 0) {
+					name = "Not Assigned";
+				} else {
+					String firstName = myConference.getReviewer(id).myFristName;
+					String lastName = myConference.getReviewer(id).myLastName;
+					name = firstName + " " + lastName  + " : ";
+				}
+			}
+			myTableData[i][5] = name + score;
 			i++;
 		}
 	}
