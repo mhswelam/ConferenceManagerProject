@@ -3,6 +3,7 @@ package cleanCode;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -42,6 +43,12 @@ public class UI_ViewReviews extends JPanel implements ActionListener, ListSelect
 	
 	private UI_PaperList paperList;
 	
+	private JPanel centerpanel;
+	
+	private JLabel listName;
+	
+	private JLabel panelInfoName;
+	
 	/**
 	 * Creates a panel containing paper list and a panel allowing 
 	 * the Author to view reviews of their manuscript.
@@ -63,17 +70,17 @@ public class UI_ViewReviews extends JPanel implements ActionListener, ListSelect
 	 * Creates the panels and sets up the UI.
 	 */
 	public void setUp() {
-		JLabel listName = new JLabel("Paper selected :");
-		JLabel panelInfoName = new JLabel(myPaperTitle);
+		listName = new JLabel("Paper selected :");
+		panelInfoName = new JLabel(myPaperTitle);
 		JButton select_Btn = new JButton("Select Paper");
 		select_Btn.addActionListener(this);
 		//Filler panels to make a decent layout
-		JPanel topLabel = new JPanel(new BorderLayout(500, 10));
+		JPanel topLabel = new JPanel(new FlowLayout());
 		topLabel.setPreferredSize(new Dimension(800, 50));
 		topLabel.setBackground(BACKGROUND_COLOR);
-		topLabel.add(listName, BorderLayout.WEST);
-		topLabel.add(panelInfoName,BorderLayout.CENTER);
-		topLabel.add(select_Btn, BorderLayout.EAST);
+		topLabel.add(listName);
+		topLabel.add(panelInfoName);
+		topLabel.add(select_Btn);
 //		JPanel paperInfoPanel = new JPanel(new BorderLayout());
 //		paperInfoPanel.add(makeUnsubmitPanel(), BorderLayout.CENTER);
 //		paperInfoPanel.add(makeUnsubmitButton(), BorderLayout.SOUTH);
@@ -120,8 +127,9 @@ public class UI_ViewReviews extends JPanel implements ActionListener, ListSelect
                 JOptionPane.PLAIN_MESSAGE,
                 null, paperT, ""));
 		myPaperTitle = myPaper.getTitle();
-		JPanel centerpanel = new UI_ReviewInfo(myPaper, myConference);
+		centerpanel = new UI_ReviewInfo(myPaper, myConference);
 		add(centerpanel, BorderLayout.CENTER);
+		panelInfoName.setText(myPaperTitle);
 		
 	}
 }

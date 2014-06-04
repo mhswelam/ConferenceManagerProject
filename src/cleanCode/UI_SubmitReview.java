@@ -193,7 +193,7 @@ public class UI_SubmitReview extends JPanel implements ActionListener{
 						.addGroup(gl_centerPanel.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(summary_textField, GroupLayout.PREFERRED_SIZE, 656, GroupLayout.PREFERRED_SIZE)
-							.addGap(58)
+							.addGap(90)
 							.addComponent(submitReviewBtn)))
 					.addContainerGap())
 		);
@@ -241,7 +241,7 @@ public class UI_SubmitReview extends JPanel implements ActionListener{
 					.addGroup(gl_centerPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(summary_textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(submitReviewBtn))
-					.addContainerGap(19, Short.MAX_VALUE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		centerPanel.setLayout(gl_centerPanel);
 		

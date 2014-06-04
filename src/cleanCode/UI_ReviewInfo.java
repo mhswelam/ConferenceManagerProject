@@ -15,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextPane;
+import java.awt.SystemColor;
 
 public class UI_ReviewInfo extends JPanel implements ActionListener{
 	
@@ -77,19 +78,20 @@ public class UI_ReviewInfo extends JPanel implements ActionListener{
 		top_Panel.add(review_Three_Btn);
 		
 		JPanel center_Panel = new JPanel();
+		center_Panel.setBackground(SystemColor.window);
 		add(center_Panel, BorderLayout.CENTER);
 		
 		JLabel aLabel = new JLabel("Can The content be directly applied by classroom instructors or curriculum designers?");
 		
-		a_Answer = new JLabel("");
+		a_Answer = new JLabel("0");
 		
 		JLabel bLabel = new JLabel("Does the work appeal to a broad readship interested in engineering education or is it narrowly specialized?");
 		
-		b_Answer = new JLabel("");
+		b_Answer = new JLabel("0");
 		
 		JLabel cLabel = new JLabel("Does the work address a significant problem?");
 		
-		c_Answer = new JLabel("");
+		c_Answer = new JLabel("0");
 		
 		JLabel dLabel = new JLabel("Does the author build upon relevant references and bodies of knowlwdge?");
 		
@@ -106,17 +108,18 @@ public class UI_ReviewInfo extends JPanel implements ActionListener{
 		ratinal_textPane = new JTextPane();
 		ratinal_textPane.setEditable(false);
 		
-		d_Answer = new JLabel("");
+		d_Answer = new JLabel("0");
 		
-		e_Answer = new JLabel("");
+		e_Answer = new JLabel("0");
 		
-		f_Answer = new JLabel("");
+		f_Answer = new JLabel("0");
 		
-		g_Answer = new JLabel("");
+		g_Answer = new JLabel("0");
 		
-		h_Answer = new JLabel("");
+		h_Answer = new JLabel("0");
 		
-		JLabel k_Answer = new JLabel("");
+		k_Answer = new JLabel("0");
+		
 		GroupLayout gl_center_Panel = new GroupLayout(center_Panel);
 		gl_center_Panel.setHorizontalGroup(
 			gl_center_Panel.createParallelGroup(Alignment.LEADING)
@@ -202,7 +205,7 @@ public class UI_ReviewInfo extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(review_One_Btn)) {
 			int temp = myPaper.getReviews()[0];
-			Review revTemp = myConference.getReview(temp);
+			Review revTemp = myConference.listOfReviews.get(temp);
 			int [] reviewGrad = revTemp.getMyComments();
 			aField = reviewGrad[0];
 			bField = reviewGrad[1];
@@ -227,7 +230,7 @@ public class UI_ReviewInfo extends JPanel implements ActionListener{
 			
 		} else if (e.getSource().equals(review_Two_Btn)) {
 			int temp = myPaper.getReviews()[1];
-			Review revTemp = myConference.getReview(temp);
+			Review revTemp = myConference.listOfReviews.get(temp);
 			int [] reviewGrad = revTemp.getMyComments();
 			aField = reviewGrad[0];
 			bField = reviewGrad[1];
@@ -250,7 +253,7 @@ public class UI_ReviewInfo extends JPanel implements ActionListener{
 			ratinal_textPane.setText(revTemp.getMySummary());
 		}else if (e.getSource().equals(review_Three_Btn)) {
 			int temp = myPaper.getReviews()[2];
-			Review revTemp = myConference.getReview(temp);
+			Review revTemp = myConference.listOfReviews.get(temp);
 			int [] reviewGrad = revTemp.getMyComments();
 			aField = reviewGrad[0];
 			bField = reviewGrad[1];
