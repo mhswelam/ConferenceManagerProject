@@ -127,9 +127,10 @@ public class UI_ViewReviews extends JPanel implements ActionListener, ListSelect
                 JOptionPane.PLAIN_MESSAGE,
                 null, paperT, ""));
 		myPaperTitle = myPaper.getTitle();
+		panelInfoName.setText(myPaperTitle);
+		
 		centerpanel = new UI_ReviewInfo(myPaper, myConference);
 		add(centerpanel, BorderLayout.CENTER);
-		panelInfoName.setText(myPaperTitle);
 		
 	}
 }

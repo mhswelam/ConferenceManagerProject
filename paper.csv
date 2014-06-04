@@ -4,5 +4,5 @@ paperID,AuthorID,TheTitle,numOfReviewer,subProgID,recommID,reviewID,reviewID,rev
 3,65,moving,3,0,0,0,0,0,0,0,0,No status
 5,65,tests,3,0,0,0,0,0,0,0,0,No status
 6,65,working,3,0,0,0,0,0,0,0,0,No status
-7,66,moved,3,0,0,130,133,151,201,202,203,No status
-9,66,gotta work,3,52,0,79,0,0,205,0,0,No status
+7,66,moved,3,0,0,201,202,203,130,133,151,No status
+9,66,gotta work,3,52,0,205,0,0,79,0,0,No status
