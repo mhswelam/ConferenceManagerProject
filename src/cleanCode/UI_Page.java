@@ -45,7 +45,7 @@ public class UI_Page {
 		myFrame = new JFrame("Conference");
 		contentPane = new JPanel(new BorderLayout());
 		myLogInPanel = new UI_Login(myConference);
-		myControlPanel = new UI_ControlPanel(myConference);
+		myControlPanel = new UI_ControlPanel(myConference, myFrame);
 	}
 
 	/**
@@ -92,6 +92,7 @@ public class UI_Page {
 		contentPane.add(myLogInPanel, BorderLayout.CENTER);
 		myFrame.add(contentPane);
 	}
+	
 	public void refresh(final int theUser, final int theRole) {
 		myFrame.setResizable(false);
 		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

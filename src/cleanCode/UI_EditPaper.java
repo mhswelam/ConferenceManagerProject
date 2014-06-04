@@ -9,6 +9,7 @@ import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -47,6 +48,7 @@ public class UI_EditPaper extends JPanel implements ActionListener {
 	private JButton mySubmitButton;
 	/** Button that opens up file chooser for submitting paper. */
 	private JButton myChooseFileButton;
+	private JFrame myFrame;
 	
 	/**
 	 * Creates a panel containing the submission sheet and a 
@@ -56,11 +58,12 @@ public class UI_EditPaper extends JPanel implements ActionListener {
 	 * @param theConference conference.
 	 */
 	public UI_EditPaper(final int theUserId, final int theRoleId, 
-			final Conference theConference) {
+			final Conference theConference, JFrame theFrame) {
 		super(new BorderLayout());
 		setBackground(BACKGROUND_COLOR);
 		myUserId = theUserId;
 		myRoleId = theRoleId;
+		myFrame = theFrame;
 		myConference = theConference;
 		myTitleField = new JTextField(30);
 		myKeywordsField = new JTextField(30);
@@ -177,6 +180,7 @@ public class UI_EditPaper extends JPanel implements ActionListener {
 			myPaper = new Paper(myConference.myPaperToDelete, myUserId, title, 
 					0, 0, 0, 0, 0, 0, 0, 0, 0, "No status");
 			myConference.addPaper(myPaper);
+			myFrame.setVisible(false);
 			UI_Page page = new UI_Page(myConference);
 			page.refresh(myUserId, myRoleId);
 			

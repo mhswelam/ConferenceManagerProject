@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -32,15 +33,17 @@ public class UI_ControlPanel extends JPanel {
 	private JTabbedPane myTabbedPane;
 	/** Conference .*/
 	private Conference myConference;
+	private JFrame myFrame;
 	
 	/**
 	 * Creates panel that includes task tabs.
 	 * 
 	 * @param theConference conference.
 	 */
-	public UI_ControlPanel(final Conference theConference) {
+	public UI_ControlPanel(final Conference theConference, JFrame frame) {
 		super(new GridLayout(1, 1));
 		setBackground(BACKGROUND_COLOR);
+		myFrame = frame;
 		myConference = theConference;
 		myTabbedPane = new JTabbedPane();
 	}
@@ -53,7 +56,7 @@ public class UI_ControlPanel extends JPanel {
 	 */
 	public void setUp(final int theUserId, final int theRoleId) {
 		if (theRoleId == 3) {
-			setUpAuthor(theUserId, theRoleId);
+			setUpAuthor(theUserId, theRoleId, myFrame);
 		} else if (theRoleId == 4) {
 			setUpReviewer(theUserId, theRoleId);
 		} else if (theRoleId == 2) {
@@ -71,7 +74,7 @@ public class UI_ControlPanel extends JPanel {
 	 * @param theUserId unique identification number of the user.
 	 * @param theRoleId role of the user.
 	 */
-	private void setUpAuthor(final int theUserId, final int theRoleId) {
+	private void setUpAuthor(final int theUserId, final int theRoleId, JFrame theFrame) {
 		//View Papers
 		UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId, myConference);
 		table.setUp();
@@ -90,7 +93,7 @@ public class UI_ControlPanel extends JPanel {
 		myTabbedPane.addTab(TASKS[theRoleId][2], submitPaper);
 		
 		//"Edit Paper"
-		UI_EditPaper editPaper = new UI_EditPaper(theUserId, theRoleId, myConference);
+		UI_EditPaper editPaper = new UI_EditPaper(theUserId, theRoleId, myConference, myFrame);
 		editPaper.setUp();
 		myTabbedPane.addTab(TASKS[theRoleId][3], editPaper);
 		

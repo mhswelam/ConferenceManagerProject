@@ -177,6 +177,7 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 				myPaper = new Paper(myConference.lastPaperID, myUserId, title, 
 						0, 0, 0, 0, 0, 0, 0, 0, 0, "No status");
 				myConference.addPaper(myPaper);
+				
 			}
 //			Map<Integer, Paper> theMap = myConference.listOfPaper;
 //			Iterator it = theMap.entrySet().iterator();
