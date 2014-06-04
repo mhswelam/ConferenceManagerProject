@@ -173,17 +173,18 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 						+ "the text fields", 
 						"missing fields",JOptionPane.ERROR_MESSAGE);
 			} else {
-				myPaper = new Paper(myConference.lastPaperID+1, myUserId, title, 
+				myConference.lastPaperID = myConference.lastPaperID + 1;
+				myPaper = new Paper(myConference.lastPaperID, myUserId, title, 
 						0, 0, 0, 0, 0, 0, 0, 0, 0, "No status");
 				myConference.addPaper(myPaper);
 			}
-			Map<Integer, Paper> theMap = myConference.listOfPaper;
-			Iterator it = theMap.entrySet().iterator();
-		    while (it.hasNext()) {
-		        Map.Entry pairs = (Map.Entry)it.next();
-		        System.out.println(pairs.getKey() + " = " + pairs.getValue());
-		        it.remove(); // avoids a ConcurrentModificationException
-		    }
+//			Map<Integer, Paper> theMap = myConference.listOfPaper;
+//			Iterator it = theMap.entrySet().iterator();
+//		    while (it.hasNext()) {
+//		        Map.Entry pairs = (Map.Entry)it.next();
+//		        System.out.println(pairs.getKey() + " = " + pairs.getValue());
+//		        it.remove(); // avoids a ConcurrentModificationException
+//		    }
 		}	
 	}
 }
