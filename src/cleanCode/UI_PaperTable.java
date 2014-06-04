@@ -69,8 +69,7 @@ public class UI_PaperTable extends JPanel {
 		table.setBackground(BACKGROUND_COLOR);
 		add(scrollPane);
 	}
-	//Add another column with radio button that will select the paper.
-	//Then the next tab will contain the information for the paper.
+	
 	/**
 	 * Retrieves all paper data for the table. 
 	 * 
@@ -81,22 +80,24 @@ public class UI_PaperTable extends JPanel {
 		fillNameTitle();
 		//Program Chair
 		if (myRoleId == 1) {
-			addSelectButton(7);
+//			addReviewScores();
+//			addSelectButton(7);
 		//SPC
 		} else if (myRoleId == 2) {
-			addSelectButton(5);
+//			addReviewScores();
+//			addSelectButton(5);
 		//Author
 		} else if (myRoleId == 3) {
-			addSelectButton(3);
+//			addSelectButton(3);
 		//Reviewer
 		} else if (myRoleId == 4) {
-			addSelectButton(3);
+//			addSelectButton(3);
 		}
 	}
 	
 	/**
 	 * Fills the Author and title columns of the table.
-	 * 
+	 * All users will see these columns.
 	 */
 	private void fillNameTitle() {
 		int i = 0;
@@ -115,6 +116,37 @@ public class UI_PaperTable extends JPanel {
 		}
 	}
 	
+	/**
+	 * Adds the reviewer scores for each paper.
+	 * Program Chair, Subprogram Chair will see reviews.
+	 */
+	private void addReviewScores() {
+		System.out.println(myPaperList.size());
+		int k = 0;
+		for (Paper paper : myPaperList) {
+			int[] reviewsId = paper.getReviews();
+			for (int i = 0; i < reviewsId.length; i++) {
+				String data = "";
+				Review review = myConference.getReview(reviewsId[i]);
+				//If there is no review. Then the paper has not been reviewed.
+				if (review == null) {
+					data = "Not Reviewed";
+				} else {
+					data = "" + myConference.getReview(reviewsId[i]).getReviewSummary();
+				}
+				//Reviews start at index 2 of the table
+				myTableData[k][2 + i] = data;
+			}
+			k++;
+		}
+	}
+	
+	/**
+	 * Fills check boxes for selected papers. 
+	 * All users will see these columns.
+	 * 
+	 * @param thePosition the placement of "Select" column in the table.
+	 */
 	private void addSelectButton(final int thePosition) {
 		myTableData[0][thePosition] = new Boolean(false);
 
@@ -132,23 +164,23 @@ public class UI_PaperTable extends JPanel {
 	 *
 	 */
 	private class MyTableModel extends AbstractTableModel {
- 	    
-	    public int getColumnCount() {
+		
+        public int getColumnCount() {
             return COLUMN_NAMES[myRoleId].length;
         }
- 
+
         public int getRowCount() {
             return myTableData.length;
         }
- 
+
         public String getColumnName(int col) {
             return COLUMN_NAMES[myRoleId][col];
         }
- 
+
         public Object getValueAt(int row, int col) {
             return myTableData[row][col];
         }
- 
+
         /*
          * JTable uses this method to determine the default renderer/
          * editor for each cell.  If we didn't implement this method,
@@ -156,24 +188,57 @@ public class UI_PaperTable extends JPanel {
          * rather than a check box.
          */
 //        public Class getColumnClass(int c) {
+//        	System.out.println(getValueAt(0, c).getClass());
 //            return getValueAt(0, c).getClass();
 //        }
-// 
+
         /*
          * Don't need to implement this method unless your table's
          * editable.
          */
         public boolean isCellEditable(int row, int col) {
-           return false;
+            //Note that the data/cell address is constant,
+            //no matter where the cell appears onscreen.
+            if (col < 2) {
+                return false;
+            } else {
+                return true;
+            }
         }
-        
+
         /*
          * Don't need to implement this method unless your table's
          * data can change.
          */
         public void setValueAt(Object value, int row, int col) {
+            if (DEBUG) {
+                System.out.println("Setting value at " + row + "," + col
+                                   + " to " + value
+                                   + " (an instance of "
+                                   + value.getClass() + ")");
+            }
+
             myTableData[row][col] = value;
             fireTableCellUpdated(row, col);
+
+            if (DEBUG) {
+                System.out.println("New value of data:");
+                printDebugData();
+            }
         }
-	}
+
+        private void printDebugData() {
+            int numRows = getRowCount();
+            int numCols = getColumnCount();
+
+            for (int i=0; i < numRows; i++) {
+                System.out.print("    row " + i + ":");
+                for (int j=0; j < numCols; j++) {
+                    System.out.print("  " + myTableData[i][j]);
+                }
+                System.out.println();
+            }
+            System.out.println("--------------------------");
+        }
+    }
 }

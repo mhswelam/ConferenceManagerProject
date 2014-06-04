@@ -32,7 +32,7 @@ public class Review {
 	 * the inputs will be validated at UI or by creating input drop list
 	 * 
 	 */
-	private int [] myComments;
+	private int[] myComments;
 	
 	private String mySummary;
 	
@@ -48,7 +48,9 @@ public class Review {
 	 * @param aForthComment a number from 1 to 5 respond for forth Q.
 	 */
 	public Review(int aReviewId, int aPaperId, int aReviewerId, int aFristComment,
-			int aSecondComment,int aThirdComment, int aForthComment, int aFivthComment, int aSixthComment, int aSeventhComment, int aEighthComment, int aNinethComment, String aSummary) {
+			int aSecondComment,int aThirdComment, int aForthComment, int aFivthComment, 
+			int aSixthComment, int aSeventhComment, int aEighthComment, int aNinethComment, 
+			String aSummary) {
 		myReviewId = aReviewId;
 		myPaperId = aPaperId;
 		myReviewerId = aReviewerId;
@@ -107,5 +109,18 @@ public class Review {
 	 */
 	public String getMySummary() {
 		return mySummary;
+	}
+	
+	/**
+	 * Averaged out summary of all reviews.
+	 * @return
+	 */
+	public int getReviewSummary() {
+		int total = 0;
+		for (int i = 0; i < myComments.length; i++) {
+			total += myComments[i];
+		}
+		total /= myComments.length;
+		return total;
 	}
 }
