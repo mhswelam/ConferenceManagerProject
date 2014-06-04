@@ -48,7 +48,7 @@ public class UI_AssignToPaper extends JPanel {
 		myConference = theConference;
 		myAuthorLabel = new JLabel();
 		myTitleLabel = new JLabel();
-		myAssignSPC = new JComboBox();
+		
 	}
 	
 	public void setUp() {
@@ -61,10 +61,18 @@ public class UI_AssignToPaper extends JPanel {
 		
 		myAuthorLabel.setText("Authors Name: " + firstName + " " + lastName);
 		myTitleLabel.setText("Title: " + title);
+		JLabel assign = new JLabel("Assign Subprogram Chair: ");
 		
-		ArrayList<SubProgramChair> aSub = myConference.getAvaSubProgram();
-		
-		
+		ArrayList<SubProgramChair> availableSPC = myConference.getAvaSubProgram();
+		String[] subChairs = new String[availableSPC.size()];
+		for (SubProgramChair spc : availableSPC) {
+			String name = spc.myFristName + " " + spc.myLastName;
+		}
+		myAssignSPC = new JComboBox(subChairs);
+		content.add(myAuthorLabel);
+		content.add(myTitleLabel);
+		content.add(myAssignSPC);
+		add(content);
 	}
 
 	private void getPaperInfo() {
