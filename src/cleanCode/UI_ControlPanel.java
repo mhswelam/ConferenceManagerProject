@@ -109,25 +109,29 @@ public class UI_ControlPanel extends JPanel {
 	 */
 	private void setUpReviewer(final int theUserId, final int theRoleId) {
 		//"View Papers"
+		UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId, myConference);
+		table.setUp();
+		//JComponent viewPaperTab = table;
+		myTabbedPane.addTab(TASKS[theRoleId][0], table);
 		//"Review Papers"
-		
+		Paper temp = myConference.getPaper(9);
+		JComponent tab = new UI_SubmitReview(myConference, temp, theUserId);
+		myTabbedPane.addTab(TASKS[theRoleId][1], tab);
+        tab.setBackground(BACKGROUND_COLOR);
 		int size = TASKS[theRoleId].length;
 		for (int i = 0; i < size; i++) {
-			JComponent tab = null;
+			//JComponent tab = null;
 			//View Paper for any user
 			if (TASKS[theRoleId][i].equals(TASKS[theRoleId][0])) {
-				UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId, myConference);
-				table.setUp();
-				tab = table;
+				
 //				tab = makeViewPaperPanel(theUserId, theRoleId);
 			//Submit Paper for Author
 			} else {
-				Paper temp = myConference.getPaper(9);
-				tab = new UI_SubmitReview(myConference, temp, theUserId);
+				
 				//tab = makeTextPanel(TASKS[theRoleId][i]);
 			}
-	        myTabbedPane.addTab(TASKS[theRoleId][i], tab);
-	        tab.setBackground(BACKGROUND_COLOR);
+	        //myTabbedPane.addTab(TASKS[theRoleId][i], tab);
+	        //tab.setBackground(BACKGROUND_COLOR);
 		}
 	}
 	
@@ -139,26 +143,35 @@ public class UI_ControlPanel extends JPanel {
 	 */
 	private void setUpSPC(final int theUserId, final int theRoleId) {
 		//"View Papers"
+		UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId, myConference);
+		table.setUp();
+		myTabbedPane.addTab(TASKS[theRoleId][0], table);
+        table.setBackground(BACKGROUND_COLOR);
+		
 		//"Assign Papers"
+        JComponent assignTab = makeTextPanel(TASKS[theRoleId][1]);
+		myTabbedPane.addTab(TASKS[theRoleId][1], assignTab);
+		assignTab.setBackground(BACKGROUND_COLOR);
 		//"Recommend Paper"
+        Paper temp = myConference.getPaper(5);
+        JComponent recoomTab = new UI_SubmitRecommendation(myConference, temp, theUserId);
+        myTabbedPane.addTab(TASKS[theRoleId][2], recoomTab);
+        recoomTab.setBackground(BACKGROUND_COLOR);
 		//"View Reviewers"
 		int size = TASKS[theRoleId].length;
 		for (int i = 0; i < size; i++) {
 			JComponent tab = null;
 			//View Paper for any user
 			if (TASKS[theRoleId][i].equals(TASKS[theRoleId][0])) {
-				UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId, myConference);
-				table.setUp();
-				tab = table;
+				
+				//tab = table;
 //				tab = makeViewPaperPanel(theUserId, theRoleId);
 			//Submit Paper for Author
 			} else {
 				//tab = makeTextPanel(TASKS[theRoleId][i]);
-				Paper temp = myConference.getPaper(5);
-				tab = new UI_SubmitRecommendation(myConference, temp, theUserId);
+				
 			}
-	        myTabbedPane.addTab(TASKS[theRoleId][i], tab);
-	        tab.setBackground(BACKGROUND_COLOR);
+	        
 		}
 	}
 	

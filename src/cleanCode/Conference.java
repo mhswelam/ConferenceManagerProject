@@ -303,9 +303,16 @@ public class Conference {
             System.exit(0);
 		}
 		Paper temp = listOfPaper.get(aReview.getMyPaperId());
+		for (int i=0 ; i<temp.getReviews().length;i++) {
+			if (temp.getReviews()[i] == 0) {
+				temp.getReviews()[i] = aReview.getMyReviewId();
+				temp.getReviewers()[i] = aReview.getMyReviewerId();
+				break;
+			}
+		}
 		listOfPaper.put(aReview.getMyPaperId(), 
 				new Paper(temp.getId(),temp.getAuthor(), temp.getTitle(), temp.getNumReviewers(),
-						temp.getSubProgramChair(), aReview.getMyReviewId(), temp.getReviews()[0],
+						temp.getSubProgramChair(), temp.getRecommendation(), temp.getReviews()[0],
 						temp.getReviews()[1], temp.getReviews()[2], temp.getReviewers()[0],temp.getReviewers()[1],
 						temp.getReviewers()[2], temp.getStatus()));
 		writePaperMapToFile();
