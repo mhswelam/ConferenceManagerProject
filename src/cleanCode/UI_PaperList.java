@@ -28,7 +28,7 @@ public class UI_PaperList extends JPanel {
 	/** Conference. */
 	private Conference myConference;
 	/** Unique identification number of the user. */
-	private int myUserId;
+	public int myUserId;
 	
 	/**
 	 * Creates a list of papers.
@@ -64,8 +64,10 @@ public class UI_PaperList extends JPanel {
 		   String[] paperNames = new String[paperSet.size()];
 		   int i = 0;
 		   for (Paper paper : paperSet) {
-			   paperNames[i] = paper.getTitle();
-			   i++;
+			   if (myUserId == paper.getAuthor()) {
+				   paperNames[i] = paper.getTitle();
+				   i++;
+			   }
 		   }
 		   final JList<String> list = new JList<String>(paperNames);
 		   

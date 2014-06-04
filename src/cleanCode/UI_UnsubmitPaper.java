@@ -180,11 +180,6 @@ public class UI_UnsubmitPaper extends JPanel implements ActionListener,
 						JOptionPane.ERROR_MESSAGE);
 			} else {
 				myConference.removePaper(myConference.myPaperToDelete);
-				JOptionPane.showMessageDialog(this,"You have succsefully "
-						+ "deleted that paper", "missing fields",
-						JOptionPane.INFORMATION_MESSAGE);
-				paperList.revalidate();
-				paperList.repaint();
 			}
 		} else if (theEvent.getSource() == myViewButton) {
 			if (myConference.myPaperToDelete == 0) {
