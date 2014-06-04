@@ -78,7 +78,7 @@ public class UI_ControlPanel extends JPanel {
 		myTabbedPane.addTab(TASKS[theRoleId][0], table);
 		
 		//View Reviewes
-		UI_ViewReviews reviewPanel = new UI_ViewReviews(theUserId, myConference);
+		UI_ViewReviews reviewPanel = new UI_ViewReviews(theUserId, myConference, theRoleId);
 		reviewPanel.setUp();
 		myTabbedPane.addTab(TASKS[theRoleId][1], reviewPanel);
 //		JComponent tab = makeTextPanel(TASKS[0][1]);
