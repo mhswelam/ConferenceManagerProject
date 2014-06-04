@@ -92,7 +92,22 @@ public class UI_Page {
 		contentPane.add(myLogInPanel, BorderLayout.CENTER);
 		myFrame.add(contentPane);
 	}
-	
+	public void refresh(final int theUser, final int theRole) {
+		myFrame.setResizable(false);
+		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//Size of the frame 1000 width 800 height
+		myFrame.setPreferredSize(new Dimension(1100, 800));
+		contentPane.setBackground(BACKGROUND_COLOR);
+		myControlPanel.setBackground(BACKGROUND_COLOR);
+	//	myFrame.repaint();
+
+		initializeProgram(theUser, theRole);
+		
+		myFrame.add(contentPane);
+		myFrame.pack();
+        myFrame.setLocationRelativeTo(null);
+        myFrame.setVisible(true);
+	}
 	/**
 	 * Starts the program for a particular user.
 	 */

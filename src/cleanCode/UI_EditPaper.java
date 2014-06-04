@@ -178,7 +178,7 @@ public class UI_EditPaper extends JPanel implements ActionListener {
 					0, 0, 0, 0, 0, 0, 0, 0, 0, "No status");
 			myConference.addPaper(myPaper);
 			UI_Page page = new UI_Page(myConference);
-			page.initializeProgram(myUserId, myRoleId);
+			page.refresh(myUserId, myRoleId);
 			
 		}	
 	}
