@@ -20,6 +20,8 @@ public class UI_ReviewInfo extends JPanel implements ActionListener{
 	
 	private Paper myPaper;
 	
+	private Conference myConference;
+	
 	private int [] myReviewList;
 	
 	private String [] reviewGrade = {"","[1] strong reject","[2] reject","[3] neutral", "[4] accept","[5] strong accept"};
@@ -34,6 +36,16 @@ public class UI_ReviewInfo extends JPanel implements ActionListener{
 	private int hField;
 	private int kField;
 	
+	private JLabel a_Answer;
+	private JLabel b_Answer;
+	private JLabel c_Answer;
+	private JLabel d_Answer;
+	private JLabel e_Answer;
+	private JLabel f_Answer;
+	private JLabel g_Answer;
+	private JLabel h_Answer;
+	private JLabel k_Answer;
+	private JTextPane ratinal_textPane;
 	private JButton review_One_Btn;
 	private JButton review_Two_Btn;
 	private JButton review_Three_Btn;
@@ -41,8 +53,9 @@ public class UI_ReviewInfo extends JPanel implements ActionListener{
 	/**
 	 * Create the panel.
 	 */
-	public UI_ReviewInfo(Paper aPaper) {
+	public UI_ReviewInfo(Paper aPaper, Conference myConference) {
 		myPaper = aPaper;
+		
 		myReviewList = myPaper.getReviewers();
 		
 		setLayout(new BorderLayout(0, 0));
@@ -68,15 +81,15 @@ public class UI_ReviewInfo extends JPanel implements ActionListener{
 		
 		JLabel aLabel = new JLabel("Can The content be directly applied by classroom instructors or curriculum designers?");
 		
-		JLabel a_Answer = new JLabel("New label");
+		a_Answer = new JLabel("");
 		
 		JLabel bLabel = new JLabel("Does the work appeal to a broad readship interested in engineering education or is it narrowly specialized?");
 		
-		JLabel b_Answer = new JLabel("New label");
+		b_Answer = new JLabel("");
 		
 		JLabel cLabel = new JLabel("Does the work address a significant problem?");
 		
-		JLabel c_Answer = new JLabel("New label");
+		c_Answer = new JLabel("");
 		
 		JLabel dLabel = new JLabel("Does the author build upon relevant references and bodies of knowlwdge?");
 		
@@ -90,20 +103,20 @@ public class UI_ReviewInfo extends JPanel implements ActionListener{
 		
 		JLabel kLable = new JLabel("Does the paper adhere to accepted standards of style, usage, and composition?");
 		
-		JTextPane ratinal_textPane = new JTextPane();
+		ratinal_textPane = new JTextPane();
 		ratinal_textPane.setEditable(false);
 		
-		JLabel d_Answer = new JLabel("New label");
+		d_Answer = new JLabel("");
 		
-		JLabel e_Answer = new JLabel("New label");
+		e_Answer = new JLabel("");
 		
-		JLabel f_Answer = new JLabel("New label");
+		f_Answer = new JLabel("");
 		
-		JLabel g_Answer = new JLabel("New label");
+		g_Answer = new JLabel("");
 		
-		JLabel h_Answer = new JLabel("New label");
+		h_Answer = new JLabel("");
 		
-		JLabel k_Answer = new JLabel("New label");
+		JLabel k_Answer = new JLabel("");
 		GroupLayout gl_center_Panel = new GroupLayout(center_Panel);
 		gl_center_Panel.setHorizontalGroup(
 			gl_center_Panel.createParallelGroup(Alignment.LEADING)
@@ -188,11 +201,76 @@ public class UI_ReviewInfo extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(review_One_Btn)) {
+			int temp = myPaper.getReviews()[0];
+			Review revTemp = myConference.getReview(temp);
+			int [] reviewGrad = revTemp.getMyComments();
+			aField = reviewGrad[0];
+			bField = reviewGrad[1];
+			cField = reviewGrad[2];
+			dField = reviewGrad[3];
+			eField = reviewGrad[4];
+			fField = reviewGrad[5];
+			gField = reviewGrad[6];
+			hField = reviewGrad[7];
+			kField = reviewGrad[8];
+			a_Answer.setText(reviewGrade[aField]);
+			b_Answer.setText(reviewGrade[bField]);
+			c_Answer.setText(reviewGrade[cField]);
+			d_Answer.setText(reviewGrade[dField]);
+			e_Answer.setText(reviewGrade[eField]);
+			f_Answer.setText(reviewGrade[fField]);
+			g_Answer.setText(reviewGrade[gField]);
+			h_Answer.setText(reviewGrade[hField]);
+			k_Answer.setText(reviewGrade[kField]);
+			ratinal_textPane.setText(revTemp.getMySummary());
+			
 			
 		} else if (e.getSource().equals(review_Two_Btn)) {
-			
+			int temp = myPaper.getReviews()[1];
+			Review revTemp = myConference.getReview(temp);
+			int [] reviewGrad = revTemp.getMyComments();
+			aField = reviewGrad[0];
+			bField = reviewGrad[1];
+			cField = reviewGrad[2];
+			dField = reviewGrad[3];
+			eField = reviewGrad[4];
+			fField = reviewGrad[5];
+			gField = reviewGrad[6];
+			hField = reviewGrad[7];
+			kField = reviewGrad[8];
+			a_Answer.setText(reviewGrade[aField]);
+			b_Answer.setText(reviewGrade[bField]);
+			c_Answer.setText(reviewGrade[cField]);
+			d_Answer.setText(reviewGrade[dField]);
+			e_Answer.setText(reviewGrade[eField]);
+			f_Answer.setText(reviewGrade[fField]);
+			g_Answer.setText(reviewGrade[gField]);
+			h_Answer.setText(reviewGrade[hField]);
+			k_Answer.setText(reviewGrade[kField]);
+			ratinal_textPane.setText(revTemp.getMySummary());
 		}else if (e.getSource().equals(review_Three_Btn)) {
-			
+			int temp = myPaper.getReviews()[2];
+			Review revTemp = myConference.getReview(temp);
+			int [] reviewGrad = revTemp.getMyComments();
+			aField = reviewGrad[0];
+			bField = reviewGrad[1];
+			cField = reviewGrad[2];
+			dField = reviewGrad[3];
+			eField = reviewGrad[4];
+			fField = reviewGrad[5];
+			gField = reviewGrad[6];
+			hField = reviewGrad[7];
+			kField = reviewGrad[8];
+			a_Answer.setText(reviewGrade[aField]);
+			b_Answer.setText(reviewGrade[bField]);
+			c_Answer.setText(reviewGrade[cField]);
+			d_Answer.setText(reviewGrade[dField]);
+			e_Answer.setText(reviewGrade[eField]);
+			f_Answer.setText(reviewGrade[fField]);
+			g_Answer.setText(reviewGrade[gField]);
+			h_Answer.setText(reviewGrade[hField]);
+			k_Answer.setText(reviewGrade[kField]);
+			ratinal_textPane.setText(revTemp.getMySummary());
 		}
 		
 	}

@@ -7,10 +7,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.ListSelectionModel;
@@ -80,9 +83,9 @@ public class UI_ViewReviews extends JPanel implements ActionListener, ListSelect
 		//									  paperList, makeReviewInfoPanel());
 		//splitPane.setDividerLocation(100);
 	    //splitPane.setBackground(BACKGROUND_COLOR);
-	    JPanel centerpanel = new UI_ReviewInfo(myPaper);
+	    
 	    add(topLabel, BorderLayout.NORTH);
-	    add(centerpanel, BorderLayout.CENTER);
+	    
 	}
 	
 
@@ -102,7 +105,23 @@ public class UI_ViewReviews extends JPanel implements ActionListener, ListSelect
 
 	@Override
 	public void actionPerformed(ActionEvent theEvent) {
-		ArrayList myPaperList = myConference.getPaperList(myRoleId, myUserId);
+		ArrayList<Paper> myPaperList = myConference.getPaperList(myRoleId, myUserId);
+		Map<String,Paper> myPapermap = new HashMap<String,Paper>();
+		String [] paperT = new String[myPaperList.size()];
+		for (int i =0 ; i < myPaperList.size();i++) {
+			paperT[i] = (myPaperList.get(i).getTitle());
+			myPapermap.put(myPaperList.get(i).getTitle(),myPaperList.get(i));
+		}
+		
+		myPaper = myPapermap.get(JOptionPane.showInputDialog(
+                this,
+                "Please select paper :",
+                "Select Paper",
+                JOptionPane.PLAIN_MESSAGE,
+                null, paperT, ""));
+		myPaperTitle = myPaper.getTitle();
+		JPanel centerpanel = new UI_ReviewInfo(myPaper, myConference);
+		add(centerpanel, BorderLayout.CENTER);
 		
 	}
 }
