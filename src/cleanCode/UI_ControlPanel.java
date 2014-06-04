@@ -88,7 +88,7 @@ public class UI_ControlPanel extends JPanel {
 //		myTabbedPane.addTab(TASKS[theRoleId][1], tab);
 	
 		//"Submit Paper"
-		UI_SubmitPaper submitPaper = new UI_SubmitPaper(theUserId, myConference);
+		UI_SubmitPaper submitPaper = new UI_SubmitPaper(theUserId, theRoleId, myConference, myFrame);
 		submitPaper.setUp();
 		myTabbedPane.addTab(TASKS[theRoleId][2], submitPaper);
 		
@@ -98,7 +98,7 @@ public class UI_ControlPanel extends JPanel {
 		myTabbedPane.addTab(TASKS[theRoleId][3], editPaper);
 		
 		//"Unsubmit Paper"
-		UI_UnsubmitPaper unsubmit = new UI_UnsubmitPaper(theUserId, theRoleId, myConference);
+		UI_UnsubmitPaper unsubmit = new UI_UnsubmitPaper(theUserId, theRoleId, myConference, myFrame);
 		unsubmit.setUp();
 		myTabbedPane.addTab(TASKS[theRoleId][4], unsubmit);
 		

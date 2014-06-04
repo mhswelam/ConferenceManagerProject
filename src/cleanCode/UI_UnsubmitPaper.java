@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -32,6 +33,7 @@ public class UI_UnsubmitPaper extends JPanel implements ActionListener,
 	/** Unique identification number of the user. */
 	private int myUserId;
 	private int myRoleId;
+	private JFrame myFrame;
 	/** Button that submits  the paper. */
 	private JButton myUnsubmitButton;
 	private JButton myViewButton;
@@ -59,10 +61,12 @@ public class UI_UnsubmitPaper extends JPanel implements ActionListener,
 	 * @param theConference conference.
 	 */
 	public UI_UnsubmitPaper(final int theUserId, final int theRoleId,
-				final Conference theConference) {
+				final Conference theConference, JFrame theFrame) {
 		super(new BorderLayout());
 		setBackground(BACKGROUND_COLOR);
 		myUserId = theUserId;
+		myRoleId = theRoleId;
+		myFrame = theFrame;
 		myConference = theConference;
 		myUnsubmitButton = new JButton("Unsubmit");
 		myInfoPanel = new JPanel();
@@ -181,6 +185,9 @@ public class UI_UnsubmitPaper extends JPanel implements ActionListener,
 						JOptionPane.ERROR_MESSAGE);
 			} else {
 				myConference.removePaper(myConference.myPaperToDelete);
+				myFrame.setVisible(false);
+				UI_Page page = new UI_Page(myConference);
+				page.refresh(myUserId, myRoleId);
 			}
 		} else if (theEvent.getSource() == myViewButton) {
 			if (myConference.myPaperToDelete == 0) {

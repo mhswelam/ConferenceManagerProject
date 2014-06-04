@@ -11,6 +11,7 @@ import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -31,6 +32,8 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 	private Conference myConference;
 	/** Unique identification number of the user. */
 	private int myUserId;
+	private int myRoleId;
+	private JFrame myFrame;
 	
 	/** Missing: Which of the conference categories best characterizes 
 	 * this paper (used to match reviewers): */
@@ -55,11 +58,14 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 	 * @param theUserId unique identification number of the user.
 	 * @param theConference conference.
 	 */
-	public UI_SubmitPaper(final int theUserId, final Conference theConference) {
+	public UI_SubmitPaper(final int theUserId, final int theRoleId,
+			final Conference theConference, JFrame theFrame) {
 		super(new BorderLayout());
 		setBackground(BACKGROUND_COLOR);
 		myUserId = theUserId;
+		myRoleId = theRoleId;
 		myConference = theConference;
+		myFrame = theFrame;
 		myTitleField = new JTextField(20);
 		myKeywordsField = new JTextField(20);
 		myAbstractField = new JTextField(58);
@@ -177,7 +183,9 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 				myPaper = new Paper(myConference.lastPaperID, myUserId, title, 
 						0, 0, 0, 0, 0, 0, 0, 0, 0, "No status");
 				myConference.addPaper(myPaper);
-				
+				myFrame.setVisible(false);
+				UI_Page page = new UI_Page(myConference);
+				page.refresh(myUserId, myRoleId);
 			}
 //			Map<Integer, Paper> theMap = myConference.listOfPaper;
 //			Iterator it = theMap.entrySet().iterator();
