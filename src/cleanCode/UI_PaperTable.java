@@ -80,18 +80,22 @@ public class UI_PaperTable extends JPanel {
 		fillNameTitle();
 		//Program Chair
 		if (myRoleId == 1) {
-//			addReviewScores();
-//			addSelectButton(7);
+			addReviewScores();
+			addSPCScore();
+			addAcceptanceStatus(6);
+			addSelectButton(7);
 		//SPC
 		} else if (myRoleId == 2) {
-//			addReviewScores();
-//			addSelectButton(5);
+			addReviewScores();
+			addSelectButton(5);
 		//Author
 		} else if (myRoleId == 3) {
-//			addSelectButton(3);
+			addAcceptanceStatus(2);
+			addSelectButton(3);
 		//Reviewer
 		} else if (myRoleId == 4) {
-//			addSelectButton(3);
+			addReviewerScore();
+			addSelectButton(3);
 		}
 	}
 	
@@ -121,7 +125,6 @@ public class UI_PaperTable extends JPanel {
 	 * Program Chair, Subprogram Chair will see reviews.
 	 */
 	private void addReviewScores() {
-		System.out.println(myPaperList.size());
 		int k = 0;
 		for (Paper paper : myPaperList) {
 			int[] reviewsId = paper.getReviews();
@@ -142,19 +145,74 @@ public class UI_PaperTable extends JPanel {
 	}
 	
 	/**
+	 * Adds the score of the paper particular reviewer.
+	 */
+	private void addReviewerScore() {
+		int i = 0;
+		for (Paper paper : myPaperList) {
+			int[] reviewsId = paper.getReviews();
+			for (int k = 0; k < reviewsId.length; k++) {
+				Review rev = myConference.getReview(reviewsId[i]);
+				int reviewerId = rev.getMyReviewerId();
+				if (reviewerId == myUserId) {
+					int temp = rev.getReviewSummary();
+					String data = "";
+					if (temp == 0) {
+						data = "Not Reviewed";
+					} else {
+						data = "" + temp;
+					}
+					myTableData[i][2] = data;
+				}
+			}
+			i++;
+		}
+	}
+	
+	/**
+	 * Shows the Subprogram Chair score for the paper.
+	 */
+	private void addSPCScore() {
+		int i = 0;
+		for (Paper paper : myPaperList) {
+			int rec = paper.getRecommendation();
+			String score = "";
+			if (rec == 0) {
+				score = "Not Reviewed";
+			} else {
+				score = "" + rec;
+			}
+			myTableData[i][5] = score;
+			i++;
+		}
+	}
+	
+	/**
+	 * Shows the acceptance status of paper.
+	 * @param theIndex index of the acceptance status field in the table.
+	 */
+	private void addAcceptanceStatus(final int theIndex) {
+		int i = 0;
+		for (Paper paper : myPaperList) {
+			String status = paper.getStatus();
+			myTableData[i][theIndex] = status;
+			i++;
+		}
+	}
+	
+	/**
 	 * Fills check boxes for selected papers. 
 	 * All users will see these columns.
 	 * 
 	 * @param thePosition the placement of "Select" column in the table.
 	 */
 	private void addSelectButton(final int thePosition) {
-		myTableData[0][thePosition] = new Boolean(false);
+//		myTableData[0][thePosition] = new Boolean(false);
 
 //		JRadioButton select = new JRadioButton();
-		for (int i = 1; i < myPaperList.size(); i++) {
+		for (int i = 0; i < myPaperList.size(); i++) {
 			myTableData[i][thePosition] = new Boolean(false);
 		}
-		
 	}
 	
 	/**
@@ -187,10 +245,10 @@ public class UI_PaperTable extends JPanel {
          * then the last column would contain text ("true"/"false"),
          * rather than a check box.
          */
-//        public Class getColumnClass(int c) {
-//        	System.out.println(getValueAt(0, c).getClass());
-//            return getValueAt(0, c).getClass();
-//        }
+        public Class getColumnClass(int c) {
+        	System.out.println(getValueAt(0, c).getClass());
+            return getValueAt(0, c).getClass();
+        }
 
         /*
          * Don't need to implement this method unless your table's
