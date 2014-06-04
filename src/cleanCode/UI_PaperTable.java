@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -16,7 +21,6 @@ import javax.swing.table.AbstractTableModel;
  *
  */
 public class UI_PaperTable extends JPanel {
-	boolean DEBUG = false;
 	/** Column headers of the table. */
 	private final static String[][] COLUMN_NAMES = {{},							//Empty 			0
 		{"Author", "Title", "Review 1", "Review 2", "Review 3", 
@@ -38,6 +42,8 @@ public class UI_PaperTable extends JPanel {
 	private ArrayList<Paper> myPaperList;
 	/** Data that will be contained within the table. */
 	private Object[][] myTableData;
+	/** Table that contains the data. */
+	private JTable myTable;
 	
 	/**
 	 * Creates a table containing all the papers.
@@ -56,6 +62,7 @@ public class UI_PaperTable extends JPanel {
 		myPaperList = myConference.getPaperList(myRoleId, myUserId);
 		myTableData = 
 				new Object[myPaperList.size()][COLUMN_NAMES[myRoleId].length];
+		myTable = null;
 	}
 
 	/**
@@ -63,12 +70,13 @@ public class UI_PaperTable extends JPanel {
 	 */
 	public void setUp() {
 		setData();
-		JTable table = new JTable(new MyTableModel());
-		JScrollPane scrollPane = new JScrollPane(table);
+		myTable = new JTable(new MyTableModel());
+		JScrollPane scrollPane = new JScrollPane(myTable);
 		scrollPane.setBackground(BACKGROUND_COLOR);
-		table.setFillsViewportHeight(true);
-		table.setPreferredScrollableViewportSize(new Dimension(880, 500));
-		table.setBackground(BACKGROUND_COLOR);
+		myTable.setFillsViewportHeight(true);
+		myTable.setPreferredScrollableViewportSize(new Dimension(880, 500));
+		myTable.setBackground(BACKGROUND_COLOR);
+		myTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		add(scrollPane);
 	}
 	
@@ -242,6 +250,35 @@ public class UI_PaperTable extends JPanel {
 		}
 	}
 	
+//	@Override
+//	public void valueChanged(ListSelectionEvent theEvent) {
+//		System.out.println("Value changed!");
+//		int row = theEvent.getFirstIndex();
+//		int col = theEvent.getLastIndex();
+//		for (int i = 0; i < myPaperList.size(); i++) {
+//			if (row != i) {
+//				myTable.setValueAt(new Boolean(false), i, myTableData[myRoleId].length - 1);
+//			}
+//		}
+//	}
+//	
+//	@Override
+//	public void tableChanged(TableModelEvent e) {
+//		// TODO Auto-generated method stub
+//		System.out.println("Table changed!");
+//		int row = e.getFirstRow();
+//        int column = e.getColumn();
+//        MyTableModel model = (MyTableModel)e.getSource();
+//        String columnName = model.getColumnName(column);
+//        Object data = model.getValueAt(row, column);
+//		for (int i = 0; i < myPaperList.size(); i++) {
+//			System.out.println(i);
+//			if (row != i) {
+//				myTable.setValueAt(new Boolean(false), i, (myTableData[myRoleId].length - 1));
+//			}
+//		}
+//	}
+	
 	/**
 	 * Class that determines the table model.
 	 * 
@@ -324,7 +361,7 @@ public class UI_PaperTable extends JPanel {
         public void setValueAt(final Object theValue, final int theRow, 
         		final int theColumn) {
             myTableData[theRow][theColumn] = theValue;
-            fireTableCellUpdated(theRow, theColumn);
+//            fireTableCellUpdated(theRow, theColumn);
         }
     }
 }
