@@ -207,96 +207,94 @@ public class UI_PaperTable extends JPanel {
 	 * @param thePosition the placement of "Select" column in the table.
 	 */
 	private void addSelectButton(final int thePosition) {
-//		myTableData[0][thePosition] = new Boolean(false);
-
-//		JRadioButton select = new JRadioButton();
 		for (int i = 0; i < myPaperList.size(); i++) {
 			myTableData[i][thePosition] = new Boolean(false);
 		}
 	}
 	
 	/**
-	 * Class that determines the table 
+	 * Class that determines the table model.
 	 * 
 	 * @author Clean Code
 	 *
 	 */
 	private class MyTableModel extends AbstractTableModel {
 		
+		/**
+		 * @return returns number of columns.
+		 */
         public int getColumnCount() {
             return COLUMN_NAMES[myRoleId].length;
         }
 
+        /**
+         * @return number of rows.
+         */
         public int getRowCount() {
             return myTableData.length;
         }
 
-        public String getColumnName(int col) {
-            return COLUMN_NAMES[myRoleId][col];
-        }
-
-        public Object getValueAt(int row, int col) {
-            return myTableData[row][col];
-        }
-
-        /*
-         * JTable uses this method to determine the default renderer/
-         * editor for each cell.  If we didn't implement this method,
-         * then the last column would contain text ("true"/"false"),
-         * rather than a check box.
+        /**
+         * Retrieves name of the column.
+         * 
+         * @param theColumn column index.
+         * 
+         * @return returns name of the index.
          */
-        public Class getColumnClass(int c) {
-        	System.out.println(getValueAt(0, c).getClass());
-            return getValueAt(0, c).getClass();
+        public String getColumnName(final int theColumn) {
+            return COLUMN_NAMES[myRoleId][theColumn];
         }
 
-        /*
-         * Don't need to implement this method unless your table's
-         * editable.
+        /**
+         * Retrieves the value in the selected row and column.
+         * 
+         * @param theRow row index.
+         * @param theColumn column index.
+         * 
+         * @return returns object of the data.
          */
-        public boolean isCellEditable(int row, int col) {
-            //Note that the data/cell address is constant,
-            //no matter where the cell appears onscreen.
-            if (col < 2) {
-                return false;
-            } else {
+        public Object getValueAt(final int theRow, final int theColumn) {
+            return myTableData[theRow][theColumn];
+        }
+
+        /**
+         * Sets up the table to render data.
+         * 
+         * @param theColumn column index.
+         * 
+         * @return returns the class of the value in the table.
+         */
+        public Class getColumnClass(final int theColumn) {
+            return getValueAt(0, theColumn).getClass();
+        }
+
+        /**
+         * Lets user edit the last cell in the table.
+         * 
+         * @param theRow row index.
+         * @param theColumn column index.
+         * 
+         * @return returns true if the column is editable, false if not.
+         */
+        public boolean isCellEditable(final int theRow, final int theColumn) {
+            if (theColumn == myTableData[myRoleId].length - 1) {
                 return true;
+            } else {
+                return false;
             }
         }
 
-        /*
-         * Don't need to implement this method unless your table's
-         * data can change.
+        /**
+         * Changes the data in the table.
+         * 
+         * @param theValue object that will be in the cell.
+         * @param theRow row index.
+         * @param theColumn column index.
          */
-        public void setValueAt(Object value, int row, int col) {
-            if (DEBUG) {
-                System.out.println("Setting value at " + row + "," + col
-                                   + " to " + value
-                                   + " (an instance of "
-                                   + value.getClass() + ")");
-            }
-
-            myTableData[row][col] = value;
-            fireTableCellUpdated(row, col);
-
-            if (DEBUG) {
-                System.out.println("New value of data:");
-                printDebugData();
-            }
-        }
-
-        private void printDebugData() {
-            int numRows = getRowCount();
-            int numCols = getColumnCount();
-
-            for (int i=0; i < numRows; i++) {
-                System.out.print("    row " + i + ":");
-                for (int j=0; j < numCols; j++) {
-                    System.out.print("  " + myTableData[i][j]);
-                }
-                System.out.println();
-            }
-            System.out.println("--------------------------");
+        public void setValueAt(final Object theValue, final int theRow, 
+        		final int theColumn) {
+            myTableData[theRow][theColumn] = theValue;
+            fireTableCellUpdated(theRow, theColumn);
         }
     }
 }
