@@ -9,8 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
@@ -20,14 +18,20 @@ import javax.swing.table.AbstractTableModel;
  * This class to create a table containing information at a glance.
  *
  */
-public class UI_PaperTable extends JPanel {
-	/** Column headers of the table. */
-	private final static String[][] COLUMN_NAMES = {{},							//Empty 			0
+public class UI_PaperTable extends JPanel implements TableModelListener {
+	/** Column headers of the table. */				 
+	private final static String[][] COLUMN_NAMES = {
+		//Empty 			0
+		{},						
+		//Program Chair 	1
 		{"Author", "Title", "Review 1", "Review 2", "Review 3", 
-		"Subprogram Chair : Review", "Acceptence Status", "Select"},			//Program Chair 	1
-		{"Author", "Title", "Review 1", "Review 2", "Review 3", "Select"}, 		//SubProgram Chair	2
-		{"Author", "Title", "Acceptence Status", "Select"},						//Author			3
-		{"Author", "Title", "Review", "Select"}};								//Reviewer			4
+		"Subprogram Chair : Review", "Acceptence Status", "Select"},	
+		//SubProgram Chair	2
+		{"Author", "Title", "Review 1", "Review 2", "Review 3", "Select"}, 
+		//Author			3
+		{"Author", "Title", "Acceptence Status", "Select"},			
+		//Reviewer			4
+		{"Author", "Title", "Review", "Select"}};								
 	
 	/** Background color is white. */
 	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
@@ -53,7 +57,7 @@ public class UI_PaperTable extends JPanel {
 	 * @param theConference conference.
 	 */
 	public UI_PaperTable(final int theUserId, final int theRoleId, 
-			final Conference theConference) {
+						 final Conference theConference) {
 		super(new FlowLayout());
 		setBackground(BACKGROUND_COLOR);
 		myUserId = theUserId;
@@ -77,6 +81,7 @@ public class UI_PaperTable extends JPanel {
 		myTable.setPreferredScrollableViewportSize(new Dimension(880, 500));
 		myTable.setBackground(BACKGROUND_COLOR);
 		myTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		myTable.getModel().addTableModelListener(this);
 		add(scrollPane);
 	}
 	
@@ -145,7 +150,8 @@ public class UI_PaperTable extends JPanel {
 				if (review == null) {
 					data = "Not Reviewed";
 				} else {
-					data = "" + myConference.getReview(reviewsId[i]).getReviewSummary();
+					data = 
+				   "" + myConference.getReview(reviewsId[i]).getReviewSummary();
 				}
 				//If the Subprogram Chair is viewing
 				//Reviewer will have their
@@ -156,8 +162,10 @@ public class UI_PaperTable extends JPanel {
 					if (id == 0) {
 						name = "Not Assigned";
 					} else {
-						String firstName = myConference.getReviewer(id).myFristName;
-						String lastName = myConference.getReviewer(id).myLastName;
+						String firstName = 
+									   myConference.getReviewer(id).myFristName;
+						String lastName = 
+										myConference.getReviewer(id).myLastName;
 						name = firstName + " " + lastName + " : ";
 					}
 				}
@@ -261,23 +269,17 @@ public class UI_PaperTable extends JPanel {
 //			}
 //		}
 //	}
-//	
-//	@Override
-//	public void tableChanged(TableModelEvent e) {
-//		// TODO Auto-generated method stub
-//		System.out.println("Table changed!");
-//		int row = e.getFirstRow();
-//        int column = e.getColumn();
-//        MyTableModel model = (MyTableModel)e.getSource();
-//        String columnName = model.getColumnName(column);
-//        Object data = model.getValueAt(row, column);
-//		for (int i = 0; i < myPaperList.size(); i++) {
-//			System.out.println(i);
-//			if (row != i) {
-//				myTable.setValueAt(new Boolean(false), i, (myTableData[myRoleId].length - 1));
-//			}
-//		}
-//	}
+	
+	@Override
+	public void tableChanged(TableModelEvent theEvent) {
+		// TODO Auto-generated method stub
+		int row = theEvent.getFirstRow();
+        int column = theEvent.getColumn();
+        MyTableModel model = (MyTableModel)theEvent.getSource();
+        String columnName = model.getColumnName(column);
+        Object data = model.getValueAt(row, column);
+        System.out.println("Table changed at " + row + " " + data.toString());
+	}
 	
 	/**
 	 * Class that determines the table model.
@@ -361,7 +363,7 @@ public class UI_PaperTable extends JPanel {
         public void setValueAt(final Object theValue, final int theRow, 
         		final int theColumn) {
             myTableData[theRow][theColumn] = theValue;
-//            fireTableCellUpdated(theRow, theColumn);
+            fireTableCellUpdated(theRow, theColumn);
         }
     }
 }

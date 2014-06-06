@@ -73,32 +73,37 @@ public class UI_ControlPanel extends JPanel {
 	 * 
 	 * @param theUserId unique identification number of the user.
 	 * @param theRoleId role of the user.
+	 * @param theFrame frame of the window.
 	 */
-	private void setUpAuthor(final int theUserId, final int theRoleId, JFrame theFrame) {
+	private void setUpAuthor(final int theUserId, final int theRoleId, 
+							 final JFrame theFrame) {
 		//View Papers
-		UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId, myConference);
+		UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId, 
+												myConference);
 		table.setUp();
 		myTabbedPane.addTab(TASKS[theRoleId][0], table);
 		
 		//View Reviewes
-		UI_ViewReviews reviewPanel = new UI_ViewReviews(theUserId, myConference, theRoleId);
+		UI_ViewReviews reviewPanel = new UI_ViewReviews(theUserId, myConference, 
+														theRoleId);
 		reviewPanel.setUp();
 		myTabbedPane.addTab(TASKS[theRoleId][1], reviewPanel);
-//		JComponent tab = makeTextPanel(TASKS[0][1]);
-//		myTabbedPane.addTab(TASKS[theRoleId][1], tab);
 	
 		//"Submit Paper"
-		UI_SubmitPaper submitPaper = new UI_SubmitPaper(theUserId, theRoleId, myConference, myFrame);
+		UI_SubmitPaper submitPaper = new UI_SubmitPaper(theUserId, theRoleId, 
+														myConference, myFrame);
 		submitPaper.setUp();
 		myTabbedPane.addTab(TASKS[theRoleId][2], submitPaper);
 		
 		//"Edit Paper"
-		UI_EditPaper editPaper = new UI_EditPaper(theUserId, theRoleId, myConference, myFrame);
+		UI_EditPaper editPaper = new UI_EditPaper(theUserId, theRoleId, 
+												  myConference, myFrame);
 		editPaper.setUp();
 		myTabbedPane.addTab(TASKS[theRoleId][3], editPaper);
 		
 		//"Unsubmit Paper"
-		UI_UnsubmitPaper unsubmit = new UI_UnsubmitPaper(theUserId, theRoleId, myConference, myFrame);
+		UI_UnsubmitPaper unsubmit = new UI_UnsubmitPaper(theUserId, theRoleId, 
+														 myConference, myFrame);
 		unsubmit.setUp();
 		myTabbedPane.addTab(TASKS[theRoleId][4], unsubmit);
 		
@@ -112,12 +117,15 @@ public class UI_ControlPanel extends JPanel {
 	 */
 	private void setUpReviewer(final int theUserId, final int theRoleId) {
 		//"View Papers"
-		UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId, myConference);
+		UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId, 
+												myConference);
 		table.setUp();
 		//JComponent viewPaperTab = table;
 		myTabbedPane.addTab(TASKS[theRoleId][0], table);
+		
 		//"Review Papers"
 		Paper temp = myConference.getPaper(9);
+		
 		JComponent tab = new UI_SubmitReview(myConference, temp, theUserId);
 		myTabbedPane.addTab(TASKS[theRoleId][1], tab);
         tab.setBackground(BACKGROUND_COLOR);
@@ -146,7 +154,8 @@ public class UI_ControlPanel extends JPanel {
 	 */
 	private void setUpSPC(final int theUserId, final int theRoleId) {
 		//"View Papers"
-		UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId, myConference);
+		UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId, 
+												myConference);
 		table.setUp();
 		myTabbedPane.addTab(TASKS[theRoleId][0], table);
         table.setBackground(BACKGROUND_COLOR);
@@ -155,11 +164,13 @@ public class UI_ControlPanel extends JPanel {
         JComponent assignTab = makeTextPanel(TASKS[theRoleId][1]);
 		myTabbedPane.addTab(TASKS[theRoleId][1], assignTab);
 		assignTab.setBackground(BACKGROUND_COLOR);
+		
 		//"Recommend Paper"
         Paper temp = myConference.getPaper(6);
         JComponent recoomTab = new UI_SubmitRecommendation(myConference, temp, theUserId);
         myTabbedPane.addTab(TASKS[theRoleId][2], recoomTab);
         recoomTab.setBackground(BACKGROUND_COLOR);
+        
 		//"View Reviewers"
 		int size = TASKS[theRoleId].length;
 		for (int i = 0; i < size; i++) {
@@ -186,17 +197,20 @@ public class UI_ControlPanel extends JPanel {
 	 */
 	private void setUpPC(final int theUserId, final int theRoleId) {
 		//"View Papers"
-		UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId, myConference);
+		UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId, 
+											    myConference);
 		table.setUp();
 		myTabbedPane.addTab(TASKS[theRoleId][0], table);
 		
 		//"Assign Papers"
-		JComponent tab = makeTextPanel(TASKS[theRoleId][1]);
-		myTabbedPane.addTab(TASKS[theRoleId][1], tab);
+		UI_AssignToPaper subToPaper = new UI_AssignToPaper(theUserId, theRoleId, 
+														   myConference);
+		myTabbedPane.addTab(TASKS[theRoleId][1], subToPaper);
 		
 		//"Make Acceptance Decision"
-		JComponent tab1 = makeTextPanel(TASKS[theRoleId][2]);
-		myTabbedPane.addTab(TASKS[theRoleId][2], tab1);
+		UI_AcceptanceDecision acceptPaper = new UI_AcceptanceDecision(theUserId, 
+													theRoleId, myConference);
+		myTabbedPane.addTab(TASKS[theRoleId][2], acceptPaper);
 	}
 	
 	
@@ -209,45 +223,6 @@ public class UI_ControlPanel extends JPanel {
         panel.add(filler);
         return panel;
     }
-   
-   /**
-    * @param text
-    * @return panel that shows list papers to user
-    */
-//   private JSplitPane makeViewPaperPanel(final int theUserId, final int theRoleId) {
-//	   JComponent listPane = makePaperList(theUserId, theRoleId);
-//	   JComponent textPanel = makeTextPanel("This will show the information of selected paper.");
-//       JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, listPane, textPanel);
-//       splitPane.setDividerLocation(300);
-//       splitPane.setBackground(BACKGROUND_COLOR);
-//
-//       return splitPane;
-//   }
-   
-//   private JList makePaperList(final int theUserId, final int theRoleId) {
-//	 //just for Program Chair
-//	   Collection<Paper> paperSet = myConference.listOfPaper.values();
-//	   String[] paperNames = new String[paperSet.size()];
-//	   int i = 0;
-//	   for (Paper paper : paperSet) {
-//		   paperNames[i] = paper.getTitle();
-//		   i++;
-//	   }
-//	   JList<String> list = new JList<String>(paperNames);
-//	   
-//	   list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-//	   list.setLayoutOrientation(JList.VERTICAL);
-//	   list.setSelectedIndex(0);
-//	   
-//	   //not sure if this is needed
-////	   JScrollPane paperPanel = new JScrollPane(list);
-////	   paperPanel.setPreferredSize(new Dimension(100, 150));
-////	   paperPanel.add(list);
-////	   return paperPanel;
-//	   
-//	   return list;
-//   }
-
    
    /**
     * Removes all tabbed panels when the user logs out.

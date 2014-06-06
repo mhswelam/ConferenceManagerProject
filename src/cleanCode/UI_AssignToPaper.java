@@ -4,9 +4,17 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.Dimension;
+import javax.swing.SpringLayout;
+import javax.swing.SwingConstants;
+import java.awt.ComponentOrientation;
+import javax.swing.BoxLayout;
 
 /**
  * @author Clean Code
@@ -34,17 +42,127 @@ public class UI_AssignToPaper extends JPanel {
 	 * needed to assign paper to a user.
 	 * 
 	 * @param theTheUserId unique user identification number.
-	 * @param thePaperId unique identification number of the paper that is displayed. 
 	 * @param theRoleId role identification number.
 	 * @param theConference conference.
 	 */
-	public UI_AssignToPaper(final int theUserId, final int theRoleId, 
-			final int thePaperId, final Conference theConference) {
+	public UI_AssignToPaper(final int theUserId, final int theRoleId,
+							final Conference theConference) {
 		super(new BorderLayout());
 		setBackground(BACKGROUND_COLOR);
+		
+		JPanel mainPanel = new JPanel();
+		mainPanel.setBackground(Color.WHITE);
+		add(mainPanel, BorderLayout.CENTER);
+		
+		JLabel lblAuthor = new JLabel("Author: ");
+		
+		JLabel lblTitle = new JLabel("Title:");
+		
+		JLabel lblSubprogramChair = new JLabel("Select Subprogram Chair: ");
+		
+		JComboBox comboBox = new JComboBox();
+		
+		JLabel lblNotSelected = new JLabel("Not Selected");
+		
+		JLabel lblNotSelected_1 = new JLabel("Not Selected");
+		
+		JLabel lblSelectFirstReviewer = new JLabel("Select First Reviewer: ");
+		
+		JLabel lblSelectSecondReviewer = new JLabel("Select Second Reviewer: ");
+		
+		JLabel lblSelectThirdReviewer = new JLabel("Select Third Reviewer: ");
+		
+		JComboBox comboBox_1 = new JComboBox();
+		
+		JComboBox comboBox_2 = new JComboBox();
+		
+		JComboBox comboBox_3 = new JComboBox();
+		GroupLayout gl_panel = new GroupLayout(mainPanel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(76)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblAuthor)
+								.addComponent(lblTitle))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblNotSelected_1)
+								.addComponent(lblNotSelected)))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblSubprogramChair)
+								.addComponent(lblSelectFirstReviewer)
+								.addComponent(lblSelectSecondReviewer)
+								.addComponent(lblSelectThirdReviewer))
+							.addGap(18)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(comboBox_3, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+									.addComponent(comboBox_2, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(comboBox_1, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(comboBox, 0, 107, Short.MAX_VALUE)))))
+					.addContainerGap(156, Short.MAX_VALUE))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(80)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblAuthor)
+						.addComponent(lblNotSelected))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblTitle)
+						.addComponent(lblNotSelected_1))
+					.addGap(31)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblSubprogramChair)
+						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblSelectFirstReviewer)
+						.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(comboBox_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblSelectSecondReviewer))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(comboBox_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblSelectThirdReviewer))
+					.addContainerGap(348, Short.MAX_VALUE))
+		);
+		mainPanel.setLayout(gl_panel);
+		
+		JPanel rightFiller = new JPanel();
+		rightFiller.setBackground(Color.WHITE);
+		rightFiller.setPreferredSize(new Dimension(100, 500));
+		add(rightFiller, BorderLayout.EAST);
+		
+		JPanel leftFiller = new JPanel();
+		leftFiller.setBackground(Color.WHITE);
+		leftFiller.setPreferredSize(new Dimension(100, 500));
+		add(leftFiller, BorderLayout.WEST);
+		
+		JPanel titleNorthFiller = new JPanel();
+		titleNorthFiller.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		titleNorthFiller.setBackground(Color.WHITE);
+		titleNorthFiller.setPreferredSize(new Dimension(500, 50));
+		add(titleNorthFiller, BorderLayout.NORTH);
+		titleNorthFiller.setLayout(null);
+		
+		JLabel lblAssignPaperTo = new JLabel("Assign Paper to Subprogram Chair");
+		lblAssignPaperTo.setBounds(149, 28, 264, 16);
+		lblAssignPaperTo.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		lblAssignPaperTo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAssignPaperTo.setHorizontalTextPosition(SwingConstants.LEADING);
+		titleNorthFiller.add(lblAssignPaperTo);
 		myUserId = theUserId;
 		myRoleId = theRoleId;
-		myPaperId = thePaperId;
+		myPaperId = 0;
 		myConference = theConference;
 		myAuthorLabel = new JLabel();
 		myTitleLabel = new JLabel();
@@ -82,6 +200,4 @@ public class UI_AssignToPaper extends JPanel {
 		String firstName = myConference.getAuthor(authorId).myFristName;
 		String lastName = myConference.getAuthor(authorId).myLastName;
 	}
-	
-
 }
