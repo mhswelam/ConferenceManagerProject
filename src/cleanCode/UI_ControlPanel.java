@@ -8,6 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+
+import cleanCode.UI_PaperTable.MyTableModel;
 
 /**
  * @author Clean Code
@@ -78,7 +82,7 @@ public class UI_ControlPanel extends JPanel {
 	private void setUpAuthor(final int theUserId, final int theRoleId, 
 							 final JFrame theFrame) {
 		//View Papers
-		UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId, 
+		UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId,
 												myConference);
 		table.setUp();
 		myTabbedPane.addTab(TASKS[theRoleId][0], table);
@@ -117,7 +121,7 @@ public class UI_ControlPanel extends JPanel {
 	 */
 	private void setUpReviewer(final int theUserId, final int theRoleId) {
 		//"View Papers"
-		UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId, 
+		UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId,
 												myConference);
 		table.setUp();
 		//JComponent viewPaperTab = table;
@@ -154,7 +158,7 @@ public class UI_ControlPanel extends JPanel {
 	 */
 	private void setUpSPC(final int theUserId, final int theRoleId) {
 		//"View Papers"
-		UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId, 
+		UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId,
 												myConference);
 		table.setUp();
 		myTabbedPane.addTab(TASKS[theRoleId][0], table);
@@ -196,21 +200,40 @@ public class UI_ControlPanel extends JPanel {
 	 * @param theRoleId role of the user.
 	 */
 	private void setUpPC(final int theUserId, final int theRoleId) {
-		//"View Papers"
-		UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId, 
+		//"View Papers" Tab 1
+		UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId,
 											    myConference);
-		table.setUp();
+		table.setUp(); 
 		myTabbedPane.addTab(TASKS[theRoleId][0], table);
 		
-		//"Assign Papers"
+		//"Assign Papers" Tab 2
 		UI_AssignToPaper subToPaper = new UI_AssignToPaper(theUserId, theRoleId, 
 														   myConference);
 		myTabbedPane.addTab(TASKS[theRoleId][1], subToPaper);
 		
-		//"Make Acceptance Decision"
+		
+		//"Make Acceptance Decision" Tab 3
 		UI_AcceptanceDecision acceptPaper = new UI_AcceptanceDecision(theUserId, 
 													theRoleId, myConference);
 		myTabbedPane.addTab(TASKS[theRoleId][2], acceptPaper);
+		
+		
+		table.getTable().getModel().addTableModelListener(new TableModelListener() {
+			@Override
+			public void tableChanged(TableModelEvent theEvent) {
+				// TODO Auto-generated method stub
+				int row = theEvent.getFirstRow();
+		        int column = theEvent.getColumn();
+		        MyTableModel model = (MyTableModel)theEvent.getSource();
+		        String columnName = model.getColumnName(column);
+		        Object data = model.getValueAt(row, column);
+		        System.out.println("Table changed at " + row + " " + data.toString());
+		        if (data.equals(true)) {
+//		        	mySelectedPaper = myPaperList.get(row);
+//		        	System.out.println(mySelectedPaper.getTitle());
+		        }
+			}
+		});
 	}
 	
 	

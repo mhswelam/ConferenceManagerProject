@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -18,7 +19,7 @@ import javax.swing.table.AbstractTableModel;
  * This class to create a table containing information at a glance.
  *
  */
-public class UI_PaperTable extends JPanel implements TableModelListener {
+public class UI_PaperTable extends JPanel {
 	/** Column headers of the table. */				 
 	private final static String[][] COLUMN_NAMES = {
 		//Empty 			0
@@ -48,6 +49,9 @@ public class UI_PaperTable extends JPanel implements TableModelListener {
 	private Object[][] myTableData;
 	/** Table that contains the data. */
 	private JTable myTable;
+	/** Last Selected Paper. */
+	private Paper mySelectedPaper;
+	JComponent myAssignToPaperUI;
 	
 	/**
 	 * Creates a table containing all the papers.
@@ -56,7 +60,7 @@ public class UI_PaperTable extends JPanel implements TableModelListener {
 	 * @param theRoleId role identification number.
 	 * @param theConference conference.
 	 */
-	public UI_PaperTable(final int theUserId, final int theRoleId, 
+	public UI_PaperTable(final int theUserId, final int theRoleId,
 						 final Conference theConference) {
 		super(new FlowLayout());
 		setBackground(BACKGROUND_COLOR);
@@ -67,6 +71,7 @@ public class UI_PaperTable extends JPanel implements TableModelListener {
 		myTableData = 
 				new Object[myPaperList.size()][COLUMN_NAMES[myRoleId].length];
 		myTable = null;
+		mySelectedPaper = null;
 	}
 
 	/**
@@ -81,8 +86,27 @@ public class UI_PaperTable extends JPanel implements TableModelListener {
 		myTable.setPreferredScrollableViewportSize(new Dimension(880, 500));
 		myTable.setBackground(BACKGROUND_COLOR);
 		myTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		myTable.getModel().addTableModelListener(this);
+//		myTable.getModel().addTableModelListener(new TableModelListener() {
+//			@Override
+//			public void tableChanged(TableModelEvent theEvent) {
+//				// TODO Auto-generated method stub
+//				int row = theEvent.getFirstRow();
+//		        int column = theEvent.getColumn();
+//		        MyTableModel model = (MyTableModel)theEvent.getSource();
+//		        String columnName = model.getColumnName(column);
+//		        Object data = model.getValueAt(row, column);
+//		        System.out.println("Table changed at " + row + " " + data.toString());
+//		        if (data.equals(true)) {
+//		        	mySelectedPaper = myPaperList.get(row);
+//		        	System.out.println(mySelectedPaper.getTitle());
+//		        }
+//			}
+//		});
 		add(scrollPane);
+	}
+	
+	public JTable getTable() {
+		return myTable;
 	}
 	
 	/**
@@ -258,36 +282,16 @@ public class UI_PaperTable extends JPanel implements TableModelListener {
 		}
 	}
 	
-//	@Override
-//	public void valueChanged(ListSelectionEvent theEvent) {
-//		System.out.println("Value changed!");
-//		int row = theEvent.getFirstIndex();
-//		int col = theEvent.getLastIndex();
-//		for (int i = 0; i < myPaperList.size(); i++) {
-//			if (row != i) {
-//				myTable.setValueAt(new Boolean(false), i, myTableData[myRoleId].length - 1);
-//			}
-//		}
-//	}
-	
-	@Override
-	public void tableChanged(TableModelEvent theEvent) {
-		// TODO Auto-generated method stub
-		int row = theEvent.getFirstRow();
-        int column = theEvent.getColumn();
-        MyTableModel model = (MyTableModel)theEvent.getSource();
-        String columnName = model.getColumnName(column);
-        Object data = model.getValueAt(row, column);
-        System.out.println("Table changed at " + row + " " + data.toString());
+	public Paper getSelectedPaper() {
+		return mySelectedPaper;
 	}
-	
 	/**
 	 * Class that determines the table model.
 	 * 
 	 * @author Clean Code
 	 *
 	 */
-	private class MyTableModel extends AbstractTableModel {
+	public class MyTableModel extends AbstractTableModel {
 		
 		/**
 		 * @return returns number of columns.

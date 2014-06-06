@@ -2,6 +2,10 @@ package cleanCode;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.ComponentOrientation;
+import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
@@ -10,11 +14,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.Dimension;
-import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
-import java.awt.ComponentOrientation;
-import javax.swing.BoxLayout;
 
 /**
  * @author Clean Code
@@ -43,6 +43,7 @@ public class UI_AssignToPaper extends JPanel {
 	 * 
 	 * @param theTheUserId unique user identification number.
 	 * @param theRoleId role identification number.
+	 * @param theTable table that contains currently selected paper.
 	 * @param theConference conference.
 	 */
 	public UI_AssignToPaper(final int theUserId, final int theRoleId,
@@ -160,9 +161,11 @@ public class UI_AssignToPaper extends JPanel {
 		lblAssignPaperTo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAssignPaperTo.setHorizontalTextPosition(SwingConstants.LEADING);
 		titleNorthFiller.add(lblAssignPaperTo);
+		
 		myUserId = theUserId;
 		myRoleId = theRoleId;
 		myPaperId = 0;
+		
 		myConference = theConference;
 		myAuthorLabel = new JLabel();
 		myTitleLabel = new JLabel();
@@ -191,6 +194,11 @@ public class UI_AssignToPaper extends JPanel {
 		content.add(myTitleLabel);
 		content.add(myAssignSPC);
 		add(content);
+	}
+	
+	public void setDisplayPaper(final Paper thePaper) {
+		myPaperId = thePaper.getNumReviewers();
+		System.out.println(myPaperId);
 	}
 
 	private void getPaperInfo() {
