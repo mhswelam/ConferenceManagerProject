@@ -217,23 +217,8 @@ public class UI_ControlPanel extends JPanel {
 													theRoleId, myConference);
 		myTabbedPane.addTab(TASKS[theRoleId][2], acceptPaper);
 		
-		
-		table.getTable().getModel().addTableModelListener(new TableModelListener() {
-			@Override
-			public void tableChanged(TableModelEvent theEvent) {
-				// TODO Auto-generated method stub
-				int row = theEvent.getFirstRow();
-		        int column = theEvent.getColumn();
-		        MyTableModel model = (MyTableModel)theEvent.getSource();
-		        String columnName = model.getColumnName(column);
-		        Object data = model.getValueAt(row, column);
-		        System.out.println("Table changed at " + row + " " + data.toString());
-		        if (data.equals(true)) {
-//		        	mySelectedPaper = myPaperList.get(row);
-//		        	System.out.println(mySelectedPaper.getTitle());
-		        }
-			}
-		});
+		table.getTable().getModel().addTableModelListener(new 
+									   MyTableModelListener(table, subToPaper));
 	}
 	
 	
@@ -252,5 +237,33 @@ public class UI_ControlPanel extends JPanel {
     */
    public void logOut() {
 	   myTabbedPane.removeAll();
+   }
+   
+   private class MyTableModelListener implements TableModelListener {
+	   private UI_PaperTable myPaperTable;
+	   private UI_AssignToPaper myAssignToPaper;
+	   
+	   public MyTableModelListener(final UI_PaperTable theTable, 
+			   					   final UI_AssignToPaper theAssignToPaper) {
+		   super();
+		   myPaperTable = theTable;
+		   myAssignToPaper = theAssignToPaper;
+	   }
+	   
+		@Override
+		public void tableChanged(TableModelEvent theEvent) {
+			// TODO Auto-generated method stub
+			int row = theEvent.getFirstRow();
+	        int column = theEvent.getColumn();
+	        MyTableModel model = (MyTableModel)theEvent.getSource();
+	        String columnName = model.getColumnName(column);
+	        Object data = model.getValueAt(row, column);
+	        System.out.println("Table changed at " + row + " " + data.toString());
+	        if (data.equals(true)) {
+	        	Paper tempPaper = myPaperTable.getSelectedPaper(row);
+	        	myAssignToPaper.setDisplayPaper(tempPaper);
+	        	myAssignToPaper.repaint();
+	        }
+		}
    }
 }

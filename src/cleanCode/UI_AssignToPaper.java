@@ -36,6 +36,7 @@ public class UI_AssignToPaper extends JPanel {
 	private JLabel myAuthorLabel;
 	private JLabel myTitleLabel;
 	private JComboBox myAssignSPC;
+	private Paper myPaper;
 	
 	/**
 	 * Creates a panel that contains all information 
@@ -63,9 +64,9 @@ public class UI_AssignToPaper extends JPanel {
 		
 		JComboBox comboBox = new JComboBox();
 		
-		JLabel lblNotSelected = new JLabel("Not Selected");
+		myAuthorLabel = new JLabel("Not Selected");
 		
-		JLabel lblNotSelected_1 = new JLabel("Not Selected");
+		myTitleLabel = new JLabel("Not Selected");
 		
 		JLabel lblSelectFirstReviewer = new JLabel("Select First Reviewer: ");
 		
@@ -90,8 +91,8 @@ public class UI_AssignToPaper extends JPanel {
 								.addComponent(lblTitle))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblNotSelected_1)
-								.addComponent(lblNotSelected)))
+								.addComponent(myTitleLabel)
+								.addComponent(myAuthorLabel)))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblSubprogramChair)
@@ -113,11 +114,11 @@ public class UI_AssignToPaper extends JPanel {
 					.addGap(80)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblAuthor)
-						.addComponent(lblNotSelected))
+						.addComponent(myAuthorLabel))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblTitle)
-						.addComponent(lblNotSelected_1))
+						.addComponent(myTitleLabel))
 					.addGap(31)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblSubprogramChair)
@@ -165,10 +166,8 @@ public class UI_AssignToPaper extends JPanel {
 		myUserId = theUserId;
 		myRoleId = theRoleId;
 		myPaperId = 0;
-		
+		myPaper = null;
 		myConference = theConference;
-		myAuthorLabel = new JLabel();
-		myTitleLabel = new JLabel();
 		
 	}
 	
@@ -197,8 +196,12 @@ public class UI_AssignToPaper extends JPanel {
 	}
 	
 	public void setDisplayPaper(final Paper thePaper) {
-		myPaperId = thePaper.getNumReviewers();
-		System.out.println(myPaperId);
+		myPaper = thePaper;
+		System.out.println(myPaper.getTitle());
+		myTitleLabel.setText(myPaper.getTitle());
+		String firstName = myConference.getAuthor(myPaper.getAuthor()).myFristName;
+		String lastName = myConference.getAuthor(myPaper.getAuthor()).myLastName;
+		myAuthorLabel.setText(firstName + " " + lastName);
 	}
 
 	private void getPaperInfo() {

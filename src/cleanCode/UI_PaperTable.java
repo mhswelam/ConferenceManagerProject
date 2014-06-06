@@ -10,8 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -282,8 +280,13 @@ public class UI_PaperTable extends JPanel {
 		}
 	}
 	
-	public Paper getSelectedPaper() {
-		return mySelectedPaper;
+	/**
+	 * @param theIndex of the paper in the list.
+	 * 
+	 * @return paper located at that index;
+	 */
+	public Paper getSelectedPaper(final int theIndex) {
+		return myPaperList.get(theIndex);
 	}
 	/**
 	 * Class that determines the table model.
