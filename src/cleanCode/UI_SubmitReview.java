@@ -68,17 +68,40 @@ public class UI_SubmitReview extends JPanel implements ActionListener{
 		add(topPanel, BorderLayout.NORTH);
 		
 		JLabel paperLabel = new JLabel("Selected Paper :");
-		topPanel.add(paperLabel);
 		
 		JLabel currentPaper = new JLabel(myPaper.getTitle());
-		topPanel.add(currentPaper);
 		
 		JLabel authorLabel = new JLabel("Author :");
-		topPanel.add(authorLabel);
 		
 		String authorName = myConferenc.getAuthor(myPaper.getAuthor()).myFristName +" " +myConferenc.getAuthor(myPaper.getAuthor()).myLastName;
 		JLabel currentAuthorLabel = new JLabel(authorName);
-		topPanel.add(currentAuthorLabel);
+		GroupLayout gl_topPanel = new GroupLayout(topPanel);
+		gl_topPanel.setHorizontalGroup(
+			gl_topPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_topPanel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(paperLabel)
+					.addGap(18)
+					.addComponent(currentPaper)
+					.addGap(265)
+					.addComponent(authorLabel)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(currentAuthorLabel)
+					.addGap(363))
+		);
+		gl_topPanel.setVerticalGroup(
+			gl_topPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_topPanel.createSequentialGroup()
+					.addGap(5)
+					.addGroup(gl_topPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_topPanel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(paperLabel)
+							.addComponent(currentPaper))
+						.addGroup(gl_topPanel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(authorLabel)
+							.addComponent(currentAuthorLabel))))
+		);
+		topPanel.setLayout(gl_topPanel);
 		
 		JPanel centerPanel = new JPanel();
 		add(centerPanel, BorderLayout.CENTER);
