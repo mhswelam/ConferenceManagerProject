@@ -5,12 +5,10 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.AbstractTableModel;
 
 /**
  * @author Clean Code
@@ -77,7 +75,7 @@ public class UI_PaperTable extends JPanel {
 	 */
 	public void setUp() {
 		setData();
-		myTable = new JTable(new MyTableModel());
+		myTable = new JTable(new MyTableModel(myRoleId, myTableData));
 		JScrollPane scrollPane = new JScrollPane(myTable);
 		scrollPane.setBackground(BACKGROUND_COLOR);
 		myTable.setFillsViewportHeight(true);
@@ -163,7 +161,7 @@ public class UI_PaperTable extends JPanel {
 				//Reviewer will have their
 				//name next to their score
 				String name = "";
-				if (myRoleId == 2) {
+				if (review != null && myRoleId == 2) {
 					int id = review.getMyReviewerId();
 					if (id == 0) {
 						name = "Not Assigned";
@@ -273,89 +271,4 @@ public class UI_PaperTable extends JPanel {
 	public Paper getSelectedPaper(final int theIndex) {
 		return myPaperList.get(theIndex);
 	}
-	/**
-	 * Class that determines the table model.
-	 * 
-	 * @author Clean Code
-	 *
-	 */
-	public class MyTableModel extends AbstractTableModel {
-		
-		/**
-		 * @return returns number of columns.
-		 */
-        public int getColumnCount() {
-            return COLUMN_NAMES[myRoleId].length;
-        }
-
-        /**
-         * @return number of rows.
-         */
-        public int getRowCount() {
-            return myTableData.length;
-        }
-
-        /**
-         * Retrieves name of the column.
-         * 
-         * @param theColumn column index.
-         * 
-         * @return returns name of the index.
-         */
-        public String getColumnName(final int theColumn) {
-            return COLUMN_NAMES[myRoleId][theColumn];
-        }
-
-        /**
-         * Retrieves the value in the selected row and column.
-         * 
-         * @param theRow row index.
-         * @param theColumn column index.
-         * 
-         * @return returns object of the data.
-         */
-        public Object getValueAt(final int theRow, final int theColumn) {
-            return myTableData[theRow][theColumn];
-        }
-
-        /**
-         * Sets up the table to render data.
-         * 
-         * @param theColumn column index.
-         * 
-         * @return returns the class of the value in the table.
-         */
-        public Class getColumnClass(final int theColumn) {
-            return getValueAt(0, theColumn).getClass();
-        }
-
-        /**
-         * Lets user edit the last cell in the table.
-         * 
-         * @param theRow row index.
-         * @param theColumn column index.
-         * 
-         * @return returns true if the column is editable, false if not.
-         */
-        public boolean isCellEditable(final int theRow, final int theColumn) {
-            if (theColumn == myTableData[myRoleId].length - 1) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        /**
-         * Changes the data in the table.
-         * 
-         * @param theValue object that will be in the cell.
-         * @param theRow row index.
-         * @param theColumn column index.
-         */
-        public void setValueAt(final Object theValue, final int theRow, 
-        		final int theColumn) {
-            myTableData[theRow][theColumn] = theValue;
-            fireTableCellUpdated(theRow, theColumn);
-        }
-    }
 }
