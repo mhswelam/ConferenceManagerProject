@@ -12,6 +12,7 @@ import javax.swing.ListSelectionModel;
 
 /**
  * @author Clean Code
+ * 
  * This class to create a table containing information at a glance.
  *
  */

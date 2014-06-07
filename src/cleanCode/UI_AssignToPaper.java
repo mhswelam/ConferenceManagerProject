@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 
 /**
  * @author Clean Code
+ *  
  * This class to a page that assigns users to papers.
  *
  */
@@ -113,12 +114,12 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 		//Set up for Program Chair
 		if (myRoleId == 1) {
 			nameLabel.setText("Assign Paper to Subprogram Chair");
-			setUpPC();
+//			setUpPC();
 			createProgramChairLayout(authorLabel, titleLabel, mainPanel);
 		//Set up for Subprogram Chair
 		} else if (myRoleId == 2) {
 			nameLabel.setText("Assign Reviewers to the Paper");
-			setUpSPC();
+//			setUpSPC();
 			createSubProgramChairLayout(authorLabel, titleLabel, mainPanel);
 		}
 		setUpLayout(nameLabel);
@@ -143,31 +144,42 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 	 * Sets up the panel so Program Chair can designate 
 	 * a Subprogram Chair for a paper.
 	 */
-	private void setUpPC() {
+	public void setUpPC() {
 		if (myPaper != null) {
 			//Add available Subprogram Chairs to Combo Box.
-			ArrayList<SubProgramChair> availableSPC = myConference.getAvaSubProgram(myPaper.getId());
+			ArrayList<SubProgramChair> availableSPC = 
+								myConference.getAvaSubProgram(myPaper.getId());
+			if (mySubChairBox.getItemCount() > 0) {
+				mySubChairBox.removeAllItems();
+			}
 			for (SubProgramChair spc : availableSPC) {
 				String name = spc.myFristName + " " + spc.myLastName;
 				mySubChairBox.addItem(name);
 			}
 		}
-		
 	}
 	
 	/**
 	 * Sets up the panel so Subprogram Chair can Designate three
 	 * Reviewers for the Paper.
 	 */
-	private void setUpSPC() {
-		//Add available Reviewers to Combo Boxes.
-		ArrayList<Reviewer> availableReviewers = myConference.getAvaReviewer();
-		
-		for (Reviewer rev : availableReviewers) {
-			String name = rev.myFristName + " " + rev.myLastName;
-			myReviewerOneBox.addItem(name);
-			myReviewerTwoBox.addItem(name);
-			myReviewerThreeBox.addItem(name);
+	public void setUpSPC() {
+		if (myPaper != null) {
+			//Add available Reviewers to Combo Boxes.
+			ArrayList<Reviewer> availableReviewers = myConference.getAvaReviewer();
+			if (myReviewerOneBox.getItemCount() > 0 || 
+				myReviewerTwoBox.getItemCount() > 0 || 
+				myReviewerThreeBox.getItemCount() > 0) {
+				myReviewerOneBox.removeAllItems();
+				myReviewerTwoBox.removeAllItems();
+				myReviewerThreeBox.removeAllItems();
+			}
+			for (Reviewer rev : availableReviewers) {
+				String name = rev.myFristName + " " + rev.myLastName;
+				myReviewerOneBox.addItem(name);
+				myReviewerTwoBox.addItem(name);
+				myReviewerThreeBox.addItem(name);
+			}
 		}
 	}
 	

@@ -171,7 +171,8 @@ public class UI_ControlPanel extends JPanel {
         recoomTab.setBackground(BACKGROUND_COLOR);
     
 		table.getTable().getSelectionModel().addListSelectionListener(new 
-				  		   MyTableModelListener(table, reviewersToPaper, null));
+				  		   MyTableModelListener(table, reviewersToPaper, null, 
+				  				   						 theRoleId, theUserId));
 	}
 	
 	/**
@@ -200,7 +201,8 @@ public class UI_ControlPanel extends JPanel {
 		acceptPaper.setUp();
 		myTabbedPane.addTab(TASKS[theRoleId][2], acceptPaper);
 		table.getTable().getSelectionModel().addListSelectionListener(new 
-						  MyTableModelListener(table, subToPaper, acceptPaper));
+						  MyTableModelListener(table, subToPaper, acceptPaper, 
+								  						 theRoleId, theUserId));
 	}
 	
    /**

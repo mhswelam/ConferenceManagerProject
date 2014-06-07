@@ -15,6 +15,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 /**
  * @author Clean Code
+ * 
  * This class to a page that lets Program Chair 
  * Accept/Deny Paper in the conference. 
  *
@@ -178,9 +179,9 @@ public class UI_AcceptanceDecision extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent theEvent) {
 		if (myPaper != null) {
 			if (theEvent.getActionCommand().equals("Accept Paper")) {
-				myPaper.changeStatus("Accepted");
+				myConference.getPaper(myPaper.getId()).changeStatus("Accepted");
 			} else if (theEvent.getActionCommand().equals("Deny Paper")) {
-				myPaper.changeStatus("Denied");
+				myConference.getPaper(myPaper.getId()).changeStatus("Denied");
 			}
 		}
 	}

@@ -17,6 +17,10 @@ public class MyTableModelListener implements ListSelectionListener {
    private UI_AssignToPaper myAssignToPaper;
    /** Panel that lets Program Chair accept or deny paper.*/
    private UI_AcceptanceDecision myAcceptPaper;
+	/** Unique identification number of the user. */
+	private int myUserId;
+	/** Role of the user. */
+	private int myRoleId;
    
    /**
     * Creates a listener that updates the 
@@ -25,14 +29,19 @@ public class MyTableModelListener implements ListSelectionListener {
     * @param theTable table that displays all the papers.
     * @param theAssignToPaper panel that lets assign a user to the paper.
     * @param theAcceptPaper panel that lets Program Chair accept/deny paper.
+ 	* @param theTheUserId unique user identification number.
+	* @param theRoleId role identification number.
     */
    public MyTableModelListener(final UI_PaperTable theTable, 
 		   					   final UI_AssignToPaper theAssignToPaper, 
-		   					   final UI_AcceptanceDecision theAcceptPaper) {
+		   					   final UI_AcceptanceDecision theAcceptPaper,
+		   					   final int theRoleId, final int theUserId) {
 	   super();
 	   myPaperTable = theTable;
 	   myAssignToPaper = theAssignToPaper;
 	   myAcceptPaper = theAcceptPaper;
+	   myRoleId = theRoleId;
+	   myUserId = theUserId;
    }
    
    /**
@@ -49,6 +58,13 @@ public class MyTableModelListener implements ListSelectionListener {
 		} 
 		if (myAcceptPaper != null) {
 	    	myAcceptPaper.setDisplayPaper(tempPaper);
+		}
+		//Set up for Program Chair
+		if (myRoleId == 1) {
+			myAssignToPaper.setUpPC();
+		//Set up for Subprogram Chair
+		} else if (myRoleId == 2) {
+			myAssignToPaper.setUpSPC();
 		}
 	}
 }
