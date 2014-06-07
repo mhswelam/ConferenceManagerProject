@@ -142,6 +142,7 @@ public class UI_PaperTable extends JPanel {
 		int k = 0;
 		for (Paper paper : myPaperList) {
 			int[] reviewsId = paper.getReviews();
+			
 			for (int i = 0; i < reviewsId.length; i++) {
 				String data = "";
 				Review review = myConference.getReview(reviewsId[i]);
@@ -183,7 +184,7 @@ public class UI_PaperTable extends JPanel {
 		for (Paper paper : myPaperList) {
 			int[] reviewsId = paper.getReviews();
 			for (int k = 0; k < reviewsId.length; k++) {
-				Review rev = myConference.getReview(reviewsId[i]);
+				Review rev = myConference.getReview(reviewsId[k]);
 				int reviewerId = rev.getMyReviewerId();
 				if (reviewerId == myUserId) {
 					int temp = rev.getReviewSummary();

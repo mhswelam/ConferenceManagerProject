@@ -43,17 +43,20 @@ public class UI_ControlPanel extends JPanel {
 	private JTabbedPane myTabbedPane;
 	/** Conference .*/
 	private Conference myConference;
+	/** Frame that holds the panels. */
 	private JFrame myFrame;
 	
 	/**
 	 * Creates panel that includes task tabs.
 	 * 
 	 * @param theConference conference.
+	 * @param theFrame frame that holds the panels.
 	 */
-	public UI_ControlPanel(final Conference theConference, JFrame frame) {
+	public UI_ControlPanel(final Conference theConference, 
+						   final JFrame theFrame) {
 		super(new GridLayout(1, 1));
 		setBackground(BACKGROUND_COLOR);
-		myFrame = frame;
+		myFrame = theFrame;
 		myConference = theConference;
 		myTabbedPane = new JTabbedPane();
 	}
