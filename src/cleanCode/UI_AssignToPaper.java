@@ -59,6 +59,8 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 	
 	
 	
+	
+	
 	/**
 	 * Creates a panel that contains all information 
 	 * needed to assign paper to a user.
@@ -142,13 +144,15 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 	 * a Subprogram Chair for a paper.
 	 */
 	private void setUpPC() {
-		//Add available Subprogram Chairs to Combo Box.
-		ArrayList<SubProgramChair> availableSPC = 
-												myConference.getAvaSubProgram(myPaper.getId());
-		for (SubProgramChair spc : availableSPC) {
-			String name = spc.myFristName + " " + spc.myLastName;
-			mySubChairBox.addItem(name);
+		if (myPaper != null) {
+			//Add available Subprogram Chairs to Combo Box.
+			ArrayList<SubProgramChair> availableSPC = myConference.getAvaSubProgram(myPaper.getId());
+			for (SubProgramChair spc : availableSPC) {
+				String name = spc.myFristName + " " + spc.myLastName;
+				mySubChairBox.addItem(name);
+			}
 		}
+		
 	}
 	
 	/**
