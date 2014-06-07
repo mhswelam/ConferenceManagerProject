@@ -64,9 +64,11 @@ public class UI_AcceptanceDecision extends JPanel implements ActionListener {
 		myTitleNameLabel = new JLabel("Not Selected");
 		myAuthorNameLabel = new JLabel("Not Selected");
 		myAcceptRadioButton = new JRadioButton("Accept Paper");
+		myAcceptRadioButton.setEnabled(false);
 		myAcceptRadioButton.addActionListener(this);
 		
 		myDenyRadioButton = new JRadioButton("Deny Paper");
+		myDenyRadioButton.setEnabled(false);
 		myDenyRadioButton.addActionListener(this);
 	}
 	
@@ -168,6 +170,8 @@ public class UI_AcceptanceDecision extends JPanel implements ActionListener {
 		String lastName = myConference.getAuthor(
 												myPaper.getAuthor()).myLastName;
 		myAuthorNameLabel.setText(firstName + " " + lastName);
+		myAcceptRadioButton.setEnabled(true);
+		myDenyRadioButton.setEnabled(true);
 	}
 
 	/**
@@ -180,8 +184,10 @@ public class UI_AcceptanceDecision extends JPanel implements ActionListener {
 		if (myPaper != null) {
 			if (theEvent.getActionCommand().equals("Accept Paper")) {
 				myConference.getPaper(myPaper.getId()).changeStatus("Accepted");
+				myDenyRadioButton.setSelected(false);
 			} else if (theEvent.getActionCommand().equals("Deny Paper")) {
 				myConference.getPaper(myPaper.getId()).changeStatus("Denied");
+				myAcceptRadioButton.setSelected(false);
 			}
 		}
 	}

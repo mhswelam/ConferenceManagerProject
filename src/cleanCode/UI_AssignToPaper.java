@@ -35,6 +35,11 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 	/** Conference. */
 	private Conference myConference;
 	
+	/** List of available Subprogram Chairs. */
+	private ArrayList<SubProgramChair> myAvailableSPC;
+	/** List of available Reviewers. */
+	private ArrayList<Reviewer> myAvailableReviewers;
+	
 	/** Label that holds authors name. */
 	private JLabel myAuthorNameLabel;
 	/** Label that holds title of the paper.*/
@@ -42,6 +47,7 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 	
 	/** Combo box that holds a list of subprogram chairs. */
 	private JComboBox mySubChairBox;
+	
 	/** Combo box that holds a list of reviewers. */
 	private JComboBox myReviewerOneBox;
 	/** Combo box that holds a list of reviewers. */
@@ -80,18 +86,32 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 		myPaper = null;
 		myConference = theConference;
 		
+		myAvailableSPC = new ArrayList<SubProgramChair>();
+		myAvailableReviewers = new ArrayList<Reviewer>();
+		
 		//initially when nothing is selected.
 		myAuthorNameLabel = new JLabel("Not Selected");
 		myPaperTitleLabel = new JLabel("Not Selected");
 		
 		mySubChairBox = new JComboBox();
 		mySubChairBox.addActionListener(this);
+		mySubChairBox.setEnabled(false);
+		
 		myReviewerOneBox = new JComboBox();
 		myReviewerOneBox.addActionListener(this);
+		myReviewerOneBox.setEnabled(false);
+		myReviewerOneBox.setName("Reviewer 1");
+		
 		myReviewerTwoBox = new JComboBox();
 		myReviewerTwoBox.addActionListener(this);
+		myReviewerTwoBox.setEnabled(false);
+		myReviewerTwoBox.setName("Reviewer 2");
+
 		myReviewerThreeBox = new JComboBox();
 		myReviewerThreeBox.addActionListener(this);
+		myReviewerThreeBox.setEnabled(false);
+		myReviewerThreeBox.setName("Reviewer 3");
+
 		
 		mySubChairLabel = new JLabel("Select Subprogram Chair: ");
 		myFirstReviewerLabel = new JLabel("Select First Reviewer: ");
@@ -114,12 +134,10 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 		//Set up for Program Chair
 		if (myRoleId == 1) {
 			nameLabel.setText("Assign Paper to Subprogram Chair");
-//			setUpPC();
 			createProgramChairLayout(authorLabel, titleLabel, mainPanel);
 		//Set up for Subprogram Chair
 		} else if (myRoleId == 2) {
 			nameLabel.setText("Assign Reviewers to the Paper");
-//			setUpSPC();
 			createSubProgramChairLayout(authorLabel, titleLabel, mainPanel);
 		}
 		setUpLayout(nameLabel);
@@ -147,14 +165,19 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 	public void setUpPC() {
 		if (myPaper != null) {
 			//Add available Subprogram Chairs to Combo Box.
-			ArrayList<SubProgramChair> availableSPC = 
-								myConference.getAvaSubProgram(myPaper.getId());
-			if (mySubChairBox.getItemCount() > 0) {
+			myAvailableSPC = myConference.getAvaSubProgram(myPaper.getId());
+			if (mySubChairBox.getItemCount() > 1) {
 				mySubChairBox.removeAllItems();
 			}
-			for (SubProgramChair spc : availableSPC) {
+			//First entry is blank
+			mySubChairBox.addItem("");
+			for (SubProgramChair spc : myAvailableSPC) {
 				String name = spc.myFristName + " " + spc.myLastName;
 				mySubChairBox.addItem(name);
+			}
+			
+			if (!mySubChairBox.isEnabled()) {
+				mySubChairBox.setEnabled(true);
 			}
 		}
 	}
@@ -166,22 +189,34 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 	public void setUpSPC() {
 		if (myPaper != null) {
 			//Add available Reviewers to Combo Boxes.
-			ArrayList<Reviewer> availableReviewers = myConference.getAvaReviewer();
-			if (myReviewerOneBox.getItemCount() > 0 || 
-				myReviewerTwoBox.getItemCount() > 0 || 
-				myReviewerThreeBox.getItemCount() > 0) {
+			myAvailableReviewers = myConference.getAvaReviewer();
+			if (myReviewerOneBox.getItemCount() > 1 || 
+				myReviewerTwoBox.getItemCount() > 1 || 
+				myReviewerThreeBox.getItemCount() > 1) {
 				myReviewerOneBox.removeAllItems();
 				myReviewerTwoBox.removeAllItems();
 				myReviewerThreeBox.removeAllItems();
 			}
-			for (Reviewer rev : availableReviewers) {
+			
+			//First entry is blank
+			myReviewerOneBox.addItem("");
+			myReviewerTwoBox.addItem("");
+			myReviewerThreeBox.addItem("");
+			for (Reviewer rev : myAvailableReviewers) {
 				String name = rev.myFristName + " " + rev.myLastName;
 				myReviewerOneBox.addItem(name);
 				myReviewerTwoBox.addItem(name);
 				myReviewerThreeBox.addItem(name);
 			}
+			//If one reviewer box is disabled, then all of them must be disabled
+			if (!myReviewerOneBox.isEnabled()) {
+				myReviewerOneBox.setEnabled(true);
+				myReviewerTwoBox.setEnabled(true);
+				myReviewerThreeBox.setEnabled(true);
+			}
 		}
 	}
+	
 	
 	/**
 	 * Sets up the layout of the main panel.
@@ -223,6 +258,7 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 	private void createProgramChairLayout(final JLabel theTitleLabel, 
 		final JLabel theAuthorLabel, final JPanel theMainPanel) {
 		GroupLayout mainPanelLayout = new GroupLayout(theMainPanel);
+		
 		//parallel group
 		mainPanelLayout.setHorizontalGroup(
 			mainPanelLayout.createParallelGroup(Alignment.LEADING)
@@ -249,7 +285,7 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 															  Alignment.LEADING)
 								.addGroup(mainPanelLayout.createParallelGroup(
 													   Alignment.LEADING, false)
-									.addComponent(mySubChairBox, 0, 107, 
+									.addComponent(mySubChairBox, 0, 200, 
 														 Short.MAX_VALUE)))))));
 		
 		//vertical group
@@ -314,17 +350,14 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 								)
 							.addGap(18)
 							.addGroup(mainPanelLayout.createParallelGroup(
-															  Alignment.LEADING)
-								.addComponent(myReviewerThreeBox, 0, 
-													   GroupLayout.DEFAULT_SIZE, 
+													   Alignment.LEADING, false)
+								.addComponent(myReviewerThreeBox, 0, 200, 
 													   			Short.MAX_VALUE)
 								.addGroup(mainPanelLayout.createParallelGroup(
 													   Alignment.LEADING, false)
-									.addComponent(myReviewerTwoBox, 0, 
-													   GroupLayout.DEFAULT_SIZE, 
+									.addComponent(myReviewerTwoBox, 0, 200, 
 													   			Short.MAX_VALUE)
-									.addComponent(myReviewerOneBox, 0, 
-													   GroupLayout.DEFAULT_SIZE, 
+									.addComponent(myReviewerOneBox, 0, 200, 
 													   			Short.MAX_VALUE)
 															))))));
 		
@@ -378,17 +411,45 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent theEvent) {
-//		System.out.println(theEvent.getActionCommand());
-		
 		//Program Chair assigns Subprogram Chair
 		if (myRoleId == 1) {
-			
-//			myPaper.assignSubProgramChair(theSubChairId);
-			
+			if (mySubChairBox.getSelectedIndex() > 0) {
+				SubProgramChair spc = myAvailableSPC.get(
+										  mySubChairBox.getSelectedIndex() - 1);
+				int spcId = spc.myUserId;
+				myConference.getPaper(myPaper.getId())
+												  .assignSubProgramChair(spcId);
+			}
 		//Subprogram Chair assigns Reviewers
 		} else if (myRoleId == 2) {
+			JComboBox temp = (JComboBox) theEvent.getSource();
+			String name = temp.getName();
 			
+			//Assigns first Reviewer
+			if (name.equals("Reviewer 1")) {
+				if (myReviewerOneBox.getSelectedIndex() > 0) {
+					Reviewer rev = myAvailableReviewers.get(myReviewerOneBox
+													   .getSelectedIndex() - 1);
+					int revId = rev.myUserId;
+					myConference.getPaper(myPaper.getId()).addReviewer(revId);
+				}
+			//Assigns Second Reviewer
+			} else if (name.equals("Reviewer 2")) {
+				if (myReviewerTwoBox.getSelectedIndex() > 0) {
+					Reviewer rev = myAvailableReviewers.get(myReviewerTwoBox
+							   						   .getSelectedIndex() - 1);
+					int revId = rev.myUserId;
+					myConference.getPaper(myPaper.getId()).addReviewer(revId);
+				}
+			//Assigns Third Reviewer
+			} else {
+				if (myReviewerThreeBox.getSelectedIndex() > 0) {
+					Reviewer rev = myAvailableReviewers.get(myReviewerThreeBox
+							   						   .getSelectedIndex() - 1);
+					int revId = rev.myUserId;
+					myConference.getPaper(myPaper.getId()).addReviewer(revId);
+				}
+			}	
 		}
-		
 	}
 }

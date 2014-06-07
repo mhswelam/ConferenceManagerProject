@@ -94,7 +94,7 @@ public class UI_PaperTable extends JPanel {
 	 * 
 	 * @return data from all the papers.
 	 */
-	private void setData() {
+	public void setData() {
 		//Names at titles of the paper are included for all users.
 		fillNameTitle();
 		//Program Chair
@@ -209,12 +209,18 @@ public class UI_PaperTable extends JPanel {
 	private void addSPCScore() {
 		int i = 0;
 		for (Paper paper : myPaperList) {
-			int rec = paper.getRecommendation();
+			int recId = paper.getRecommendation();
 			String score = "";
-			if (rec == 0) {
+			//FIX THIS
+			if (myConference.getRecommendation(recId) == null) {
 				score = "Not Reviewed";
 			} else {
-				score = "" + rec;
+				int rec = myConference.getRecommendation(recId).getGrade();
+				if (rec == 0) {
+					score = "Not Reviewed";
+				} else {
+					score = "" + rec;
+				}
 			}
 			//If the Program Chair is viewing
 			//Subprogram Chair will have their
