@@ -144,7 +144,7 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 	private void setUpPC() {
 		//Add available Subprogram Chairs to Combo Box.
 		ArrayList<SubProgramChair> availableSPC = 
-												myConference.getAvaSubProgram();
+												myConference.getAvaSubProgram(myPaper.getId());
 		for (SubProgramChair spc : availableSPC) {
 			String name = spc.myFristName + " " + spc.myLastName;
 			mySubChairBox.addItem(name);
