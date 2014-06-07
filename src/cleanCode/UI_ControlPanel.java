@@ -116,7 +116,6 @@ public class UI_ControlPanel extends JPanel {
 														 myConference, myFrame);
 		unsubmit.setUp();
 		myTabbedPane.addTab(TASKS[theRoleId][4], unsubmit);
-		
 	}
 	
 	/**
@@ -130,30 +129,14 @@ public class UI_ControlPanel extends JPanel {
 		UI_PaperTable table = new UI_PaperTable(theUserId, theRoleId,
 												myConference);
 		table.setUp();
-		//JComponent viewPaperTab = table;
 		myTabbedPane.addTab(TASKS[theRoleId][0], table);
 		
 		//"Review Papers"
 		Paper temp = myConference.getPaper(9);
 		
-		JComponent tab = new UI_SubmitReview(myConference, temp, theUserId);
+		UI_SubmitReview tab = new UI_SubmitReview(myConference, temp, theUserId);
 		myTabbedPane.addTab(TASKS[theRoleId][1], tab);
         tab.setBackground(BACKGROUND_COLOR);
-		int size = TASKS[theRoleId].length;
-		for (int i = 0; i < size; i++) {
-			//JComponent tab = null;
-			//View Paper for any user
-			if (TASKS[theRoleId][i].equals(TASKS[theRoleId][0])) {
-				
-//				tab = makeViewPaperPanel(theUserId, theRoleId);
-			//Submit Paper for Author
-			} else {
-				
-				//tab = makeTextPanel(TASKS[theRoleId][i]);
-			}
-	        //myTabbedPane.addTab(TASKS[theRoleId][i], tab);
-	        //tab.setBackground(BACKGROUND_COLOR);
-		}
 	}
 	
 	/**
@@ -183,25 +166,9 @@ public class UI_ControlPanel extends JPanel {
         															 theUserId);
         myTabbedPane.addTab(TASKS[theRoleId][2], recoomTab);
         recoomTab.setBackground(BACKGROUND_COLOR);
-        
-		//"View Reviewers"
-		int size = TASKS[theRoleId].length;
-		for (int i = 0; i < size; i++) {
-			JComponent tab = null;
-			//View Paper for any user
-			if (TASKS[theRoleId][i].equals(TASKS[theRoleId][0])) {
-				
-				//tab = table;
-//				tab = makeViewPaperPanel(theUserId, theRoleId);
-			//Submit Paper for Author
-			} else {
-				//tab = makeTextPanel(TASKS[theRoleId][i]);
-				
-			}
-	        
-		}
+    
 		table.getTable().getSelectionModel().addListSelectionListener(new 
-				  MyTableModelListener(table, reviewersToPaper, null));
+				  		   MyTableModelListener(table, reviewersToPaper, null));
 	}
 	
 	/**
@@ -233,17 +200,6 @@ public class UI_ControlPanel extends JPanel {
 						  MyTableModelListener(table, subToPaper, acceptPaper));
 	}
 	
-	
-   private JComponent makeTextPanel(String text) {
-        JPanel panel = new JPanel(false);
-        JLabel filler = new JLabel(text);
-        filler.setHorizontalAlignment(JLabel.CENTER);
-        panel.setLayout(new GridLayout(1, 1));
-        panel.setBackground(BACKGROUND_COLOR);
-        panel.add(filler);
-        return panel;
-    }
-   
    /**
     * Removes all tabbed panels when the user logs out.
     */

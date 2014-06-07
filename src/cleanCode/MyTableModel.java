@@ -76,17 +76,6 @@ public class MyTableModel extends AbstractTableModel {
     }
 
     /**
-     * Sets up the table to render data.
-     * 
-     * @param theColumn column index.
-     * 
-     * @return returns the class of the value in the table.
-     */
-    public Class getColumnClass(final int theColumn) {
-        return getValueAt(0, theColumn).getClass();
-    }
-
-    /**
      * Changes the data in the table.
      * 
      * @param theValue object that will be in the cell.
