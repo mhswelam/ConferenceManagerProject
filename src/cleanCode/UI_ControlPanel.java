@@ -19,19 +19,27 @@ import cleanCode.UI_PaperTable.MyTableModel;
  *
  */
 public class UI_ControlPanel extends JPanel { 
+	/** Background color is white. */
+	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
 	/** Tasks for each role. 
 	 * Tasks at index 0 belongs to Author, 
 	 * Tasks at index 1 belongs to Reviewer,
 	 * Tasks at index 2 belong to Subprogram Chair,
 	 * Tasks at index 3 belong to Program Chair. */
-	private final static String[][] TASKS = { {},												//0 is empty
-		{"View Papers", "Assign Subprogram Chair", "Make Acceptance Decision"}, 				//1 Program Chair
-		{"View Papers", "Assign Reviewers", "Recommend Paper"}, 								//2	Subprogram Chair
-		{"View Papers", "View Reviews", "Submit Paper", "Edit Paper", "Unsubmit Paper"},		//3 Author
-		{"View Papers", "Review Papers"}};														//4 Reviewer
+	private final static String[][] TASKS = { 
+		//0 is empty
+		{},												
+		//1 Program Chair
+		{"View Papers", "Assign Subprogram Chair", "Make Acceptance Decision"},
+		//2	Subprogram Chair
+		{"View Papers", "Assign Reviewers", "Recommend Paper"}, 								
+		//3 Author
+		{"View Papers", "View Reviews", "Submit Paper", "Edit Paper", 
+															  "Unsubmit Paper"},		
+		//4 Reviewer
+		{"View Papers", "Review Papers"}};														
 	
-	/** Background color is white. */
-	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
+	
 	
 	/** Tabbed pane. */
 	private JTabbedPane myTabbedPane;
@@ -165,15 +173,16 @@ public class UI_ControlPanel extends JPanel {
         table.setBackground(BACKGROUND_COLOR);
 		
 		//"Assign Papers"
-        UI_AssignToPaper reviewersToPaper = new UI_AssignToPaper(theUserId, theRoleId, 
-				   myConference);
+        UI_AssignToPaper reviewersToPaper = new UI_AssignToPaper(theUserId, 
+        											   theRoleId, myConference);
         reviewersToPaper.setUp();
 		myTabbedPane.addTab(TASKS[theRoleId][1], reviewersToPaper);
 		reviewersToPaper.setBackground(BACKGROUND_COLOR);
 		
 		//"Recommend Paper"
         Paper temp = myConference.getPaper(6);
-        JComponent recoomTab = new UI_SubmitRecommendation(myConference, temp, theUserId);
+        JComponent recoomTab = new UI_SubmitRecommendation(myConference, temp, 
+        															 theUserId);
         myTabbedPane.addTab(TASKS[theRoleId][2], recoomTab);
         recoomTab.setBackground(BACKGROUND_COLOR);
         
@@ -218,9 +227,11 @@ public class UI_ControlPanel extends JPanel {
 		//"Make Acceptance Decision" Tab 3
 		UI_AcceptanceDecision acceptPaper = new UI_AcceptanceDecision(theUserId, 
 													theRoleId, myConference);
+		acceptPaper.setUp();
 		myTabbedPane.addTab(TASKS[theRoleId][2], acceptPaper);
 		table.getTable().getModel().addTableModelListener(new 
-									   MyTableModelListener(table, subToPaper));
+									   MyTableModelListener(table, subToPaper, 
+											   				acceptPaper));
 	}
 	
 	
@@ -244,12 +255,15 @@ public class UI_ControlPanel extends JPanel {
    private class MyTableModelListener implements TableModelListener {
 	   private UI_PaperTable myPaperTable;
 	   private UI_AssignToPaper myAssignToPaper;
+	   private UI_AcceptanceDecision myAcceptPaper;
 	   
 	   public MyTableModelListener(final UI_PaperTable theTable, 
-			   					   final UI_AssignToPaper theAssignToPaper) {
+			   					   final UI_AssignToPaper theAssignToPaper, 
+			   					   final UI_AcceptanceDecision theAcceptPaper) {
 		   super();
 		   myPaperTable = theTable;
 		   myAssignToPaper = theAssignToPaper;
+		   myAcceptPaper = theAcceptPaper;
 	   }
 	   
 		@Override
@@ -258,12 +272,13 @@ public class UI_ControlPanel extends JPanel {
 			int row = theEvent.getFirstRow();
 	        int column = theEvent.getColumn();
 	        MyTableModel model = (MyTableModel)theEvent.getSource();
-	        String columnName = model.getColumnName(column);
+//	        String columnName = model.getColumnName(column);
 	        Object data = model.getValueAt(row, column);
-	        System.out.println("Table changed at " + row + " " + data.toString());
+//	        System.out.println("Table changed at " + row + " " + data.toString());
 	        if (data.equals(true)) {
 	        	Paper tempPaper = myPaperTable.getSelectedPaper(row);
 	        	myAssignToPaper.setDisplayPaper(tempPaper);
+	        	myAcceptPaper.setDisplayPaper(tempPaper);
 	        	myAssignToPaper.repaint();
 	        }
 		}

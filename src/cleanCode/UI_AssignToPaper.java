@@ -33,10 +33,12 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 	private Paper myPaper;
 	/** Conference. */
 	private Conference myConference;
+	
 	/** Label that holds authors name. */
 	private JLabel myAuthorNameLabel;
 	/** Label that holds title of the paper.*/
 	private JLabel myPaperTitleLabel;
+	
 	/** Combo box that holds a list of subprogram chairs. */
 	private JComboBox mySubChairBox;
 	/** Combo box that holds a list of reviewers. */
@@ -45,6 +47,7 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 	private JComboBox myReviewerTwoBox;
 	/** Combo box that holds a list of reviewers. */
 	private JComboBox myReviewerThreeBox;
+	
 	/** Label that displays "Select Subprogram Chair.*/
 	private JLabel mySubChairLabel;
 	/** Label that displays "Select First Reviewer: ".*/
@@ -80,13 +83,10 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 		
 		mySubChairBox = new JComboBox();
 		mySubChairBox.addActionListener(this);
-		
 		myReviewerOneBox = new JComboBox();
 		myReviewerOneBox.addActionListener(this);
-		
 		myReviewerTwoBox = new JComboBox();
 		myReviewerTwoBox.addActionListener(this);
-		
 		myReviewerThreeBox = new JComboBox();
 		myReviewerThreeBox.addActionListener(this);
 		
@@ -329,7 +329,6 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(mainPanelLayout.createParallelGroup(
 															 Alignment.BASELINE)
-															 
 						.addComponent(myFirstReviewerLabel)
 						.addComponent(myReviewerOneBox, 
 								GroupLayout.PREFERRED_SIZE, 
@@ -338,7 +337,6 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(mainPanelLayout.createParallelGroup(
 															 Alignment.BASELINE)
-															 
 						.addComponent(myReviewerTwoBox, 
 								GroupLayout.PREFERRED_SIZE, 
 								GroupLayout.DEFAULT_SIZE, 
@@ -346,8 +344,7 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 						.addComponent(mySecondReviewerLabel))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(mainPanelLayout.createParallelGroup(
-															 Alignment.BASELINE)
-															 
+															 Alignment.BASELINE) 
 						.addComponent(myReviewerThreeBox, 
 								GroupLayout.PREFERRED_SIZE, 
 								GroupLayout.DEFAULT_SIZE, 
@@ -358,9 +355,23 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 		theMainPanel.setLayout(mainPanelLayout);
 	}
 
+	/**
+	 * Program Chair designates Subprogram Chair to the paper.
+	 * Subprogram Chair designates Reviewers to the paper.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent theEvent) {
 		System.out.println(theEvent.getActionCommand());
+		
+		//Program Chair assigns Subprogram Chair
+		if (myRoleId == 1) {
+			
+//			myPaper.assignSubProgramChair(theSubChairId);
+			
+		//Subprogram Chair assigns Reviewers
+		} else if (myRoleId == 2) {
+			
+		}
 		
 	}
 }
