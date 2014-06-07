@@ -36,9 +36,9 @@ public class ProgramChair extends User {
 	 * @param theConference conference.
 	 */
 	public ProgramChair(final int theUserId, final String theFirstName, 
-						final String theLastName, final String theEmail) {
+						final String theLastName, final String theEmail, int aPaperAssigned) {
 		
-		super(theUserId, theFirstName, theLastName, theEmail, 1);
+		super(theUserId, theFirstName, theLastName, theEmail, 1, aPaperAssigned);
 //		myConference = theConference;
 		myAssignedPapers = new HashMap<Integer, List<Integer>>();
 		mySubProgramChairs = new ArrayList<Integer>();

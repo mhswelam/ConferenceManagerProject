@@ -8,11 +8,11 @@ package cleanCode;
  */
 public class User {
 	
-	public static int myUserId;
+	public int myUserId;
 	public String myFristName;
 	public String myLastName;
 	public String myEmail;
-	public static int myRoleId;
+	public int myRoleId;
 	public int paperAssinged;
 	
 	public User(int aUserId, String aFristName, String aLastName,
@@ -36,13 +36,7 @@ public class User {
 		myRoleId = aRoleId;
 		paperAssinged = aPaperassinged;
 	}
-//	public void login(int aUserId) {
-//
-//	}
-//	
-//	public void logout() {
-//		
-//	}
+
 	
 
 }

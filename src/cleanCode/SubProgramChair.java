@@ -7,8 +7,7 @@ import java.util.Map;
  */
 public class SubProgramChair extends User{
 	
-	/** the amount of papers that can be assigned to the Sub Program Chair. */
-	public int papersAssigned = 0;
+	
 	
 	/** a list of the papers that the Sub Program Chair has access to. */
 	private Map<Integer, Paper> myAssignedPapers;
@@ -25,8 +24,8 @@ public class SubProgramChair extends User{
 	 */
 	public SubProgramChair(int aUserId, String aFristName, String aLastName,
 			String anEmail, int aPaperAssigned){
-	    	super(aUserId, aFristName, aLastName, anEmail, 2);
-	    	papersAssigned = aPaperAssigned;
+	    	super(aUserId, aFristName, aLastName, anEmail, 2,aPaperAssigned);
+	    	//papersAssigned = aPaperAssigned;
 	}
 	
 	/**
@@ -68,6 +67,6 @@ public class SubProgramChair extends User{
 	 * @return the amount of papers this Sub Program chair can take on.
 	 */
 	public int getAmountAssigned() {
-		return papersAssigned;
+		return super.paperAssinged;
 	}
 }

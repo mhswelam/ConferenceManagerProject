@@ -149,9 +149,9 @@ public class UI_UnsubmitPaper extends JPanel implements ActionListener,
 					+ "This will be paper abstract");
 		} else {
 			System.out.println("Inside the else");
-			System.out.println(User.myRoleId);
-			System.out.println(User.myUserId);
-			ArrayList<Paper> list = myConference.getPaperList(User.myRoleId ,User.myUserId);
+			System.out.println(myRoleId);
+			System.out.println(myUserId);
+			ArrayList<Paper> list = myConference.getPaperList(myRoleId ,myUserId);
 			System.out.println(list);
 			for(Paper temp : list) {
 				System.out.println(temp);

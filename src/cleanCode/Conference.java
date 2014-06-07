@@ -87,10 +87,8 @@ public class Conference {
 		createPaperMap();
 		createReviewMap();
 		createRecommendationMap();
-		//System.out.println(lastPaperID);
-		//addPaper(new Paper(++lastPaperID,65,"Test",3,0,0,0,0,0,0,0,0,"No status"));
-		//lastRecommendationID++;
-		//addRecommendation(new Recommendation(lastRecommendationID, 99, 23, 1, "It is working"));
+		
+		
 	}
 	
 	/**
@@ -154,7 +152,7 @@ public class Conference {
             				new Reviewer(Integer.parseInt(line[0]), line[1], line[2], line[3],Integer.parseInt(line[5])));
             	} else if (line[4].equals("1")) {
             		listOfReviewer.put(Integer.parseInt(line[0]), 
-            				new ProgramChair(Integer.parseInt(line[0]), line[1], line[2], line[3]));
+            				new ProgramChair(Integer.parseInt(line[0]), line[1], line[2], line[3], Integer.parseInt(line[5])));
             		myProgramChair = Integer.parseInt(line[0]);
             	} else if (line[4].equals("2")) {
             		listOfReviewer.put(Integer.parseInt(line[0]), 
@@ -568,12 +566,13 @@ public class Conference {
 	}
 	
 	/**
-	 * This method to get available subProgram chair
+	 * This method to get available subProgram chair for a paper
+	 * @param aPaperId to get SPC for. 
 	 */
-	public ArrayList<SubProgramChair> getAvaSubProgram() {
+	public ArrayList<SubProgramChair> getAvaSubProgram(int aPaperId) {
 		ArrayList<SubProgramChair> result = new ArrayList<SubProgramChair>(); 
 		for (Entry<Integer, User> entry: listOfReviewer.entrySet()) {
-			if (entry.getValue().myRoleId == 2 && entry.getValue().paperAssinged < 4) {
+			if (entry.getValue().myRoleId == 2 && entry.getValue().paperAssinged < 4 && listOfPaper.get(aPaperId).getAuthor()!= entry.getValue().myUserId) {
 				result.add((SubProgramChair) entry.getValue());
 			}
 		}
