@@ -116,11 +116,11 @@ public class UI_AcceptanceDecision extends JPanel implements ActionListener {
 					.addGap(76)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(authorLabel)
-						.addComponent(myTitleNameLabel))
+						.addComponent(myAuthorNameLabel))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(titleLabel)
-						.addComponent(myAuthorNameLabel))
+						.addComponent(myTitleNameLabel))
 					.addGap(137)
 					.addComponent(makeDecisionLabel)
 					.addGap(35)
@@ -170,13 +170,17 @@ public class UI_AcceptanceDecision extends JPanel implements ActionListener {
 
 	/**
 	 * Changes the status of the paper.
+	 * 
+	 * @param theEvent Program Chair has accepted or denied the paper.
 	 */
 	@Override
 	public void actionPerformed(ActionEvent theEvent) {
-		if (theEvent.getActionCommand().equals("Accept Paper")) {
-			myPaper.changeStatus("Accepted");
-		} else if (theEvent.getActionCommand().equals("Deny Paper")) {
-			myPaper.changeStatus("Denied");
+		if (myPaper != null) {
+			if (theEvent.getActionCommand().equals("Accept Paper")) {
+				myPaper.changeStatus("Accepted");
+			} else if (theEvent.getActionCommand().equals("Deny Paper")) {
+				myPaper.changeStatus("Denied");
+			}
 		}
 	}
 }

@@ -8,10 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-
-import cleanCode.UI_PaperTable.MyTableModel;
 
 /**
  * @author Clean Code
@@ -38,8 +38,6 @@ public class UI_ControlPanel extends JPanel {
 															  "Unsubmit Paper"},		
 		//4 Reviewer
 		{"View Papers", "Review Papers"}};														
-	
-	
 	
 	/** Tabbed pane. */
 	private JTabbedPane myTabbedPane;
@@ -202,6 +200,8 @@ public class UI_ControlPanel extends JPanel {
 			}
 	        
 		}
+		table.getTable().getSelectionModel().addListSelectionListener(new 
+				  MyTableModelListener(table, reviewersToPaper, null));
 	}
 	
 	/**
@@ -229,9 +229,8 @@ public class UI_ControlPanel extends JPanel {
 													theRoleId, myConference);
 		acceptPaper.setUp();
 		myTabbedPane.addTab(TASKS[theRoleId][2], acceptPaper);
-		table.getTable().getModel().addTableModelListener(new 
-									   MyTableModelListener(table, subToPaper, 
-											   				acceptPaper));
+		table.getTable().getSelectionModel().addListSelectionListener(new 
+						  MyTableModelListener(table, subToPaper, acceptPaper));
 	}
 	
 	
@@ -252,11 +251,30 @@ public class UI_ControlPanel extends JPanel {
 	   myTabbedPane.removeAll();
    }
    
-   private class MyTableModelListener implements TableModelListener {
+   /**
+    * Updates information in Assign to Subprogram Chair, Assign to Reviewer
+    * and Accept Decision Panels.
+    * 
+    * @author CleanCode
+    *
+    */
+   private class MyTableModelListener implements ListSelectionListener {
+	   /** Table that displays the papers.*/
 	   private UI_PaperTable myPaperTable;
+	   /** Panel that lets Program Chair assign Paper to Subprogram Chair.
+	    *  Panel that lets Subprogram Chair assign Paper to Reviewers.*/
 	   private UI_AssignToPaper myAssignToPaper;
+	   /** Panel that lets Program Chair accept or deny paper.*/
 	   private UI_AcceptanceDecision myAcceptPaper;
 	   
+	   /**
+	    * Creates a listener that updates the 
+	    * Information for appropriate panels.
+	    * 
+	    * @param theTable table that displays all the papers.
+	    * @param theAssignToPaper panel that lets assign a user to the paper.
+	    * @param theAcceptPaper panel that lets Program Chair accept/deny paper.
+	    */
 	   public MyTableModelListener(final UI_PaperTable theTable, 
 			   					   final UI_AssignToPaper theAssignToPaper, 
 			   					   final UI_AcceptanceDecision theAcceptPaper) {
@@ -266,21 +284,20 @@ public class UI_ControlPanel extends JPanel {
 		   myAcceptPaper = theAcceptPaper;
 	   }
 	   
+	   /**
+	    * Changes the paper that will be displayed in the other panels.
+	    * 
+	    * @param theEvent event that specifies if a table row has been selected.
+	    */
 		@Override
-		public void tableChanged(TableModelEvent theEvent) {
-			// TODO Auto-generated method stub
-			int row = theEvent.getFirstRow();
-	        int column = theEvent.getColumn();
-	        MyTableModel model = (MyTableModel)theEvent.getSource();
-//	        String columnName = model.getColumnName(column);
-	        Object data = model.getValueAt(row, column);
-//	        System.out.println("Table changed at " + row + " " + data.toString());
-	        if (data.equals(true)) {
-	        	Paper tempPaper = myPaperTable.getSelectedPaper(row);
-	        	myAssignToPaper.setDisplayPaper(tempPaper);
-	        	myAcceptPaper.setDisplayPaper(tempPaper);
-	        	myAssignToPaper.repaint();
-	        }
+		public void valueChanged(ListSelectionEvent theEvent) {
+			int row = myPaperTable.getTable().getSelectedRow();
+			Paper tempPaper = myPaperTable.getSelectedPaper(row);
+        	myAssignToPaper.setDisplayPaper(tempPaper);
+        	System.out.println("I got this far");
+        	myAcceptPaper.setDisplayPaper(tempPaper);
+        	myAssignToPaper.repaint();
+        	myAcceptPaper.repaint();
 		}
    }
 }

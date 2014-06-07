@@ -18,20 +18,19 @@ import javax.swing.ListSelectionModel;
 public class UI_PaperTable extends JPanel {
 	/** Background color is white. */
 	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
-	
 	/** Column headers of the table. */				 
 	private final static String[][] COLUMN_NAMES = {
 		//Empty 			0
 		{},						
 		//Program Chair 	1
 		{"Author", "Title", "Review 1", "Review 2", "Review 3", 
-		"Subprogram Chair : Review", "Acceptence Status", "Select"},	
+		"Subprogram Chair : Review", "Acceptence Status"},	
 		//SubProgram Chair	2
-		{"Author", "Title", "Review 1", "Review 2", "Review 3", "Select"}, 
+		{"Author", "Title", "Review 1", "Review 2", "Review 3"}, 
 		//Author			3
-		{"Author", "Title", "Acceptence Status", "Select"},			
+		{"Author", "Title", "Acceptence Status"},			
 		//Reviewer			4
-		{"Author", "Title", "Review", "Select"}};								
+		{"Author", "Title", "Review"}};								
 	
 	
 	/** Unique identification number of the user. */
@@ -102,19 +101,15 @@ public class UI_PaperTable extends JPanel {
 			addReviewScores();
 			addSPCScore();
 			addAcceptanceStatus(6);
-			addSelectButton(7);
 		//SPC
 		} else if (myRoleId == 2) {
 			addReviewScores();
-			addSelectButton(5);
 		//Author
 		} else if (myRoleId == 3) {
 			addAcceptanceStatus(2);
-			addSelectButton(3);
 		//Reviewer
 		} else if (myRoleId == 4) {
 			addReviewerScore();
-			addSelectButton(3);
 		}
 	}
 	
@@ -226,14 +221,14 @@ public class UI_PaperTable extends JPanel {
 			if (myRoleId == 1) {
 				int id = paper.getSubProgramChair();
 				if (id == 0) {
-					name = "Not Assigned";
+					name = "Not Assigned\t";
 				} else {
 					String firstName = myConference.getReviewer(id).myFristName;
 					String lastName = myConference.getReviewer(id).myLastName;
-					name = firstName + " " + lastName  + " : ";
+					name = firstName + " " + lastName;
 				}
 			}
-			myTableData[i][5] = name + score;
+			myTableData[i][5] = name + "\t : " + score;
 			i++;
 		}
 	}
@@ -248,18 +243,6 @@ public class UI_PaperTable extends JPanel {
 			String status = paper.getStatus();
 			myTableData[i][theIndex] = status;
 			i++;
-		}
-	}
-	
-	/**
-	 * Fills check boxes for selected papers. 
-	 * All users will see these columns.
-	 * 
-	 * @param thePosition the placement of "Select" column in the table.
-	 */
-	private void addSelectButton(final int thePosition) {
-		for (int i = 0; i < myPaperList.size(); i++) {
-			myTableData[i][thePosition] = new Boolean(false);
 		}
 	}
 	

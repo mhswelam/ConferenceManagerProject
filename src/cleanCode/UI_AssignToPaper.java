@@ -361,7 +361,7 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent theEvent) {
-		System.out.println(theEvent.getActionCommand());
+//		System.out.println(theEvent.getActionCommand());
 		
 		//Program Chair assigns Subprogram Chair
 		if (myRoleId == 1) {

@@ -14,13 +14,13 @@ public class MyTableModel extends AbstractTableModel {
 		{},						
 		//Program Chair 	1
 		{"Author", "Title", "Review 1", "Review 2", "Review 3", 
-		"Subprogram Chair : Review", "Acceptence Status", "Select"},	
+		"Subprogram Chair : Review", "Acceptence Status"},	
 		//SubProgram Chair	2
-		{"Author", "Title", "Review 1", "Review 2", "Review 3", "Select"}, 
+		{"Author", "Title", "Review 1", "Review 2", "Review 3"}, 
 		//Author			3
-		{"Author", "Title", "Acceptence Status", "Select"},			
+		{"Author", "Title", "Acceptence Status"},			
 		//Reviewer			4
-		{"Author", "Title", "Review", "Select"}};			
+		{"Author", "Title", "Review"}};			
 	/** Data that will be contained within the table. */
 	private Object[][] myTableData;
 	private int myRoleId;
