@@ -4,8 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.GroupLayout;
@@ -21,7 +21,7 @@ import javax.swing.SwingConstants;
  * This class to a page that assigns users to papers.
  *
  */
-public class UI_AssignToPaper extends JPanel {
+public class UI_AssignToPaper extends JPanel implements ActionListener {
 	/** Background color is white. */
 	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
 	
@@ -29,14 +29,32 @@ public class UI_AssignToPaper extends JPanel {
 	private int myUserId;
 	/** Role of the user. */
 	private int myRoleId;
-	/** unique identification number of the paper that is displayed. */
-	private int myPaperId;
+	/** Paper that is being displyed.*/
+	private Paper myPaper;
 	/** Conference. */
 	private Conference myConference;
-	private JLabel myAuthorLabel;
-	private JLabel myTitleLabel;
-	private JComboBox myAssignSPC;
-	private Paper myPaper;
+	/** Label that holds authors name. */
+	private JLabel myAuthorNameLabel;
+	/** Label that holds title of the paper.*/
+	private JLabel myPaperTitleLabel;
+	/** Combo box that holds a list of subprogram chairs. */
+	private JComboBox mySubChairBox;
+	/** Combo box that holds a list of reviewers. */
+	private JComboBox myReviewerOneBox;
+	/** Combo box that holds a list of reviewers. */
+	private JComboBox myReviewerTwoBox;
+	/** Combo box that holds a list of reviewers. */
+	private JComboBox myReviewerThreeBox;
+	/** Label that displays "Select Subprogram Chair.*/
+	private JLabel mySubChairLabel;
+	/** Label that displays "Select First Reviewer: ".*/
+	private JLabel myFirstReviewerLabel;
+	/** Label that displays "Select Second Reviewer: ".*/
+	private JLabel mySecondReviewerLabel;
+	/** Label that displays "Select Third Reviewer: ".*/
+	private JLabel myThirdReviewerLabel;
+	
+	
 	
 	/**
 	 * Creates a panel that contains all information 
@@ -51,164 +69,298 @@ public class UI_AssignToPaper extends JPanel {
 							final Conference theConference) {
 		super(new BorderLayout());
 		setBackground(BACKGROUND_COLOR);
+		myUserId = theUserId;
+		myRoleId = theRoleId;
+		myPaper = null;
+		myConference = theConference;
 		
+		//initially when nothing is selected.
+		myAuthorNameLabel = new JLabel("Not Selected");
+		myPaperTitleLabel = new JLabel("Not Selected");
+		
+		mySubChairBox = new JComboBox();
+		mySubChairBox.addActionListener(this);
+		
+		myReviewerOneBox = new JComboBox();
+		myReviewerOneBox.addActionListener(this);
+		
+		myReviewerTwoBox = new JComboBox();
+		myReviewerTwoBox.addActionListener(this);
+		
+		myReviewerThreeBox = new JComboBox();
+		myReviewerThreeBox.addActionListener(this);
+		
+		mySubChairLabel = new JLabel("Select Subprogram Chair: ");
+		myFirstReviewerLabel = new JLabel("Select First Reviewer: ");
+		mySecondReviewerLabel = new JLabel("Select Second Reviewer: ");
+		myThirdReviewerLabel = new JLabel("Select Third Reviewer: ");
+	}
+	
+	/**
+	 * Sets up the display panel to choose Subprogram Chair for Program Chair.
+	 * Or to choose the Reviewers for Subprogram Chair.
+	 */
+	public void setUp() {
 		JPanel mainPanel = new JPanel();
-		mainPanel.setBackground(Color.WHITE);
+		mainPanel.setBackground(BACKGROUND_COLOR);
 		add(mainPanel, BorderLayout.CENTER);
+		JLabel authorLabel = new JLabel("Author: ");
+		JLabel titleLabel = new JLabel("Title: ");
 		
-		JLabel lblAuthor = new JLabel("Author: ");
+		//Set up for Program Chair
+		if (myRoleId == 1) {
+			setUpPC();
+			createProgramChairLayout(authorLabel, titleLabel, mainPanel);
+		//Set up for Subprogram Chair
+		} else if (myRoleId == 2) {
+			setUpSPC();
+			createSubProgramChairLayout(authorLabel, titleLabel, mainPanel);
+		}
+		setUpLayout();
+	}
+	
+	/**
+	 * Changer the paper that is being displayed.
+	 * 
+	 * @param thePaper a manuscript.
+	 */
+	public void setDisplayPaper(final Paper thePaper) {
+		myPaper = thePaper;
+		System.out.println(myPaper.getTitle());
+		myPaperTitleLabel.setText(myPaper.getTitle());
+		String firstName = myConference.getAuthor(
+											   myPaper.getAuthor()).myFristName;
+		String lastName = myConference.getAuthor(
+												myPaper.getAuthor()).myLastName;
+		myAuthorNameLabel.setText(firstName + " " + lastName);
+	}
+	
+	/**
+	 * Sets up the panel so Program Chair can designate 
+	 * a Subprogram Chair for a paper.
+	 */
+	private void setUpPC() {
+		//Add available Subprogram Chairs to Combo Box.
+		ArrayList<SubProgramChair> availableSPC = 
+												myConference.getAvaSubProgram();
+		for (SubProgramChair spc : availableSPC) {
+			String name = spc.myFristName + " " + spc.myLastName;
+			mySubChairBox.addItem(name);
+		}
+	}
+	
+	/**
+	 * Sets up the panel so Subprogram Chair can Designate three
+	 * Reviewers for the Paper.
+	 */
+	private void setUpSPC() {
+		//Add available Reviewers to Combo Boxes.
+		ArrayList<Reviewer> availableReviewers = myConference.getAvaReviewer();
 		
-		JLabel lblTitle = new JLabel("Title:");
-		
-		JLabel lblSubprogramChair = new JLabel("Select Subprogram Chair: ");
-		
-		JComboBox comboBox = new JComboBox();
-		
-		myAuthorLabel = new JLabel("Not Selected");
-		
-		myTitleLabel = new JLabel("Not Selected");
-		
-		JLabel lblSelectFirstReviewer = new JLabel("Select First Reviewer: ");
-		
-		JLabel lblSelectSecondReviewer = new JLabel("Select Second Reviewer: ");
-		
-		JLabel lblSelectThirdReviewer = new JLabel("Select Third Reviewer: ");
-		
-		JComboBox comboBox_1 = new JComboBox();
-		
-		JComboBox comboBox_2 = new JComboBox();
-		
-		JComboBox comboBox_3 = new JComboBox();
-		GroupLayout gl_panel = new GroupLayout(mainPanel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(76)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblAuthor)
-								.addComponent(lblTitle))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(myTitleLabel)
-								.addComponent(myAuthorLabel)))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblSubprogramChair)
-								.addComponent(lblSelectFirstReviewer)
-								.addComponent(lblSelectSecondReviewer)
-								.addComponent(lblSelectThirdReviewer))
-							.addGap(18)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(comboBox_3, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-									.addComponent(comboBox_2, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(comboBox_1, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(comboBox, 0, 107, Short.MAX_VALUE)))))
-					.addContainerGap(156, Short.MAX_VALUE))
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(80)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblAuthor)
-						.addComponent(myAuthorLabel))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblTitle)
-						.addComponent(myTitleLabel))
-					.addGap(31)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblSubprogramChair)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblSelectFirstReviewer)
-						.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(comboBox_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblSelectSecondReviewer))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(comboBox_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblSelectThirdReviewer))
-					.addContainerGap(348, Short.MAX_VALUE))
-		);
-		mainPanel.setLayout(gl_panel);
-		
+		for (Reviewer rev : availableReviewers) {
+			String name = rev.myFristName + " " + rev.myLastName;
+			myReviewerOneBox.addItem(name);
+			myReviewerTwoBox.addItem(name);
+			myReviewerThreeBox.addItem(name);
+		}
+	}
+	
+	/**
+	 * Sets up the layout of the main panel.
+	 */
+	private void setUpLayout() {
 		JPanel rightFiller = new JPanel();
-		rightFiller.setBackground(Color.WHITE);
+		rightFiller.setBackground(BACKGROUND_COLOR);
 		rightFiller.setPreferredSize(new Dimension(100, 500));
 		add(rightFiller, BorderLayout.EAST);
 		
 		JPanel leftFiller = new JPanel();
-		leftFiller.setBackground(Color.WHITE);
+		leftFiller.setBackground(BACKGROUND_COLOR);
 		leftFiller.setPreferredSize(new Dimension(100, 500));
 		add(leftFiller, BorderLayout.WEST);
 		
-		JPanel titleNorthFiller = new JPanel();
-		titleNorthFiller.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		titleNorthFiller.setBackground(Color.WHITE);
-		titleNorthFiller.setPreferredSize(new Dimension(500, 50));
-		add(titleNorthFiller, BorderLayout.NORTH);
-		titleNorthFiller.setLayout(null);
+		JPanel titlePanel = new JPanel();
+		titlePanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		titlePanel.setBackground(BACKGROUND_COLOR);
+		titlePanel.setPreferredSize(new Dimension(500, 50));
+		add(titlePanel, BorderLayout.NORTH);
+		titlePanel.setLayout(null);
 		
-		JLabel lblAssignPaperTo = new JLabel("Assign Paper to Subprogram Chair");
-		lblAssignPaperTo.setBounds(149, 28, 264, 16);
-		lblAssignPaperTo.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		lblAssignPaperTo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAssignPaperTo.setHorizontalTextPosition(SwingConstants.LEADING);
-		titleNorthFiller.add(lblAssignPaperTo);
-		
-		myUserId = theUserId;
-		myRoleId = theRoleId;
-		myPaperId = 0;
-		myPaper = null;
-		myConference = theConference;
-		
+		JLabel assignPaperToSPCLabel = new 
+									 JLabel("Assign Paper to Subprogram Chair");
+		assignPaperToSPCLabel.setBounds(149, 28, 264, 16);
+		assignPaperToSPCLabel.setComponentOrientation(
+											ComponentOrientation.LEFT_TO_RIGHT);
+		assignPaperToSPCLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		assignPaperToSPCLabel.setHorizontalTextPosition(SwingConstants.LEADING);
+		titlePanel.add(assignPaperToSPCLabel);
 	}
 	
-	public void setUp() {
-		JPanel content = new JPanel();
-		Paper paper = myConference.getPaper(myPaperId);
-		String title = paper.getTitle();
-		int authorId = paper.getAuthor();
-		String firstName = myConference.getAuthor(authorId).myFristName;
-		String lastName = myConference.getAuthor(authorId).myLastName;
+	/**
+	 * Sets up layout for Program Chair.
+	 * 
+	 * @param theTitleLabel label that displays "Title: ".
+	 * @param theAuthorLabel label that displays "Author: "
+	 * @param theMainPanel panel that contains all the information.
+	 */
+	private void createProgramChairLayout(final JLabel theTitleLabel, 
+		final JLabel theAuthorLabel, final JPanel theMainPanel) {
+		GroupLayout mainPanelLayout = new GroupLayout(theMainPanel);
+		//parallel group
+		mainPanelLayout.setHorizontalGroup(
+			mainPanelLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(mainPanelLayout.createSequentialGroup()
+					.addGap(76)
+					.addGroup(mainPanelLayout.createParallelGroup(
+															  Alignment.LEADING)
+						.addGroup(mainPanelLayout.createSequentialGroup()
+							.addGroup(mainPanelLayout.createParallelGroup(
+															  Alignment.LEADING)
+								.addComponent(theAuthorLabel)
+								.addComponent(theTitleLabel))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(mainPanelLayout.createParallelGroup(
+															  Alignment.LEADING)
+								.addComponent(myPaperTitleLabel)
+								.addComponent(myAuthorNameLabel)))
+						.addGroup(mainPanelLayout.createSequentialGroup()
+							.addGroup(mainPanelLayout.createParallelGroup(
+															  Alignment.LEADING)
+								.addComponent(mySubChairLabel))
+							.addGap(18)
+							.addGroup(mainPanelLayout.createParallelGroup(
+															  Alignment.LEADING)
+								.addGroup(mainPanelLayout.createParallelGroup(
+													   Alignment.LEADING, false)
+									.addComponent(mySubChairBox, 0, 107, 
+															Short.MAX_VALUE)))))));
 		
-		myAuthorLabel.setText("Authors Name: " + firstName + " " + lastName);
-		myTitleLabel.setText("Title: " + title);
-		JLabel assign = new JLabel("Assign Subprogram Chair: ");
+		//vertical group
+		mainPanelLayout.setVerticalGroup(
+			mainPanelLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(mainPanelLayout.createSequentialGroup()
+					.addGap(80)
+					.addGroup(mainPanelLayout.createParallelGroup(
+															 Alignment.BASELINE)
+						.addComponent(theAuthorLabel)
+						.addComponent(myAuthorNameLabel))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(mainPanelLayout.createParallelGroup(
+															 Alignment.BASELINE)
+						.addComponent(theTitleLabel)
+						.addComponent(myPaperTitleLabel))
+					.addGap(31)
+					.addGroup(mainPanelLayout.createParallelGroup(
+															 Alignment.BASELINE)
+						.addComponent(mySubChairLabel)
+						.addComponent(mySubChairBox, GroupLayout.PREFERRED_SIZE, 
+												   	GroupLayout.DEFAULT_SIZE, 
+													GroupLayout.PREFERRED_SIZE))
+					));
 		
-		ArrayList<SubProgramChair> availableSPC = myConference.getAvaSubProgram();
-		String[] subChairs = new String[availableSPC.size()];
-		for (SubProgramChair spc : availableSPC) {
-			String name = spc.myFristName + " " + spc.myLastName;
-		}
-		myAssignSPC = new JComboBox(subChairs);
-		content.add(myAuthorLabel);
-		content.add(myTitleLabel);
-		content.add(myAssignSPC);
-		add(content);
+		theMainPanel.setLayout(mainPanelLayout);
 	}
 	
-	public void setDisplayPaper(final Paper thePaper) {
-		myPaper = thePaper;
-		System.out.println(myPaper.getTitle());
-		myTitleLabel.setText(myPaper.getTitle());
-		String firstName = myConference.getAuthor(myPaper.getAuthor()).myFristName;
-		String lastName = myConference.getAuthor(myPaper.getAuthor()).myLastName;
-		myAuthorLabel.setText(firstName + " " + lastName);
+	/**
+	 * Sets up the layout for Subprogram Chair.
+	 * 
+	 * @param theTitleLabel label that displays "Title: ".
+	 * @param theAuthorLabel label that displays "Author: "
+	 * @param theMainPanel panel that contains all the information.
+	 */
+	private void createSubProgramChairLayout(final JLabel theTitleLabel, 
+		final JLabel theAuthorLabel, final JPanel theMainPanel) {
+		GroupLayout mainPanelLayout = new GroupLayout(theMainPanel);
+		//parallel group
+		mainPanelLayout.setHorizontalGroup(
+			mainPanelLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(mainPanelLayout.createSequentialGroup()
+					.addGap(76)
+					.addGroup(mainPanelLayout.createParallelGroup(
+															  Alignment.LEADING)
+						.addGroup(mainPanelLayout.createSequentialGroup()
+							.addGroup(mainPanelLayout.createParallelGroup(
+															  Alignment.LEADING)
+								.addComponent(theAuthorLabel)
+								.addComponent(theTitleLabel))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(mainPanelLayout.createParallelGroup(
+															  Alignment.LEADING)
+								.addComponent(myPaperTitleLabel)
+								.addComponent(myAuthorNameLabel)))
+						.addGroup(mainPanelLayout.createSequentialGroup()
+							.addGroup(mainPanelLayout.createParallelGroup(
+															  Alignment.LEADING)
+								.addComponent(myFirstReviewerLabel)
+								.addComponent(mySecondReviewerLabel)
+								.addComponent(myThirdReviewerLabel)
+								)
+							.addGap(18)
+							.addGroup(mainPanelLayout.createParallelGroup(
+															  Alignment.LEADING)
+								.addComponent(myReviewerThreeBox, 0, 
+													   GroupLayout.DEFAULT_SIZE, 
+													   			Short.MAX_VALUE)
+								.addGroup(mainPanelLayout.createParallelGroup(
+													   Alignment.LEADING, false)
+									.addComponent(myReviewerTwoBox, 0, 
+													   GroupLayout.DEFAULT_SIZE, 
+													   			Short.MAX_VALUE)
+									.addComponent(myReviewerOneBox, 0, 
+													   GroupLayout.DEFAULT_SIZE, 
+													   			Short.MAX_VALUE)
+															))))));
+		
+		//vertical group
+		mainPanelLayout.setVerticalGroup(
+			mainPanelLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(mainPanelLayout.createSequentialGroup()
+					.addGap(80)
+					.addGroup(mainPanelLayout.createParallelGroup(
+															 Alignment.BASELINE)
+						.addComponent(theAuthorLabel)
+						.addComponent(myAuthorNameLabel))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(mainPanelLayout.createParallelGroup(
+															 Alignment.BASELINE)
+						.addComponent(theTitleLabel)
+						.addComponent(myPaperTitleLabel))
+					.addGap(31)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(mainPanelLayout.createParallelGroup(
+															 Alignment.BASELINE)
+															 
+						.addComponent(myFirstReviewerLabel)
+						.addComponent(myReviewerOneBox, 
+								GroupLayout.PREFERRED_SIZE, 
+								GroupLayout.DEFAULT_SIZE, 
+								GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(mainPanelLayout.createParallelGroup(
+															 Alignment.BASELINE)
+															 
+						.addComponent(myReviewerTwoBox, 
+								GroupLayout.PREFERRED_SIZE, 
+								GroupLayout.DEFAULT_SIZE, 
+								GroupLayout.PREFERRED_SIZE)
+						.addComponent(mySecondReviewerLabel))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(mainPanelLayout.createParallelGroup(
+															 Alignment.BASELINE)
+															 
+						.addComponent(myReviewerThreeBox, 
+								GroupLayout.PREFERRED_SIZE, 
+								GroupLayout.DEFAULT_SIZE, 
+								GroupLayout.PREFERRED_SIZE)
+						.addComponent(myThirdReviewerLabel))
+					));
+		
+		theMainPanel.setLayout(mainPanelLayout);
 	}
 
-	private void getPaperInfo() {
-		Paper paper = myConference.getPaper(myPaperId);
-		String title = paper.getTitle();
-		int authorId = paper.getAuthor();
-		String firstName = myConference.getAuthor(authorId).myFristName;
-		String lastName = myConference.getAuthor(authorId).myLastName;
+	@Override
+	public void actionPerformed(ActionEvent theEvent) {
+		System.out.println(theEvent.getActionCommand());
+		
 	}
 }

@@ -165,9 +165,11 @@ public class UI_ControlPanel extends JPanel {
         table.setBackground(BACKGROUND_COLOR);
 		
 		//"Assign Papers"
-        JComponent assignTab = makeTextPanel(TASKS[theRoleId][1]);
-		myTabbedPane.addTab(TASKS[theRoleId][1], assignTab);
-		assignTab.setBackground(BACKGROUND_COLOR);
+        UI_AssignToPaper reviewersToPaper = new UI_AssignToPaper(theUserId, theRoleId, 
+				   myConference);
+        reviewersToPaper.setUp();
+		myTabbedPane.addTab(TASKS[theRoleId][1], reviewersToPaper);
+		reviewersToPaper.setBackground(BACKGROUND_COLOR);
 		
 		//"Recommend Paper"
         Paper temp = myConference.getPaper(6);
@@ -209,6 +211,7 @@ public class UI_ControlPanel extends JPanel {
 		//"Assign Papers" Tab 2
 		UI_AssignToPaper subToPaper = new UI_AssignToPaper(theUserId, theRoleId, 
 														   myConference);
+		subToPaper.setUp();
 		myTabbedPane.addTab(TASKS[theRoleId][1], subToPaper);
 		
 		
@@ -216,7 +219,6 @@ public class UI_ControlPanel extends JPanel {
 		UI_AcceptanceDecision acceptPaper = new UI_AcceptanceDecision(theUserId, 
 													theRoleId, myConference);
 		myTabbedPane.addTab(TASKS[theRoleId][2], acceptPaper);
-		
 		table.getTable().getModel().addTableModelListener(new 
 									   MyTableModelListener(table, subToPaper));
 	}

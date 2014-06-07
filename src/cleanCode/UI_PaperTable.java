@@ -18,6 +18,9 @@ import javax.swing.table.AbstractTableModel;
  *
  */
 public class UI_PaperTable extends JPanel {
+	/** Background color is white. */
+	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
+	
 	/** Column headers of the table. */				 
 	private final static String[][] COLUMN_NAMES = {
 		//Empty 			0
@@ -32,8 +35,6 @@ public class UI_PaperTable extends JPanel {
 		//Reviewer			4
 		{"Author", "Title", "Review", "Select"}};								
 	
-	/** Background color is white. */
-	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
 	
 	/** Unique identification number of the user. */
 	private int myUserId;
@@ -49,7 +50,6 @@ public class UI_PaperTable extends JPanel {
 	private JTable myTable;
 	/** Last Selected Paper. */
 	private Paper mySelectedPaper;
-	JComponent myAssignToPaperUI;
 	
 	/**
 	 * Creates a table containing all the papers.
@@ -84,22 +84,6 @@ public class UI_PaperTable extends JPanel {
 		myTable.setPreferredScrollableViewportSize(new Dimension(880, 500));
 		myTable.setBackground(BACKGROUND_COLOR);
 		myTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-//		myTable.getModel().addTableModelListener(new TableModelListener() {
-//			@Override
-//			public void tableChanged(TableModelEvent theEvent) {
-//				// TODO Auto-generated method stub
-//				int row = theEvent.getFirstRow();
-//		        int column = theEvent.getColumn();
-//		        MyTableModel model = (MyTableModel)theEvent.getSource();
-//		        String columnName = model.getColumnName(column);
-//		        Object data = model.getValueAt(row, column);
-//		        System.out.println("Table changed at " + row + " " + data.toString());
-//		        if (data.equals(true)) {
-//		        	mySelectedPaper = myPaperList.get(row);
-//		        	System.out.println(mySelectedPaper.getTitle());
-//		        }
-//			}
-//		});
 		add(scrollPane);
 	}
 	
@@ -222,6 +206,7 @@ public class UI_PaperTable extends JPanel {
 			i++;
 		}
 	}
+	
 	//Add name of Subprogram Chair to the Review
 	/**
 	 * Shows the Subprogram Chair score for the paper.

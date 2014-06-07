@@ -1,15 +1,15 @@
 package cleanCode;
 
 import java.awt.BorderLayout;
-
-import javax.swing.JPanel;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.Dimension;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 /**
  * @author Clean Code
@@ -18,6 +18,17 @@ import javax.swing.JRadioButton;
  *
  */
 public class UI_AcceptanceDecision extends JPanel {
+	/** Background color is white. */
+	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
+	
+	/** Unique identification number of the user. */
+	private int myUserId;
+	/** Role of the user. */
+	private int myRoleId;
+	/** unique identification number of the paper that is displayed. */
+	private int myPaperId;
+	/** Conference. */
+	private Conference myConference;
 	
 	/**
 	 * Creates a panel that lets Program Chair Accept/Reject selected paper.
@@ -28,11 +39,11 @@ public class UI_AcceptanceDecision extends JPanel {
 	public UI_AcceptanceDecision(final int theUserId, final int theRoleId,
 			final Conference theConference) {
 		super(new BorderLayout());
-		setBackground(Color.WHITE);
+		setBackground(BACKGROUND_COLOR);
 		
 		JPanel panel = new JPanel();
-		panel.setForeground(Color.WHITE);
-		panel.setBackground(Color.WHITE);
+		panel.setForeground(BACKGROUND_COLOR);
+		panel.setBackground(BACKGROUND_COLOR);
 		add(panel, BorderLayout.CENTER);
 		
 		JLabel lblTitle = new JLabel("Title: ");
@@ -95,7 +106,7 @@ public class UI_AcceptanceDecision extends JPanel {
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setPreferredSize(new Dimension(500, 50));
-		panel_1.setBackground(Color.WHITE);
+		panel_1.setBackground(BACKGROUND_COLOR);
 		add(panel_1, BorderLayout.NORTH);
 		panel_1.setLayout(null);
 		
@@ -105,12 +116,22 @@ public class UI_AcceptanceDecision extends JPanel {
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setPreferredSize(new Dimension(100, 500));
-		panel_2.setBackground(Color.WHITE);
+		panel_2.setBackground(BACKGROUND_COLOR);
 		add(panel_2, BorderLayout.WEST);
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(Color.WHITE);
+		panel_3.setBackground(BACKGROUND_COLOR);
 		panel_3.setPreferredSize(new Dimension(100, 500));
 		add(panel_3, BorderLayout.EAST);
+		
+		myUserId = theUserId;
+		myRoleId = theRoleId;
+		myConference = theConference;
 	}
+	
+	public void setUp() {
+		
+	}
+	
+	
 }
