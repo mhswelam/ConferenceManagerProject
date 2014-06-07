@@ -23,9 +23,15 @@ public class MyTableModel extends AbstractTableModel {
 		{"Author", "Title", "Review"}};			
 	/** Data that will be contained within the table. */
 	private Object[][] myTableData;
+	/** Role of the user.*/
 	private int myRoleId;
 	
-	
+	/**
+	 * Creates a table model that manages data.
+	 * 
+	 * @param theRoleId role of the user.
+	 * @param theTableData data contained within the table.
+	 */
 	public MyTableModel(final int theRoleId, final Object[][] theTableData) {
 		super();
 		myTableData = theTableData;
