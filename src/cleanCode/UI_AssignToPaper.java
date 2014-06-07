@@ -106,17 +106,20 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 		add(mainPanel, BorderLayout.CENTER);
 		JLabel authorLabel = new JLabel("Author: ");
 		JLabel titleLabel = new JLabel("Title: ");
+		JLabel nameLabel = new JLabel();
 		
 		//Set up for Program Chair
 		if (myRoleId == 1) {
+			nameLabel.setText("Assign Paper to Subprogram Chair");
 			setUpPC();
 			createProgramChairLayout(authorLabel, titleLabel, mainPanel);
 		//Set up for Subprogram Chair
 		} else if (myRoleId == 2) {
+			nameLabel.setText("Assign Reviewers to the Paper");
 			setUpSPC();
 			createSubProgramChairLayout(authorLabel, titleLabel, mainPanel);
 		}
-		setUpLayout();
+		setUpLayout(nameLabel);
 	}
 	
 	/**
@@ -126,7 +129,6 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 	 */
 	public void setDisplayPaper(final Paper thePaper) {
 		myPaper = thePaper;
-		System.out.println(myPaper.getTitle());
 		myPaperTitleLabel.setText(myPaper.getTitle());
 		String firstName = myConference.getAuthor(
 											   myPaper.getAuthor()).myFristName;
@@ -168,7 +170,7 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 	/**
 	 * Sets up the layout of the main panel.
 	 */
-	private void setUpLayout() {
+	private void setUpLayout(final JLabel theTopLabel) {
 		JPanel rightFiller = new JPanel();
 		rightFiller.setBackground(BACKGROUND_COLOR);
 		rightFiller.setPreferredSize(new Dimension(100, 500));
@@ -186,14 +188,13 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 		add(titlePanel, BorderLayout.NORTH);
 		titlePanel.setLayout(null);
 		
-		JLabel assignPaperToSPCLabel = new 
-									 JLabel("Assign Paper to Subprogram Chair");
-		assignPaperToSPCLabel.setBounds(149, 28, 264, 16);
-		assignPaperToSPCLabel.setComponentOrientation(
+		
+		theTopLabel.setBounds(149, 28, 264, 16);
+		theTopLabel.setComponentOrientation(
 											ComponentOrientation.LEFT_TO_RIGHT);
-		assignPaperToSPCLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		assignPaperToSPCLabel.setHorizontalTextPosition(SwingConstants.LEADING);
-		titlePanel.add(assignPaperToSPCLabel);
+		theTopLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		theTopLabel.setHorizontalTextPosition(SwingConstants.LEADING);
+		titlePanel.add(theTopLabel);
 	}
 	
 	/**
@@ -233,7 +234,7 @@ public class UI_AssignToPaper extends JPanel implements ActionListener {
 								.addGroup(mainPanelLayout.createParallelGroup(
 													   Alignment.LEADING, false)
 									.addComponent(mySubChairBox, 0, 107, 
-															Short.MAX_VALUE)))))));
+														 Short.MAX_VALUE)))))));
 		
 		//vertical group
 		mainPanelLayout.setVerticalGroup(

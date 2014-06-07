@@ -23,9 +23,15 @@ public class MyTableModel extends AbstractTableModel {
 		{"Author", "Title", "Review"}};			
 	/** Data that will be contained within the table. */
 	private Object[][] myTableData;
+	/** Role of the user.*/
 	private int myRoleId;
 	
-	
+	/**
+	 * Creates a table model that manages data.
+	 * 
+	 * @param theRoleId role of the user.
+	 * @param theTableData data contained within the table.
+	 */
 	public MyTableModel(final int theRoleId, final Object[][] theTableData) {
 		super();
 		myTableData = theTableData;
@@ -67,17 +73,6 @@ public class MyTableModel extends AbstractTableModel {
      */
     public Object getValueAt(final int theRow, final int theColumn) {
         return myTableData[theRow][theColumn];
-    }
-
-    /**
-     * Sets up the table to render data.
-     * 
-     * @param theColumn column index.
-     * 
-     * @return returns the class of the value in the table.
-     */
-    public Class getColumnClass(final int theColumn) {
-        return getValueAt(0, theColumn).getClass();
     }
 
     /**

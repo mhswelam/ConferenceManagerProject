@@ -32,6 +32,7 @@ public class UI_AcceptanceDecision extends JPanel implements ActionListener {
 	private int myPaperId;
 	/** Conference. */
 	private Conference myConference;
+	
 	/** Label that contains the title of the paper. */
 	JLabel myTitleNameLabel;
 	/** Label that contains the name of the author.*/
@@ -171,7 +172,7 @@ public class UI_AcceptanceDecision extends JPanel implements ActionListener {
 	/**
 	 * Changes the status of the paper.
 	 * 
-	 * @param theEvent Program Chair has accepted or denied the paper.
+	 * @param theEvent Program Chair has accepted or denied .
 	 */
 	@Override
 	public void actionPerformed(ActionEvent theEvent) {
