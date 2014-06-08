@@ -186,7 +186,11 @@ public class UI_PaperTable extends JPanel {
 			int[] reviewsId = paper.getReviews();
 			for (int k = 0; k < reviewsId.length; k++) {
 				Review rev = myConference.getReview(reviewsId[k]);
-				int reviewerId = rev.getMyReviewerId();
+				int reviewerId = 0;
+				if (rev != null) {
+					reviewerId = rev.getMyReviewerId();
+				}
+				
 				if (reviewerId == myUserId) {
 					int temp = rev.getReviewSummary();
 					String data = "";
