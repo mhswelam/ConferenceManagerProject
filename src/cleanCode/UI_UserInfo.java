@@ -24,15 +24,18 @@ public class UI_UserInfo extends JPanel {
 	private String myConferenceName;
 	
 	/**
-	 * Creates top panel that contains name and role of the user.
+	 * Creates top panel that contains name and role of 
+	 * the user.
 	 * 
 	 * @param theName name of the user.
 	 * @param theRole role of the user.
-	 * @param theUserId unique identification number of the user.
+	 * @param theUserId unique identification number of 
+	 * the user.
 	 * @param theConferenceName name of the conference.
 	 */
-	public UI_UserInfo(final String theName, final String theRole, 
-					   final String theUserId, final String theConferenceName) {
+	public UI_UserInfo(final String theName, 
+			final String theRole, final String theUserId, 
+			final String theConferenceName) {
 		super(new BorderLayout());
 		myName = theName;
 		myRole = theRole;
@@ -53,7 +56,8 @@ public class UI_UserInfo extends JPanel {
 		JLabel hello = new JLabel("Hello, " + myName);
 		JLabel userId = new JLabel("User Id : " + myUserId);
 		JLabel role = new JLabel("Role : " + myRole);
-		JLabel conference = new JLabel("Conference : " + myConferenceName);
+		JLabel conference = new JLabel("Conference : " + 
+				myConferenceName);
 		
 		wordPanel.add(hello);
 		wordPanel.add(role);
@@ -69,7 +73,8 @@ public class UI_UserInfo extends JPanel {
 		fillerWest.setBackground(new Color(255, 255, 255));
 		
 		JPanel fillerNorth = new JPanel();
-		fillerNorth.setPreferredSize(new Dimension(800, 25));
+		fillerNorth.setPreferredSize(new 
+										Dimension(800, 25));
 		fillerNorth.setBackground(new Color(255, 255, 255));
 		
 		

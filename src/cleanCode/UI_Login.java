@@ -20,16 +20,20 @@ import javax.swing.border.Border;
  * This class to create a user interface for the login
  *
  */ 
-public class UI_Login extends JPanel implements ActionListener {
+public class UI_Login extends JPanel implements
+											ActionListener {
 	/** Role choices when logging in. */
-	private final String[] options = {"", "Program Chair", "SubProgram Chair", 
-			"Author", "Reviewer"};
+	private final String[] options = {"", "Program Chair", 
+			"SubProgram Chair", "Author", "Reviewer"};
 	/** Background color is white. */
-	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
+	private final static Color BACKGROUND_COLOR = 
+								   new Color(255, 255, 255);
 	
-	/** User Id entered into the text field. Initially set to -1. */
+	/** User Id entered into the text field. 
+	 * Initially set to 0. */
 	private int myUserId;
-	/** Role selected in the combo box. Initially set to -1. */
+	/** Role selected in the combo box. 
+	 * Initially set to 0. */
 	private int myRoleId;
 	/** Combo box containing a list of roles. */
 	private JComboBox<String> myRoleBox;
@@ -41,7 +45,8 @@ public class UI_Login extends JPanel implements ActionListener {
 	private Conference myConference;
 	
 	/**
-	 * Instantiates Log In panel when Conference starts running.
+	 * Instantiates Log In panel when Conference 
+	 * starts running.
 	 * 
 	 * @param theConference conference.
 	 */
@@ -62,11 +67,12 @@ public class UI_Login extends JPanel implements ActionListener {
 	 * Sets up the panels for log in screen.
 	 */
 	public void logIn() {
-		JPanel loginFrame = new JPanel(new FlowLayout(FlowLayout.CENTER, 100, 
-				10));
-		loginFrame.setPreferredSize(new Dimension(350, 270));
-		Border panelBorder = BorderFactory.createLineBorder(new Color(235, 235, 
-				235), 2);
+		JPanel loginFrame = new JPanel(new FlowLayout(
+							  FlowLayout.CENTER, 100, 10));
+		loginFrame.setPreferredSize(new 
+									   Dimension(350, 270));
+		Border panelBorder = BorderFactory.createLineBorder(
+							new Color(235, 235, 235), 2);
 		loginFrame.setBorder(panelBorder);
 		loginFrame.setBackground(BACKGROUND_COLOR);
 	
@@ -75,7 +81,8 @@ public class UI_Login extends JPanel implements ActionListener {
 		userNameLabel.setLabelFor(myUserNameField);
 
 		
-		JLabel comboBoxText = new JLabel("Select Your Role");
+		JLabel comboBoxText = 
+							new JLabel("Select Your Role");
 		comboBoxText.setLabelFor(myRoleBox);
 
 
@@ -105,12 +112,14 @@ public class UI_Login extends JPanel implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent theEvent) {
-		myUserId = Integer.parseInt(myUserNameField.getText());
+		myUserId = 
+				Integer.parseInt(myUserNameField.getText());
 		myRoleId = myRoleBox.getSelectedIndex();
 		if (myConference.isReviewer(myUserId) || 
 				myConference.isAuthor(myUserId)) {
 			if (myRoleId == 1) {
-				if (myUserId == myConference.myProgramChair){
+				if (myUserId == 
+							  myConference.myProgramChair){
 					setVisible(false);
 				}
 		} else if (myRoleId == 2 || myRoleId == 4) {
@@ -119,7 +128,8 @@ public class UI_Login extends JPanel implements ActionListener {
 				setVisible(false);
 			}
 		} else {
-			if (myRoleId == 3 && myConference.isAuthor(myUserId)){
+			if (myRoleId == 3 && 
+					      myConference.isAuthor(myUserId)){
 				setVisible(false);
 			}
 		}
@@ -127,14 +137,16 @@ public class UI_Login extends JPanel implements ActionListener {
 	}
 	
 	/**
-	 * @return unique identification number of the user that logged in.
+	 * @return unique identification number of 
+	 * the user that logged in.
 	 */
 	public int getUderId() {
 		return myUserId;
 	}
 	
 	/**
-	 * @return role identification number of the user that logged in.
+	 * @return role identification number of 
+	 * the user that logged in.
 	 */
 	public int getRoleId() {
 		return myRoleId;

@@ -18,16 +18,19 @@ import javax.swing.ListSelectionModel;
  */
 public class UI_PaperTable extends JPanel {
 	/** Background color is white. */
-	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
+	private final static Color BACKGROUND_COLOR = 
+			new Color(255, 255, 255);
 	/** Column headers of the table. */				 
 	private final static String[][] COLUMN_NAMES = {
 		//Empty 			0
 		{},						
 		//Program Chair 	1
-		{"Author", "Title", "Review 1", "Review 2", "Review 3", 
+		{"Author", "Title", "Review 1", "Review 2", 
+			"Review 3", 
 		"Subprogram Chair : Review", "Acceptence Status"},	
 		//SubProgram Chair	2
-		{"Author", "Title", "Review 1", "Review 2", "Review 3"}, 
+		{"Author", "Title", "Review 1", "Review 2", 
+			"Review 3"}, 
 		//Author			3
 		{"Author", "Title", "Acceptence Status"},			
 		//Reviewer			4
@@ -56,16 +59,19 @@ public class UI_PaperTable extends JPanel {
 	 * @param theRoleId role identification number.
 	 * @param theConference conference.
 	 */
-	public UI_PaperTable(final int theUserId, final int theRoleId,
-						 final Conference theConference) {
+	public UI_PaperTable(final int theUserId, 
+			final int theRoleId,
+			final Conference theConference) {
 		super(new FlowLayout());
 		setBackground(BACKGROUND_COLOR);
 		myUserId = theUserId;
 		myRoleId = theRoleId;
 		myConference = theConference;
-		myPaperList = myConference.getPaperList(myRoleId, myUserId);
+		myPaperList = myConference.getPaperList(myRoleId, 
+				myUserId);
 		myTableData = 
-				new Object[myPaperList.size()][COLUMN_NAMES[myRoleId].length];
+				new Object[myPaperList.size()]
+						[COLUMN_NAMES[myRoleId].length];
 		myTable = null;
 		mySelectedPaper = null;
 	}
@@ -75,13 +81,16 @@ public class UI_PaperTable extends JPanel {
 	 */
 	public void setUp() {
 		setData();
-		myTable = new JTable(new MyTableModel(myRoleId, myTableData));
+		myTable = new JTable(new MyTableModel(myRoleId, 
+				myTableData));
 		JScrollPane scrollPane = new JScrollPane(myTable);
 		scrollPane.setBackground(BACKGROUND_COLOR);
 		myTable.setFillsViewportHeight(true);
-		myTable.setPreferredScrollableViewportSize(new Dimension(880, 500));
+		myTable.setPreferredScrollableViewportSize(new 
+				Dimension(880, 500));
 		myTable.setBackground(BACKGROUND_COLOR);
-		myTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		myTable.setSelectionMode(
+				ListSelectionModel.SINGLE_SELECTION);
 		add(scrollPane);
 	}
 	
@@ -95,7 +104,8 @@ public class UI_PaperTable extends JPanel {
 	 * @return data from all the papers.
 	 */
 	public void setData() {
-		//Names at titles of the paper are included for all users.
+		//Names at titles of the paper are 
+		//included for all users.
 		fillNameTitle();
 		//Program Chair
 		if (myRoleId == 1) {
@@ -123,8 +133,10 @@ public class UI_PaperTable extends JPanel {
 		for (Paper paper : myPaperList) {
 			int authorId = paper.getAuthor();
 			//Retrieving Authors first and last name.
-			String firstName = myConference.getAuthor(authorId).myFristName;
-			String lastName = myConference.getAuthor(authorId).myLastName;
+			String firstName = myConference
+					.getAuthor(authorId).myFristName;
+			String lastName = myConference
+					.getAuthor(authorId).myLastName;
 			String wholeName = firstName + " " + lastName;
 			myTableData[i][0] = wholeName;
 
@@ -146,13 +158,16 @@ public class UI_PaperTable extends JPanel {
 			
 			for (int i = 0; i < reviewsId.length; i++) {
 				String data = "";
-				Review review = myConference.getReview(reviewsId[i]);
-				//If there is no review. Then the paper has not been reviewed.
+				Review review = myConference.getReview(
+						reviewsId[i]);
+				//If there is no review. Then the paper 
+				//has not been reviewed.
 				if (review == null) {
 					data = "Not Reviewed";
 				} else {
 					data = 
-				   "" + myConference.getReview(reviewsId[i]).getReviewSummary();
+				   "" + myConference.getReview(
+						   reviewsId[i]).getReviewSummary();
 				}
 				//If the Subprogram Chair is viewing
 				//Reviewer will have their
@@ -163,11 +178,14 @@ public class UI_PaperTable extends JPanel {
 					if (id == 0) {
 						name = "Not Assigned";
 					} else {
-						String firstName = 
-									   myConference.getReviewer(id).myFristName;
-						String lastName = 
-										myConference.getReviewer(id).myLastName;
-						name = firstName + " " + lastName + " : ";
+						String firstName = myConference
+									   .getReviewer(id)
+									   .myFristName;
+						String lastName = myConference
+								.getReviewer(id)
+								.myLastName;
+						name = firstName + " " + lastName + 
+								" : ";
 					}
 				}
 				//Reviews start at index 2 of the table
@@ -185,7 +203,8 @@ public class UI_PaperTable extends JPanel {
 		for (Paper paper : myPaperList) {
 			int[] reviewsId = paper.getReviews();
 			for (int k = 0; k < reviewsId.length; k++) {
-				Review rev = myConference.getReview(reviewsId[k]);
+				Review rev = myConference
+						.getReview(reviewsId[k]);
 				int reviewerId = 0;
 				if (rev != null) {
 					reviewerId = rev.getMyReviewerId();
@@ -215,10 +234,13 @@ public class UI_PaperTable extends JPanel {
 			int recId = paper.getRecommendation();
 			String score = "";
 			//FIX THIS
-			if (myConference.getRecommendation(recId) == null) {
+			if (myConference.getRecommendation(recId) 
+					== null) {
 				score = "Not Reviewed";
 			} else {
-				int rec = myConference.getRecommendation(recId).getGrade();
+				int rec = myConference
+						.getRecommendation(recId)
+						.getGrade();
 				if (rec == 0) {
 					score = "Not Reviewed";
 				} else {
@@ -234,8 +256,10 @@ public class UI_PaperTable extends JPanel {
 				if (id == 0) {
 					name = "Not Assigned\t";
 				} else {
-					String firstName = myConference.getReviewer(id).myFristName;
-					String lastName = myConference.getReviewer(id).myLastName;
+					String firstName = myConference
+							.getReviewer(id).myFristName;
+					String lastName = myConference
+							.getReviewer(id).myLastName;
 					name = firstName + " " + lastName;
 				}
 			}
@@ -246,7 +270,8 @@ public class UI_PaperTable extends JPanel {
 	
 	/**
 	 * Shows the acceptance status of paper.
-	 * @param theIndex index of the acceptance status field in the table.
+	 * @param theIndex index of the acceptance status 
+	 * field in the table.
 	 */
 	private void addAcceptanceStatus(final int theIndex) {
 		int i = 0;

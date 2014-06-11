@@ -7,7 +7,8 @@ package cleanCode;
  *
  */
 public class Paper {
-	/** Maximum number of reviews and reviewers for the paper. */
+	/** Maximum number of reviews and reviewers 
+	 * for the paper. */
 	private final static int NUM_REVIEW = 3;
 	
 	/** Unique identification number of the paper. */
@@ -42,69 +43,106 @@ public class Paper {
 	 * The paper has not been reviewed.
 	 * There is no recommendation from SubProgram Chair.
 	 * 
-	 * @param theId unique identification number of the paper.
+	 * @param theId unique identification 
+	 * number of the paper.
 	 * @param theAuthor author of the paper.
 	 * @param theTitle title of the paper.
 	 */
-	public Paper(final int theId, final int theAuthor, final String theTitle) {
-		this(theId, theAuthor, theTitle, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-				"Undecided");
+	public Paper(final int theId, final int theAuthor,
+			final String theTitle) {
+		this(theId, theAuthor, theTitle, 0, 0, 0, 0, 0, 0, 
+				0, 0, 0, "Undecided");
 	}
 	
 	/**
 	 * Creates a new paper.
 	 * 
-	 * @param theId unique identification number of the paper.
-	 * @param theAuthorId unique identification number of the author
+	 * @param theId unique identification number 
+	 * of the paper.
+	 * @param theAuthorId unique identification number 
+	 * of the author
 	 * @param theTitle title of the paper.
 	 * @param theNumOfReviewer number of assigned reviewers.
-	 * @param theSubProgId unique identification number of the Subprogram Chair.
-	 * @param theRecommendId Subprogram Chair recommendation id number.
-	 * @param theReviewOneId identification number of the first review.
-	 * @param theReviewTwoId identification number of the second review.
-	 * @param theReviewThreeId identification number of the third review.
-	 * @param theReviewerOneId identification number of the first reviewer.
-	 * @param theReviewerTwoId identification number of the second reviewer.
-	 * @param theReviewerThreeId identification number of the third reviewer.
+	 * @param theSubProgId unique identification number 
+	 * of the Subprogram Chair.
+	 * @param theRecommendId Subprogram Chair 
+	 * recommendation id number.
+	 * @param theReviewOneId identification number of the 
+	 * first review.
+	 * @param theReviewTwoId identification number of the 
+	 * second review.
+	 * @param theReviewThreeId identification number of the 
+	 * third review.
+	 * @param theReviewerOneId identification number of the 
+	 * first reviewer.
+	 * @param theReviewerTwoId identification number of the 
+	 * second reviewer.
+	 * @param theReviewerThreeId identification number of
+	 * the third reviewer.
 	 * @param theStatus acceptance status of the paper.
 	 */
-	public Paper(final int theId, final int theAuthorId, final String theTitle, 
-				final int theNumOfReviewer,final int theSubProgId, 
-				final int theRecommendId, final int theReviewOneId, 
-				final int theReviewTwoId, final int theReviewThreeId, 
-				final int theReviewerOneId, final int theReviewerTwoId, 
-				final int theReviewerThreeId, final String theStatus)  {
+	public Paper(final int theId, final int theAuthorId, 
+			final String theTitle, 
+			final int theNumOfReviewer, 
+			final int theSubProgId,  
+			final int theRecommendId, 
+			final int theReviewOneId, 
+			final int theReviewTwoId, 
+			final int theReviewThreeId, 
+			final int theReviewerOneId, 
+			final int theReviewerTwoId, 
+			final int theReviewerThreeId, 
+			final String theStatus)  {
 		
-		this(theId, theAuthorId, theTitle, theNumOfReviewer, theSubProgId, 
-				theRecommendId, theReviewOneId, theReviewTwoId, theReviewThreeId, 
-				theReviewerOneId, theReviewerTwoId, theReviewerThreeId, 
+		this(theId, theAuthorId, theTitle, theNumOfReviewer, 
+				theSubProgId, theRecommendId, 
+				theReviewOneId, theReviewTwoId, 
+				theReviewThreeId, theReviewerOneId, 
+				theReviewerTwoId, theReviewerThreeId, 
 				theStatus, false);
 	}
 	
 	/**
 	 * Creates a new paper.
 	 * 
-	 * @param theId unique identification number of the paper.
-	 * @param theAuthorId unique identification number of the author
+	 * @param theId unique identification number 
+	 * of the paper.
+	 * @param theAuthorId unique identification 
+	 * number of the author
 	 * @param theTitle title of the paper.
 	 * @param theNumOfReviewer number of assigned reviewers.
-	 * @param theSubProgId unique identification number of the Subprogram Chair.
-	 * @param theRecommendId Subprogram Chair recommendation id number.
-	 * @param theReviewOneId identification number of the first review.
-	 * @param theReviewTwoId identification number of the second review.
-	 * @param theReviewThreeId identification number of the third review.
-	 * @param theReviewerOneId identification number of the first reviewer.
-	 * @param theReviewerTwoId identification number of the second reviewer.
-	 * @param theReviewerThreeId identification number of the third reviewer.
+	 * @param theSubProgId unique identification number 
+	 * of the Subprogram Chair.
+	 * @param theRecommendId Subprogram Chair 
+	 * recommendation id number.
+	 * @param theReviewOneId identification number of 
+	 * the first review.
+	 * @param theReviewTwoId identification number of 
+	 * the second review.
+	 * @param theReviewThreeId identification number of 
+	 * the third review.
+	 * @param theReviewerOneId identification number of 
+	 * the first reviewer.
+	 * @param theReviewerTwoId identification number of 
+	 * the second reviewer.
+	 * @param theReviewerThreeId identification number 
+	 * of the third reviewer.
 	 * @param theStatus acceptance status of the paper.
-	 * @param theReviewed true if the reviewers have submitted all the reviews.
+	 * @param theReviewed true if the reviewers have 
+	 * submitted all the reviews.
 	 */
-	public Paper(final int theId, final int theAuthorId, final String theTitle, 
-			final int theNumOfReviewer,final int theSubProgId, 
-			final int theRecommendId, final int theReviewOneId, 
-			final int theReviewTwoId, final int theReviewThreeId, 
-			final int theReviewerOneId, final int theReviewerTwoId, 
-			final int theReviewerThreeId, final String theStatus, 
+	public Paper(final int theId, final int theAuthorId, 
+			final String theTitle, 
+			final int theNumOfReviewer,
+			final int theSubProgId, 
+			final int theRecommendId, 
+			final int theReviewOneId, 
+			final int theReviewTwoId, 
+			final int theReviewThreeId, 
+			final int theReviewerOneId, 
+			final int theReviewerTwoId, 
+			final int theReviewerThreeId, 
+			final String theStatus, 
 			final boolean theReviewed)  {
 		
 		myId = theId;
@@ -165,11 +203,14 @@ public class Paper {
 	}
 	
 	/**
-	 * SubProgram Chair adds recommendation to the paper for Program Chair.
+	 * SubProgram Chair adds recommendation 
+	 * to the paper for Program Chair.
 	 * 
-	 * @param theRecommendation recommendation form from SubProgram Chair.
+	 * @param theRecommendation recommendation 
+	 * form from SubProgram Chair.
 	 */
-	public void addRecommendation(final int theRecommendationId) {
+	public void addRecommendation(final int
+									theRecommendationId) {
 		myRecommendation = theRecommendationId;
 	}
 
@@ -179,7 +220,8 @@ public class Paper {
 	* @param theSubChair Identification number of 
 	* SubProgram Chair selected for the paper.
 	*/
-	public void assignSubProgramChair(final int theSubChairId) {
+	public void assignSubProgramChair(final 
+									 int theSubChairId) {
 		mySubProgramChair = theSubChairId;
 	}
 	
@@ -187,14 +229,16 @@ public class Paper {
 	* Change paper status to Accepted/Rejected. 
 	* Initially the status is Undecided.
 	* 
-	* @param theStatus Accepted / Rejected status of the paper.
+	* @param theStatus Accepted / Rejected 
+	* status of the paper.
 	*/
 	public void changeStatus(final String theStatus) {
 		myStatus = theStatus;
 	}
 
 	/**
-	 * @return true is all Reviewers have submitted their reviews. 
+	 * @return true is all Reviewers have 
+	 * submitted their reviews. 
 	 * False otherwise.
 	 */
 	public boolean isReviewed() {

@@ -11,7 +11,8 @@ import java.util.Map;
  *
  */
 public class ProgramChair extends User {
-	/** Map of SubProgram Chairs and their Assigned papers. */
+	/** Map of SubProgram Chairs and their 
+	 * Assigned papers. */
 	private Map<Integer, List<Integer>> myAssignedPapers;
 	/** List designated SubProgram Chairs. */
 	private List<Integer> mySubProgramChairs;
@@ -23,19 +24,22 @@ public class ProgramChair extends User {
 	/**
 	 * Creates a designated Program Chair
 	 * 
-	 * @param theUserId unique identification number of the Program Chair.
+	 * @param theUserId unique identification 
+	 * number of the Program Chair.
 	 * @param theFirstName first name of the Program Chair.
 	 * @param theLastName last name of the Program Chair.
 	 * @param theEmail email of the Program Chair.
 	 * @param theConference conference.
 	 */
-	public ProgramChair(final int theUserId, final String theFirstName, 
-						final String theLastName, final String theEmail, 
-						int aPaperAssigned) {
+	public ProgramChair(final int theUserId, 
+			final String theFirstName, 
+			final String theLastName, 
+			final String theEmail, int aPaperAssigned) {
 		
-		super(theUserId, theFirstName, theLastName, theEmail, 1, 
-				aPaperAssigned);
-		myAssignedPapers = new HashMap<Integer, List<Integer>>();
+		super(theUserId, theFirstName, theLastName, 
+				theEmail, 1, aPaperAssigned);
+		myAssignedPapers = new HashMap<Integer, 
+										  List<Integer>>();
 		mySubProgramChairs = new ArrayList<Integer>();
 		myReviewers = new ArrayList<Integer>();
 		myPapers = new ArrayList<Integer>();
@@ -44,29 +48,35 @@ public class ProgramChair extends User {
 	/**
 	 * Designates SubProgram Chair for a manuscript.
 	 * 
-	 * @param theSubChair SubProgram Chair to oversee the manuscript.
+	 * @param theSubChair SubProgram Chair to oversee 
+	 * the manuscript.
 	 * @param thePaperId paper to be designated.
 	 */
 	public void selectSubProgramChair(final int theSubChair, 
-									  final int thePaperId) {
-		//check that subprogram chair is not the author of the paper
+									 final int thePaperId) {
+		//check that subprogram chair is not the 
+		//author of the paper
 		if (!myAssignedPapers.containsKey(theSubChair)) {
-			myAssignedPapers.put(theSubChair, new ArrayList<Integer>());
+			myAssignedPapers.put(theSubChair, 
+					new ArrayList<Integer>());
 		} 
 		myAssignedPapers.get(theSubChair).add(thePaperId);
 	}
 	
 	/**
-	 * Assigns a Reviewer to be a Subprogram Chair for the conference.
+	 * Assigns a Reviewer to be a Subprogram Chair 
+	 * for the conference.
 	 * 
 	 * @param theReviewer reviewer in the conference.
 	 */
-	public void designateSubProgramChair(final int theReviewer) {
+	public void designateSubProgramChair(final int
+			theReviewer) {
 		//still working
 	}
 	
 	/**
-	 * @return List of SubProgram Chairs and their corresponding papers.
+	 * @return List of SubProgram Chairs and 
+	 * their corresponding papers.
 	 */
 	public Map<Integer, List<Integer>> getAssignedPapers() {
 		return myAssignedPapers;

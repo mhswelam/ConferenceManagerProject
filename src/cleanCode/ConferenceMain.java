@@ -10,7 +10,8 @@ import java.awt.EventQueue;
 public class ConferenceMain {
 	
 	/**
-	 * Private constructor prevents main class from instantiating.
+	 * Private constructor prevents main class 
+	 * from instantiating.
 	 */
 	private ConferenceMain() {
 		throw new IllegalStateException();
@@ -27,7 +28,8 @@ public class ConferenceMain {
             @Override
             public void run() {
             	try {
-					UI_Page window = new UI_Page(new Conference());
+					UI_Page window = 
+							new UI_Page(new Conference());
 					window.start();
 				} catch (Exception e) {
 					e.printStackTrace();

@@ -23,7 +23,8 @@ public class UI_PaperList extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	/** Background color is white. */
-	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
+	private final static Color BACKGROUND_COLOR = 
+			new Color(255, 255, 255);
 
 	/** Conference. */
 	private Conference myConference;
@@ -33,10 +34,12 @@ public class UI_PaperList extends JPanel {
 	/**
 	 * Creates a list of papers.
 	 * 
-	 * @param theUserId unique identification number of the user.
+	 * @param theUserId unique identification 
+	 * number of the user.
 	 * @param theConference conference.
 	 */
-	public UI_PaperList(final int theUserId, final Conference theConference) {
+	public UI_PaperList(final int theUserId, 
+			final Conference theConference) {
 		super(new BorderLayout());
 		setBackground(BACKGROUND_COLOR);
 		myUserId = theUserId;
@@ -53,15 +56,18 @@ public class UI_PaperList extends JPanel {
 	/**
 	 * Creates a list of papers.
 	 * 
-	 * @param theUserId unique identification number of the user.
+	 * @param theUserId unique identification 
+	 * number of the user.
 	 * @param theConference conference.
 	 * 
 	 * @return a list of papers.
 	 */
    public JList makePaperList() {
 		 //just for Program Chair
-		   Collection<Paper> paperSet = myConference.listOfPaper.values();
-		   String[] paperNames = new String[paperSet.size()];
+		   Collection<Paper> paperSet = myConference
+				   .listOfPaper.values();
+		   String[] paperNames = 
+				   new String[paperSet.size()];
 		   int i = 0;
 		   for (Paper paper : paperSet) {
 			   if (myUserId == paper.getAuthor()) {
@@ -69,24 +75,34 @@ public class UI_PaperList extends JPanel {
 				   i++;
 			   }
 		   }
-		   final JList<String> list = new JList<String>(paperNames);
+		   final JList<String> list = 
+				   new JList<String>(paperNames);
 		   
-		   list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		   list.setSelectionMode(ListSelectionModel
+				   .SINGLE_SELECTION);
 		   list.setLayoutOrientation(JList.VERTICAL);
-		   list.addListSelectionListener(new ListSelectionListener() {
+		   list.addListSelectionListener(new 
+				   ListSelectionListener() {
 
 	            @Override
-	            public void valueChanged(ListSelectionEvent arg0) {
+	            public void valueChanged(ListSelectionEvent 
+	            		arg0) {
 	                if (!arg0.getValueIsAdjusting()) {
-	                	Map<Integer, Paper> theMap = myConference.listOfPaper;
-	                	Iterator it = theMap.entrySet().iterator();
+	                	Map<Integer, Paper> theMap = 
+	                			myConference.listOfPaper;
+	                	Iterator it = theMap.entrySet()
+	                			.iterator();
 	        		    while (it.hasNext()) {
-	        		        Map.Entry pairs = (Map.Entry)it.next();
-	        		        Paper tempPaper = (Paper) pairs.getValue();
-	        		        if (tempPaper.getTitle().equals(list.
-	        		        		getSelectedValue().toString())) {
-	        		        	myConference.myPaperToDelete = 
-	        		        			tempPaper.getId();
+	        		        Map.Entry pairs = 
+	        		        		(Map.Entry)it.next();
+	        		        Paper tempPaper = 
+	        		        	(Paper) pairs.getValue();
+	        		        if (tempPaper.getTitle()
+	        		        		.equals(
+	        		                list.getSelectedValue()
+	        		                .toString())) {
+	        		        	myConference.myPaperToDelete 
+	        		        	= tempPaper.getId();
 	        		        	break;
 	        		        }
 	        		    }
@@ -95,5 +111,4 @@ public class UI_PaperList extends JPanel {
 	        });
 		   return list;
 	   }
-
 }

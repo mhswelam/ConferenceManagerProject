@@ -10,16 +10,16 @@ import java.util.List;
  * Class to create an Author.
  */
 public class Author extends User {
-	/** The max amount of papers that can be assigned to and author. */
+	/** The max amount of papers that can be 
+	 * assigned to and author. */
 	private final static int MAX_PAPERS = 4;
 	
 	/** The unique role ID for an author. */
 	private final static int ROLE_ID = 0;
 	
-	/** Conference. */
-//	private Conference myConference;
 	
-	/** The amount of papers that have been assigned to and author. */
+	/** The amount of papers that have been assigned 
+	 * to and author. */
 	private int myPapersAssigned;
 	
 	/** An array of Papers that have been submitted. */
@@ -29,17 +29,18 @@ public class Author extends User {
 	/**
 	 * Creates an author.
 	 * 
-	 * @param aUserId unique identification number of the user.
+	 * @param aUserId unique identification 
+	 * number of the user.
 	 * @param aFirstName authors first name.
 	 * @param aLastName authors last name.
 	 * @param anEmail authors email address.
 	 */
-	public Author(final int aUserId, final String aFirstName, final String aLastName, 
+	public Author(final int aUserId, 
+			final String aFirstName, final String aLastName, 
 			final String anEmail, int aPaperAssined) {
 		super(aUserId, aFirstName, aLastName, anEmail,3);
 		mySubmittedPapers = new ArrayList<Integer>();
 		myPapersAssigned = aPaperAssined;
-//		myConference = theConference; 
 	}
 	
 	/**
@@ -48,17 +49,19 @@ public class Author extends User {
 	 * @param idPaper The paper ID
 	 * @param theTitle title of the paper.
 	 */
-	public void submitPaper(final int thePaperId, final String theTitle) {
+	public void submitPaper(final int thePaperId, 
+									final String theTitle) {
 		
-		Paper newPaper = new Paper(thePaperId, myUserId, theTitle);
+		Paper newPaper = new Paper(thePaperId, myUserId, 
+												  theTitle);
 		mySubmittedPapers.add(newPaper.getId());
-		//submittedPapers.add(newPaper);
 	}
 	
 	/**
 	 * Author edits the paper.
 	 * 
-	 * @param thePaperId unique identification number of the paper.
+	 * @param thePaperId unique identification 
+	 * number of the paper.
 	 */
 	public void editPaper(final int thePaperId) {
 //		myConference.listOfPaper.get(thePaperId);

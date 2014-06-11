@@ -20,9 +20,11 @@ import javax.swing.LayoutStyle.ComponentPlacement;
  * Accept/Deny Paper in the conference. 
  *
  */
-public class UI_AcceptanceDecision extends JPanel implements ActionListener {
+public class UI_AcceptanceDecision extends JPanel 
+								 implements ActionListener {
 	/** Background color is white. */
-	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
+	private final static Color BACKGROUND_COLOR = 
+								   new Color(255, 255, 255);
 	
 	/** Unique identification number of the user. */
 	private int myUserId;
@@ -44,13 +46,16 @@ public class UI_AcceptanceDecision extends JPanel implements ActionListener {
 	JRadioButton myDenyRadioButton;
 	
 	/**
-	 * Creates a panel that lets Program Chair Accept/Reject selected paper.
+	 * Creates a panel that lets Program Chair
+	 *  Accept/Reject selected paper.
 	 * 
-	 * @param theTheUserId unique user identification number.
+	 * @param theTheUserId unique user 
+	 * identification number.
 	 * @param theRoleId role identification number.
 	 * @param theConference conference.
 	 */
-	public UI_AcceptanceDecision(final int theUserId, final int theRoleId,
+	public UI_AcceptanceDecision(final int theUserId, 
+			final int theRoleId,
 			final Conference theConference) {
 		super(new BorderLayout());
 		setBackground(BACKGROUND_COLOR);
@@ -63,7 +68,8 @@ public class UI_AcceptanceDecision extends JPanel implements ActionListener {
 		
 		myTitleNameLabel = new JLabel("Not Selected");
 		myAuthorNameLabel = new JLabel("Not Selected");
-		myAcceptRadioButton = new JRadioButton("Accept Paper");
+		myAcceptRadioButton = 
+				new JRadioButton("Accept Paper");
 		myAcceptRadioButton.setEnabled(false);
 		myAcceptRadioButton.addActionListener(this);
 		
@@ -73,7 +79,8 @@ public class UI_AcceptanceDecision extends JPanel implements ActionListener {
 	}
 	
 	/**
-	 * Sets up the panel where Program Chair can accept of deny the paper.
+	 * Sets up the panel where Program Chair 
+	 * can accept of deny the paper.
 	 */
 	public void setUp() {
 		JPanel panel = new JPanel();
@@ -83,52 +90,72 @@ public class UI_AcceptanceDecision extends JPanel implements ActionListener {
 		
 		JLabel titleLabel = new JLabel("Title: ");
 		JLabel authorLabel = new JLabel("Author: ");
-		JLabel makeDecisionLabel = new JLabel("Make Decision: ");
+		JLabel makeDecisionLabel = 
+				new JLabel("Make Decision: ");
 		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(76)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel
+							.createParallelGroup(
+									Alignment.LEADING)
 						.addComponent(makeDecisionLabel)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(
+						.addGroup(gl_panel
+								.createSequentialGroup()
+							.addGroup(gl_panel
+									.createParallelGroup(
 									Alignment.TRAILING)
 								.addGroup(Alignment.LEADING, 
-										gl_panel.createSequentialGroup()
-									.addGroup(gl_panel.createParallelGroup(
-											Alignment.LEADING)
-										.addComponent(authorLabel)
-										.addComponent(titleLabel))
+										gl_panel
+								    .createSequentialGroup()
+									.addGroup(gl_panel
+									   .createParallelGroup(
+										  Alignment.LEADING)
+										.addComponent(
+												authorLabel)
+										.addComponent(
+												titleLabel))
 									.addPreferredGap(
-											ComponentPlacement.UNRELATED)
-									.addGroup(gl_panel.createParallelGroup(
-											Alignment.LEADING)
-										.addComponent(myAuthorNameLabel)
-										.addComponent(myTitleNameLabel)))
-								.addGroup(gl_panel.createSequentialGroup()
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(myAcceptRadioButton)))
+							   ComponentPlacement.UNRELATED)
+									.addGroup(gl_panel
+									   .createParallelGroup(
+										  Alignment.LEADING)
+										.addComponent(
+										  myAuthorNameLabel)
+										.addComponent(
+										 myTitleNameLabel)))
+								.addGroup(gl_panel
+								    .createSequentialGroup()
+									.addPreferredGap(
+								 ComponentPlacement.RELATED)
+									.addComponent(
+								      myAcceptRadioButton)))
 							.addGap(63)
-							.addComponent(myDenyRadioButton)))
+							.addComponent(
+									   myDenyRadioButton)))
 					.addContainerGap(136, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(76)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+					.addGroup(gl_panel.createParallelGroup(
+							Alignment.BASELINE)
 						.addComponent(authorLabel)
 						.addComponent(myAuthorNameLabel))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+					.addPreferredGap(ComponentPlacement
+							.RELATED)
+					.addGroup(gl_panel.createParallelGroup(
+							Alignment.BASELINE)
 						.addComponent(titleLabel)
 						.addComponent(myTitleNameLabel))
 					.addGap(137)
 					.addComponent(makeDecisionLabel)
 					.addGap(35)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+					.addGroup(gl_panel.createParallelGroup(
+							Alignment.BASELINE)
 						.addComponent(myAcceptRadioButton)
 						.addComponent(myDenyRadioButton))
 					.addContainerGap(269, Short.MAX_VALUE))
@@ -142,8 +169,10 @@ public class UI_AcceptanceDecision extends JPanel implements ActionListener {
 		panel_1.setLayout(null);
 		
 		JLabel lblMakeAcceptenceDesicion = 
-										new JLabel("Make Acceptence Desicion ");
-		lblMakeAcceptenceDesicion.setBounds(168, 28, 193, 16);
+										new JLabel("Make "
+								  + "Acceptence Desicion ");
+		lblMakeAcceptenceDesicion.setBounds(168, 28, 193, 
+														16);
 		panel_1.add(lblMakeAcceptenceDesicion);
 		
 		JPanel panel_2 = new JPanel();
@@ -165,11 +194,14 @@ public class UI_AcceptanceDecision extends JPanel implements ActionListener {
 	public void setDisplayPaper(final Paper thePaper) {
 		myPaper = thePaper;
 		myTitleNameLabel.setText(myPaper.getTitle());
-		String firstName = myConference.getAuthor(
-											   myPaper.getAuthor()).myFristName;
-		String lastName = myConference.getAuthor(
-												myPaper.getAuthor()).myLastName;
-		myAuthorNameLabel.setText(firstName + " " + lastName);
+		String firstName = 
+				myConference.getAuthor(myPaper.getAuthor())
+				.myFristName;
+		String lastName = 
+				myConference.getAuthor(myPaper.getAuthor())
+				.myLastName;
+		myAuthorNameLabel.setText(firstName + " " 
+												+ lastName);
 		myAcceptRadioButton.setEnabled(true);
 		myDenyRadioButton.setEnabled(true);
 	}
@@ -182,11 +214,15 @@ public class UI_AcceptanceDecision extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent theEvent) {
 		if (myPaper != null) {
-			if (theEvent.getActionCommand().equals("Accept Paper")) {
-				myConference.getPaper(myPaper.getId()).changeStatus("Accepted");
+			if (theEvent.getActionCommand()
+								  .equals("Accept Paper")) {
+				myConference.getPaper(myPaper.getId())
+				.changeStatus("Accepted");
 				myDenyRadioButton.setSelected(false);
-			} else if (theEvent.getActionCommand().equals("Deny Paper")) {
-				myConference.getPaper(myPaper.getId()).changeStatus("Denied");
+			} else if (theEvent.getActionCommand()
+					.equals("Deny Paper")) {
+				myConference.getPaper(myPaper.getId())
+				.changeStatus("Denied");
 				myAcceptRadioButton.setSelected(false);
 			}
 		}

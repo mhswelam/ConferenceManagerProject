@@ -22,12 +22,14 @@ import javax.swing.JTextField;
  * This class to create a submit paper panel for the author.
  *
  */
-public class UI_SubmitPaper extends JPanel implements ActionListener {
+public class UI_SubmitPaper extends JPanel implements 
+											ActionListener {
 	
 	/**Adding default serial ID to get rid of error.*/
 	private static final long serialVersionUID = 1L;
 	/** Background color is white. */
-	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
+	private final static Color BACKGROUND_COLOR = new 
+			Color(255, 255, 255);
 	/** Conference. */
 	private Conference myConference;
 	/** Unique identification number of the user. */
@@ -35,33 +37,39 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 	private int myRoleId;
 	private JFrame myFrame;
 	
-	/** Missing: Which of the conference categories best characterizes 
-	 * this paper (used to match reviewers): */
+	/** Missing: Which of the conference categories best 
+	 * characterizes this paper (used to match reviewers):*/
 	
 	/** Field where Author puts the title of their paper.
 	  * 100 characters max. */
 	private JTextField myTitleField;
-	/** Field where Author puts the keywords that describe the paper. */
+	/** Field where Author puts the keywords that describe 
+	 * the paper. */
 	private JTextField myKeywordsField;
 	/** Field where Author writes abstract of the paper.
 	 *  100 characters max. */
 	private JTextField myAbstractField;
 	/** Button that submits  the paper. */
 	private JButton mySubmitButton;
-	/** Button that opens up file chooser for submitting paper. */
+	/** Button that opens up file chooser for submitting
+	 *  paper. */
 	private JButton myChooseFileButton;
 	
 	/**
 	 * Creates a panel containing the submission sheet and a 
 	 * dialog allowing the Author to submit their manuscript.
 	 * 
-	 * @param theUserId unique identification number of the user.
+	 * @param theUserId unique identification number of 
+	 * the user.
 	 * @param theRoleId role of the user.
 	 * @param theConference conference.
-	 * @param theFrame window where information is displayed.
+	 * @param theFrame window where information is 
+	 * displayed.
 	 */
-	public UI_SubmitPaper(final int theUserId, final int theRoleId,
-			final Conference theConference, final JFrame theFrame) {
+	public UI_SubmitPaper(final int theUserId, 
+			final int theRoleId, 
+			final Conference theConference, 
+			final JFrame theFrame) {
 		super(new BorderLayout());
 		setBackground(BACKGROUND_COLOR);
 		myUserId = theUserId;
@@ -85,7 +93,7 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 		
 		//Filler panels to make a decent layout
 		JPanel northfiller = new JPanel();
-		northfiller.setPreferredSize(new Dimension(800, 50));
+		northfiller.setPreferredSize(new Dimension(800,50));
 		northfiller.setBackground(BACKGROUND_COLOR);
 		northfiller.add(panelName);
 		JPanel westfiller = new JPanel();
@@ -106,16 +114,19 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 	 * Creates a form for submission.
 	 */
 	private void makeSubmitForm() {
-		JLabel titleLabel = new JLabel("Paper title (100 characters max): ");
+		JLabel titleLabel = new JLabel("Paper title "
+				+ "(100 characters max): ");
 		titleLabel.setLabelFor(myTitleField);
-		JLabel keywordsLabel = new JLabel("Keywords (for searching): ");
+		JLabel keywordsLabel = new JLabel("Keywords "
+				+ "(for searching): ");
 		keywordsLabel.setLabelFor(myKeywordsField);
-		JLabel abstractLabel = new JLabel("Abstract: (100 words max): ");
+		JLabel abstractLabel = new JLabel("Abstract: "
+				+ "(100 words max): ");
 		abstractLabel.setLabelFor(myAbstractField);
 		
-		//Panel that contains the form for submission of paper
+		//Panel that contains the form to submit the paper
 		JPanel submitForm = new JPanel();
-		submitForm.setPreferredSize(new Dimension(400, 300));
+		submitForm.setPreferredSize(new Dimension(400,300));
 		submitForm.setBackground(BACKGROUND_COLOR);
 		
 		submitForm.add(titleLabel);
@@ -133,7 +144,8 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 	 */
 	public void makeSubmitDialog() {
 		JPanel dialogPanel = new JPanel(new BorderLayout());
-		dialogPanel.setPreferredSize(new Dimension(800, 100));
+		dialogPanel.setPreferredSize(new 
+				Dimension(800, 100));
 		dialogPanel.setBackground(BACKGROUND_COLOR);
 		
 		//Filler panels for decent layout
@@ -147,7 +159,8 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 		JPanel centerPanel = new JPanel();
 		centerPanel.setBackground(BACKGROUND_COLOR);
 		
-		centerPanel.add(myChooseFileButton, BorderLayout.NORTH);
+		centerPanel.add(myChooseFileButton, 
+				BorderLayout.NORTH);
 		centerPanel.add(mySubmitButton, BorderLayout.SOUTH);
 		
 		dialogPanel.add(westfiller, BorderLayout.WEST);
@@ -165,25 +178,34 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 		//Author is trying to choose a file to upload
 		if (theEvent.getSource() == myChooseFileButton) {
 			JFileChooser fileChooser = new JFileChooser();
-			int returnValue = fileChooser.showDialog(this, "Upload");
+			int returnValue = fileChooser.showDialog(this, 
+					"Upload");
 			if (returnValue == JFileChooser.OPEN_DIALOG) {
 				File paper = fileChooser.getSelectedFile();
-				paper.renameTo(new File("C:\\Users\\Zack\\git"
-						+ "\\ConferenceManager\\src\\lib" + paper.getName()));
+				paper.renameTo(new File("C:\\Users\\Zack"
+						+ "\\git"
+						+ "\\ConferenceManager\\src\\lib" + 
+						paper.getName()));
 			}
 		} else if (theEvent.getSource() == mySubmitButton) {
 			Paper myPaper = null;
 			String title = myTitleField.getText();
 			String key = myKeywordsField.getText();
 			String abs = myAbstractField.getText();
-			if (title.isEmpty() || key.isEmpty() || abs.isEmpty()) {
-				JOptionPane.showMessageDialog(this,"You must fill out all of "
+			if (title.isEmpty() || key.isEmpty() || 
+					abs.isEmpty()) {
+				JOptionPane.showMessageDialog(this,
+						"You must fill out all of "
 						+ "the text fields", 
-						"missing fields",JOptionPane.ERROR_MESSAGE);
+						"missing fields",
+						JOptionPane.ERROR_MESSAGE);
 			} else {
-				myConference.lastPaperID = myConference.lastPaperID + 1;
-				myPaper = new Paper(myConference.lastPaperID, myUserId, title, 
-						0, 0, 0, 0, 0, 0, 0, 0, 0, "No status");
+				myConference.lastPaperID = 
+						myConference.lastPaperID + 1;
+				myPaper = new Paper(myConference.lastPaperID, 
+						myUserId, title, 
+						0, 0, 0, 0, 0, 0, 0, 0, 0, 
+						"No status");
 				myConference.addPaper(myPaper);
 				myFrame.setVisible(false);
 				UI_Page page = new UI_Page(myConference);

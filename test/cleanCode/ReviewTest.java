@@ -14,15 +14,15 @@ import org.junit.Test;
  */
 public class ReviewTest {
 	public static void main(String[] args) {
-		
 	}
 
 	/**
 	 * Tests the id validity of a review.
 	 */
 	@Test
-	public void testGeMyReviewID() {
-		Review testReviewOne = new Review(00555, 00001, 1, 2, 3,3,3,3,4,3,3,3,"good");
+	public void testGetMyReviewID() {
+		Review testReviewOne = new Review(00555, 00001, 1, 
+				2, 3,3,3,3,4,3,3,3,"good");
 		int output = testReviewOne.getMyReviewerId();
 		int expected = 00001;
 		assertEquals(output, expected);
@@ -33,7 +33,8 @@ public class ReviewTest {
 	 */
 	@Test
 	public void testGetPaperId() {
-		Review testReviewTwo = new Review(00555, 00001, 1, 2, 3,3,3,3,4,3,3,3,"good");
+		Review testReviewTwo = new Review(00555, 00001, 1, 
+				2, 3,3,3,3,4,3,3,3,"good");
 		int output = testReviewTwo.getMyPaperId();
 		int expected = 00545;
 		assertEquals(output, expected);
@@ -44,7 +45,8 @@ public class ReviewTest {
 	 */
 	@Test
 	public void testGetMyComments() {
-		Review testReviewThree = new Review(00555, 00001, 1, 2, 3,3,3,3,4,3,3,3,"good");
+		Review testReviewThree = new Review(00555, 00001, 
+				1, 2, 3,3,3,3,4,3,3,3, "good");
 		int [] output = testReviewThree.getMyComments();
 		List<Integer> expected = new ArrayList<Integer>();
 		expected.add(1);

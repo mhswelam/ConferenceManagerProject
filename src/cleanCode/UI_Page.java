@@ -20,10 +20,11 @@ import javax.swing.JPanel;
  */
 public class UI_Page {
 	/** Role choices. */
-	private final String[] OPTIONS = {"","Program Chair","SubProgram Chair",
-									"Author", "Reviewer"};
+	private final String[] OPTIONS = {"","Program Chair",
+			"SubProgram Chair", "Author", "Reviewer"};
 	/** Background color is white. */
-	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
+	private final static Color BACKGROUND_COLOR = 
+			new Color(255, 255, 255);
 	
 	/** Main window frame. */
 	private JFrame myFrame;
@@ -46,7 +47,8 @@ public class UI_Page {
 		myFrame = new JFrame("Conference");
 		contentPane = new JPanel(new BorderLayout());
 		myLogInPanel = new UI_Login(myConference);
-		myControlPanel = new UI_ControlPanel(myConference, myFrame);
+		myControlPanel = new UI_ControlPanel(myConference, 
+												myFrame);
 	}
 
 	/**
@@ -54,7 +56,8 @@ public class UI_Page {
 	 */
 	public void start() {
 		myFrame.setResizable(false);
-		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		myFrame.setDefaultCloseOperation(
+				JFrame.EXIT_ON_CLOSE);
 		//Size of the frame 1100 width 800 height
 		myFrame.setPreferredSize(new Dimension(1100, 800));
 		contentPane.setBackground(BACKGROUND_COLOR);
@@ -73,13 +76,17 @@ public class UI_Page {
 	private void setUpPanels() {
 		
 		
-		myLogInPanel.addComponentListener(new ComponentAdapter() {
+		myLogInPanel.addComponentListener(new 
+										ComponentAdapter() {
 			/**
-			 * When the user loged in, sets up the rest of the program.
+			 * When the user loged in, sets up the rest 
+			 * of the program.
 			 */
 			@Override
-			public void componentHidden(final ComponentEvent theEvent) {
-				UI_Login panel = (UI_Login) theEvent.getComponent();
+			public void componentHidden(final ComponentEvent 
+					theEvent) {
+				UI_Login panel = 
+						(UI_Login) theEvent.getComponent();
 				contentPane.remove(panel);
 				int userId = panel.getUderId();
 				int roleId = panel.getRoleId();
@@ -93,9 +100,11 @@ public class UI_Page {
 		myFrame.add(contentPane);
 	}
 	
-	public void refresh(final int theUser, final int theRole) {
+	public void refresh(final int theUser, 
+										final int theRole) {
 		myFrame.setResizable(false);
-		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		myFrame.setDefaultCloseOperation(
+									 JFrame.EXIT_ON_CLOSE);
 		//Size of the frame 1000 width 800 height
 		myFrame.setPreferredSize(new Dimension(1100, 800));
 		contentPane.setBackground(BACKGROUND_COLOR);
@@ -111,39 +120,50 @@ public class UI_Page {
 	/**
 	 * Starts the program for a particular user.
 	 */
-	public void initializeProgram(final int theUserId, final int theRoleId) {
+	public void initializeProgram(final int theUserId, 
+									final int theRoleId) {
 		//Retrieves the First and Last name of the user
 		String firstName = "";
 		String lastName = "";
-		if (theRoleId == 1 || theRoleId == 2 || theRoleId == 4) {
+		if (theRoleId == 1 || theRoleId == 2 || 
+										  theRoleId == 4) {
 			if (myConference.isReviewer(theUserId)) {
-				firstName = myConference.getReviewer(theUserId).myFristName;
-				lastName = myConference.getReviewer(theUserId).myLastName;
+				firstName = myConference
+						.getReviewer(theUserId).myFristName;
+				lastName = myConference
+						.getReviewer(theUserId).myLastName;
 			}
 		} else {
-			firstName = myConference.getAuthor(theUserId).myFristName;
-			lastName = myConference.getAuthor(theUserId).myLastName;
+			firstName = myConference
+					.getAuthor(theUserId).myFristName;
+			lastName = myConference
+					.getAuthor(theUserId).myLastName;
 		}
 		
-		//Creates the top User Information panel that contains the ID Name etc
-		UI_UserInfo userInfo = new UI_UserInfo(firstName + " " + lastName, 
-											OPTIONS[theRoleId], 
-											   "" + theUserId, 
-											   myConference.myName);
+		//Creates the top User Information panel that
+	    //contains the ID Name etc
+		UI_UserInfo userInfo = 
+				new UI_UserInfo(firstName + " " + lastName, 
+										 OPTIONS[theRoleId], 
+											 "" + theUserId, 
+									   myConference.myName);
 		userInfo.setUp();
 		
 		//add "Log Out" button to the panel
-		userInfo.add(createLogOutButton(), BorderLayout.EAST);
+		userInfo.add(createLogOutButton(),
+										BorderLayout.EAST);
 		
 		
 		myControlPanel.setUp(theUserId, theRoleId);
 		
 		contentPane.add(userInfo, BorderLayout.NORTH);
-		contentPane.add(myControlPanel, BorderLayout.CENTER);
+		contentPane.add(myControlPanel, 
+				BorderLayout.CENTER);
 	}
 	
 	/**
-	 * @return button that logs out the user, clearing all the information.
+	 * @return button that logs out the user, 
+	 * clearing all the information.
 	 */ 
 	private JButton createLogOutButton() {
 		JButton logOut = new JButton("Log Out");
@@ -152,15 +172,18 @@ public class UI_Page {
 			 * Logs out the user.
 			 */
 			@Override
-			public void actionPerformed(ActionEvent theEvent) {
-				int ok = JOptionPane.showConfirmDialog(contentPane, 
+			public void actionPerformed(ActionEvent 
+												theEvent) {
+				int ok = 
+				JOptionPane.showConfirmDialog(contentPane, 
 						"Are you sure you want to log out?", 
-						   "Log out", JOptionPane.YES_NO_OPTION); 
+					  "Log out", JOptionPane.YES_NO_OPTION); 
 					if (ok ==  JOptionPane.YES_OPTION) {
 						contentPane.removeAll();
 						myLogInPanel.logOut();
 						myControlPanel.logOut();
-						contentPane.add(myLogInPanel, BorderLayout.CENTER);
+						contentPane.add(myLogInPanel, 
+								BorderLayout.CENTER);
 						myLogInPanel.setVisible(true);
 					}
 			}

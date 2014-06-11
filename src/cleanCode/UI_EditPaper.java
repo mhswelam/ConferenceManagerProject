@@ -21,32 +21,37 @@ import javax.swing.JTextField;
  * This class to create a edit paper panel for the author.
  *
  */
-public class UI_EditPaper extends JPanel implements ActionListener {
+public class UI_EditPaper extends JPanel implements 
+											ActionListener {
 	
 	/**Adding default serial ID to get rid of error.*/
 	private static final long serialVersionUID = 1L;
 	/** Background color is white. */
-	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
+	private final static Color BACKGROUND_COLOR =
+								   new Color(255, 255, 255);
 	/** Conference. */
 	private Conference myConference;
 	/** Unique identification number of the user. */
 	private int myUserId;
 	private int myRoleId;
 	
-	/** Missing: Which of the conference categories best characterizes this 
+	/** Missing: Which of the conference categories 
+	 * best characterizes this 
 	 * paper (used to match reviewers): */
 	
 	/** Field where Author puts the title of their paper.
 	 *  100 characters max. */
 	private JTextField myTitleField;
-	/** Field where Author puts the keywords that describe the paper. */
+	/** Field where Author puts the keywords that 
+	 * describe the paper. */
 	private JTextField myKeywordsField;
 	/** Field where Author writes abstract of the paper.
 	 *  100 characters max. */
 	private JTextField myAbstractField;
 	/** Button that submits  the paper. */
 	private JButton mySubmitButton;
-	/** Button that opens up file chooser for submitting paper. */
+	/** Button that opens up file chooser for 
+	 * submitting paper. */
 	private JButton myChooseFileButton;
 	private JFrame myFrame;
 	
@@ -54,11 +59,14 @@ public class UI_EditPaper extends JPanel implements ActionListener {
 	 * Creates a panel containing the submission sheet and a 
 	 * dialog allowing the Author to edit their manuscript.
 	 * 
-	 * @param theUserId unique identification number of the user.
+	 * @param theUserId unique identification number 
+	 * of the user.
 	 * @param theConference conference.
 	 */
-	public UI_EditPaper(final int theUserId, final int theRoleId, 
-			final Conference theConference, JFrame theFrame) {
+	public UI_EditPaper(final int theUserId, 
+			final int theRoleId, 
+			final Conference theConference,
+			JFrame theFrame) {
 		super(new BorderLayout());
 		setBackground(BACKGROUND_COLOR);
 		myUserId = theUserId;
@@ -79,24 +87,31 @@ public class UI_EditPaper extends JPanel implements ActionListener {
 	 */
 	public void setUp() {
 		JLabel listName = new JLabel("List Of Papers");
-		JLabel panelName = new JLabel("Edit Submission Form");
+		JLabel panelName = 
+				new JLabel("Edit Submission Form");
 		
 		//Filler panels to make a decent layout
-		JPanel topLabel = new JPanel(new BorderLayout(500, 10));
+		JPanel topLabel = 
+				new JPanel(new BorderLayout(500, 10));
 		topLabel.setPreferredSize(new Dimension(800, 50));
 		topLabel.setBackground(BACKGROUND_COLOR);
 		topLabel.add(listName, BorderLayout.WEST);
 		topLabel.add(panelName,BorderLayout.CENTER);
 		
-		JPanel paperInfoPanel = new JPanel(new BorderLayout());
-		paperInfoPanel.add(makeSubmitForm(), BorderLayout.CENTER);
-		paperInfoPanel.add(makeSubmitDialog(), BorderLayout.SOUTH);
+		JPanel paperInfoPanel = 
+				new JPanel(new BorderLayout());
+		paperInfoPanel.add(makeSubmitForm(), 
+									   BorderLayout.CENTER);
+		paperInfoPanel.add(makeSubmitDialog(), 
+										BorderLayout.SOUTH);
 		
-		UI_PaperList paperList = new UI_PaperList(myUserId, myConference);
+		UI_PaperList paperList = new UI_PaperList(myUserId, 
+											  myConference);
 		paperList.setUp();
 		
-		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, 
-											  paperList, paperInfoPanel);
+		JSplitPane splitPane = 
+				new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, 
+								 paperList, paperInfoPanel);
 		splitPane.setDividerLocation(300);
 	    splitPane.setBackground(BACKGROUND_COLOR);
 	    
@@ -109,16 +124,22 @@ public class UI_EditPaper extends JPanel implements ActionListener {
 	 */
 	private JPanel makeSubmitForm() {
 		//Creating labels
-		JLabel titleLabel = new JLabel("Paper title (100 characters max): ");
+		JLabel titleLabel = 
+				new JLabel("Paper title "
+						+ "(100 characters max): ");
 		titleLabel.setLabelFor(myTitleField);
-		JLabel keywordsLabel = new JLabel("Keywords (for searching): ");
+		JLabel keywordsLabel = 
+				new JLabel("Keywords (for searching): ");
 		keywordsLabel.setLabelFor(myKeywordsField);
-		JLabel abstractLabel = new JLabel("Abstract: (100 words max): ");
+		JLabel abstractLabel = 
+				new JLabel("Abstract: (100 words max): ");
 		abstractLabel.setLabelFor(myAbstractField);
 		
-		//Panel that contains the form for submission of paper
+		//Panel that contains the form for 
+		//submission of paper
 		JPanel submitForm = new JPanel();
-		submitForm.setPreferredSize(new Dimension(400, 300));
+		submitForm.setPreferredSize(new 
+									   Dimension(400, 300));
 		submitForm.setBackground(BACKGROUND_COLOR);
 		
 		submitForm.add(titleLabel);
@@ -136,13 +157,15 @@ public class UI_EditPaper extends JPanel implements ActionListener {
 	 */
 	public JPanel makeSubmitDialog() {
 		JPanel dialogPanel = new JPanel(new BorderLayout());
-		dialogPanel.setPreferredSize(new Dimension(800, 100));
+		dialogPanel.setPreferredSize(new 
+									   Dimension(800, 100));
 		dialogPanel.setBackground(BACKGROUND_COLOR);
 		
 		JPanel centerPanel = new JPanel();
 		centerPanel.setBackground(BACKGROUND_COLOR);
 		
-		centerPanel.add(myChooseFileButton, BorderLayout.NORTH);
+		centerPanel.add(myChooseFileButton, 
+										BorderLayout.NORTH);
 		centerPanel.add(mySubmitButton, BorderLayout.SOUTH);
 		dialogPanel.add(centerPanel, BorderLayout.CENTER);
 		
@@ -156,9 +179,12 @@ public class UI_EditPaper extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent theEvent) {
 		//Author is trying to choose a file to upload
 		if (theEvent.getSource() == myChooseFileButton) {
-			JFileChooser fileChooser = new JFileChooser(new File("C:\\Users"
-					+ "\\Zack\\git\\ConferenceManager\\src"));
-			int returnValue = fileChooser.showDialog(this, "Upload");
+			JFileChooser fileChooser = 
+					new JFileChooser(new File("C:\\Users"
+					+ "\\Zack"
+					+ "\\git\\ConferenceManager\\src"));
+			int returnValue = fileChooser.showDialog(this, 
+					"Upload");
 			//This will delete old paper. Submit new paper.
 			if (returnValue == JFileChooser.OPEN_DIALOG) {
 				File paper = fileChooser.getSelectedFile();
@@ -168,16 +194,22 @@ public class UI_EditPaper extends JPanel implements ActionListener {
 			String title = myTitleField.getText();
 			String key = myKeywordsField.getText();
 			String abs = myAbstractField.getText();
-			if (title.isEmpty() || key.isEmpty() || abs.isEmpty()) {
-				JOptionPane.showMessageDialog(this,"You must fill out all of "
+			if (title.isEmpty() || key.isEmpty() ||
+											abs.isEmpty()) {
+				JOptionPane.showMessageDialog(this, 
+								 "You must fill out all of "
 						+ "the text fields", 
-						"missing fields",JOptionPane.ERROR_MESSAGE);
+						"missing fields",
+						 JOptionPane.ERROR_MESSAGE);
 			}
 			
 			if (myConference.myPaperToDelete != 0) {
-				myConference.removePaper(myConference.myPaperToDelete);
+				myConference.removePaper(myConference
+										.myPaperToDelete);
 			}
-			myPaper = new Paper(myConference.myPaperToDelete, myUserId, title, 
+			myPaper = 
+					new Paper(myConference.myPaperToDelete,
+					myUserId, title, 
 					0, 0, 0, 0, 0, 0, 0, 0, 0, "No status");
 			myConference.addPaper(myPaper);
 			myFrame.setVisible(false);

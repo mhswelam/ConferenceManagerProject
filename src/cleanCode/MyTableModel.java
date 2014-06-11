@@ -13,10 +13,12 @@ public class MyTableModel extends AbstractTableModel {
 		//Empty 			0
 		{},						
 		//Program Chair 	1
-		{"Author", "Title", "Review 1", "Review 2", "Review 3", 
-		"Subprogram Chair : Review", "Acceptence Status"},	
+		{"Author", "Title", "Review 1", "Review 2", 
+		"Review 3", "Subprogram Chair : Review", 
+		"Acceptence Status"},	
 		//SubProgram Chair	2
-		{"Author", "Title", "Review 1", "Review 2", "Review 3"}, 
+		{"Author", "Title", "Review 1", "Review 2", 
+		"Review 3"}, 
 		//Author			3
 		{"Author", "Title", "Acceptence Status"},			
 		//Reviewer			4
@@ -32,7 +34,8 @@ public class MyTableModel extends AbstractTableModel {
 	 * @param theRoleId role of the user.
 	 * @param theTableData data contained within the table.
 	 */
-	public MyTableModel(final int theRoleId, final Object[][] theTableData) {
+	public MyTableModel(final int theRoleId, 
+			final Object[][] theTableData) {
 		super();
 		myTableData = theTableData;
 		myRoleId = theRoleId;
@@ -71,7 +74,8 @@ public class MyTableModel extends AbstractTableModel {
      * 
      * @return returns object of the data.
      */
-    public Object getValueAt(final int theRow, final int theColumn) {
+    public Object getValueAt(final int theRow, 
+    		final int theColumn) {
         return myTableData[theRow][theColumn];
     }
 
@@ -82,8 +86,8 @@ public class MyTableModel extends AbstractTableModel {
      * @param theRow row index.
      * @param theColumn column index.
      */
-    public void setValueAt(final Object theValue, final int theRow, 
-    		final int theColumn) {
+    public void setValueAt(final Object theValue, 
+    		final int theRow, final int theColumn) {
         myTableData[theRow][theColumn] = theValue;
         fireTableCellUpdated(theRow, theColumn);
     }
