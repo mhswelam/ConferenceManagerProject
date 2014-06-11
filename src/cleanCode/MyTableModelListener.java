@@ -52,9 +52,7 @@ public class MyTableModelListener implements ListSelectionListener {
 	@Override
 	public void valueChanged(ListSelectionEvent theEvent) {
 		final int row = myPaperTable.getTable().getSelectedRow();
-		final int column = myPaperTable.getTable().getSelectedColumn();
 		Paper tempPaper = myPaperTable.getSelectedPaper(row);
-//		System.out.println(tempPaper);
 		if (myAssignToPaper != null) {
 	    	myAssignToPaper.setDisplayPaper(tempPaper);
 		} 

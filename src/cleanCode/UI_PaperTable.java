@@ -206,7 +206,6 @@ public class UI_PaperTable extends JPanel {
 		}
 	}
 	
-	//Add name of Subprogram Chair to the Review
 	/**
 	 * Shows the Subprogram Chair score for the paper.
 	 */

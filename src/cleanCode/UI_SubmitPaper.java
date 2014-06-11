@@ -56,10 +56,12 @@ public class UI_SubmitPaper extends JPanel implements ActionListener {
 	 * dialog allowing the Author to submit their manuscript.
 	 * 
 	 * @param theUserId unique identification number of the user.
+	 * @param theRoleId role of the user.
 	 * @param theConference conference.
+	 * @param theFrame window where information is displayed.
 	 */
 	public UI_SubmitPaper(final int theUserId, final int theRoleId,
-			final Conference theConference, JFrame theFrame) {
+			final Conference theConference, final JFrame theFrame) {
 		super(new BorderLayout());
 		setBackground(BACKGROUND_COLOR);
 		myUserId = theUserId;

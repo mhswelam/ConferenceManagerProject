@@ -22,7 +22,8 @@ import javax.swing.border.Border;
  */ 
 public class UI_Login extends JPanel implements ActionListener {
 	/** Role choices when logging in. */
-	private final String[] options = {"", "Program Chair", "SubProgram Chair", "Author", "Reviewer"};
+	private final String[] options = {"", "Program Chair", "SubProgram Chair", 
+			"Author", "Reviewer"};
 	/** Background color is white. */
 	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
 	
@@ -61,9 +62,11 @@ public class UI_Login extends JPanel implements ActionListener {
 	 * Sets up the panels for log in screen.
 	 */
 	public void logIn() {
-		JPanel loginFrame = new JPanel(new FlowLayout(FlowLayout.CENTER, 100, 10));
+		JPanel loginFrame = new JPanel(new FlowLayout(FlowLayout.CENTER, 100, 
+				10));
 		loginFrame.setPreferredSize(new Dimension(350, 270));
-		Border panelBorder = BorderFactory.createLineBorder(new Color(235, 235, 235), 2);
+		Border panelBorder = BorderFactory.createLineBorder(new Color(235, 235, 
+				235), 2);
 		loginFrame.setBorder(panelBorder);
 		loginFrame.setBackground(BACKGROUND_COLOR);
 	
@@ -104,8 +107,8 @@ public class UI_Login extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent theEvent) {
 		myUserId = Integer.parseInt(myUserNameField.getText());
 		myRoleId = myRoleBox.getSelectedIndex();
-		//System.out.println(myConference.myProgramChair +" "+ myUserId +"  "+ myRoleId);
-		if (myConference.isReviewer(myUserId) || myConference.isAuthor(myUserId)) {
+		if (myConference.isReviewer(myUserId) || 
+				myConference.isAuthor(myUserId)) {
 			if (myRoleId == 1) {
 				if (myUserId == myConference.myProgramChair){
 					setVisible(false);
@@ -121,11 +124,6 @@ public class UI_Login extends JPanel implements ActionListener {
 			}
 		}
 		}
-		
-		//Here ooes the code to check user & and their role
-		//If the person logging in is User, then they become author by submitting the paper;
-		
-//		System.out.println("User Id : " + myUserId + " Rode num : " + myRoleId);
 	}
 	
 	/**

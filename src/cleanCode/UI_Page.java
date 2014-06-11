@@ -20,7 +20,8 @@ import javax.swing.JPanel;
  */
 public class UI_Page {
 	/** Role choices. */
-	private final String[] OPTIONS = {"","Program Chair","SubProgram Chair","Author", "Reviewer"};
+	private final String[] OPTIONS = {"","Program Chair","SubProgram Chair",
+									"Author", "Reviewer"};
 	/** Background color is white. */
 	private final static Color BACKGROUND_COLOR = new Color(255, 255, 255);
 	
@@ -54,7 +55,7 @@ public class UI_Page {
 	public void start() {
 		myFrame.setResizable(false);
 		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//Size of the frame 1000 width 800 height
+		//Size of the frame 1100 width 800 height
 		myFrame.setPreferredSize(new Dimension(1100, 800));
 		contentPane.setBackground(BACKGROUND_COLOR);
 		myControlPanel.setBackground(BACKGROUND_COLOR);
@@ -82,7 +83,6 @@ public class UI_Page {
 				contentPane.remove(panel);
 				int userId = panel.getUderId();
 				int roleId = panel.getRoleId();
-//				System.out.println("User Id : " + userId + " Rode num : " + roleId);
 				initializeProgram(userId, roleId);
 			}
 		});
@@ -100,7 +100,6 @@ public class UI_Page {
 		myFrame.setPreferredSize(new Dimension(1100, 800));
 		contentPane.setBackground(BACKGROUND_COLOR);
 		myControlPanel.setBackground(BACKGROUND_COLOR);
-	//	myFrame.repaint();
 
 		initializeProgram(theUser, theRole);
 		
@@ -129,7 +128,8 @@ public class UI_Page {
 		//Creates the top User Information panel that contains the ID Name etc
 		UI_UserInfo userInfo = new UI_UserInfo(firstName + " " + lastName, 
 											OPTIONS[theRoleId], 
-											   "" + theUserId, myConference.myName);
+											   "" + theUserId, 
+											   myConference.myName);
 		userInfo.setUp();
 		
 		//add "Log Out" button to the panel
@@ -140,10 +140,6 @@ public class UI_Page {
 		
 		contentPane.add(userInfo, BorderLayout.NORTH);
 		contentPane.add(myControlPanel, BorderLayout.CENTER);
-		
-		
-//		UI_PaperInfo paperInfo = new UI_PaperInfo();
-		UI_TaskInfo taskInfo  = new UI_TaskInfo();
 	}
 	
 	/**

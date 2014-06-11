@@ -4,8 +4,6 @@ package cleanCode;
 /**
  * @author Clean Code
  * This class to create a Paper
- * 
- * @author Polina Kud
  *
  */
 public class Paper {
@@ -49,26 +47,65 @@ public class Paper {
 	 * @param theTitle title of the paper.
 	 */
 	public Paper(final int theId, final int theAuthor, final String theTitle) {
-		this(theId, theAuthor, theTitle, 0, 0, 0, 0, 0, 0, 0, 0, 0, "Undecided");
+		this(theId, theAuthor, theTitle, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+				"Undecided");
 	}
 	
-	
+	/**
+	 * Creates a new paper.
+	 * 
+	 * @param theId unique identification number of the paper.
+	 * @param theAuthorId unique identification number of the author
+	 * @param theTitle title of the paper.
+	 * @param theNumOfReviewer number of assigned reviewers.
+	 * @param theSubProgId unique identification number of the Subprogram Chair.
+	 * @param theRecommendId Subprogram Chair recommendation id number.
+	 * @param theReviewOneId identification number of the first review.
+	 * @param theReviewTwoId identification number of the second review.
+	 * @param theReviewThreeId identification number of the third review.
+	 * @param theReviewerOneId identification number of the first reviewer.
+	 * @param theReviewerTwoId identification number of the second reviewer.
+	 * @param theReviewerThreeId identification number of the third reviewer.
+	 * @param theStatus acceptance status of the paper.
+	 */
 	public Paper(final int theId, final int theAuthorId, final String theTitle, 
-				final int theNumOfReviewer,final int theSubProgId, final int theRecommendId, 
-				final int theReviewOneId, final int theReviewTwoId, final int theReviewThreeId, 
+				final int theNumOfReviewer,final int theSubProgId, 
+				final int theRecommendId, final int theReviewOneId, 
+				final int theReviewTwoId, final int theReviewThreeId, 
 				final int theReviewerOneId, final int theReviewerTwoId, 
 				final int theReviewerThreeId, final String theStatus)  {
 		
 		this(theId, theAuthorId, theTitle, theNumOfReviewer, theSubProgId, 
 				theRecommendId, theReviewOneId, theReviewTwoId, theReviewThreeId, 
-				theReviewerOneId, theReviewerTwoId, theReviewerThreeId, theStatus, false);
+				theReviewerOneId, theReviewerTwoId, theReviewerThreeId, 
+				theStatus, false);
 	}
 	
+	/**
+	 * Creates a new paper.
+	 * 
+	 * @param theId unique identification number of the paper.
+	 * @param theAuthorId unique identification number of the author
+	 * @param theTitle title of the paper.
+	 * @param theNumOfReviewer number of assigned reviewers.
+	 * @param theSubProgId unique identification number of the Subprogram Chair.
+	 * @param theRecommendId Subprogram Chair recommendation id number.
+	 * @param theReviewOneId identification number of the first review.
+	 * @param theReviewTwoId identification number of the second review.
+	 * @param theReviewThreeId identification number of the third review.
+	 * @param theReviewerOneId identification number of the first reviewer.
+	 * @param theReviewerTwoId identification number of the second reviewer.
+	 * @param theReviewerThreeId identification number of the third reviewer.
+	 * @param theStatus acceptance status of the paper.
+	 * @param theReviewed true if the reviewers have submitted all the reviews.
+	 */
 	public Paper(final int theId, final int theAuthorId, final String theTitle, 
-			final int theNumOfReviewer,final int theSubProgId, final int theRecommendId, 
-			final int theReviewOneId, final int theReviewTwoId, final int theReviewThreeId, 
+			final int theNumOfReviewer,final int theSubProgId, 
+			final int theRecommendId, final int theReviewOneId, 
+			final int theReviewTwoId, final int theReviewThreeId, 
 			final int theReviewerOneId, final int theReviewerTwoId, 
-			final int theReviewerThreeId, final String theStatus, final boolean theReviewed)  {
+			final int theReviewerThreeId, final String theStatus, 
+			final boolean theReviewed)  {
 		
 		myId = theId;
 		myAuthor = theAuthorId;
@@ -238,21 +275,4 @@ public class Paper {
 	public String toString() {
 		return myTitle;
 	}
-	
-//	//Author submits the paper into the database.
-//	
-//	/**
-//	* Downloads the paper.
-//	*/
-//	public void download() {
-//		
-//	}
-//	
-//	//Constructor will upload the paper
-//	/**
-//	* Uploads the paper.
-//	*/
-//	public void upload() {
-//
-//	}
 }

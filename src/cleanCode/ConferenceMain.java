@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 
 /**
  * @author Clean Code
- * @author Polina Kud
  * Runs Conference by instantiating UI_Page.
  *
  */
@@ -35,8 +34,6 @@ public class ConferenceMain {
 				}
             }
         });
-        //Conference mycon = new Conference();
- 
 	}
 
 }
