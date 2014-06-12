@@ -101,7 +101,7 @@ public class Conference {
 	        String [] lines = new String[4];
 	        int index = 0;
 	        try {
-	            final File readFile = new File("conferenceInfo.txt");
+	            final File readFile = new File("files/conferenceInfo.txt");
 	            toRead = new Scanner(readFile);
 	        } catch (final IOException e) {
 	            System.out.println(errorMessage);
@@ -136,7 +136,7 @@ public class Conference {
         Scanner toRead = null;
         String [] line = new String[6];
         try {
-            final File readFile = new File("vipUsers.csv");
+            final File readFile = new File("files/vipUsers.csv");
             toRead = new Scanner(readFile);
         } catch (final IOException e) {
             System.out.println(errorMessage);
@@ -173,7 +173,7 @@ public class Conference {
         Scanner toRead = null;
         String [] line = new String[6];
         try {
-            final File readFile = new File("authors.csv");
+            final File readFile = new File("files/authors.csv");
             toRead = new Scanner(readFile);
         } catch (final IOException e) {
             System.out.println(errorMessage);
@@ -202,7 +202,7 @@ public class Conference {
         Scanner toRead = null;
         String [] line = new String[13];
         try {
-            final File readFile = new File("paper.csv");
+            final File readFile = new File("files/paper.csv");
             toRead = new Scanner(readFile);
         } catch (final IOException e) {
             System.out.println(errorMessage);
@@ -234,7 +234,7 @@ public class Conference {
         Scanner toRead = null;
         String [] line = new String[13];
         try {
-            final File readFile = new File("reviews.csv");
+            final File readFile = new File("files/reviews.csv");
             toRead = new Scanner(readFile);
         } catch (final IOException e) {
             System.out.println(errorMessage);
@@ -263,7 +263,7 @@ public class Conference {
         Scanner toRead = null;
         String [] line = new String[5];
         try {
-            final File readFile = new File("recommendation.csv");
+            final File readFile = new File("files/recommendation.csv");
             toRead = new Scanner(readFile);
         } catch (final IOException e) {
             System.out.println(errorMessage);
@@ -287,7 +287,7 @@ public class Conference {
 	 */
 	public void addReview(Review aReview) {
 		listOfReviews.put(aReview.getMyReviewId(), aReview);
-		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("reviews.csv", false)))) {
+		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("files/reviews.csv", false)))) {
 			out.println("reviewId,paperId,reviewerId,fristComment,secondComment,thirdComment,forthComment,FivthComment,SixthComment,SeventhComment,EighthComment,NinethComment,Summary");
 			for (Entry<Integer, Review> entry: listOfReviews.entrySet()) {
 				out.println(entry.getKey() + "," + entry.getValue().getMyPaperId() + "," + entry.getValue().getMyReviewerId() + "," + 
@@ -323,7 +323,7 @@ public class Conference {
 	 */
 	public void addRecommendation(Recommendation aRecomm) {
 		listOfRecommendation.put(aRecomm.getMyrecommendationId(), aRecomm);
-		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("recommendation.csv", false)))) {
+		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("files/recommendation.csv", false)))) {
 			out.println("recommendationId,paperId,subProgramId,grade,rational");
 			for (Entry<Integer, Recommendation> entry: listOfRecommendation.entrySet()) {
 				out.println(entry.getKey() + "," + entry.getValue().getMyPaperID() + "," + entry.getValue().getMySubProgramID() + "," + 
@@ -376,7 +376,7 @@ public class Conference {
 		
 		listOfPaper.put(aPaper.getId(), aPaper);
 		
-		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("paper.csv", false)))) {
+		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("files/paper.csv", false)))) {
 			out.println("paperID,AuthorID,TheTitle,numOfReviewer,subProgID,recommID,reviewID,reviewID,reviewID,reviewerID,reviewerID,reviewerID,paperStatus");
 			for (Entry<Integer, Paper> entry: listOfPaper.entrySet()) {
 				out.println(entry.getKey() + "," + entry.getValue().getAuthor() + "," + entry.getValue().getTitle() + "," + entry.getValue().getReviewers().length 
@@ -400,7 +400,7 @@ public class Conference {
 	 * This will write the paper map to file.
 	 */
 	public void writePaperMapToFile() {
-		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("paper.csv", false)))) {
+		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("files/paper.csv", false)))) {
 			out.println("paperID,AuthorID,TheTitle,numOfReviewer,subProgID,recommID,reviewID,reviewID,reviewID,reviewerID,reviewerID,reviewerID,paperStatus");
 			for (Entry<Integer, Paper> entry: listOfPaper.entrySet()) {
 				out.println(entry.getKey() + "," + entry.getValue().getAuthor() + "," + entry.getValue().getTitle() + "," + entry.getValue().getReviewers().length 
@@ -423,7 +423,7 @@ public class Conference {
 	public void removePaper(int aPaperId) {
 		if (listOfPaper.containsKey(aPaperId)) {
 			listOfPaper.remove(aPaperId);
-			try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("paper.csv", false)))) {
+			try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("files/paper.csv", false)))) {
 				out.println("paperID,AuthorID,TheTitle,numOfReviewer,subProgID,recommID,reviewID,reviewID,reviewID,reviewerID,reviewerID,reviewerID,paperStatus");
 				for (Entry<Integer, Paper> entry: listOfPaper.entrySet()) {
 					out.println(entry.getKey() + "," + entry.getValue().getAuthor() + "," + entry.getValue().getTitle() + "," + entry.getValue().getReviewers().length 
@@ -538,7 +538,7 @@ public class Conference {
 	public void addAuthor(int aUserId) {
 		User temp = getReviewer(aUserId);
 		listOfAuthors.put(aUserId, new Author(aUserId,temp.myFristName, temp.myLastName, temp.myEmail, temp.paperAssinged ));
-		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("authors.csv", false)))) {
+		try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("files/authors.csv", false)))) {
 			out.println("UserID,FirstName,LastName,email,RoleID");
 			for (Entry<Integer, User> entry: listOfAuthors.entrySet()) {
 				out.println(entry.getKey() + "," + entry.getValue().myFristName + "," + entry.getValue().myLastName
