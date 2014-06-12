@@ -100,6 +100,7 @@ public class Paper {
 				theReviewThreeId, theReviewerOneId, 
 				theReviewerTwoId, theReviewerThreeId, 
 				theStatus, false);
+		myStatus = theStatus;
 	}
 	
 	/**

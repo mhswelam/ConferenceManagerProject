@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -16,9 +18,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
- * @author Clean Code
+ * @author Clean Code/Zack 
+ * @author edited by Mohamed  6/11/2014 to show the file been submitted and massage to confirm submition
  * This class to create a submit paper panel for the author.
  *
  */
@@ -55,6 +59,11 @@ public class UI_SubmitPaper extends JPanel implements
 	 *  paper. */
 	private JButton myChooseFileButton;
 	
+	private JLabel myFile = new JLabel("File :");
+	
+	private JLabel myPaperFile;
+	
+	
 	/**
 	 * Creates a panel containing the submission sheet and a 
 	 * dialog allowing the Author to submit their manuscript.
@@ -83,6 +92,7 @@ public class UI_SubmitPaper extends JPanel implements
 		mySubmitButton.addActionListener(this);
 		myChooseFileButton = new JButton("Choose File");
 		myChooseFileButton.addActionListener(this);
+		myPaperFile = new JLabel("");
 	}
 
 	/**
@@ -128,15 +138,17 @@ public class UI_SubmitPaper extends JPanel implements
 		JPanel submitForm = new JPanel();
 		submitForm.setPreferredSize(new Dimension(400,300));
 		submitForm.setBackground(BACKGROUND_COLOR);
-		
-		submitForm.add(titleLabel);
-		submitForm.add(myTitleField);
-		submitForm.add(keywordsLabel);
-		submitForm.add(myKeywordsField);
-		submitForm.add(abstractLabel);
-		submitForm.add(myAbstractField);
-		
+		submitForm.add(titleLabel, BorderLayout.NORTH);
+		submitForm.add(myTitleField, BorderLayout.NORTH);
+		submitForm.add(keywordsLabel, BorderLayout.NORTH);
+		submitForm.add(myKeywordsField, BorderLayout.NORTH);
+		submitForm.add(abstractLabel, BorderLayout.CENTER);
+		submitForm.add(myAbstractField, BorderLayout.CENTER);
+		submitForm.add(myFile, BorderLayout.SOUTH);
+		submitForm.add(myPaperFile, BorderLayout.SOUTH);
 		add(submitForm, BorderLayout.CENTER);
+		
+		
 	}
 	
 	/**
@@ -169,6 +181,7 @@ public class UI_SubmitPaper extends JPanel implements
 		
 		add(dialogPanel, BorderLayout.SOUTH);
 	}
+	
 
 	/**
 	 * Uploads a paper the user chose to submit.
@@ -178,14 +191,14 @@ public class UI_SubmitPaper extends JPanel implements
 		//Author is trying to choose a file to upload
 		if (theEvent.getSource() == myChooseFileButton) {
 			JFileChooser fileChooser = new JFileChooser();
-			int returnValue = fileChooser.showDialog(this, 
-					"Upload");
-			if (returnValue == JFileChooser.OPEN_DIALOG) {
+			fileChooser.resetChoosableFileFilters();
+			fileChooser.setFileFilter(new FileNameExtensionFilter
+                    ("PDF Format (*.pdf)", "pdf"));
+			int returnValue = fileChooser.showSaveDialog(null);
+			if (returnValue == JFileChooser.APPROVE_OPTION) {
 				File paper = fileChooser.getSelectedFile();
-				paper.renameTo(new File("C:\\Users\\Zack"
-						+ "\\git"
-						+ "\\ConferenceManager\\src\\lib" + 
-						paper.getName()));
+				paper.renameTo(new File("\\papers\\"+paper.getName()));
+				myPaperFile.setText(paper.getName());
 			}
 		} else if (theEvent.getSource() == mySubmitButton) {
 			Paper myPaper = null;
@@ -200,24 +213,19 @@ public class UI_SubmitPaper extends JPanel implements
 						"missing fields",
 						JOptionPane.ERROR_MESSAGE);
 			} else {
-				myConference.lastPaperID = 
+				int paperID = 
 						myConference.lastPaperID + 1;
-				myPaper = new Paper(myConference.lastPaperID, 
+				myPaper = new Paper(paperID, 
 						myUserId, title, 
 						0, 0, 0, 0, 0, 0, 0, 0, 0, 
 						"No status");
 				myConference.addPaper(myPaper);
-				myFrame.setVisible(false);
-				UI_Page page = new UI_Page(myConference);
-				page.refresh(myUserId, myRoleId);
+				JOptionPane.showMessageDialog(this,
+					    "Thank you, The paper has been submited.");
+				
 			}
-//			Map<Integer, Paper> theMap = myConference.listOfPaper;
-//			Iterator it = theMap.entrySet().iterator();
-//		    while (it.hasNext()) {
-//		        Map.Entry pairs = (Map.Entry)it.next();
-//		        System.out.println(pairs.getKey() + " = " + pairs.getValue());
-//		        it.remove(); // avoids a ConcurrentModificationException
-//		    }
+
+
 		}	
 	}
 }

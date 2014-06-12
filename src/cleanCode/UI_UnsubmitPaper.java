@@ -168,16 +168,17 @@ public class UI_UnsubmitPaper extends JPanel implements
 					+ "(100 words max): " 
 					+ "This will be paper abstract");
 		} else {
-			System.out.println("Inside the else");
-			System.out.println(myRoleId);
-			System.out.println(myUserId);
+			//System.out.println("Inside the else");
+			//System.out.println(myRoleId);
+			//System.out.println(myUserId);
 			ArrayList<Paper> list = 
 					myConference.getPaperList(myRoleId ,
 							myUserId);
-			System.out.println(list);
+			//System.out.println(list);
 			for(Paper temp : list) {
-				System.out.println(temp);
+				//System.out.println(temp);
 			}
+			paperList.setUp();
 		}
 	}
 	
@@ -212,9 +213,10 @@ public class UI_UnsubmitPaper extends JPanel implements
 			} else {
 				myConference.removePaper(
 						myConference.myPaperToDelete);
-				myFrame.setVisible(false);
-				UI_Page page = new UI_Page(myConference);
-				page.refresh(myUserId, myRoleId);
+				
+				//myFrame.setVisible(false);
+				//UI_Page page = new UI_Page(myConference);
+				//page.refresh(myUserId, myRoleId);
 			}
 		} else if (theEvent.getSource() == myViewButton) {
 			if (myConference.myPaperToDelete == 0) {

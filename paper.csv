@@ -1,3 +1,5 @@
 paperID,AuthorID,TheTitle,numOfReviewer,subProgID,recommID,reviewID,reviewID,reviewID,reviewerID,reviewerID,reviewerID,paperStatus
-7,66,moved,3,192,0,201,202,203,130,133,151,No status
-9,66,gotta work,3,52,0,204,205,0,79,130,151,No status
+1,66,Home Control,3,192,300,79,130,151,200,201,202,Accepted
+2,66,Smart Phone,3,192,0,79,130,151,203,204,205,No Status
+3,66,Black Smart Phone,3,192,0,79,151,130,0,0,0,No Status
+4,66,Paper to be deleted for test,3,192,0,79,0,0,0,0,0,No Status

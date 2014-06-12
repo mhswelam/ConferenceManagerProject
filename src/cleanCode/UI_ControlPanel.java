@@ -14,7 +14,8 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
 /**
- * @author Clean Code
+ * @author Clean Code/ Polina
+ * Mohamed added more code to access other tabs.
  * This class to create a user interface 
  * for the Control Panel.
  *
@@ -152,7 +153,7 @@ public class UI_ControlPanel extends JPanel {
 		myTabbedPane.addTab(TASKS[theRoleId][0], table);
 		
 		//"Review Papers"
-		Paper temp = myConference.getPaper(9);
+		Paper temp = myConference.getPaper(3);
 		
 		UI_SubmitReview tab = 
 				new UI_SubmitReview(myConference, temp, 
@@ -187,8 +188,8 @@ public class UI_ControlPanel extends JPanel {
 				   						  reviewersToPaper);
 		reviewersToPaper.setBackground(BACKGROUND_COLOR);
 		
-		//"Recommend Paper"
-        Paper temp = myConference.getPaper(7);
+		//"Recommend Paper" had to hard code the paper number
+        Paper temp = myConference.getPaper(2);
         JComponent recoomTab = 
         		new UI_SubmitRecommendation(myConference, 
         								   temp, theUserId);

@@ -203,6 +203,8 @@ public class UI_ReviewInfo extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		this.revalidate();
+		this.repaint();
 		if (e.getSource().equals(review_One_Btn)) {
 			int temp = myPaper.getReviews()[0];
 			Review revTemp = myConference.listOfReviews.get(temp);

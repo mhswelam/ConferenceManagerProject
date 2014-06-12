@@ -22,7 +22,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 /**
- * @author Clean Code
+ * @author Clean Code/ Polina
+ * @author Mohamed added access to review info class to show the reviews for paper has been accepted or denied only
  * This class to create a view reviews paper panel for the Author.
  *
  */
@@ -112,12 +113,18 @@ public class UI_ViewReviews extends JPanel implements ActionListener, ListSelect
 
 	@Override
 	public void actionPerformed(ActionEvent theEvent) {
+		
 		ArrayList<Paper> myPaperList = myConference.getPaperList(myRoleId, myUserId);
 		Map<String,Paper> myPapermap = new HashMap<String,Paper>();
 		String [] paperT = new String[myPaperList.size()];
 		for (int i =0 ; i < myPaperList.size();i++) {
-			paperT[i] = (myPaperList.get(i).getTitle());
-			myPapermap.put(myPaperList.get(i).getTitle(),myPaperList.get(i));
+			if (myPaperList.get(i).getStatus().equals("Accepted") 
+					|| myPaperList.get(i).getStatus() == "Denied"){
+				
+				paperT[i] = (myPaperList.get(i).getTitle());
+				myPapermap.put(myPaperList.get(i).getTitle(),myPaperList.get(i));
+			}
+			
 		}
 		
 		myPaper = myPapermap.get(JOptionPane.showInputDialog(
@@ -126,11 +133,19 @@ public class UI_ViewReviews extends JPanel implements ActionListener, ListSelect
                 "Select Paper",
                 JOptionPane.PLAIN_MESSAGE,
                 null, paperT, ""));
-		myPaperTitle = myPaper.getTitle();
+		if (myPaper != null) {
+			myPaperTitle = myPaper.getTitle();
+			centerpanel = new UI_ReviewInfo(myPaper, myConference);
+			centerpanel.revalidate();
+			centerpanel.repaint();
+			add(centerpanel, BorderLayout.CENTER);
+		}else {
+			myPaperTitle = "";
+		}
+		
 		panelInfoName.setText(myPaperTitle);
 		
-		centerpanel = new UI_ReviewInfo(myPaper, myConference);
-		add(centerpanel, BorderLayout.CENTER);
+		
 		
 	}
 }

@@ -1,6 +1,7 @@
 reviewId,paperId,reviewerId,fristComment,secondComment,thirdComment,forthComment,FivthComment,SixthComment,SeventhComment,EighthComment,NinethComment,Summary
-201,7,130,1,2,3,5,3,3,3,3,3,good work
-202,7,133,1,2,3,5,3,3,3,3,3,good but need improving
-203,7,151,3,2,2,3,4,3,3,3,3,Good job
-204,9,79,2,3,4,3,3,2,3,3,3,OK
-205,9,130,2,3,2,2,2,2,2,2,2,good try
+200,1,79,2,3,2,3,2,3,2,2,2,good
+201,1,130,2,3,2,3,2,3,2,2,2,good work
+202,1,151,2,3,2,3,2,3,2,2,2,not good
+203,2,79,2,3,2,3,2,3,2,2,2,good
+204,2,130,2,3,2,3,2,3,2,2,2,good
+205,2,151,2,3,2,3,2,3,2,2,2,good
