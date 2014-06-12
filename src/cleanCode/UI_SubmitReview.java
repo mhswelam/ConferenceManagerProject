@@ -24,6 +24,10 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+/**
+ * @author Clean code /  Mohamed
+ * to create panel to submit review. 
+ */
 public class UI_SubmitReview extends JPanel implements ActionListener{
 	
 	private Conference myConferenc;

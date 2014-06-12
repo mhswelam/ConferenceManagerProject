@@ -17,6 +17,11 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextPane;
 import java.awt.SystemColor;
 
+/**
+ * @author Clean code / Mohamed
+ * to create review panel to show the review information.
+ *
+ */
 public class UI_ReviewInfo extends JPanel implements ActionListener{
 	
 	private Paper myPaper;

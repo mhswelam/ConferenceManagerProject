@@ -15,6 +15,12 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 
+/**
+ * @author Clean Code / Mohamed
+ * 
+ * TO create panel to submit recommendation. 
+ *
+ */
 public class UI_SubmitRecommendation extends JPanel implements ActionListener{
 	
     private Conference myConferenc;
