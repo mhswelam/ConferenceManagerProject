@@ -153,10 +153,10 @@ public class UI_ControlPanel extends JPanel {
 		myTabbedPane.addTab(TASKS[theRoleId][0], table);
 		
 		//"Review Papers"
-		Paper temp = myConference.getPaper(3);
+		
 		
 		UI_SubmitReview tab = 
-				new UI_SubmitReview(myConference, temp, 
+				new UI_SubmitReview(myConference, theRoleId, 
 												 theUserId);
 		myTabbedPane.addTab(TASKS[theRoleId][1], tab);
         tab.setBackground(BACKGROUND_COLOR);
@@ -188,11 +188,10 @@ public class UI_ControlPanel extends JPanel {
 				   						  reviewersToPaper);
 		reviewersToPaper.setBackground(BACKGROUND_COLOR);
 		
-		//"Recommend Paper" had to hard code the paper number
-        Paper temp = myConference.getPaper(2);
+		
         JComponent recoomTab = 
         		new UI_SubmitRecommendation(myConference, 
-        								   temp, theUserId);
+        								   theRoleId, theUserId);
         myTabbedPane.addTab(TASKS[theRoleId][2], recoomTab);
         recoomTab.setBackground(BACKGROUND_COLOR);
     

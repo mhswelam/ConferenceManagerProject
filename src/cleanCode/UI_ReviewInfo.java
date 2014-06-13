@@ -13,8 +13,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextPane;
+
 import java.awt.SystemColor;
 
 /**
@@ -59,10 +61,15 @@ public class UI_ReviewInfo extends JPanel implements ActionListener{
 	/**
 	 * Create the panel.
 	 */
-	public UI_ReviewInfo(Paper aPaper, Conference myConference) {
-		myPaper = aPaper;
+	public UI_ReviewInfo(Conference AConference) {
 		
-		myReviewList = myPaper.getReviewers();
+		myConference = AConference;
+		
+		myPaper = myConference.getPaper(myConference.getSelectedPaper());
+		
+		
+		
+		
 		
 		setLayout(new BorderLayout(0, 0));
 		
@@ -208,21 +215,23 @@ public class UI_ReviewInfo extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		this.revalidate();
-		this.repaint();
-		if (e.getSource().equals(review_One_Btn)) {
-			int temp = myPaper.getReviews()[0];
-			Review revTemp = myConference.listOfReviews.get(temp);
-			int [] reviewGrad = revTemp.getMyComments();
-			aField = reviewGrad[0];
-			bField = reviewGrad[1];
-			cField = reviewGrad[2];
-			dField = reviewGrad[3];
-			eField = reviewGrad[4];
-			fField = reviewGrad[5];
-			gField = reviewGrad[6];
-			hField = reviewGrad[7];
-			kField = reviewGrad[8];
+		myPaper = myConference.getPaper(myConference.getSelectedPaper());
+
+		if (e.getSource().equals(review_One_Btn) && myPaper != null) {
+			
+			int temp = myConference.getPaper(myConference.getSelectedPaper()).getReviews()[0];
+			
+			Review revTemp = Conference.listOfReviews.get(temp);
+			int [] reviewGrad_1 = revTemp.getMyComments();
+			aField = reviewGrad_1[0];
+			bField = reviewGrad_1[1];
+			cField = reviewGrad_1[2];
+			dField = reviewGrad_1[3];
+			eField = reviewGrad_1[4];
+			fField = reviewGrad_1[5];
+			gField = reviewGrad_1[6];
+			hField = reviewGrad_1[7];
+			kField = reviewGrad_1[8];
 			a_Answer.setText(reviewGrade[aField]);
 			b_Answer.setText(reviewGrade[bField]);
 			c_Answer.setText(reviewGrade[cField]);
@@ -235,19 +244,19 @@ public class UI_ReviewInfo extends JPanel implements ActionListener{
 			ratinal_textPane.setText(revTemp.getMySummary());
 			
 			
-		} else if (e.getSource().equals(review_Two_Btn)) {
-			int temp = myPaper.getReviews()[1];
+		} else if (e.getSource().equals(review_Two_Btn) && myPaper != null) {
+			int temp = myConference.getPaper(myConference.getSelectedPaper()).getReviews()[1];
 			Review revTemp = myConference.listOfReviews.get(temp);
-			int [] reviewGrad = revTemp.getMyComments();
-			aField = reviewGrad[0];
-			bField = reviewGrad[1];
-			cField = reviewGrad[2];
-			dField = reviewGrad[3];
-			eField = reviewGrad[4];
-			fField = reviewGrad[5];
-			gField = reviewGrad[6];
-			hField = reviewGrad[7];
-			kField = reviewGrad[8];
+			int [] reviewGrad_2 = revTemp.getMyComments();
+			aField = reviewGrad_2[0];
+			bField = reviewGrad_2[1];
+			cField = reviewGrad_2[2];
+			dField = reviewGrad_2[3];
+			eField = reviewGrad_2[4];
+			fField = reviewGrad_2[5];
+			gField = reviewGrad_2[6];
+			hField = reviewGrad_2[7];
+			kField = reviewGrad_2[8];
 			a_Answer.setText(reviewGrade[aField]);
 			b_Answer.setText(reviewGrade[bField]);
 			c_Answer.setText(reviewGrade[cField]);
@@ -258,19 +267,19 @@ public class UI_ReviewInfo extends JPanel implements ActionListener{
 			h_Answer.setText(reviewGrade[hField]);
 			k_Answer.setText(reviewGrade[kField]);
 			ratinal_textPane.setText(revTemp.getMySummary());
-		}else if (e.getSource().equals(review_Three_Btn)) {
-			int temp = myPaper.getReviews()[2];
+		}else if (e.getSource().equals(review_Three_Btn) && myPaper != null) {
+			int temp = myConference.getPaper(myConference.getSelectedPaper()).getReviews()[2];
 			Review revTemp = myConference.listOfReviews.get(temp);
-			int [] reviewGrad = revTemp.getMyComments();
-			aField = reviewGrad[0];
-			bField = reviewGrad[1];
-			cField = reviewGrad[2];
-			dField = reviewGrad[3];
-			eField = reviewGrad[4];
-			fField = reviewGrad[5];
-			gField = reviewGrad[6];
-			hField = reviewGrad[7];
-			kField = reviewGrad[8];
+			int [] reviewGrad_3 = revTemp.getMyComments();
+			aField = reviewGrad_3[0];
+			bField = reviewGrad_3[1];
+			cField = reviewGrad_3[2];
+			dField = reviewGrad_3[3];
+			eField = reviewGrad_3[4];
+			fField = reviewGrad_3[5];
+			gField = reviewGrad_3[6];
+			hField = reviewGrad_3[7];
+			kField = reviewGrad_3[8];
 			a_Answer.setText(reviewGrade[aField]);
 			b_Answer.setText(reviewGrade[bField]);
 			c_Answer.setText(reviewGrade[cField]);
@@ -281,6 +290,9 @@ public class UI_ReviewInfo extends JPanel implements ActionListener{
 			h_Answer.setText(reviewGrade[hField]);
 			k_Answer.setText(reviewGrade[kField]);
 			ratinal_textPane.setText(revTemp.getMySummary());
+		} else {
+			JOptionPane.showMessageDialog(this,
+				    "Please select paper!");
 		}
 		
 	}

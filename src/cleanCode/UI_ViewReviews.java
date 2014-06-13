@@ -57,13 +57,15 @@ public class UI_ViewReviews extends JPanel implements ActionListener, ListSelect
 	 * @param theUserId unique identification number of the user.
 	 * @param theConference conference.
 	 */
-	public UI_ViewReviews(final int theUserId, final Conference theConference, final int theRoleId) {
+	public UI_ViewReviews(final int theUserId, Conference theConference, final int theRoleId) {
 		super(new BorderLayout());
 		setBackground(BACKGROUND_COLOR);
 		myUserId = theUserId;
 		myRoleId = theRoleId;
 		myConference = theConference;
 		myPaperTitle = "";
+		centerpanel = new UI_ReviewInfo(myConference);
+		add(centerpanel, BorderLayout.CENTER);
 	}
 	
 	
@@ -82,15 +84,7 @@ public class UI_ViewReviews extends JPanel implements ActionListener, ListSelect
 		topLabel.add(listName);
 		topLabel.add(panelInfoName);
 		topLabel.add(select_Btn);
-//		JPanel paperInfoPanel = new JPanel(new BorderLayout());
-//		paperInfoPanel.add(makeUnsubmitPanel(), BorderLayout.CENTER);
-//		paperInfoPanel.add(makeUnsubmitButton(), BorderLayout.SOUTH);
-		//paperList = new UI_PaperList(myUserId, myConference);
-		//paperList.setUp();
-		//JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, 
-		//									  paperList, makeReviewInfoPanel());
-		//splitPane.setDividerLocation(100);
-	    //splitPane.setBackground(BACKGROUND_COLOR);
+
 	    
 	    add(topLabel, BorderLayout.NORTH);
 	    
@@ -133,12 +127,12 @@ public class UI_ViewReviews extends JPanel implements ActionListener, ListSelect
                 "Select Paper",
                 JOptionPane.PLAIN_MESSAGE,
                 null, paperT, ""));
+		
 		if (myPaper != null) {
+			myConference.setSelectedPaper(myPaper.getId());
 			myPaperTitle = myPaper.getTitle();
-			centerpanel = new UI_ReviewInfo(myPaper, myConference);
-			centerpanel.revalidate();
-			centerpanel.repaint();
-			add(centerpanel, BorderLayout.CENTER);
+			
+			
 		}else {
 			myPaperTitle = "";
 		}

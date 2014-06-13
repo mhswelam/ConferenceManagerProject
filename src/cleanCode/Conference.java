@@ -27,6 +27,11 @@ import java.util.TreeMap;
  */
 public class Conference {
 	
+	/**
+	 * To hold the current selected paper.
+	 */
+	public int selectedPaper;
+	
 	public int myPaperToDelete;
 	/**
 	 * This to hold the conference name.
@@ -81,6 +86,7 @@ public class Conference {
 	 * This is a constructor to create conference
 	 */
 	public Conference(){
+		selectedPaper = 0;
 		readConferenceInfo();
 		createReviewerMap();
 		createAuthorMap();
@@ -301,10 +307,9 @@ public class Conference {
             System.exit(0);
 		}
 		Paper temp = listOfPaper.get(aReview.getMyPaperId());
-		for (int i=0 ; i<temp.getReviews().length;i++) {
-			if (temp.getReviews()[i] == 0) {
+		for (int i=0 ; i<temp.getReviewers().length;i++) {
+			if (temp.getReviewers()[i] == aReview.getMyReviewerId()) {
 				temp.getReviews()[i] = aReview.getMyReviewId();
-				temp.getReviewers()[i] = aReview.getMyReviewerId();
 				break;
 			}
 		}
@@ -380,9 +385,9 @@ public class Conference {
 			out.println("paperID,AuthorID,TheTitle,numOfReviewer,subProgID,recommID,reviewID,reviewID,reviewID,reviewerID,reviewerID,reviewerID,paperStatus");
 			for (Entry<Integer, Paper> entry: listOfPaper.entrySet()) {
 				out.println(entry.getKey() + "," + entry.getValue().getAuthor() + "," + entry.getValue().getTitle() + "," + entry.getValue().getReviewers().length 
-						+ "," + entry.getValue().getSubProgramChair() + "," + entry.getValue().getRecommendation() + "," + entry.getValue().getReviewers()[0] 
-								+ "," + entry.getValue().getReviewers()[1] + "," + entry.getValue().getReviewers()[2]+ "," + entry.getValue().getReviews()[0]
-										+ "," + entry.getValue().getReviews()[1] + "," + entry.getValue().getReviews()[2] + "," + entry.getValue().getStatus());
+						+ "," + entry.getValue().getSubProgramChair() + "," + entry.getValue().getRecommendation() + "," + entry.getValue().getReviews()[0] 
+								+ "," + entry.getValue().getReviews()[1] + "," + entry.getValue().getReviews()[2]+ "," + entry.getValue().getReviewers()[0]
+										+ "," + entry.getValue().getReviewers()[1] + "," + entry.getValue().getReviewers()[2] + "," + entry.getValue().getStatus());
 			}
 		    
 		    out.close();
@@ -404,9 +409,9 @@ public class Conference {
 			out.println("paperID,AuthorID,TheTitle,numOfReviewer,subProgID,recommID,reviewID,reviewID,reviewID,reviewerID,reviewerID,reviewerID,paperStatus");
 			for (Entry<Integer, Paper> entry: listOfPaper.entrySet()) {
 				out.println(entry.getKey() + "," + entry.getValue().getAuthor() + "," + entry.getValue().getTitle() + "," + entry.getValue().getReviewers().length 
-						+ "," + entry.getValue().getSubProgramChair() + "," + entry.getValue().getRecommendation() + "," + entry.getValue().getReviewers()[0] 
-								+ "," + entry.getValue().getReviewers()[1] + "," + entry.getValue().getReviewers()[2]+ "," + entry.getValue().getReviews()[0]
-										+ "," + entry.getValue().getReviews()[1] + "," + entry.getValue().getReviews()[2] + "," + entry.getValue().getStatus());
+						+ "," + entry.getValue().getSubProgramChair() + "," + entry.getValue().getRecommendation() + "," + entry.getValue().getReviews()[0] 
+								+ "," + entry.getValue().getReviews()[1] + "," + entry.getValue().getReviews()[2]+ "," + entry.getValue().getReviewers()[0]
+										+ "," + entry.getValue().getReviewers()[1] + "," + entry.getValue().getReviewers()[2] + "," + entry.getValue().getStatus());
 			}
 		    
 		    out.close();
@@ -427,9 +432,9 @@ public class Conference {
 				out.println("paperID,AuthorID,TheTitle,numOfReviewer,subProgID,recommID,reviewID,reviewID,reviewID,reviewerID,reviewerID,reviewerID,paperStatus");
 				for (Entry<Integer, Paper> entry: listOfPaper.entrySet()) {
 					out.println(entry.getKey() + "," + entry.getValue().getAuthor() + "," + entry.getValue().getTitle() + "," + entry.getValue().getReviewers().length 
-							+ "," + entry.getValue().getSubProgramChair() + "," + entry.getValue().getRecommendation() + "," + entry.getValue().getReviewers()[0] 
-									+ "," + entry.getValue().getReviewers()[1] + "," + entry.getValue().getReviewers()[2]+ "," + entry.getValue().getReviews()[0]
-											+ "," + entry.getValue().getReviews()[1] + "," + entry.getValue().getReviews()[2] + "," + entry.getValue().getStatus());
+							+ "," + entry.getValue().getSubProgramChair() + "," + entry.getValue().getRecommendation() + "," + entry.getValue().getReviews()[0] 
+									+ "," + entry.getValue().getReviews()[1] + "," + entry.getValue().getReviews()[2]+ "," + entry.getValue().getReviewers()[0]
+											+ "," + entry.getValue().getReviewers()[1] + "," + entry.getValue().getReviewers()[2] + "," + entry.getValue().getStatus());
 				}
 			    
 			    out.close();
@@ -588,5 +593,19 @@ public class Conference {
 		
 		Paper result = listOfPaper.get(aPaperId);
 		return result;
+	}
+
+	/**
+	 * @return the selectedPaper
+	 */
+	public int getSelectedPaper() {
+		return selectedPaper;
+	}
+
+	/**
+	 * @param selectedPaper the selectedPaper to set
+	 */
+	public void setSelectedPaper(int selectedPaper) {
+		this.selectedPaper = selectedPaper;
 	}
 }

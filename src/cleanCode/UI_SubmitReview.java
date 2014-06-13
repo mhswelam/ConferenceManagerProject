@@ -16,6 +16,9 @@ import javax.swing.JComboBox;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -35,6 +38,7 @@ public class UI_SubmitReview extends JPanel implements ActionListener{
 	private Paper myPaper;
 	
 	private int myUserId; 
+	private int myRoleId;
 	private JTextField summary_textField;
 	private int aField;
 	private int bField;
@@ -57,14 +61,21 @@ public class UI_SubmitReview extends JPanel implements ActionListener{
 	private JComboBox comboBox_K;
 	
 	private JButton submitReviewBtn;
+	private JButton selectPaperBtn;
+	
+	private String authorName;
+	
+	private JLabel currentAuthorLabel;
+	private JLabel currentPaper;
 	/**
 	 * Create the panel.
 	 */
-	public UI_SubmitReview(Conference aConference, Paper aPaper, int userId) {
+	public UI_SubmitReview(Conference aConference, int roleId,int userId) {
 		String [] reviewGrade = {"","[1] strong reject","[2] reject","[3] neutral", "[4] accept","[5] strong accept"};
 		myConferenc = aConference;
-		myPaper = aPaper;
+		myRoleId = roleId;
 		myUserId = userId;
+		myPaper = null;
 		
 		setLayout(new BorderLayout(0, 0));
 		
@@ -73,25 +84,35 @@ public class UI_SubmitReview extends JPanel implements ActionListener{
 		
 		JLabel paperLabel = new JLabel("Selected Paper :");
 		
-		JLabel currentPaper = new JLabel(myPaper.getTitle());
+		currentPaper = new JLabel("");
 		
 		JLabel authorLabel = new JLabel("Author :");
 		
-		String authorName = myConferenc.getAuthor(myPaper.getAuthor()).myFristName +" " +myConferenc.getAuthor(myPaper.getAuthor()).myLastName;
-		JLabel currentAuthorLabel = new JLabel(authorName);
+		authorName = "";
+		currentAuthorLabel = new JLabel(authorName);
+		
+		selectPaperBtn = new JButton("Select Paper");
+		selectPaperBtn.addActionListener(this);
+		
 		GroupLayout gl_topPanel = new GroupLayout(topPanel);
 		gl_topPanel.setHorizontalGroup(
 			gl_topPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_topPanel.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(paperLabel)
-					.addGap(18)
-					.addComponent(currentPaper)
-					.addGap(265)
-					.addComponent(authorLabel)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(currentAuthorLabel)
-					.addGap(363))
+					.addGroup(gl_topPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_topPanel.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+							.addComponent(currentPaper)
+							.addGap(311)
+							.addComponent(currentAuthorLabel)
+							.addGap(189))
+						.addGroup(gl_topPanel.createSequentialGroup()
+							.addGap(190)
+							.addComponent(authorLabel)
+							.addPreferredGap(ComponentPlacement.RELATED)))
+					.addComponent(selectPaperBtn)
+					.addGap(249))
 		);
 		gl_topPanel.setVerticalGroup(
 			gl_topPanel.createParallelGroup(Alignment.LEADING)
@@ -100,10 +121,11 @@ public class UI_SubmitReview extends JPanel implements ActionListener{
 					.addGroup(gl_topPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_topPanel.createParallelGroup(Alignment.BASELINE)
 							.addComponent(paperLabel)
-							.addComponent(currentPaper))
+							.addComponent(currentPaper)
+							.addComponent(authorLabel))
 						.addGroup(gl_topPanel.createParallelGroup(Alignment.BASELINE)
-							.addComponent(authorLabel)
-							.addComponent(currentAuthorLabel))))
+							.addComponent(currentAuthorLabel)
+							.addComponent(selectPaperBtn))))
 		);
 		topPanel.setLayout(gl_topPanel);
 		
@@ -279,25 +301,57 @@ public class UI_SubmitReview extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		aField = comboBox_A.getSelectedIndex();
-		bField = comboBox_B.getSelectedIndex();
-		cField = comboBox_C.getSelectedIndex();
-		dField = comboBox_D.getSelectedIndex();
-		eField = comboBox_E.getSelectedIndex();
-		fField = comboBox_F.getSelectedIndex();
-		gField = comboBox_G.getSelectedIndex();
-		hField = comboBox_H.getSelectedIndex();
-		kField = comboBox_K.getSelectedIndex();
-		String summary = summary_textField.getText();
-		if (summary.length()>0 && aField > 0 && bField > 0 && cField > 0 && dField > 0 && eField > 0 && fField > 0 && gField > 0 && hField > 0 && kField > 0) {
-			int nextReview = ++myConferenc.lastReviewID;
-			myConferenc.addReview(new Review (nextReview, myPaper.getId(),myUserId,aField,bField,cField,dField,eField,fField,gField,hField,kField,summary));
-			JOptionPane.showMessageDialog(this,
-				    "Thank you, The paper review has been submited.");
+		
+		if (e.getSource().equals(selectPaperBtn)) {
+			ArrayList<Paper> myPaperList = myConferenc.getPaperList(myRoleId, myUserId);
+			Map<String,Paper> myPapermap = new HashMap<String,Paper>();
+			String [] paperT = new String[myPaperList.size()];
+			for (int i =0 ; i < myPaperList.size();i++) {
+				
+					paperT[i] = (myPaperList.get(i).getTitle());
+					myPapermap.put(myPaperList.get(i).getTitle(),myPaperList.get(i));
+			}
+			myPaper = myPapermap.get(JOptionPane.showInputDialog(
+	                this,
+	                "Please select paper :",
+	                "Select Paper",
+	                JOptionPane.PLAIN_MESSAGE,
+	                null, paperT, ""));
+			
+			if (myPaper != null) {
+				myConferenc.setSelectedPaper(myPaper.getId());
+				authorName = myConferenc.getAuthor(myPaper.getAuthor()).myFristName +" " +myConferenc.getAuthor(myPaper.getAuthor()).myLastName;
+				currentPaper.setText(myPaper.getTitle());
+				currentAuthorLabel.setText(authorName);
+			}
+			
+			
+		} else if (e.getSource().equals(submitReviewBtn) && myPaper != null) {
+			aField = comboBox_A.getSelectedIndex();
+			bField = comboBox_B.getSelectedIndex();
+			cField = comboBox_C.getSelectedIndex();
+			dField = comboBox_D.getSelectedIndex();
+			eField = comboBox_E.getSelectedIndex();
+			fField = comboBox_F.getSelectedIndex();
+			gField = comboBox_G.getSelectedIndex();
+			hField = comboBox_H.getSelectedIndex();
+			kField = comboBox_K.getSelectedIndex();
+			String summary = summary_textField.getText();
+			if (summary.length()>0 && aField > 0 && bField > 0 && cField > 0 && dField > 0 && eField > 0 && fField > 0 && gField > 0 && hField > 0 && kField > 0) {
+				int nextReview = ++myConferenc.lastReviewID;
+				myConferenc.addReview(new Review (nextReview, myConferenc.getSelectedPaper(),myUserId,aField,bField,cField,dField,eField,fField,gField,hField,kField,summary));
+				JOptionPane.showMessageDialog(this,
+					    "Thank you, The paper review has been submited.");
+				
+			} else {
+				JOptionPane.showMessageDialog(this,
+					    "Please make sure to fill all fields!");
+			}
 		} else {
 			JOptionPane.showMessageDialog(this,
-				    "Please make sure to fill all fields!");
+				    "Please select paper !");
 		}
+		
 		
 	}
 }
